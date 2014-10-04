@@ -415,52 +415,49 @@ function Introduce_Mission(arg, time)
   msg.text = ' Chameleon_Silk is proud to present, Operation Flagship... Alpha Test'
   msg.displayTime = 60
   msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)
+    mist.message.add(msg)
 
   local msg = {} 
   msg.text = '  '
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)
+    mist.message.add(msg)
 
   local msg = {} 
   msg.text = ' Mission utilizes heavily modified Interception Script by akp '
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)
+    mist.message.add(msg)
 
   local msg = {} 
   msg.text = ' Global difficulty has been set to '..tostring(Difficulty)
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)
+    mist.message.add(msg)
 
   local msg = {} 
   msg.text = ' Task spawn start range has been set to '..tostring(Range)
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)
+    mist.message.add(msg)
 
   local pickSFX = mist.random(1,4)
 
   if pickSFX == 1 then
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'variation1.ogg')
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'variation1.ogg')
   end
 
   if pickSFX == 2 then
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'variation2.ogg')
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'variation2.ogg')
   end
 
   if pickSFX == 3 then
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'variation3.ogg')
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'variation3.ogg')
   end
 
   if pickSFX == 4 then
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'variation4.ogg')
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'variation4.ogg')
   end
-
-
-
   return
 end
 ---
@@ -468,10 +465,10 @@ end
 function Nothing()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
   local msg = {}
-  msg.text = ' Feature is unavailable at this time sorry.'
-  msg.displayTime = 10
-  msg.msgFor = {coa = {'red'}} 
-  mist.message.add(msg)
+    msg.text = ' Feature is unavailable at this time sorry.'
+    msg.displayTime = 10
+    msg.msgFor = {coa = {'red'}} 
+      mist.message.add(msg)
   return
 end
 ---
@@ -484,86 +481,79 @@ local zone = trigger.misc.getZone(_Area)
 local rand = mist.random(1,Fighter_Names)
 
   if Difficultymod == 1 then
-  grpName = Fighter_Names_Easy[rand]
+    grpName = Fighter_Names_Easy[rand]
   end
 	
   if Difficultymod == 2 then
-  grpName = Fighter_Names_Normal[rand]
+    grpName = Fighter_Names_Normal[rand]
   end
 
   if Difficultymod == 3 then
-  grpName = Fighter_Names_Hard[rand]
+    grpName = Fighter_Names_Hard[rand]
   end
 
   if Difficultymod == 4 then
-  grpName = Fighter_Names_VeryHard[rand]
+    grpName = Fighter_Names_VeryHard[rand]
   end
 
   spawnPsn = {}
 
   if Task_Range == 1 then
-  spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.75)
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.75)
   end
 
   if Task_Range == 2 then
-  spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.825)
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.825)
   end
 
   if Task_Range == 3 then
-  spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.90)
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.90)
   end
 
   if Task_Range == 4 then
-  spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.99)
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius, zone.radius * 0.99)
   end
 	
   local msg = {} 
-  msg.text = ' Choosing from interceptor list. Plane number  '..tostring(rand)..tostring(grpName)..tostring(_Area)
-  msg.displayTime = 10
-  msg.msgFor = {coa = {'all'}} 
-  mist.message.add(msg)		
+    msg.text = ' Choosing from interceptor list. Plane number  '..tostring(rand)..tostring(grpName)..tostring(_Area)
+    msg.displayTime = 10
+    msg.msgFor = {coa = {'all'}} 
+    mist.message.add(msg)		
 
-  trigger.action.activateGroup(Group.getByName(grpName))
-  grp = Group.getByName(grpName)
+    trigger.action.activateGroup(Group.getByName(grpName))
+    grp = Group.getByName(grpName)
   local InitwpSpeed = mist.random(600,700)
   local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
   local wpAlt = mist.random(5000,8000)
   local wpPsn = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.20, zone.radius * 0.50)
   local wpPsn2 = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.40, zone.radius * 0.50)
   local path = {}
-  path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
-  path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
-  path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
-  path[1].task = {
-    id = "ComboTask",
-      params = 
-      {
-        tasks = 
-        {
-          [1] = 
-          {
+    path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
+    path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
+    path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+    path[1].task = {
+      id = "ComboTask",
+      params = {
+        tasks = {
+          [1] = {
             number = 1,
             auto = true,
             id = "EngageTargets",
             enabled = true,
             key = "CAP",
-            params =
-            {
-              targetTypes =
-              {
+            params = {
+              targetTypes = {
                 [1] = "Air",
               }, -- end of targetTypes
               priority = 0,
             }, -- end of params
           }, -- end of [1]
-          [2] =
-          {
+          [2] = {
             number = 2,
             auto = false,
             id = "Orbit",
             enabled = true,
-            params =
-            {
+            params = {
               altitudeEdited = false,
               pattern = "Race-Track",
               speed = wpSpeed,
@@ -571,19 +561,15 @@ local rand = mist.random(1,Fighter_Names)
               speedEdited = true,
             }, -- end of params
           }, -- end of [2]
-          [3] =
-          {
+          [3] = {
             enabled = true,
             auto = false,
             id = "WrappedAction",
             number = 1,
-            params =
-            {
-              action =
-              {
+            params = {
+              action = {
                 id = "Option",
-                params =
-                {
+                params = {
                   value = false,
                   name = 6,
                 }, -- end of params
@@ -601,26 +587,26 @@ local rand = mist.random(1,Fighter_Names)
     path[3].speed_locked = true
 
     local vars = {} 
-    vars.groupName = grpName
-    vars.action = "respawn"
-    vars.point = spawnPsn
-    vars.route = path
-    mist.teleportToPoint(vars)			
+      vars.groupName = grpName
+      vars.action = "respawn"
+      vars.point = spawnPsn
+      vars.route = path
+        mist.teleportToPoint(vars)			
 
     local con = grp:getController()
-    con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-    con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-    con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
-    list.teleportToPoint(vars)
+      con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+      con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
+      con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+      list.teleportToPoint(vars)
 
     local msg = {} 
-    msg.text = ' Intercept task has been created, search and destroy target.'
-    msg.displayTime = 20
-    msg.msgFor = {coa = {'all'}} 
-    mist.message.add(msg)
+      msg.text = ' Intercept task has been created, search and destroy target.'
+      msg.displayTime = 20
+      msg.msgFor = {coa = {'all'}} 
+        mist.message.add(msg)
 --end -- break for loop
 
-trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
 
 --return
 end
@@ -756,18 +742,14 @@ bpath[6] = mist.fixedWing.buildWP(bwpPsn, bwpSpeed, bwpAlt, "BARO")
 
 bpath[2].task = {
   id = "ComboTask",
-  params = 
-  {
-    tasks =
-    {
-      [1] =
-      {
+  params = {
+    tasks = {
+      [1] = {
       	number = 1,
       	auto = false,
       	id = "BombingRunway",
       	enabled = true,
-      	params =
-      	{
+      	params = {
       	  altitudeEnabled = false,
       	  attackQtyLimit = false,
       	  attackQty = 1,
@@ -780,19 +762,15 @@ bpath[2].task = {
       	  direction = 0,
         }, -- end of params
       }, -- end of [1]
-      [2] =
-      {
+      [2] =  {
         enabled = true,
         auto = false,
         id = "WrappedAction",
         number = 1,
-        params =
-        {
-          action =
-          {
+        params =  {
+          action = {
             id = "Option",
-            params =
-            {
+            params = {
               value = false,
               name = 6,
             },-- end of params
@@ -828,9 +806,9 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
   bgrp = Group.getByName(bgrpName)
   
   local bcon = bgrp:getController()
-  bcon:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-  bcon:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-  bcon:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+    bcon:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+    bcon:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
+    bcon:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
   
   BomberID = bgrp:getID()
   
@@ -845,61 +823,48 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
   epath[5] = mist.fixedWing.buildWP(bspawnPsn, ewpSpeed, ewpAlt, "BARO")
   epath[6] = mist.fixedWing.buildWP(bwpPsn, ewpSpeed, ewpAlt, "BARO")
   
-  epath[2].task =
-  {
+  epath[2].task = {
     id = "ComboTask",
-    params =
-    {
-      tasks =
-      {
-        [1] =
-        {
+    params = {
+      tasks = {
+        [1] = {
           number = 1,
           auto = true,
           id = "EngageTargets",
           enabled = true,
           key = "CAP",
-          params =
-          {
-            targetTypes =
-            {
+          params = {
+            targetTypes = {
               [1] = "Air",
             }, -- end of targetTypes
             priority = 0
           }, -- end of params
         }, -- end of [1]
-        [2] =
-        {
+        [2] = {
           number = 2,
           auto = false,
           id = "Follow",
           enabled = true,
-          params =
-          {
+          params = {
             lastWptIndexFlagChangedManually = true,
             groupId = BomberID,
             lastWptIndexFlag = false,
-            pos =
-            {
+            pos = {
               y = -500,
               x = -200,
               z = 0,
             }, -- end of ["pos"]
           }, -- end of ["params"]
         }, -- end of [2]
-        [3] =
-        {
+        [3] = {
           enabled = true,
           auto = false,
           id = "WrappedAction",
           number = 3,
-          params =
-          {
-            action =
-            {
+          params = {
+            action = {
               id = "Option",
-              params =
-              {
+              params = {
                 value = false,
                 name = 6,
               }, -- end of params
@@ -919,17 +884,17 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
     
   trigger.action.activateGroup(Group.getByName(egrpName))
     local evars = {}
-    evars.groupName = egrpNameevars.action = "respawn"
-    evars.point = bspawnPsn
-    evars.route = epath
-    mist.teleportToPoint(evars)
+      evars.groupName = egrpNameevars.action = "respawn"
+      evars.point = bspawnPsn
+      evars.route = epath
+        mist.teleportToPoint(evars)
     
     egrp = Group.getByName(egrpName)
     
     local econ = egrp:getController()
-    econ:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-    econ:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-    econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+      econ:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+      econ:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
+      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
     
     local msg = {}
     msg.text = ' Choosing from interceptor list. Plane number  '..tostring(brand)..tostring(bgrpName)..tostring(_bArea)
@@ -938,22 +903,22 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
       mist.message.add(msg)
     
     local msg = {}
-    msg.text = ' Choosing from escort list. Plane number  '..tostring(erand)..tostring(egrpName)..tostring(_bArea)
-    msg.displayTime = 10
-    msg.msgFor = {coa = {'all'}}
-      mist.message.add(msg)
+      msg.text = ' Choosing from escort list. Plane number  '..tostring(erand)..tostring(egrpName)..tostring(_bArea)
+      msg.displayTime = 10
+      msg.msgFor = {coa = {'all'}}
+        mist.message.add(msg)
         
     local msg = {}
-    msg.text = ' Bomber intercept task has been created. '
-    msg.displayTime = 20
-    msg.msgFor = {coa = {'all'}}
-      mist.message.add(msg)
+      msg.text = ' Bomber intercept task has been created. '
+      msg.displayTime = 20
+      msg.msgFor = {coa = {'all'}}
+        mist.message.add(msg)
         
     local msg = {}
-    msg.text = ' Escort is following  '..tostring(BomberID)
-    msg.displayTime = 20
-    msg.msgFor = {coa = {'all'}}
-      mist.message.add(msg)
+      msg.text = ' Escort is following  '..tostring(BomberID)
+      msg.displayTime = 20
+      msg.msgFor = {coa = {'all'}}
+        mist.message.add(msg)
 --end -- break for loop
 
 
@@ -1061,10 +1026,10 @@ local msg = {}
   msg.ref = 'red'
   msg.displayTime = 90
   msg.msgFor = {coa = {'red'}}
-  	msg.text = ' Imperial: '
-  	msg.metric = false
-  	msg.alt = true
-  	  mist.msgBullseye(msg)
+  msg.text = ' Imperial: '
+  msg.metric = false
+  msg.alt = true
+    mist.msgBullseye(msg)
   return
 end
 ---

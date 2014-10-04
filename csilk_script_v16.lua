@@ -30,14 +30,16 @@ smoke_marker = {}
 --MudUnits = MudGrp:getUnits()
 
 RunwayID = 0
-Smoke = 1
-SmokeCoord = {}
+
 
 bspawnPsn = {}
 espawnPsn = {}
 spawnPsn = {}
 mudPsn = {}
 
+
+Smoke = 1
+SmokeCoord = {}
 Difficulty = "Easy"
 Difficultymod = 1
 Range = "Standard"
@@ -591,12 +593,14 @@ local rand = mist.random(1,Fighter_Names)
       vars.action = "respawn"
       vars.point = spawnPsn
       vars.route = path
-        mist.teleportToPoint(vars)			
+      	mist.teleportToPoint(vars)			
 
     local con = grp:getController()
       con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-      con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-      con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+      con:setOption(AI.Option.Air.id.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+      con:setOption(AI.Option.Air.id.ROE.OPEN_FIRE_WEAPON_FREE)
+			con:setOption(AI.Option.Air.id.FLARE_USING.AGAINST_FIRED_MISSILE)
+			con:setOption(AI.Option.Air.id.REACTION_ON_THREAT.EVADE_FIRE)
       list.teleportToPoint(vars)
 
     local msg = {} 
@@ -807,8 +811,10 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
   
   local bcon = bgrp:getController()
     bcon:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-    bcon:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-    bcon:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+    bcon:setOption(AI.Option.Air.id.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+    bcon:setOption(AI.Option.Air.id.ROE.OPEN_FIRE)
+		bcon:setOption(AI.Option.Air.id.REACTION_ON_THREAT.PASSIVE_DEFENCE)
+		bcon:setOption(AI.Option.Air.id.FLARE_USING.WHEN_FLYING_NEAR_ENEMIES)
   
   BomberID = bgrp:getID()
   
@@ -833,7 +839,7 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
           id = "EngageTargets",
           enabled = true,
           key = "CAP",
-          params = {
+					params = {
             targetTypes = {
               [1] = "Air",
             }, -- end of targetTypes
@@ -884,7 +890,8 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
     
   trigger.action.activateGroup(Group.getByName(egrpName))
     local evars = {}
-      evars.groupName = egrpNameevars.action = "respawn"
+      evars.groupName = egrpName
+			evars.action = "respawn"
       evars.point = bspawnPsn
       evars.route = epath
         mist.teleportToPoint(evars)
@@ -893,8 +900,10 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
     
     local econ = egrp:getController()
       econ:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-      econ:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+      econ:setOption(AI.Option.Air.id.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+      econ:setOption(AI.Option.Air.id.ROE.OPEN_FIRE_WEAPON_FREE)
+			econ:setOption(AI.Option.Air.id.FLARE_USING.AGAINST_FIRED_MISSILE)
+			econ:setOption(AI.Option.Air.id.REACTION_ON_THREAT.EVADE_FIRE)
     
     local msg = {}
     msg.text = ' Choosing from interceptor list. Plane number  '..tostring(brand)..tostring(bgrpName)..tostring(_bArea)
@@ -933,6 +942,9 @@ function Create_Mud_Fortified(_mArea)
 local mzone = trigger.misc.getZone(_mArea)
 local mrand = mist.random(1,Mud_Names)
 
+SmokeCoord = {}
+SmokeCoord = mist.utils.zoneToVec3('Anapa')
+
 trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
 if Difficultymod == 1 then
@@ -960,7 +972,7 @@ formisttable = '[g]' .. MudName
 trigger.action.activateGroup(Group.getByName(MudName))
 
 local msg = {}
-  msg.text = ' Creating mud task '..tostring(MudName) ..tostring(targets) ..tostring(formisttable)
+  msg.text = ' Creating mud task '..tostring(MudName) ..tostring(formisttable)
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}}
     mist.message.add(msg)
@@ -994,7 +1006,7 @@ local msg = {}
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}}
     mist.message.add(msg)
-    SmokeCoord = mist.utils.zoneToVec3(mzone)
+    
     
   timer.scheduleFunction(Make_Smoke, nil, timer.getTime() + 5)
   return
@@ -1003,10 +1015,9 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Make_Smoke(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  local smoke = _smoke
 
   if Smoke == 1 then
-    trigger.action.smoke({x= SmokeCoord.x + math.random(1,200), y= land.getHeight({x = SmokeCoord.x, y = SmokeCoord.z}), z= SmokeCoord.z + math.random(1, 200)}, trigger.smokeColor.red)
+	trigger.action.smoke({x=SmokeCoord.x + math.random(1,200), y= land.getHeight({x = SmokeCoord.x, y = SmokeCoord.z}), z= SmokeCoord.z + math.random(1, 200)}, trigger.smokeColor.Red)
     return time + 90
   end
 

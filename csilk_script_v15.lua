@@ -43,271 +43,271 @@ Range = "Standard"
 Task_Range = 2
 
 Rad = {
-"Anapa-21 #1",
-"Anapa-21 #2",
-"Anapa-21 #3",
-"Anapa-21 #4",
-"Anapa-21 #5",
-"Anapa-21 #6",
-"Anapa-25T #1",
-"Anapa-25T #2",
-"Anapa-25T #3",
-"Anapa-25T #4",
-"Anapa-25T #5",
-"Anapa-25T #6",
-"Anapa-25 #1",
-"Anapa-25 #2",
-"Anapa-25 #3",
-"Anapa-25 #4",
-"Anapa-25 #5",
-"Anapa-25 #6",
-"Anapa-A10C #1",
-"Anapa-A10C #2",
-"Anapa-A10C #3",
-"Anapa-A10C #4",
-"Anapa-A10C #5",
-"Anapa-A10C #6",
-"Anapa-A10A #1",
-"Anapa-A10A #2",
-"Anapa-A10A #3",
-"Anapa-A10A #4",
-"Anapa-A10A #5",
-"Anapa-A10A #6",
-"Anapa-F15C #1",
-"Anapa-F15C #2",
-"Anapa-F15C #3",
-"Anapa-F15C #4",
-"Anapa-F15C #5",
-"Anapa-F15C #6",
-"Anapa-F86F #1",
-"Anapa-F86F #2",
-"Anapa-F86F #3",
-"Anapa-F86F #4",
-"Anapa-F86F #5",
-"Anapa-F86F #6",
-"Anapa-KA50 #1",
-"Anapa-KA50 #2",
-"Anapa-KA50 #3",
-"Anapa-KA50 #4",
-"Anapa-KA50 #5",
-"Anapa-KA50 #6",
-"Anapa-KA50 #7",
-"Anapa-KA50 #8",
-"Anapa-UH1H #1",
-"Anapa-UH1H #2",
-"Anapa-UH1H #3",
-"Anapa-UH1H #4",
-"Anapa-Mi8 #1",
-"Anapa-Mi8 #2",
-"Anapa-Mi8 #3",
-"Anapa-Mi8 #4",
-"Mozdok-21 #1",
-"Mozdok-21 #2",
-"Mozdok-21 #3",
-"Mozdok-21 #4",
-"Mozdok-21 #5",
-"Mozdok-21 #6",
-"Mozdok-15C #1",
-"Mozdok-15C #2",
-"Mozdok-15C #3",
-"Mozdok-15C #4",
-"Mozdok-15C #5",
-"Mozdok-15C #6",
-"Vaziani-21 #1",
-"Vaziani-21 #2",
-"Vaziani-21 #3",
-"Vaziani-21 #4",
-"Vaziani-21 #5",
-"Vaziani-21 #6",
-"Vaziani-15C #1",
-"Vaziani-15C #2",
-"Vaziani-15C #3",
-"Vaziani-15C #4",
-"Vaziani-15C #5",
-"Vaziani-15C #6",
-"Sochi-21 #1",
-"Sochi-21 #2",
-"Sochi-21 #3",
-"Sochi-21 #4",
-"Sochi-21 #5",
-"Sochi-21 #6",
-"Sochi-15C #1",
-"Sochi-15C #2",
-"Sochi-15C #3",
-"Sochi-15C #4",
-"Sochi-15C #5",
-"Sochi-15C #6",
-"Kutaisi-21 #1",
-"Kutaisi-21 #2",
-"Kutaisi-21 #3",
-"Kutaisi-21 #4",
-"Kutaisi-21 #5",
-"Kutaisi-21 #6",
-"Kutaisi-15C #1",
-"Kutaisi-15C #2",
-"Kutaisi-15C #3",
-"Kutaisi-15C #4",
-"Kutaisi-15C #5",
-"Kutaisi-15C #6",
-"Maykop-21 #1",
-"Maykop-21 #2",
-"Maykop-21 #3",
-"Maykop-21 #4",
-"Maykop-21 #5",
-"Maykop-21 #6",
-"Maykop-15C #1",
-"Maykop-15C #2",
-"Maykop-15C #3",
-"Maykop-15C #4",
-"Maykop-15C #5",
-"Maykop-15C #6",
+  "Anapa-21 #1",
+  "Anapa-21 #2",
+  "Anapa-21 #3",
+  "Anapa-21 #4",
+  "Anapa-21 #5",
+  "Anapa-21 #6",
+  "Anapa-25T #1",
+  "Anapa-25T #2",
+  "Anapa-25T #3",
+  "Anapa-25T #4",
+  "Anapa-25T #5",
+  "Anapa-25T #6",
+  "Anapa-25 #1",
+  "Anapa-25 #2",
+  "Anapa-25 #3",
+  "Anapa-25 #4",
+  "Anapa-25 #5",
+  "Anapa-25 #6",
+  "Anapa-A10C #1",
+  "Anapa-A10C #2",
+  "Anapa-A10C #3",
+  "Anapa-A10C #4",
+  "Anapa-A10C #5",
+  "Anapa-A10C #6",
+  "Anapa-A10A #1",
+  "Anapa-A10A #2",
+  "Anapa-A10A #3",
+  "Anapa-A10A #4",
+  "Anapa-A10A #5",
+  "Anapa-A10A #6",
+  "Anapa-F15C #1",
+  "Anapa-F15C #2",
+  "Anapa-F15C #3",
+  "Anapa-F15C #4",
+  "Anapa-F15C #5",
+  "Anapa-F15C #6",
+  "Anapa-F86F #1",
+  "Anapa-F86F #2",
+  "Anapa-F86F #3",
+  "Anapa-F86F #4",
+  "Anapa-F86F #5",
+  "Anapa-F86F #6",
+  "Anapa-KA50 #1",
+  "Anapa-KA50 #2",
+  "Anapa-KA50 #3",
+  "Anapa-KA50 #4",
+  "Anapa-KA50 #5",
+  "Anapa-KA50 #6",
+  "Anapa-KA50 #7",
+  "Anapa-KA50 #8",
+  "Anapa-UH1H #1",
+  "Anapa-UH1H #2",
+  "Anapa-UH1H #3",
+  "Anapa-UH1H #4",
+  "Anapa-Mi8 #1",
+  "Anapa-Mi8 #2",
+  "Anapa-Mi8 #3",
+  "Anapa-Mi8 #4",
+  "Mozdok-21 #1",
+  "Mozdok-21 #2",
+  "Mozdok-21 #3",
+  "Mozdok-21 #4",
+  "Mozdok-21 #5",
+  "Mozdok-21 #6",
+  "Mozdok-15C #1",
+  "Mozdok-15C #2",
+  "Mozdok-15C #3",
+  "Mozdok-15C #4",
+  "Mozdok-15C #5",
+  "Mozdok-15C #6",
+  "Vaziani-21 #1",
+  "Vaziani-21 #2",
+  "Vaziani-21 #3",
+  "Vaziani-21 #4",
+  "Vaziani-21 #5",
+  "Vaziani-21 #6",
+  "Vaziani-15C #1",
+  "Vaziani-15C #2",
+  "Vaziani-15C #3",
+  "Vaziani-15C #4",
+  "Vaziani-15C #5",
+  "Vaziani-15C #6",
+  "Sochi-21 #1",
+  "Sochi-21 #2",
+  "Sochi-21 #3",
+  "Sochi-21 #4",
+  "Sochi-21 #5",
+  "Sochi-21 #6",
+  "Sochi-15C #1",
+  "Sochi-15C #2",
+  "Sochi-15C #3",
+  "Sochi-15C #4",
+  "Sochi-15C #5",
+  "Sochi-15C #6",
+  "Kutaisi-21 #1",
+  "Kutaisi-21 #2",
+  "Kutaisi-21 #3",
+  "Kutaisi-21 #4",
+  "Kutaisi-21 #5",
+  "Kutaisi-21 #6",
+  "Kutaisi-15C #1",
+  "Kutaisi-15C #2",
+  "Kutaisi-15C #3",
+  "Kutaisi-15C #4",
+  "Kutaisi-15C #5",
+  "Kutaisi-15C #6",
+  "Maykop-21 #1",
+  "Maykop-21 #2",
+  "Maykop-21 #3",
+  "Maykop-21 #4",
+  "Maykop-21 #5",
+  "Maykop-21 #6",
+  "Maykop-15C #1",
+  "Maykop-15C #2",
+  "Maykop-15C #3",
+  "Maykop-15C #4",
+  "Maykop-15C #5",
+  "Maykop-15C #6",
 }
 
 Mud = {
-	[1] = "Mud Fortified #000",
-	[2] = "Mud Fortified #001",
+  [1] = "Mud Fortified #000",
+  [2] = "Mud Fortified #001",
 }
 
 Mud_Names = 2
 
 Fighter_Names_Easy = {
-    [1] = 'MiG-21 (Easy)',
-    [2] = 'MiG-23 (Easy)',
-	[3] = 'MiG-29S (Easy)',
-	[4] = 'MiG-29A (Easy)',
-	[5] = 'Su-17 (Easy)',
-	[6] = 'F-16C bl.52d (Easy)',
-	[7] = 'Su-24MR (Easy)',
-	[8] = 'Su-27 (Easy)',
-	[9] = 'Su-25 (Easy)',
-	[10] = 'Su-25T (Easy)',
-	[11] = '2000-5 (Easy)',
-	[12] = 'F-86 (Easy)',
-	[13] = 'MiG-25PD (Easy)',
-	[14] = 'MiG-25RBT (Easy)',
-	[15] = 'MiG-27K (Easy)',
-	[16] = 'F-16C bl.50 (Easy)',
-	[17] = 'F-4E (Easy)',
-	[18] = 'F-5E (Easy)',	
+  [1] = 'MiG-21 (Easy)',
+  [2] = 'MiG-23 (Easy)',
+  [3] = 'MiG-29S (Easy)',
+  [4] = 'MiG-29A (Easy)',
+  [5] = 'Su-17 (Easy)',
+  [6] = 'F-16C bl.52d (Easy)',
+  [7] = 'Su-24MR (Easy)',
+  [8] = 'Su-27 (Easy)',
+  [9] = 'Su-25 (Easy)',
+  [10] = 'Su-25T (Easy)',
+  [11] = '2000-5 (Easy)',
+  [12] = 'F-86 (Easy)',
+  [13] = 'MiG-25PD (Easy)',
+  [14] = 'MiG-25RBT (Easy)',
+  [15] = 'MiG-27K (Easy)',
+  [16] = 'F-16C bl.50 (Easy)',
+  [17] = 'F-4E (Easy)',
+  [18] = 'F-5E (Easy)',	
 }
 
 Fighter_Names_Normal = {
-    [1] = 'MiG-21 (Normal)',
-    [2] = 'MiG-23 (Normal)',
-	[3] = 'MiG-29S (Normal)',
-	[4] = 'MiG-29A (Normal)',
-	[5] = 'Su-17 (Normal)',
-	[6] = 'F-16C bl.52d (Normal)',
-	[7] = 'Su-24MR (Normal)',
-	[8] = 'Su-27 (Normal)',
-	[9] = 'Su-25 (Normal)',
-	[10] = 'Su-25T (Normal)',
-	[11] = '2000-5 (Normal)',
-	[12] = 'F-86 (Normal)',
-	[13] = 'MiG-25PD (Normal)',
-	[14] = 'MiG-25RBT (Normal)',
-	[15] = 'MiG-27K (Normal)',
-	[16] = 'F-16C bl.50 (Normal)',
-	[17] = 'F-4E (Normal)',
-	[18] = 'F-5E (Normal)',	
+  [1] = 'MiG-21 (Normal)',
+  [2] = 'MiG-23 (Normal)',
+  [3] = 'MiG-29S (Normal)',
+  [4] = 'MiG-29A (Normal)',
+  [5] = 'Su-17 (Normal)',
+  [6] = 'F-16C bl.52d (Normal)',
+  [7] = 'Su-24MR (Normal)',
+  [8] = 'Su-27 (Normal)',
+  [9] = 'Su-25 (Normal)',
+  [10] = 'Su-25T (Normal)',
+  [11] = '2000-5 (Normal)',
+  [12] = 'F-86 (Normal)',
+  [13] = 'MiG-25PD (Normal)',
+  [14] = 'MiG-25RBT (Normal)',
+  [15] = 'MiG-27K (Normal)',
+  [16] = 'F-16C bl.50 (Normal)',
+  [17] = 'F-4E (Normal)',
+  [18] = 'F-5E (Normal)',	
 }
 
 Fighter_Names_Hard = {
-    [1] = 'MiG-21 (Hard)',
-    [2] = 'MiG-23 (Hard)',
-	[3] = 'MiG-29S (Hard)',
-	[4] = 'MiG-29A (Hard)',
-	[5] = 'Su-17 (Hard)',
-	[6] = 'F-16C bl.52d (Hard)',
-	[7] = 'Su-24MR (Hard)',
-	[8] = 'Su-27 (Hard)',
-	[9] = 'Su-25 (Hard)',
-	[10] = 'Su-25T (Hard)',
-	[11] = '2000-5 (Hard)',
-	[12] = 'F-86 (Hard)',
-	[13] = 'MiG-25PD (Hard)',
-	[14] = 'MiG-25RBT (Hard)',
-	[15] = 'MiG-27K (Hard)',
-	[16] = 'F-16C bl.50 (Hard)',
-	[17] = 'F-4E (Hard)',
-	[18] = 'F-5E (Hard)',	
+  [1] = 'MiG-21 (Hard)',
+  [2] = 'MiG-23 (Hard)',
+  [3] = 'MiG-29S (Hard)',
+  [4] = 'MiG-29A (Hard)',
+  [5] = 'Su-17 (Hard)',
+  [6] = 'F-16C bl.52d (Hard)',
+  [7] = 'Su-24MR (Hard)',
+  [8] = 'Su-27 (Hard)',
+  [9] = 'Su-25 (Hard)',
+  [10] = 'Su-25T (Hard)',
+  [11] = '2000-5 (Hard)',
+  [12] = 'F-86 (Hard)',
+  [13] = 'MiG-25PD (Hard)',
+  [14] = 'MiG-25RBT (Hard)',
+  [15] = 'MiG-27K (Hard)',
+  [16] = 'F-16C bl.50 (Hard)',
+  [17] = 'F-4E (Hard)',
+  [18] = 'F-5E (Hard)',	
 }
 
 Fighter_Names_VeryHard = {
-    [1] = 'MiG-21 (VeryHard)',
-    [2] = 'MiG-23 (VeryHard)',
-	[3] = 'MiG-29S (VeryHard)',
-	[4] = 'MiG-29A (VeryHard)',
-	[5] = 'Su-17 (VeryHard)',
-	[6] = 'F-16C bl.52d (VeryHard)',
-	[7] = 'Su-24MR (VeryHard)',
-	[8] = 'Su-27 (VeryHard)',
-	[9] = 'Su-25 (VeryHard)',
-	[10] = 'Su-25T (VeryHard)',
-	[11] = '2000-5 (VeryHard)',
-	[12] = 'F-86 (VeryHard)',
-	[13] = 'MiG-25PD (VeryHard)',
-	[14] = 'MiG-25RBT (VeryHard)',
-	[15] = 'MiG-27K (VeryHard)',
-	[16] = 'F-16C bl.50 (VeryHard)',
-	[17] = 'F-4E (VeryHard)',
-	[18] = 'F-5E (VeryHard)',	
+  [1] = 'MiG-21 (VeryHard)',
+  [2] = 'MiG-23 (VeryHard)',
+  [3] = 'MiG-29S (VeryHard)',
+  [4] = 'MiG-29A (VeryHard)',
+  [5] = 'Su-17 (VeryHard)',
+  [6] = 'F-16C bl.52d (VeryHard)',
+  [7] = 'Su-24MR (VeryHard)',
+  [8] = 'Su-27 (VeryHard)',
+  [9] = 'Su-25 (VeryHard)',
+  [10] = 'Su-25T (VeryHard)',
+  [11] = '2000-5 (VeryHard)',
+  [12] = 'F-86 (VeryHard)',
+  [13] = 'MiG-25PD (VeryHard)',
+  [14] = 'MiG-25RBT (VeryHard)',
+  [15] = 'MiG-27K (VeryHard)',
+  [16] = 'F-16C bl.50 (VeryHard)',
+  [17] = 'F-4E (VeryHard)',
+  [18] = 'F-5E (VeryHard)',	
 }
 
 Fighter_Names = 18
 
 Bomber_Names_Easy = {
-    [1] = 'Tu-22M3 (Easy)',
-	[2] = 'Su-24M (Easy)',
-	[3] = 'Su-25T (BEasy)',
-	[4] = 'Su-25 (BEasy)',
-	[5] = 'MiG-27K (BEasy)',
-	[6] = 'Su-17 (BEasy)',
+  [1] = 'Tu-22M3 (Easy)',
+  [2] = 'Su-24M (Easy)',
+  [3] = 'Su-25T (BEasy)',
+  [4] = 'Su-25 (BEasy)',
+  [5] = 'MiG-27K (BEasy)',
+  [6] = 'Su-17 (BEasy)',
 }
 
 Bomber_Names_Normal = {
-    [1] = 'Tu-22M3 (Normal)',
-	[2] = 'Su-24M (Normal)',
-	[3] = 'Su-25T (BNormal)',
-	[4] = 'Su-25 (BNormal)',
-	[5] = 'MiG-27K (BNormal)',
-	[6] = 'Su-17 (BNormal)',
+  [1] = 'Tu-22M3 (Normal)',
+  [2] = 'Su-24M (Normal)',
+  [3] = 'Su-25T (BNormal)',
+  [4] = 'Su-25 (BNormal)',
+  [5] = 'MiG-27K (BNormal)',
+  [6] = 'Su-17 (BNormal)',
 }
 
 Bomber_Names_Hard = {
-    [1] = 'Tu-22M3 (Hard)',
-	[2] = 'Su-24M (Hard)',
-	[3] = 'Su-25T (BHard)',
-	[4] = 'Su-25 (BHard)',
-	[5] = 'MiG-27K (BHard)',
-	[6] = 'Su-17 (BHard)',
+  [1] = 'Tu-22M3 (Hard)',
+  [2] = 'Su-24M (Hard)',
+  [3] = 'Su-25T (BHard)',
+  [4] = 'Su-25 (BHard)',
+  [5] = 'MiG-27K (BHard)',
+  [6] = 'Su-17 (BHard)',
 }
 
 Bomber_Names_VeryHard = {
-    [1] = 'Tu-22M3 (VeryHard)',
-	[2] = 'Su-24M (VeryHard)',
-	[3] = 'Su-25T (BVeryHard)',
-	[4] = 'Su-25 (BVeryHard)',
-	[5] = 'MiG-27K (BVeryHard)',
-	[6] = 'Su-17 (BVeryHard)',
+  [1] = 'Tu-22M3 (VeryHard)',
+  [2] = 'Su-24M (VeryHard)',
+  [3] = 'Su-25T (BVeryHard)',
+  [4] = 'Su-25 (BVeryHard)',
+  [5] = 'MiG-27K (BVeryHard)',
+  [6] = 'Su-17 (BVeryHard)',
 }
 
 Bomber_Names = 6
 
 CAS_Planes = {
-	[1] = 'Tornado GR4 #1',
-	[2] = 'Tornado IDS #1',
+  [1] = 'Tornado GR4 #1',
+  [2] = 'Tornado IDS #1',
 }
 
 
-	Calls = missionCommands.addSubMenu("Mission Info",nil)
-	AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
-	MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
-	SochiPath = missionCommands.addSubMenu("Sochi-Adler Tasks",nil)
-	KutaisiPath = missionCommands.addSubMenu("Kutaisi Tasks",nil)
-	MozdokPath = missionCommands.addSubMenu("Mozdok Tasks",nil)
-	VazianiPath = missionCommands.addSubMenu("Vaziani Tasks",nil)
-	GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
+Calls = missionCommands.addSubMenu("Mission Info",nil)
+AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
+MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
+SochiPath = missionCommands.addSubMenu("Sochi-Adler Tasks",nil)
+KutaisiPath = missionCommands.addSubMenu("Kutaisi Tasks",nil)
+MozdokPath = missionCommands.addSubMenu("Mozdok Tasks",nil)
+VazianiPath = missionCommands.addSubMenu("Vaziani Tasks",nil)
+GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
 
 ---------------
 -- RADIO ADD --
@@ -315,62 +315,59 @@ CAS_Planes = {
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Radio_Add(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	for i=1,#Rad do
-		Add_Menu(Rad[i])
-			end
-return time + 5
+  for i=1,#Rad do
+    Add_Menu(Rad[i])
+  end
+  return time + 5
 end
 ---
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Add_Menu(unitName)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if Radio_Table[unitName] == nil then
-	local unit = Unit.getByName(unitName)
-
-        if unit == nil then
-			return
-		end
-			
-	local group = unit:getGroup()
-
-			if group == nil then
-				return
-			end		
+  local unit = Unit.getByName(unitName)
+    if unit == nil then
+    return
+    end
+  local group = unit:getGroup()
+    if group == nil then
+    return
+    end		
 	
-	Rad_GroupID = group:getID()   
+  Rad_GroupID = group:getID()   
 		
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, GameSet, Change_Difficulty, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GameSet, Change_Task_Range, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2b, GameSet, Change_Smoke_Set, nil)
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3b, GameSet, Make_Smoke, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, AnapaPath, Create_Fighter_Intercept, "Anapa")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Bomber_Intercept, "Anapa")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, AnapaPath, Create_Mud_Fortified, "Anapa")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
+  --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, GameSet, Change_Difficulty, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GameSet, Change_Task_Range, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2b, GameSet, Change_Smoke_Set, nil)
+  --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3b, GameSet, Make_Smoke, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, AnapaPath, Create_Fighter_Intercept, "Anapa")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Bomber_Intercept, "Anapa")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, AnapaPath, Create_Mud_Fortified, "Anapa")
+
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MaykopPath, Create_Fighter_Intercept, "Maykop")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Bomber_Intercept, "Maykop")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MaykopPath, Create_Mud_Fortified, "Maykop")
 	
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MaykopPath, Create_Fighter_Intercept, "Maykop")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Bomber_Intercept, "Maykop")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MaykopPath, Create_Mud_Fortified, "Maykop")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, SochiPath, Create_Fighter_Intercept, "Sochi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, SochiPath, Create_Bomber_Intercept, "Sochi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, SochiPath, Create_Mud_Fortified, "Sochi")
 	
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, SochiPath, Create_Fighter_Intercept, "Sochi")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, SochiPath, Create_Bomber_Intercept, "Sochi")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, SochiPath, Create_Mud_Fortified, "Sochi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, KutaisiPath, Create_Fighter_Intercept, "Kutaisi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Bomber_Intercept, "Kutaisi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, KutaisiPath, Create_Mud_Fortified, "Kutaisi")
+
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MozdokPath, Create_Fighter_Intercept, "Mozdok")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MozdokPath, Create_Bomber_Intercept, "Mozdok")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MozdokPath, Create_Mud_Fortified, "Mozdok")
+
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, VazianiPath, Create_Fighter_Intercept, "Vaziani")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, VazianiPath, Create_Bomber_Intercept, "Vaziani")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, VazianiPath, Create_Mud_Fortified, "Vaziani")
 	
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, KutaisiPath, Create_Fighter_Intercept, "Kutaisi")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Bomber_Intercept, "Kutaisi")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, KutaisiPath, Create_Mud_Fortified, "Kutaisi")
-	
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MozdokPath, Create_Fighter_Intercept, "Mozdok")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MozdokPath, Create_Bomber_Intercept, "Mozdok")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MozdokPath, Create_Mud_Fortified, "Mozdok")
-	
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, VazianiPath, Create_Fighter_Intercept, "Vaziani")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, VazianiPath, Create_Bomber_Intercept, "Vaziani")
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, VazianiPath, Create_Mud_Fortified, "Vaziani")
-		
-	Radio_Table[unitName] = true
-	end
+  Radio_Table[unitName] = true
+  end
 end
 ---
 ---------------

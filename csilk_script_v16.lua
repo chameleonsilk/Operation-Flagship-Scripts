@@ -30,14 +30,16 @@ smoke_marker = {}
 --MudUnits = MudGrp:getUnits()
 
 RunwayID = 0
-Smoke = 1
-SmokeCoord = {}
+
 
 bspawnPsn = {}
 espawnPsn = {}
 spawnPsn = {}
 mudPsn = {}
 
+
+Smoke = 1
+SmokeCoord = {}
 Difficulty = "Easy"
 Difficultymod = 1
 Range = "Standard"
@@ -191,20 +193,14 @@ Fighter_Names_Easy = {
   [2] = 'MiG-23 (Easy)',
   [3] = 'MiG-29S (Easy)',
   [4] = 'MiG-29A (Easy)',
-  [5] = 'Su-17 (Easy)',
-  [6] = 'F-16C bl.52d (Easy)',
-  [7] = 'Su-24MR (Easy)',
-  [8] = 'Su-27 (Easy)',
-  [9] = 'Su-25 (Easy)',
-  [10] = 'Su-25T (Easy)',
-  [11] = '2000-5 (Easy)',
-  [12] = 'F-86 (Easy)',
-  [13] = 'MiG-25PD (Easy)',
-  [14] = 'MiG-25RBT (Easy)',
-  [15] = 'MiG-27K (Easy)',
-  [16] = 'F-16C bl.50 (Easy)',
-  [17] = 'F-4E (Easy)',
-  [18] = 'F-5E (Easy)',	
+  [5] = 'F-16C bl.52d (Easy)',
+  [6] = 'Su-27 (Easy)',
+  [7] = '2000-5 (Easy)',
+  [8] = 'F-86 (Easy)',
+  [9] = 'MiG-25PD (Easy)',
+  [10] = 'F-16C (Easy)',
+  [11] = 'F-4E (Easy)',
+  [12] = 'F-5E (Easy)',	
 }
 
 Fighter_Names_Normal = {
@@ -212,20 +208,14 @@ Fighter_Names_Normal = {
   [2] = 'MiG-23 (Normal)',
   [3] = 'MiG-29S (Normal)',
   [4] = 'MiG-29A (Normal)',
-  [5] = 'Su-17 (Normal)',
-  [6] = 'F-16C bl.52d (Normal)',
-  [7] = 'Su-24MR (Normal)',
-  [8] = 'Su-27 (Normal)',
-  [9] = 'Su-25 (Normal)',
-  [10] = 'Su-25T (Normal)',
-  [11] = '2000-5 (Normal)',
-  [12] = 'F-86 (Normal)',
-  [13] = 'MiG-25PD (Normal)',
-  [14] = 'MiG-25RBT (Normal)',
-  [15] = 'MiG-27K (Normal)',
-  [16] = 'F-16C bl.50 (Normal)',
-  [17] = 'F-4E (Normal)',
-  [18] = 'F-5E (Normal)',	
+  [5] = 'F-16C bl.52d (Normal)',
+  [6] = 'Su-27 (Normal)',
+  [7] = '2000-5 (Normal)',
+  [8] = 'F-86 (Normal)',
+  [9] = 'MiG-25PD (Normal)',
+  [10] = 'F-16C (Normal)',
+  [11] = 'F-4E (Normal)',
+  [12] = 'F-5E (Normal)',	
 }
 
 
@@ -234,20 +224,14 @@ Fighter_Names_Hard = {
   [2] = 'MiG-23 (Hard)',
   [3] = 'MiG-29S (Hard)',
   [4] = 'MiG-29A (Hard)',
-  [5] = 'Su-17 (Hard)',
-  [6] = 'F-16C bl.52d (Hard)',
-  [7] = 'Su-24MR (Hard)',
-  [8] = 'Su-27 (Hard)',
-  [9] = 'Su-25 (Hard)',
-  [10] = 'Su-25T (Hard)',
-  [11] = '2000-5 (Hard)',
-  [12] = 'F-86 (Hard)',
-  [13] = 'MiG-25PD (Hard)',
-  [14] = 'MiG-25RBT (Hard)',
-  [15] = 'MiG-27K (Hard)',
-  [16] = 'F-16C bl.50 (Hard)',
-  [17] = 'F-4E (Hard)',
-  [18] = 'F-5E (Hard)',	
+  [5] = 'F-16C bl.52d (Hard)',
+  [6] = 'Su-27 (Hard)',
+  [7] = '2000-5 (Hard)',
+  [8] = 'F-86 (Hard)',
+  [9] = 'MiG-25PD (Hard)',
+  [10] = 'F-16C (Hard)',
+  [11] = 'F-4E (Hard)',
+  [12] = 'F-5E (Hard)',	
 }
 
 Fighter_Names_VeryHard = {
@@ -255,23 +239,17 @@ Fighter_Names_VeryHard = {
   [2] = 'MiG-23 (VeryHard)',
   [3] = 'MiG-29S (VeryHard)',
   [4] = 'MiG-29A (VeryHard)',
-  [5] = 'Su-17 (VeryHard)',
-  [6] = 'F-16C bl.52d (VeryHard)',
-  [7] = 'Su-24MR (VeryHard)',
-  [8] = 'Su-27 (VeryHard)',
-  [9] = 'Su-25 (VeryHard)',
-  [10] = 'Su-25T (VeryHard)',
-  [11] = '2000-5 (VeryHard)',
-  [12] = 'F-86 (VeryHard)',
-  [13] = 'MiG-25PD (VeryHard)',
-  [14] = 'MiG-25RBT (VeryHard)',
-  [15] = 'MiG-27K (VeryHard)',
-  [16] = 'F-16C bl.50 (VeryHard)',
-  [17] = 'F-4E (VeryHard)',
-  [18] = 'F-5E (VeryHard)',	
+  [5] = 'F-16C bl.52d (VeryHard)',
+  [6] = 'Su-27 (VeryHard)',
+  [7] = '2000-5 (VeryHard)',
+  [8] = 'F-86 (VeryHard)',
+  [9] = 'MiG-25PD (VeryHard)',
+  [10] = 'F-16C (VeryHard)',
+  [11] = 'F-4E (VeryHard)',
+  [12] = 'F-5E (VeryHard)',	
 }
 
-Fighter_Names = 18
+Fighter_Names = 12
 
 Bomber_Names_Easy = {
   [1] = 'Tu-22M3 (Easy)',
@@ -359,29 +337,29 @@ if Radio_Table[unitName] == nil then
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GameSet, Change_Task_Range, nil)
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2b, GameSet, Change_Smoke_Set, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3b, GameSet, Make_Smoke, nil)
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, AnapaPath, Create_Fighter_Intercept, "Anapa")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Bomber_Intercept, "Anapa")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, AnapaPath, Create_Mud_Fortified, "Anapa")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, AnapaPath, Create_Fighter_Intercept, 'Anapa')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Bomber_Intercept, 'Anapa')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, AnapaPath, Create_Mud_Fortified, 'Anapa')
 
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MaykopPath, Create_Fighter_Intercept, "Maykop")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Bomber_Intercept, "Maykop")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MaykopPath, Create_Mud_Fortified, "Maykop")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MaykopPath, Create_Fighter_Intercept, 'Maykop')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Bomber_Intercept, 'Maykop')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MaykopPath, Create_Mud_Fortified, 'Maykop')
 	
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, SochiPath, Create_Fighter_Intercept, "Sochi")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, SochiPath, Create_Bomber_Intercept, "Sochi")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, SochiPath, Create_Mud_Fortified, "Sochi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, SochiPath, Create_Fighter_Intercept, 'Sochi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, SochiPath, Create_Bomber_Intercept, 'Sochi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, SochiPath, Create_Mud_Fortified, 'Sochi')
 	
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, KutaisiPath, Create_Fighter_Intercept, "Kutaisi")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Bomber_Intercept, "Kutaisi")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, KutaisiPath, Create_Mud_Fortified, "Kutaisi")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, KutaisiPath, Create_Fighter_Intercept, 'Kutaisi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, KutaisiPath, Create_Mud_Fortified, 'Kutaisi')
 
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MozdokPath, Create_Fighter_Intercept, "Mozdok")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MozdokPath, Create_Bomber_Intercept, "Mozdok")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MozdokPath, Create_Mud_Fortified, "Mozdok")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MozdokPath, Create_Fighter_Intercept, 'Mozdok')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MozdokPath, Create_Bomber_Intercept, 'Mozdok')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MozdokPath, Create_Mud_Fortified, 'Mozdok')
 
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, VazianiPath, Create_Fighter_Intercept, "Vaziani")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, VazianiPath, Create_Bomber_Intercept, "Vaziani")
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, VazianiPath, Create_Mud_Fortified, "Vaziani")
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, VazianiPath, Create_Fighter_Intercept, 'Vaziani')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, VazianiPath, Create_Bomber_Intercept, 'Vaziani')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, VazianiPath, Create_Mud_Fortified, 'Vaziani')
 	
   Radio_Table[unitName] = true
   end
@@ -525,8 +503,8 @@ local rand = mist.random(1,Fighter_Names)
   local InitwpSpeed = mist.random(600,700)
   local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
   local wpAlt = mist.random(5000,8000)
-  local wpPsn = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.20, zone.radius * 0.50)
-  local wpPsn2 = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.40, zone.radius * 0.50)
+  local wpPsn = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.70, zone.radius * 0.40)
+  local wpPsn2 = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.75, zone.radius * 0.10)
   local path = {}
     path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
     path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
@@ -579,25 +557,25 @@ local rand = mist.random(1,Fighter_Names)
         }, -- end of tasks
       } -- end of params
     }
-    path[1].ETA_locked = false
-    path[1].speed_locked = true
-    path[2].ETA_locked = false
-    path[2].speed_locked = true
-    path[3].ETA_locked = false
-    path[3].speed_locked = true
+	
+	  --path[1] = path[2].task
+		--path[3] = path[2].task
+		
 
     local vars = {} 
       vars.groupName = grpName
       vars.action = "respawn"
       vars.point = spawnPsn
       vars.route = path
-        mist.teleportToPoint(vars)			
+      	mist.teleportToPoint(vars)			
 
     local con = grp:getController()
       con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-      con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-      con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
-      list.teleportToPoint(vars)
+      con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+      con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+			con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+			con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+      
 
     local msg = {} 
       msg.text = ' Intercept task has been created, search and destroy target.'
@@ -617,28 +595,28 @@ function Create_Bomber_Intercept(_bArea)
 local bzone = trigger.misc.getZone(_bArea)
 --bZone_Used = _bArea
 	
-  if _bArea == "Anapa" then
-    runwayID = 12
+  if _bArea == 'Anapa' then
+    RunwayID = 12
   end
 
-  if _bArea == "Maykop" then
-    runwayID = 16
+  if _bArea == 'Maykop' then
+    RunwayID = 16
   end
 
-  if _bArea == "Sochi" then
-    runwayID = 18
+  if _bArea == 'Sochi' then
+    RunwayID = 18
   end
 
-  if _bArea == "Kutaisi" then
-    runwayID = 25
+  if _bArea == 'Kutaisi' then
+    RunwayID = 25
   end
 
-  if _bArea == "Mozdok" then
-    runwayID = 28
+  if _bArea == 'Mozdok' then
+    RunwayID = 28
   end
 
-  if _bArea == "Vaziani" then
-    runwayID = 31
+  if _bArea == 'Vaziani' then
+    RunwayID = 31
   end
 
 --0 Airdrome_0
@@ -724,23 +702,30 @@ local bzone = trigger.misc.getZone(_bArea)
     espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius, bzone.radius * 0.925)
   end
 
-  local bInitwpSpeed = mist.random(550,625)
+  local bInitwpSpeed = mist.random(425,525)
   local bwpSpeed = mist.utils.kmphToMps(bInitwpSpeed)
   local bwpAlt = mist.random(6100,9000)
 
   --local ewpSpeed = mist.random(850,1025)			
-local bwpPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.01, bzone.radius * 0.1)
+local bwpPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.10, bzone.radius * 0.5)
+local bwpPsn2 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.10, bzone.radius * 0.4)
+local bwpPsn3 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.10, bzone.radius * 0.3)
+local bwpPsn4 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.10, bzone.radius * 0.2)
+local bwpPsn5 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.10, bzone.radius * 0.1)
 
+trigger.action.activateGroup(Group.getByName(bgrpName))
 trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')			
+
 
 bpath[1] = mist.fixedWing.buildWP(bspawnPsn, bwpSpeed, bwpAlt, "BARO")			-- altitude and speed reversed.
 bpath[2] = mist.fixedWing.buildWP(bwpPsn, bwpSpeed, bwpAlt, "BARO")		
-bpath[3] = mist.fixedWing.buildWP(bspawnPsn, bwpSpeed, bwpAlt, "BARO")
-bpath[4] = mist.fixedWing.buildWP(bwpPsn, bwpSpeed, bwpAlt, "BARO")		
-bpath[5] = mist.fixedWing.buildWP(bzone, bwpSpeed, bwpAlt, "BARO")		
-bpath[6] = mist.fixedWing.buildWP(bwpPsn, bwpSpeed, bwpAlt, "BARO")		
+bpath[3] = mist.fixedWing.buildWP(bwpPsn2, bwpSpeed, bwpAlt, "BARO")
+bpath[4] = mist.fixedWing.buildWP(bwpPsn3, bwpSpeed, bwpAlt, "BARO")
+bpath[5] = mist.fixedWing.buildWP(bwpPsn4, bwpSpeed, bwpAlt, "BARO")
+bpath[6] = mist.fixedWing.buildWP(bwpPsn5, bwpSpeed, bwpAlt, "BARO")	
 
-bpath[2].task = {
+
+bpath[3].task = {
   id = "ComboTask",
   params = {
     tasks = {
@@ -780,37 +765,42 @@ bpath[2].task = {
     }, -- end of tasks
   } -- end of params
 }
-              	
--- start escort stuffs
-bpath[1].ETA_locked = false
-bpath[1].speed_locked = true
-bpath[2].ETA_locked = false
-bpath[2].speed_locked = true
-bpath[3].ETA_locked = false
-bpath[3].speed_locked = true
-bpath[4].ETA_locked = false
-bpath[4].speed_locked = true
-bpath[5].ETA_locked = false
-bpath[5].speed_locked = true
-bpath[6].ETA_locked = false
-bpath[6].speed_locked = true
 
-trigger.action.activateGroup(Group.getByName(bgrpName))
+
+			bpath[1].ETA_locked = false
+			bpath[1].speed_locked = true
+			bpath[2].ETA_locked = false
+			bpath[2].speed_locked = true
+			bpath[3].ETA_locked = false
+			bpath[3].speed_locked = true
+			bpath[4].ETA_locked = false
+			bpath[4].speed_locked = true
+			bpath[5].ETA_locked = false
+			bpath[5].speed_locked = true
+			bpath[6].ETA_locked = false
+			bpath[6].speed_locked = true
+			
+	
+
   local bvars = {} 
   bvars.groupName = bgrpName
   bvars.action = "respawn"
   bvars.point = bspawnPsn
   bvars.route = bpath
-    mist.teleportToPoint(bvars)
+	mist.teleportToPoint(bvars)
   
   bgrp = Group.getByName(bgrpName)
   
   local bcon = bgrp:getController()
     bcon:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-    bcon:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-    bcon:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+    bcon:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+    bcon:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE)
+		bcon:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.PASSIVE_DEFENCE)
+		bcon:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.WHEN_FLYING_NEAR_ENEMIES)
   
   BomberID = bgrp:getID()
+	
+	trigger.action.activateGroup(Group.getByName(egrpName))
   
   local eInitwpSpeed = mist.random(500,600)
   local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
@@ -818,12 +808,10 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
   
   epath[1] = mist.fixedWing.buildWP(bspawnPsn, ewpSpeed, ewpAlt, "BARO")
   epath[2] = mist.fixedWing.buildWP(bwpPsn, ewpSpeed, ewpAlt, "BARO")
-  epath[3] = mist.fixedWing.buildWP(bspawnPsn, ewpSpeed, ewpAlt, "BARO")
-  epath[4] = mist.fixedWing.buildWP(bwpPsn, ewpSpeed, ewpAlt, "BARO")
-  epath[5] = mist.fixedWing.buildWP(bspawnPsn, ewpSpeed, ewpAlt, "BARO")
-  epath[6] = mist.fixedWing.buildWP(bwpPsn, ewpSpeed, ewpAlt, "BARO")
+	epath[3] = mist.fixedWing.buildWP(bwpPsn2, ewpSpeed, ewpAlt, "BARO")
+
   
-  epath[2].task = {
+  epath[1].task = {
     id = "ComboTask",
     params = {
       tasks = {
@@ -833,7 +821,7 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
           id = "EngageTargets",
           enabled = true,
           key = "CAP",
-          params = {
+					params = {
             targetTypes = {
               [1] = "Air",
             }, -- end of targetTypes
@@ -874,7 +862,8 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
       }, -- end of tasks
     } -- end of params
   }
-  
+	
+	
   --epath[1].ETA_locked = false
   --epath[1].speed_locked = true
   --epath[2].ETA_locked = false
@@ -882,19 +871,22 @@ trigger.action.activateGroup(Group.getByName(bgrpName))
   --epath[3].ETA_locked = false
   --epath[3].speed_locked = true
     
-  trigger.action.activateGroup(Group.getByName(egrpName))
+  
     local evars = {}
-      evars.groupName = egrpNameevars.action = "respawn"
+      evars.groupName = egrpName
+			evars.action = "respawn"
       evars.point = bspawnPsn
       evars.route = epath
-        mist.teleportToPoint(evars)
+      mist.teleportToPoint(evars)
     
     egrp = Group.getByName(egrpName)
     
     local econ = egrp:getController()
       econ:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-      econ:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_ATTACK_ONLY)
-      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.WEAPON_FREE)
+      econ:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+			econ:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+			econ:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
     
     local msg = {}
     msg.text = ' Choosing from interceptor list. Plane number  '..tostring(brand)..tostring(bgrpName)..tostring(_bArea)
@@ -933,6 +925,9 @@ function Create_Mud_Fortified(_mArea)
 local mzone = trigger.misc.getZone(_mArea)
 local mrand = mist.random(1,Mud_Names)
 
+--SmokeCoord = {}
+--SmokeCoord = mist.utils.zoneToVec3('Anapa')
+
 trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
 if Difficultymod == 1 then
@@ -960,7 +955,7 @@ formisttable = '[g]' .. MudName
 trigger.action.activateGroup(Group.getByName(MudName))
 
 local msg = {}
-  msg.text = ' Creating mud task '..tostring(MudName) ..tostring(targets) ..tostring(formisttable)
+  msg.text = ' Creating mud task '..tostring(MudName) ..tostring(formisttable)
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}}
     mist.message.add(msg)
@@ -994,19 +989,18 @@ local msg = {}
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}}
     mist.message.add(msg)
-    SmokeCoord = mist.utils.zoneToVec3(mzone)
     
-  timer.scheduleFunction(Make_Smoke, nil, timer.getTime() + 5)
+    
+  --timer.scheduleFunction(Make_Smoke, nil, timer.getTime() + 5)
   return
 end
 ---
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Make_Smoke(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  local smoke = _smoke
 
   if Smoke == 1 then
-    trigger.action.smoke({x= SmokeCoord.x + math.random(1,200), y= land.getHeight({x = SmokeCoord.x, y = SmokeCoord.z}), z= SmokeCoord.z + math.random(1, 200)}, trigger.smokeColor.red)
+	trigger.action.smoke({x=SmokeCoord.x + math.random(1,200), y= land.getHeight({x = SmokeCoord.x, y = SmokeCoord.z}), z= SmokeCoord.z + math.random(1, 200)}, trigger.smokeColor.Red)
     return time + 90
   end
 

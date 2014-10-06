@@ -311,7 +311,7 @@ AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
 MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
 SochiPath = missionCommands.addSubMenu("Sochi-Adler Tasks",nil)
 KutaisiPath = missionCommands.addSubMenu("Kutaisi Tasks",nil)
-NalchikPath = missionCommands.addSubMenu("Nalchik Tasks",nil)
+MozdokPath = missionCommands.addSubMenu("Mozdok Tasks",nil)
 VazianiPath = missionCommands.addSubMenu("Vaziani Tasks",nil)
 GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
 
@@ -364,9 +364,9 @@ if Radio_Table[unitName] == nil then
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, KutaisiPath, Create_Mud_Fortified, 'Kutaisi')
 
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, NalchikPath, Create_Mud_Fortified, 'Nalchik')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, MozdokPath, Create_Fighter_Intercept, 'Nalchik')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MozdokPath, Create_Bomber_Intercept, 'Nalchik')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2c, MozdokPath, Create_Mud_Fortified, 'Nalchik')
 
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, VazianiPath, Create_Fighter_Intercept, 'Vaziani')
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, VazianiPath, Create_Bomber_Intercept, 'Vaziani')
@@ -1015,21 +1015,21 @@ end
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
 	
-  for i = 1, 1000 do
+  for i = 1, 5000 do
     if Task_Range == 1 then
 			
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.15)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.50, mzone.radius * 0.25)
     elseif Task_Range == 2 then
 			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.50, mzone.radius * 0.50)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.75, mzone.radius * 0.50)
     elseif Task_Range == 3 then
 			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.75)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 0.75)
     elseif Task_Range == 4 then
 			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.00)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.50, mzone.radius * 1.00)		
 		
-				if mist.isTerrainValid(mudPsn, {'LAND', 'ROAD'}) == true and mist.terrainHeightDiff(mudPsn, 5) < 9 then				
+				if mist.isTerrainValid(mudPsn, {'LAND', 'ROAD'}) == true and mist.terrainHeightDiff(mudPsn, 10) < 5 then				
 				break
 				end
 
@@ -1119,9 +1119,9 @@ local mvars = {}
 	local _randompoint2 = {}
 	local _randompoint3 = {}
 	
-	_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
-	_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
-	_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
+	_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
+	_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
+	_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
 
 	move_units(InfName, _randompoint1, _randompoint2, _randompoint3)
 	

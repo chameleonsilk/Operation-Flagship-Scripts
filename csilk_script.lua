@@ -541,7 +541,12 @@ local rand = mist.random(1,Fighter_Names)
   end
 
   if Task_Range == 4 then
-    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.75, zone.radius * 1.25)
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.50, zone.radius * 1.25)
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+  end
+	
+	  if Task_Range == 5 then
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.75, zone.radius * 1.50)
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
   end
 	
@@ -740,26 +745,32 @@ local bzone = trigger.misc.getZone(_bArea)
 	
   if Task_Range == 1 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.60, bzone.radius * 0.70)
+    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.70, bzone.radius * 0.50)
     espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.50, bzone.radius * 0.35)
   end
 
   if Task_Range == 2 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
     bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.00, bzone.radius * 0.80)
-    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.90, bzone.radius * 0.60)
+    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.80, bzone.radius * 0.60)
   end
 
   if Task_Range == 3 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
     bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.25, bzone.radius * 0.90)
-    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.00, bzone.radius * 0.75)
+    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.90, bzone.radius * 0.75)
   end
 
   if Task_Range == 4 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.00)
+    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.25)
     espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.25, bzone.radius * 1.00)
+  end
+	
+	if Task_Range == 5 then
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.75, bzone.radius * 1.50)
+    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.25)
   end
 
   local bInitwpSpeed = mist.random(425,525)
@@ -770,8 +781,8 @@ local bzone = trigger.misc.getZone(_bArea)
 local bwpPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.50, bzone.radius * 0.35)
 local bwpPsn2 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.02, bzone.radius * 0.01)
 local bwpPsn3 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.25, bzone.radius * 0.15)
-local bwpPsn4 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.25, bzone.radius * 0.15)
-local bwpPsn5 = mist.getRandPointInCircle(bzone.point, bzone.radius * 2.00, bzone.radius * 2.00)
+local bwpPsn4 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.35, bzone.radius * 0.15)
+local bwpPsn5 = mist.getRandPointInCircle(bzone.point, bzone.radius * 2.00, bzone.radius * 1.99)
 
 trigger.action.activateGroup(Group.getByName(bgrpName))
 trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')			
@@ -1048,26 +1059,25 @@ end
 	targets = mist.makeUnitTable({formisttable})
 	
 	local msg = {}
-  msg.text = ' Creating mud task '..tostring(formisttable)
+  msg.text = ' Creating mud task (this will create a pause on server.. please be patient) '
   msg.displayTime = 20
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
 	
-  for i = 1, 1000 do
+  for i = 1, 10000 do
     if Task_Range == 1 then
-			
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.35, mzone.radius * 0.15)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
     elseif Task_Range == 2 then
-			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.50, mzone.radius * 0.35)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
     elseif Task_Range == 3 then
-			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.75)
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
     elseif Task_Range == 4 then
-			--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.00)		
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
+		elseif Task_Range == 5 then
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)		
 		
 				if mist.isTerrainValid(mudPsn, {'LAND', 'ROAD'}) == true and mist.terrainHeightDiff(mudPsn, 10) < 5 then				
+				trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
 				break
 				end
 
@@ -1153,9 +1163,9 @@ local mvars = {}
 	local _randompoint2 = {}
 	local _randompoint3 = {}
 	
-	_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
-	_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
-	_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.015, mzone.radius * 0.005)		
+	_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
+	_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
+	_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.005, mzone.radius * 0.001)		
 
 	move_units(InfName, _randompoint1, _randompoint2, _randompoint3)
 	

@@ -1943,7 +1943,7 @@ end
 timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
 timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
 timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
-timer.scheduleFunction(Move_Convoy, nil, timer.getTime() + 6
+timer.scheduleFunction(Move_Convoy, nil, timer.getTime() + 6)
 timer.scheduleFunction(Move_Infantry, nil, timer.getTime() + 6)
 ------------------------------------------------------------------
 

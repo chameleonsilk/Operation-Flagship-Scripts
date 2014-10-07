@@ -2,8 +2,8 @@
 
 local rad_option_0a = "Recieve Bullseye Call"
 
---local rad_option_0b = "Change Difficulty Setting"
-local rad_option_1b = "Change Task Spawn Distance"
+
+-- local rad_option_1b = "Change Task Spawn Distance"
 local rad_option_2b = "Toggle Enemy Smoke Markers"
 
 local rad_option_0c = "Intercept: Fighters"
@@ -13,11 +13,22 @@ local rad_option_2c = "Moving Mud: Fortified"
 ----------------
 -- Wanks Code --
 ----------------
-
+-- radio option variables are grouped by function. ie- 0a-3a
+-- These variables define the displayed name for mission difficulty
 local rad_option_0d = "Easy"
 local rad_option_1d = "Normal"
 local rad_option_2d = "Hard"
 local rad_option_3d = "Very Hard"
+
+--These variables define displayed name for Tast Spawn Distance
+local rad_option_0b = "Scramble"
+local rad_option_1b = "Close"
+local rad_option_2b = "Standard"
+local rad_option_3b = "Far"
+local rad_option_4b = "Very Far"
+local rad_option_5b = "Distant"
+local rad_option_6b = "Random"
+
 
 --------------------
 -- End Wanks Code --
@@ -317,7 +328,7 @@ CAS_Planes = {
   [2] = 'Tornado IDS #1',
 }
 
-
+--variables defining f10 sub-menu items
 Calls = missionCommands.addSubMenu("Mission Info",nil)
 AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
 MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
@@ -330,8 +341,9 @@ GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
 ----------------
 -- Wanks Code --
 ----------------
-
-DifficultySet = missionCommands.addSubMenu("Change Difficulty", GameSet)
+--The are sub-menu variables, the parent menu is GameSet
+DifficultySet = missionCommands.addSubMenu("Set Difficulty", GameSet)
+DistanceSet = missionCommands.addSubMenu("Set Distance at Which Enemy Will Begin", GameSet)
 
 --------------------
 -- End Wanks Code --
@@ -367,16 +379,24 @@ if Radio_Table[unitName] == nil then
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
   
-  ----------------
+----------------
 -- Wanks Code --
 ----------------
-
+-- These commands set the function of the radio options in the difficulty sub-menu
 missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, DifficultySet, Set_Difficuty_Easy, nil) -- 'Easy'
 missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, DifficultySet, Set_Difficuty_Normal, nil) -- 'Normal'
 missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2d, DifficultySet, Set_Difficuty_Hard, nil) -- 'Hard'
 missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3d, DifficultySet, Set_Difficuty_VeryHard, nil) -- 'Very Hard'
 
---missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, GameSet, Change_Difficulty, nil)
+-- These commands set the function of the radio options in the target range sub-menu
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, DistanceSet, Set_Distance_Scramble, nil) -- Scramble
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, DistanceSet, Set_Distance_Close, nil) -- Close
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2b, DistanceSet, Set_Distance_Standard, nil) -- Standard
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3b, DistanceSet, Set_Distance_Far, nil) -- Far
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_4b, DistanceSet, Set_Distance_Veryfar, nil) -- Very far
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_5b, DistanceSet, Set_Distance_Distant, nil) -- Distant
+--Random Option not implemented yet
+--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_6b, DistanceSet, Set_Distance_Random, nil) -- Random
 
 --------------------
 -- End Wanks Code --
@@ -1333,43 +1353,17 @@ trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
     return
 end
 ------
---------------------
--- End Wanks Code --
---------------------
-
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function Change_Task_Range()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  local Old_Set = Range
-  local New_Set = ""
+-- This is the Scramble Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Scramble()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Scramble"
+Task_Range = 1
 
-  if Old_Set == "Furthest" then
-    New_Set = "Closest"
-    Range = New_Set
-    Task_Range = 1
-  end
-
-  if Old_Set == "Far" then
-    New_Set = "Furthest"
-    Range = New_Set
-    Task_Range = 4
-  end
-	
-  if Old_Set == "Standard" then
-    New_Set = "Far"
-    Range = New_Set
-    Task_Range = 3
-  end
-	
-  if Old_Set == "Closest" then
-    New_Set = "Standard"
-    Range = New_Set
-    Task_Range = 2
-  end
-
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')
-  
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
     msg.text = ' Task spawn start range has been set to '..tostring(Range)
     msg.displayTime = 20
@@ -1377,6 +1371,142 @@ function Change_Task_Range()
       mist.message.add(msg)
   return
 end
+-- This is the Close Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Close()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Close"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+-- This is the Standard Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Standard()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Standard"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+-- This is the Far Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Far()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Far"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+-- This is the Very Far Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Veryfar()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Very Far"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+-- This is the Distant Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Distant()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Distant"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+-- This is the Random Distance function, it sets the Task_Range variable and displays a messages
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Distance_Random()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Range = "Random"
+Task_Range = 1
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+  local msg = {}
+    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+------
+
+--------------------
+-- End Wanks Code --
+--------------------
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--function Change_Task_Range()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ -- local Old_Set = Range
+  --local New_Set = ""
+--
+ -- if Old_Set == "Furthest" then
+--New_Set = "Closest"
+--    Range = New_Set
+ --   Task_Range = 1
+ -- end
+
+--  if Old_Set == "Far" then
+--    New_Set = "Furthest"
+--    Range = New_Set
+--    Task_Range = 4
+--  end
+--	
+ -- if Old_Set == "Standard" then
+  --  New_Set = "Far"
+--    Range = New_Set
+--    Task_Range = 3
+--  end
+--	
+--  if Old_Set == "Closest" then
+--    New_Set = "Standard"
+--    Range = New_Set
+--    Task_Range = 2
+--  end
+--
+--  trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')
+--  
+--  local msg = {}
+--    msg.text = ' Task spawn start range has been set to '..tostring(Range)
+--   msg.displayTime = 20
+--    msg.msgFor = {coa = {'all'}}
+--      mist.message.add(msg)
+--  return
+--end
 ---
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------

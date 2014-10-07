@@ -19,7 +19,7 @@ local rad_option_8b = "Normal"
 local rad_option_8c = "Hard"
 local rad_option_8d = "Very Hard"
 
---These variables define displayed name for Tast Spawn Distance
+--These variables define displayed name for Task Spawn Distance
 local rad_option_9a = "Scramble"
 local rad_option_9b = "Close"
 local rad_option_9c = "Standard"
@@ -75,6 +75,7 @@ Difficultymod = 1
 Range = "Standard"
 Task_Range = 2
 
+--This array contains all the available player aircraft at their respective airbase
 Rad = {
   "Anapa-21 #1",
   "Anapa-21 #2",
@@ -247,7 +248,12 @@ Inf_Spawn = {
 	[4] = 'Infantry (VeryHard) #000',
 }
 
+-----------------------------
+-- Fighter spawning arrays --
+-----------------------------
+-- The following arrays contain available enemy aircraft the Spawn Fighter function pulls from
 
+Fighter_Names = 12 -- variable for number of availale fighters
 
 Fighter_Names_Easy = {
   [1] = 'MiG-21 (Easy)',
@@ -310,7 +316,17 @@ Fighter_Names_VeryHard = {
   [12] = 'F-5E (VeryHard)',	
 }
 
-Fighter_Names = 12
+------------------------
+-- End Fighter Arrays --
+------------------------
+
+-----------------------------------
+-- Ground Attack spawning arrays --
+-----------------------------------
+-- The following arrays contain available enemy aircraft the Spawn Fighter function pulls from
+
+Attacker_Names = 4 -- variable for number of availale ground attackers
+
 
 Attacker_Names_Easy = {
   [1] = 'Su-25T (BEasy)',
@@ -340,7 +356,16 @@ Attacker_Names_VeryHard = {
   [4] = 'Su-17 (BVeryHard)',
 }
 
-Attacker_Names = 4
+------------------------
+-- End Ground Attack Arrays --
+------------------------
+
+----------------------------
+-- Bomber spawning arrays --
+----------------------------
+-- The following arrays contain available enemy aircraft the Spawn Fighter function pulls from
+
+Bomber_Names = 2 --variable for number of availale fighters
 
 Bomber_Names_Easy = {
 	[1] = 'Tu-22M3 (Easy)',
@@ -362,23 +387,35 @@ Bomber_Names_VeryHard = {
   [2] = 'Su-24M (VeryHard)',
 }
 
-Bomber_Names = 2
+------------------------
+-- End Bomber Arrays --
+------------------------
+
+----------------------------
+-- CAS spawning arrays --
+----------------------------
+-- The following arrays contain available enemy aircraft the Spawn CAS function pulls from
 
 CAS_Planes = {
   [1] = 'Tornado GR4 #1',
   [2] = 'Tornado IDS #1',
 }
+------------------------
+-- End CAS Arrays --
+------------------------
 
 
- missionCommands.removeItem({"Mission Info"})
- missionCommands.removeItem({"Anapa Tasks"})
- missionCommands.removeItem({"Maykop Tasks"})
- missionCommands.removeItem({"Gudauta Tasks"})
- missionCommands.removeItem({"Kutaisi Tasks"})
- missionCommands.removeItem({"Nalchik Tasks"})
- missionCommands.removeItem({"Tbilisi Tasks"})
- missionCommands.removeItem({"OPFS Settings"})
- missionCommands.removeItem({"Debug"})
+-- Not sure what this is doing, removing menus to add menus, i dunno Chameleon comment this so i know what
+-- it is for
+missionCommands.removeItem({"Mission Info"})
+missionCommands.removeItem({"Anapa Tasks"})
+missionCommands.removeItem({"Maykop Tasks"})
+missionCommands.removeItem({"Gudauta Tasks"})
+missionCommands.removeItem({"Kutaisi Tasks"})
+missionCommands.removeItem({"Nalchik Tasks"})
+missionCommands.removeItem({"Tbilisi Tasks"})
+missionCommands.removeItem({"OPFS Settings"})
+missionCommands.removeItem({"Debug"})
  
 
 --variables defining f10 sub-menu items
@@ -435,8 +472,8 @@ if Radio_Table[unitName] == nil then
   Rad_GroupID = group:getID()   
 		
   
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, reloadscript, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, reloadscript, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
   
 
@@ -475,7 +512,7 @@ if Radio_Table[unitName] == nil then
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Mud, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
 	
-	----------------
+----------------
 -- Wanks Code --
 ----------------
 -- These commands set the function of the radio options in the difficulty sub-menu

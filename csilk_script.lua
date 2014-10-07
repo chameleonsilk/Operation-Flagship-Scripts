@@ -197,6 +197,12 @@ Rad = {
   "Maykop-15C #6",
 }
 
+-----------------------
+-- Static MUD Arrays --
+-----------------------
+
+Mud_Names = 2 -- variable for number of availale MUD Per Difficulty
+
 Mud_Easy = {
   [1] = "Mud (Easy) #000",
 	[2] = "Mud (Easy) #001",
@@ -217,7 +223,15 @@ Mud_VeryHard = {
 	[2] = "Mud (VeryHard) #001",
 }
 
-Mud_Names = 2
+---------------------------
+-- End Static MUD Arrays --
+---------------------------
+
+-----------------------
+-- Moving MUD Arrays --
+-----------------------
+
+Mud_Convoys = 2 -- variable for number of availale Moving MUD Per Difficulty
 
 Mud_Convoy_Easy = {
   [1] = "Mud Convoy (Easy) #000",
@@ -239,7 +253,13 @@ Mud_Convoy_VeryHard = {
 	[2] = "Mud Convoy (VeryHard) #001",
 }
 
-Mud_Convoys = 2
+---------------------------
+-- End Moving MUD Arrays --
+---------------------------
+
+-----------------------------
+--Iinfantry spawning array --
+-----------------------------
 
 Inf_Spawn = {
 	[1] = 'Infantry (Easy) #000',
@@ -247,6 +267,10 @@ Inf_Spawn = {
 	[3] = 'Infantry (Hard) #000',
 	[4] = 'Infantry (VeryHard) #000',
 }
+
+---------------------------------
+--End Iinfantry spawning array --
+---------------------------------
 
 -----------------------------
 -- Fighter spawning arrays --
@@ -1272,18 +1296,14 @@ local mvars = {}
   --infvars.radius = 20
 	mist.teleportToPoint(infvars)
 	
-						local msg = {}
-						msg.text = ' Inital moved placement occured'
-						msg.displayTime = 5
-						msg.msgFor = {coa = {'all'}}
-						mist.message.add(msg)
-	
-   
-							mist.spawnRandomizedGroup(InfName)
-							mist.spawnRandomizedGroup(MudName)
-							
-							
-							local mvars = {}
+	local msg = {}
+	msg.text = ' Inital moved placement occured'
+	msg.displayTime = 5
+	msg.msgFor = {coa = {'all'}}
+	mist.message.add(msg)
+	mist.spawnRandomizedGroup(InfName)
+	mist.spawnRandomizedGroup(MudName)
+	local mvars = {}
   mvars.groupName = MudName
   mvars.action = "teleport"
   mvars.point = mudPsn

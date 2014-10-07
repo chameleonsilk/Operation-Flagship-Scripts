@@ -570,6 +570,11 @@ local rand = mist.random(1,Fighter_Names)
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
   end
 	
+	  if Task_Range == 6 then
+    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 2.00, zone.radius * 1.75)
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+  end
+	
   local msg = {} 
     msg.text = ' Choosing from interceptor list. Plane number  '..tostring(rand)..tostring(grpName)..tostring(_Area)
     msg.displayTime = 10
@@ -791,6 +796,12 @@ local bzone = trigger.misc.getZone(_bArea)
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
     bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.75, bzone.radius * 1.50)
     espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.25)
+  end
+	
+		if Task_Range == 6 then
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+    bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 2.00, bzone.radius * 1.75)
+    espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.75, bzone.radius * 1.50)
   end
 
   local bInitwpSpeed = mist.random(425,525)
@@ -1094,7 +1105,9 @@ end
     elseif Task_Range == 4 then
       mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
 		elseif Task_Range == 5 then
-      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)		
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
+		elseif Task_Range == 5 then
+      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)				
 		
 				if mist.isTerrainValid(mudPsn, {'LAND', 'ROAD'}) == true and mist.terrainHeightDiff(mudPsn, 10) < 5 then				
 				trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
@@ -1376,7 +1389,7 @@ end
 function Set_Distance_Close()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Close"
-Task_Range = 1
+Task_Range = 2
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
@@ -1391,7 +1404,7 @@ end
 function Set_Distance_Standard()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Standard"
-Task_Range = 1
+Task_Range = 3
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
@@ -1406,7 +1419,7 @@ end
 function Set_Distance_Far()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Far"
-Task_Range = 1
+Task_Range = 4
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
@@ -1421,7 +1434,7 @@ end
 function Set_Distance_Veryfar()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Very Far"
-Task_Range = 1
+Task_Range = 5
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
@@ -1436,7 +1449,7 @@ end
 function Set_Distance_Distant()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Distant"
-Task_Range = 1
+Task_Range = 6
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}
@@ -1451,7 +1464,7 @@ end
 function Set_Distance_Random()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Range = "Random"
-Task_Range = 1
+Task_Range = math.random(1,6)
 
 trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
   local msg = {}

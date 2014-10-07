@@ -2,7 +2,7 @@
 
 local rad_option_0a = "Recieve Bullseye Call"
 
-local rad_option_0b = "Change Difficulty Setting"
+--local rad_option_0b = "Change Difficulty Setting"
 local rad_option_1b = "Change Task Spawn Distance"
 local rad_option_2b = "Toggle Enemy Smoke Markers"
 
@@ -10,6 +10,18 @@ local rad_option_0c = "Intercept: Fighters"
 local rad_option_1c = "Intercept: Bomber and Escort"
 local rad_option_2c = "Moving Mud: Fortified"
 
+----------------
+-- Wanks Code --
+----------------
+
+local rad_option_0d = "Easy"
+local rad_option_1d = "Normal"
+local rad_option_2d = "Hard"
+local rad_option_3d = "Very Hard"
+
+--------------------
+-- End Wanks Code --
+--------------------
 
 
 Radio_Table = {}
@@ -315,6 +327,16 @@ NalchikPath = missionCommands.addSubMenu("Nalchik Tasks",nil)
 VazianiPath = missionCommands.addSubMenu("Vaziani Tasks",nil)
 GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
 
+----------------
+-- Wanks Code --
+----------------
+
+DifficultySet = missionCommands.addSubMenu("Change Difficulty", 'GameSet')
+
+--------------------
+-- End Wanks Code --
+--------------------
+
 ---------------
 -- RADIO ADD --
 ---------------
@@ -344,7 +366,23 @@ if Radio_Table[unitName] == nil then
 		
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, GameSet, Change_Difficulty, nil)
+  
+  ----------------
+-- Wanks Code --
+----------------
+
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, DifficultySet, Set_Difficuty_Easy, nil) -- 'Easy'
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, DifficultySet, Set_Difficuty_Normal, nil) -- 'Normal'
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2d, DifficultySet, Set_Difficuty_Hard, nil) -- 'Hard'
+missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3d, DifficultySet, Set_Difficuty_VeryHard, nil) -- 'Very Hard'
+
+--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, GameSet, Change_Difficulty, nil)
+
+--------------------
+-- End Wanks Code --
+--------------------
+  
+  
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GameSet, Change_Task_Range, nil)
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2b, GameSet, Change_Smoke_Set, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_3b, GameSet, Make_Smoke, nil)
@@ -1038,20 +1076,16 @@ end
 end
 trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
 
-					local msg = {}
-						msg.text = ' Suitable spot found'
-						msg.displayTime = 5
-						msg.msgFor = {coa = {'all'}}
-						mist.message.add(msg)
-
-
-							
-	
-	local msg = {}
-						msg.text = ' Attempted further randomization'
-						msg.displayTime = 5
-						msg.msgFor = {coa = {'all'}}
-						mist.message.add(msg)
+local msg = {}
+msg.text = ' Suitable spot found'
+msg.displayTime = 5
+msg.msgFor = {coa = {'all'}}
+mist.message.add(msg)
+local msg = {}
+msg.text = ' Attempted further randomization'
+msg.displayTime = 5
+msg.msgFor = {coa = {'all'}}
+mist.message.add(msg)
 						
 							
 						
@@ -1183,36 +1217,72 @@ end
 ---
 			
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function Change_Difficulty()
+--function Change_Difficulty()
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  local Old_Set = Difficulty
-  local New_Set = {}
+--  local Old_Set = Difficulty
+--  local New_Set = {}
+--
+--  if Old_Set == "Very Hard" then
+--    New_Set = "Easy"
+--    Difficulty = New_Set
+--    Difficultymod = 1
+--  end
+--
+--  if Old_Set == "Hard" then
+--    New_Set = "Very Hard"
+--    Difficulty = New_Set
+--    Difficultymod = 4
+--  end
+--	
+--  if Old_Set == "Normal" then
+--    New_Set = "Hard"
+--    Difficulty = New_Set
+--    Difficultymod = 3
+--  end
+--	
+--  if Old_Set == "Easy" then
+--    New_Set = "Normal"
+--    Difficulty = New_Set
+--    Difficultymod = 2
+--  end
+--
+--  trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+--  local msg = {} 
+--    msg.text = ' Global difficulty has been set to '..tostring(New_Set)
+--    msg.displayTime = 20
+--    msg.msgFor = {coa = {'all'}}
+--    	mist.message.add(msg)
+--    return
+--end
+---
 
-  if Old_Set == "Very Hard" then
-    New_Set = "Easy"
-    Difficulty = New_Set
-    Difficultymod = 1
-  end
+----------------
+-- Wanks Code --
+----------------
 
-  if Old_Set == "Hard" then
-    New_Set = "Very Hard"
-    Difficulty = New_Set
-    Difficultymod = 4
-  end
-	
-  if Old_Set == "Normal" then
-    New_Set = "Hard"
-    Difficulty = New_Set
-    Difficultymod = 3
-  end
-	
-  if Old_Set == "Easy" then
-    New_Set = "Normal"
-    Difficulty = New_Set
-    Difficultymod = 2
-  end
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Difficuty_Easy()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local New_Set = "Easy"
+Difficultymod = 1
 
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+  local msg = {} 
+    msg.text = ' Global difficulty has been set to '..tostring(New_Set)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+    return
+end
+------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Difficuty_Normal()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local New_Set = "Normal"
+Difficultymod = 2
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
   local msg = {} 
     msg.text = ' Global difficulty has been set to '..tostring(New_Set)
     msg.displayTime = 20
@@ -1220,7 +1290,43 @@ function Change_Difficulty()
     	mist.message.add(msg)
     return
 end
----
+-------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Difficuty_Hard()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local New_Set = "Hard"
+Difficultymod = 3
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+  local msg = {} 
+    msg.text = ' Global difficulty has been set to '..tostring(New_Set)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+    	mist.message.add(msg)
+    return
+end
+------
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Set_Difficuty_VeryHard()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+local New_Set = "Very Hard"
+Difficultymod = 4
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+  local msg = {} 
+    msg.text = ' Global difficulty has been set to '..tostring(New_Set)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+    	mist.message.add(msg)
+    return
+end
+------
+--------------------
+-- End Wanks Code --
+--------------------
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Change_Task_Range()

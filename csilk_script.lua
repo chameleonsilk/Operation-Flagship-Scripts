@@ -331,7 +331,7 @@ GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
 -- Wanks Code --
 ----------------
 
-DifficultySet = missionCommands.addSubMenu("Change Difficulty", 'GameSet')
+DifficultySet = missionCommands.addSubMenu("Change Difficulty", GameSet)
 
 --------------------
 -- End Wanks Code --

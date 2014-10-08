@@ -1587,56 +1587,70 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Move_Convoy(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+--	local msg = {} 
+--    msg.text = ' Moving Convoy'
+ --   msg.displayTime = 5
+ --   msg.msgFor = {coa = {'all'}}
+ --     mist.message.add(msg)
+	
 	local formationrand = mist.random(1,6)
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Off Road')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Off Road')
 	
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Cone')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Cone')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Rank')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Rank')
 	
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Diamond')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Diamond')
 	
 	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonL')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonL')
 	
 	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonR')	
+	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonR')	
 	end
 
 
-return time + 600
+return time + 10					-- is this even needed?
 end
 ---
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Move_Infantry(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+	 -- local msg = {} 
+  --  msg.text = ' Moving Infantry'
+   -- msg.displayTime = 5
+   -- msg.msgFor = {coa = {'all'}}
+   --   mist.message.add(msg)
+	
 	local formationrand = mist.random(1,6)
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Off Road')
+	mist.groupRandomDistSelf(MoveInf, 40, 'Off Road')
 	
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Cone')
+	mist.groupRandomDistSelf(MoveInf, 30, 'Cone')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Rank')
+	mist.groupRandomDistSelf(MoveInf, 25, 'Rank')
 	
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Diamond')
+	mist.groupRandomDistSelf(MoveInf, 30, 'Diamond')
 	
 	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'EchelonL')
+	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonL')
 	
 	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'EchelonR')	
+	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonR')	
 	end
 
 
-return time + 240
+return time + 10
 end
 ---
 
@@ -1943,7 +1957,7 @@ end
 timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
 timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
 timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
-timer.scheduleFunction(Move_Convoy, nil, timer.getTime() + 6)
-timer.scheduleFunction(Move_Infantry, nil, timer.getTime() + 6)
+mist.scheduleFunction(Move_Convoy, {nil, nil}, timer.getTime() + 10, 600, timer.getTime() + 3600) 
+mist.scheduleFunction(Move_Infantry, {nil, nil}, timer.getTime() + 10, 120,  timer.getTime() + 3600) 
 ------------------------------------------------------------------
 

@@ -7,6 +7,8 @@ local rad_option_1b = "Intercept: Bomber and Escort"
 local rad_option_1c = "Mud: Fortified"
 local rad_option_1d = "Moving Mud: Convoy"
 
+local rad_option_2a = "Assault: Sochi-Adler"
+
 local rad_option_7a = "Enemy Smoke Markers"
 
 ----------------
@@ -340,6 +342,22 @@ Fighter_Names_VeryHard = {
   [12] = 'F-5E (VeryHard)',	
 }
 
+Sochi_Names_Easy = {
+	[1] = 'Sochi Airfield (Easy) #000',
+}
+
+Sochi_Names_Normal = {
+	[1] = 'Sochi Airfield (Normal) #000',
+}
+
+Sochi_Names_Hard = {
+	[1] = 'Sochi Airfield (Hard) #000',
+}
+
+Sochi_Names_VeryHard = {
+	[1] = 'Sochi Airfield (VeryHard) #000',
+}
+
 ------------------------
 -- End Fighter Arrays --
 ------------------------
@@ -429,9 +447,10 @@ CAS_Planes = {
 ------------------------
 
 
--- Not sure what this is doing, removing menus to add menus, i dunno Chameleon comment this so i know what
--- it is for
+-- Removes submenus so that reloading the script does not result in duplicate submenus in the list
+-- this was added because of the loading of the script debug option.
 missionCommands.removeItem({"Mission Info"})
+missionCommands.removeItem({"Airfield Tasks"})
 missionCommands.removeItem({"Anapa Tasks"})
 missionCommands.removeItem({"Maykop Tasks"})
 missionCommands.removeItem({"Gudauta Tasks"})
@@ -444,6 +463,7 @@ missionCommands.removeItem({"Debug"})
 
 --variables defining f10 sub-menu items
 Calls = missionCommands.addSubMenu("Mission Info",nil)
+Airdromes = missionCommands.addSubMenu("Airfield Tasks",nil)
 AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
 MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
 GudautaPath = missionCommands.addSubMenu("Gudauta Tasks",nil)
@@ -505,6 +525,8 @@ if Radio_Table[unitName] == nil then
   
   
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
+	
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
   
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, AnapaPath, Create_Fighter_Intercept, 'Anapa')
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, AnapaPath, Create_Bomber_Intercept, 'Anapa')
@@ -799,7 +821,7 @@ local rand = mist.random(1,Fighter_Names)
 
 --return
 end
-
+---
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Create_Bomber_Intercept(_bArea)
@@ -1160,7 +1182,7 @@ bpath[3].task = {
 
 
 
-return
+--return
 end
 ---
 
@@ -1212,7 +1234,7 @@ end
 	
 	
 	trigger.action.activateGroup(Group.getByName(MudName))
-	trigger.action.activateGroup(Group.getByName(MudName))
+	--trigger.action.activateGroup(Group.getByName(MudName))
 	local MudGrpData = mist.getGroupData(MudName)
 	
 	
@@ -1382,7 +1404,7 @@ local mvars = {}
  --"EchelonR" - moving in Echelon Right formation  
 	
 	
-	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
 	Make_Smoke(mzone, nil)
 	
 return
@@ -1437,7 +1459,7 @@ end
 	
 	
 	trigger.action.activateGroup(Group.getByName(MudName))
-	trigger.action.activateGroup(Group.getByName(MudName))
+	--trigger.action.activateGroup(Group.getByName(MudName))
 	local MudGrpData = mist.getGroupData(MudName)
 	
 	
@@ -1584,59 +1606,268 @@ local mvars = {}
 return
 end
 ---
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Create_Airfield(_afArea)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+mzone = trigger.misc.getZone(_afArea)
+--local mrand = mist.random(1,Mud_Convoys)
+
+
+--trigger.action.deactivateGroup(Group.getByName(InfName))
+AFName1 = 'Infantry (Airdrome) #000'
+AFName2 = 'Infantry (Airdrome) #001'
+AFName3 = 'Infantry (Airdrome) #002'
+AFName4 = 'Infantry (Airdrome) #003'
+DefensesNames = {}
+airdromePsn = {}
+
+--if MudName ==  then
+	local msg = {}
+  msg.text = ' Creating Airfield Defenses' ..tostring(_afArea)
+  msg.displayTime = 5
+  msg.msgFor = {coa = {'all'}}
+  mist.message.add(msg)
+
+trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+if _afArea == 'Sochi' then
+	if Difficultymod == 1 then
+		DefensesName = Sochi_Names_Easy[1]
+		airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+	end
+
+	if Difficultymod == 2 then
+		DefensesName = Sochi_Names_Normal[1]
+		airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+	end
+	
+	if Difficultymod == 3 then
+		DefensesName = Sochi_Names_Hard[1]
+		airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+	end
+
+	if Difficultymod == 4 then
+		DefensesName = Sochi_Names_VeryHard[1]
+		airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+		airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+	end
+
+	else
+	local msg = {}
+		msg.text = ' Bad Airfield Name'
+		msg.displayTime = 5
+		msg.msgFor = {coa = {'all'}}
+		mist.message.add(msg)
+		return
+	
+end
+
+	local msg = {}
+  msg.text = ' Post difficulty setting'
+  msg.displayTime = 5
+  msg.msgFor = {coa = {'all'}}
+  mist.message.add(msg)
+	
+	
+	trigger.action.activateGroup(Group.getByName(DefensesName))
+	--trigger.action.activateGroup(Group.getByName(AFname1))
+	--trigger.action.activateGroup(Group.getByName(AFname2))
+	--trigger.action.activateGroup(Group.getByName(AFname3))
+	--trigger.action.activateGroup(Group.getByName(AFname4))
+	local DefGrpData = mist.getGroupData(DefensesName)
+	
+	
+	local msg = {}
+  msg.text = ' Post Info Collect'
+  msg.displayTime = 5
+  msg.msgFor = {coa = {'all'}}
+  mist.message.add(msg)
+	
+
+	local msg = {}
+  msg.text = ' Activated groups needed' ..tostring(MudGrp)
+  msg.displayTime = 5
+  msg.msgFor = {coa = {'all'}}
+  mist.message.add(msg)
+
+	formisttable = '[g]' .. DefensesName
+	targets = mist.makeUnitTable({formisttable})
+
+
+	mist.respawnGroup(DefensesName)
+	mist.spawnRandomizedGroup(DefensesName)
+	
+	local infvars = {}
+	infvars.groupName = AFName1
+  infvars.action = "respawn"
+  infvars.point = airdromePsn
+  --infvars.disperse = true
+  --infvars.maxDisp = 10
+  --infvars.radius = 20
+	mist.teleportToPoint(infvars)
+	
+	local infvars = {}
+	infvars.groupName = AFName2
+  infvars.action = "respawn"
+  infvars.point = airdromePsn2
+  --infvars.disperse = true
+  --infvars.maxDisp = 10
+  --infvars.radius = 20
+	mist.teleportToPoint(infvars)
+	
+	local infvars = {}
+	infvars.groupName = AFName3
+  infvars.action = "respawn"
+  infvars.point = airdromePsn3
+  --infvars.disperse = true
+  --infvars.maxDisp = 10
+  --infvars.radius = 20
+	mist.teleportToPoint(infvars)
+	
+	local infvars = {}
+	infvars.groupName = AFName4
+  infvars.action = "respawn"
+  infvars.point = airdromePsn4
+  --infvars.disperse = true
+  --infvars.maxDisp = 10
+  --infvars.radius = 20
+	mist.teleportToPoint(infvars)
+	
+	local msg = {}
+  msg.text = ' Created airfield task'
+  msg.displayTime = 20
+  msg.msgFor = {coa = {'all'}}
+  mist.message.add(msg)
+	
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
+
+
+---
+
+
+end
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Move_Convoy(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+--	local msg = {} 
+--    msg.text = ' Moving Convoy'
+ --   msg.displayTime = 5
+ --   msg.msgFor = {coa = {'all'}}
+ --     mist.message.add(msg)
+	
 	local formationrand = mist.random(1,6)
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Off Road')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Off Road')
 	
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Cone')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Cone')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Rank')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Rank')
 	
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Diamond')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'Diamond')
 	
 	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonL')
+	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonL')
 	
 	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonR')	
+	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonR')	
 	end
 
 
-return time + 600
+return		
 end
 ---
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function Move_Infantry(arg, time)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+	 -- local msg = {} 
+  --  msg.text = ' Moving Infantry'
+   -- msg.displayTime = 5
+   -- msg.msgFor = {coa = {'all'}}
+   --   mist.message.add(msg)
+	
 	local formationrand = mist.random(1,6)
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Off Road')
+	mist.groupRandomDistSelf(MoveInf, 40, 'Off Road')
 	
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Cone')
+	mist.groupRandomDistSelf(MoveInf, 30, 'Cone')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Rank')
+	mist.groupRandomDistSelf(MoveInf, 25, 'Rank')
 	
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'Diamond')
+	mist.groupRandomDistSelf(MoveInf, 30, 'Diamond')
 	
 	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'EchelonL')
+	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonL')
 	
 	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveInf, 15, 'EchelonR')	
+	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonR')	
 	end
 
 
-return time + 240
+return
+end
+---
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function Move_AF_Infantry(arg, time)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	
+	 -- local msg = {} 
+  --  msg.text = ' Moving Infantry'
+   -- msg.displayTime = 5
+   -- msg.msgFor = {coa = {'all'}}
+   --   mist.message.add(msg)
+	
+	local formationrand = mist.random(1,6)
+	
+	if formationrand == 1 then
+	mist.groupRandomDistSelf(AFName1, 5, 'Rank')
+	mist.groupRandomDistSelf(AFName2, 5, 'Rank')	
+	mist.groupRandomDistSelf(AFName3, 5, 'Rank')	
+	mist.groupRandomDistSelf(AFName4, 5, 'Rank')	
+	
+	elseif formationrand == 2 then
+	mist.groupRandomDistSelf(AFName1, 5, 'Diamond')
+	mist.groupRandomDistSelf(AFName2, 5, 'Diamond')	
+	mist.groupRandomDistSelf(AFName3, 5, 'Diamond')	
+	mist.groupRandomDistSelf(AFName4, 5, 'Diamond')	
+	
+	elseif formationrand == 3 then
+	mist.groupRandomDistSelf(AFName1, 5, 'EchelonL')
+	mist.groupRandomDistSelf(AFName2, 5, 'EchelonL')	
+	mist.groupRandomDistSelf(AFName3, 5, 'EchelonL')	
+	mist.groupRandomDistSelf(AFName4, 5, 'EchelonL')	
+	
+	elseif formationrand == 4 then
+	mist.groupRandomDistSelf(AFName1, 5, 'EchelonR')	
+	mist.groupRandomDistSelf(AFName2, 5, 'EchelonR')	
+	mist.groupRandomDistSelf(AFName3, 5, 'EchelonR')	
+	mist.groupRandomDistSelf(AFName4, 5, 'EchelonR')	
+	end
+
+
+return
 end
 ---
 
@@ -1943,7 +2174,8 @@ end
 timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
 timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
 timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
-timer.scheduleFunction(Move_Convoy, nil, timer.getTime() + 6)
-timer.scheduleFunction(Move_Infantry, nil, timer.getTime() + 6)
+mist.scheduleFunction(Move_Convoy, {nil, nil}, timer.getTime() + 10, 600, timer.getTime() + 3600) 
+mist.scheduleFunction(Move_Infantry, {nil, nil}, timer.getTime() + 10, 120,  timer.getTime() + 3600) 
+mist.scheduleFunction(Move_AF_Infantry, {nil, nil}, timer.getTime() + 10, 400,  timer.getTime() + 3600) 
 ------------------------------------------------------------------
 

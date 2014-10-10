@@ -31,7 +31,8 @@ local rad_option_9f = "Distant"
 local rad_option_9g = "Random"
 
 --Debug radio command (must have modified mission_scripting.lua in dcs scripts folder to not sanitize ios and lfs)
-local rad_option_9z = "Debugging - Reload Script"
+local rad_option_9y = "Debugging - Reload Script"
+local rad_option_9z = "Debugging - Show Task Values"
 
 
 --------------------
@@ -62,6 +63,21 @@ smoke_marker = {}
 --MudUnits = MudGrp:getUnits()
 
 RunwayID = 0
+Debugger = 0
+
+airfield = 0
+mudtask = 0
+convoytask = 0
+intercepttask = 0
+bombertask = 0
+
+airfield_complete = 0
+mud_complete = 0
+convoy_complete = 0
+intercept_complete = 0
+bomber_complete = 0
+
+message = {}
 
 
 bspawnPsn = {}
@@ -279,7 +295,7 @@ Inf_Spawn = {
 -----------------------------
 -- The following arrays contain available enemy aircraft the Spawn Fighter function pulls from
 
-Fighter_Names = 12 -- variable for number of availale fighters
+Fighter_Names = 12 -- variable for number of available fighters
 
 Fighter_Names_Easy = {
   [1] = 'MiG-21 (Easy)',
@@ -516,7 +532,9 @@ if Radio_Table[unitName] == nil then
   Rad_GroupID = group:getID()   
 		
   
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, reloadscript, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9y, Debug, reloadscript, nil)
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, Debug_Toggle, nil)
+	
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
   --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, Calls, Nothing, nil)
   
@@ -674,8 +692,8 @@ function Create_Fighter_Intercept(_Area)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- based off of Kutaisi Intercept script by akp, but modified for my own use.
 local zone = trigger.misc.getZone(_Area)
-		
 local rand = mist.random(1,Fighter_Names)
+intercepttask = 1
 
   if Difficultymod == 1 then
     grpName = Fighter_Names_Easy[rand]
@@ -817,6 +835,16 @@ local rand = mist.random(1,Fighter_Names)
         mist.message.add(msg)
 --end -- break for loop
 
+	
+	 checkunits4 = {
+   groupName = grpName,
+   percent = 40,
+	 flag = 401,
+	 stopFlag = 402,
+	 toggle = true,
+ }
+ mist.flagFunc.group_alive_less_than(checkunits4)
+
   trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
 
 --return
@@ -828,6 +856,7 @@ function Create_Bomber_Intercept(_bArea)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- based off of Kutaisi Intercept script by akp, but modified for my own use.
 bzone = trigger.misc.getZone(_bArea)
+bombertask = 1
 	bspawnPsn = {}
   espawnPsn = {}
   bpath = {}
@@ -1180,6 +1209,16 @@ bpath[3].task = {
         mist.message.add(msg)
 --end -- break for loop
 
+	
+	local checkunits5 = {
+	groupName = bgrpName,
+	percent = 40,
+	flag = 501,
+	stopFlag = 502,
+	 toggle = true,
+ }
+ mist.flagFunc.group_alive_less_than(checkunits5)
+ 
 
 
 --return
@@ -1191,7 +1230,7 @@ function Create_Mud(_mArea)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 mzone = trigger.misc.getZone(_mArea)
 local mrand = mist.random(1,Mud_Names)
-
+mudtask = 1
 
 --trigger.action.deactivateGroup(Group.getByName(InfName))
 MudName = {}
@@ -1232,9 +1271,11 @@ end
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
 	
-	
+		--if Group.getByName(MudName):isExist() then
+		--trigger.action.deactivateGroup(Group.getByName(MudName))
+		--end
+		
 	trigger.action.activateGroup(Group.getByName(MudName))
-	--trigger.action.activateGroup(Group.getByName(MudName))
 	local MudGrpData = mist.getGroupData(MudName)
 	
 	
@@ -1375,24 +1416,7 @@ local mvars = {}
 	MoveInf = InfName
 	local formationrand = mist.random(1,6)
 	
-	if formationrand == 1 then
-	mist.groupRandomDistSelf(InfName, 100, 'Off Road')
-	
-	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(InfName, 100, 'Cone')
-	
-	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(InfName, 100, 'Rank')
-	
-	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(InfName, 100, 'Diamond')
-	
-	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(InfName, 100, 'EchelonL')
-	
-	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(InfName, 100, 'EchelonR')	
-	end
+	mist.scheduleFunction(Move_Infantry, {InfName}, timer.getTime() + 5, 120,  timer.getTime() + 3600) 
 	
 	--"Off Road" - moving off-road in Column formation 
  --"On Road" - moving on road in Column formation 
@@ -1403,6 +1427,16 @@ local mvars = {}
  --"EchelonL" - moving in Echelon Left formation 
  --"EchelonR" - moving in Echelon Right formation  
 	
+	
+	 local checkunits2 = {
+   groupName = MudName,
+   percent = 33,
+	 flag = 201,
+	stopFlag = 202,
+	 toggle = true,
+ }
+ mist.flagFunc.group_alive_less_than(checkunits2)
+ 
 	
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
 	Make_Smoke(mzone, nil)
@@ -1416,6 +1450,7 @@ function Create_Mud_Convoy(_mArea)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 mzone = trigger.misc.getZone(_mArea)
 local mrand = mist.random(1,Mud_Convoys)
+convoytask = 1
 
 
 --trigger.action.deactivateGroup(Group.getByName(InfName))
@@ -1457,9 +1492,11 @@ end
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
 	
+	--if Group.getByName(MudName):isExist() then
+	--trigger.action.deactivateGroup(Group.getByName(MudName))
+	--end
 	
 	trigger.action.activateGroup(Group.getByName(MudName))
-	--trigger.action.activateGroup(Group.getByName(MudName))
 	local MudGrpData = mist.getGroupData(MudName)
 	
 	
@@ -1557,26 +1594,6 @@ local mvars = {}
 
 	
 	MoveMud = MudName
-	local formationrand = mist.random(1,6)
-	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Off Road')
-	
-	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Cone')
-	
-	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Rank')
-	
-	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'Diamond')
-	
-	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonL')
-	
-	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveMud, 5000, 'EchelonR')	
-	end
-	
 	
 	local msg = {}
   msg.text = ' Mud should be moving'
@@ -1584,7 +1601,15 @@ local mvars = {}
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)  
 	
-	
+	local checkunits3 = {
+  groupName = MudName,
+  percent = 33,
+	flag = 301,
+	stopFlag = 302,
+	 toggle = true,
+ }
+ mist.flagFunc.group_alive_less_than(checkunits3)
+ 
 	--
 	
 
@@ -1599,8 +1624,10 @@ local mvars = {}
  --"EchelonR" - moving in Echelon Right formation  
 	
 	
+
 	
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
+	mist.scheduleFunction(Move_Convoy, {MoveMud}, timer.getTime() + 10, 600, timer.getTime() + 3600) 
 	--Make_Smoke(mzone, nil)
 	
 return
@@ -1611,15 +1638,14 @@ end
 function Create_Airfield(_afArea)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 mzone = trigger.misc.getZone(_afArea)
---local mrand = mist.random(1,Mud_Convoys)
-
+airfield = 1
 
 --trigger.action.deactivateGroup(Group.getByName(InfName))
 AFName1 = 'Infantry (Airdrome) #000'
 AFName2 = 'Infantry (Airdrome) #001'
 AFName3 = 'Infantry (Airdrome) #002'
 AFName4 = 'Infantry (Airdrome) #003'
-DefensesNames = {}
+DefensesNames = ""
 airdromePsn = {}
 
 --if MudName ==  then
@@ -1680,13 +1706,17 @@ end
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
 	
+	--if Group.getByName(DefensesName):isExist() then
+	--trigger.action.deactivateGroup(Group.getByName(DefensesName))
+	--end
 	
-	trigger.action.activateGroup(Group.getByName(DefensesName))
+		trigger.action.activateGroup(Group.getByName(DefensesName))
+	
 	--trigger.action.activateGroup(Group.getByName(AFname1))
 	--trigger.action.activateGroup(Group.getByName(AFname2))
 	--trigger.action.activateGroup(Group.getByName(AFname3))
 	--trigger.action.activateGroup(Group.getByName(AFname4))
-	local DefGrpData = mist.getGroupData(DefensesName)
+--	local DefGrpData = mist.getGroupData(DefensesName)
 	
 	
 	local msg = {}
@@ -1697,7 +1727,7 @@ end
 	
 
 	local msg = {}
-  msg.text = ' Activated groups needed' ..tostring(MudGrp)
+  msg.text = ' Activated groups needed' ..tostring(DefensesName)
   msg.displayTime = 5
   msg.msgFor = {coa = {'all'}}
   mist.message.add(msg)
@@ -1752,122 +1782,84 @@ end
   mist.message.add(msg)
 	
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-
-
----
-
-
+	
+ local checkunits1 = {
+  groupName = DefensesName,
+  percent = 33,
+	flag = 101,
+	stopFlag = 102,
+	 toggle = true,
+ }
+ mist.flagFunc.group_alive_less_than(checkunits1)
+ 
+ mist.scheduleFunction(Move_Infantry, {AFName1}, timer.getTime() + 5, 120,  timer.getTime() + 3600) 
+	mist.scheduleFunction(Move_Infantry, {AFName2}, timer.getTime() + 25, 120,  timer.getTime() + 3600) 
+	mist.scheduleFunction(Move_Infantry, {AFName3}, timer.getTime() + 45, 120,  timer.getTime() + 3600) 
+	mist.scheduleFunction(Move_Infantry, {AFName4}, timer.getTime() + 65, 120,  timer.getTime() + 3600) 
+ 
+ 
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function Move_Convoy(arg, time)
+function Move_Convoy(_Mud)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-	
---	local msg = {} 
---    msg.text = ' Moving Convoy'
- --   msg.displayTime = 5
- --   msg.msgFor = {coa = {'all'}}
- --     mist.message.add(msg)
+local MoveConvoy = {}
+MoveConvoy = _Mud
 	
 	local formationrand = mist.random(1,6)
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'Off Road')
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'Off Road')
 	
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'Cone')
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'Cone')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'Rank')
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'Rank')
 	
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'Diamond')
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'Diamond')
 	
 	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonL')
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'EchelonL')
 	
 	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveMud, 9000, 'EchelonR')	
+	mist.groupRandomDistSelf(MoveConvoy, 9000, 'EchelonR')	
 	end
 
 
-return		
+--return		
 end
 ---
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function Move_Infantry(arg, time)
+function Move_Infantry(_infantry)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+	local Infantry_Name = {}
 	
-	 -- local msg = {} 
-  --  msg.text = ' Moving Infantry'
-   -- msg.displayTime = 5
-   -- msg.msgFor = {coa = {'all'}}
-   --   mist.message.add(msg)
-	
-	local formationrand = mist.random(1,6)
-	if formationrand == 1 then
-	mist.groupRandomDistSelf(MoveInf, 40, 'Off Road')
-	
-	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(MoveInf, 30, 'Cone')
-	
-	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(MoveInf, 25, 'Rank')
-	
-	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(MoveInf, 30, 'Diamond')
-	
-	elseif formationrand == 5 then
-	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonL')
-	
-	elseif formationrand == 6 then
-	mist.groupRandomDistSelf(MoveInf, 24, 'EchelonR')	
-	end
+	Infantry_Name = _infantry
 
-
-return
-end
----
-
-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-function Move_AF_Infantry(arg, time)
-------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-	
-	 -- local msg = {} 
-  --  msg.text = ' Moving Infantry'
-   -- msg.displayTime = 5
-   -- msg.msgFor = {coa = {'all'}}
-   --   mist.message.add(msg)
+	--local msg = {} 
+  --msg.text = ' Moving Airfield Infantry'
+  --msg.displayTime = 2
+  --msg.msgFor = {coa = {'all'}}
+  --mist.message.add(msg)
 	
 	local formationrand = mist.random(1,6)
 	
 	if formationrand == 1 then
-	mist.groupRandomDistSelf(AFName1, 5, 'Rank')
-	mist.groupRandomDistSelf(AFName2, 5, 'Rank')	
-	mist.groupRandomDistSelf(AFName3, 5, 'Rank')	
-	mist.groupRandomDistSelf(AFName4, 5, 'Rank')	
-	
+	mist.groupRandomDistSelf(Infantry_Name, 5, 'Rank')
+
 	elseif formationrand == 2 then
-	mist.groupRandomDistSelf(AFName1, 5, 'Diamond')
-	mist.groupRandomDistSelf(AFName2, 5, 'Diamond')	
-	mist.groupRandomDistSelf(AFName3, 5, 'Diamond')	
-	mist.groupRandomDistSelf(AFName4, 5, 'Diamond')	
+	mist.groupRandomDistSelf(Infantry_Name, 5, 'Diamond')
 	
 	elseif formationrand == 3 then
-	mist.groupRandomDistSelf(AFName1, 5, 'EchelonL')
-	mist.groupRandomDistSelf(AFName2, 5, 'EchelonL')	
-	mist.groupRandomDistSelf(AFName3, 5, 'EchelonL')	
-	mist.groupRandomDistSelf(AFName4, 5, 'EchelonL')	
-	
+	mist.groupRandomDistSelf(Infantry_Name, 5, 'EchelonL')
+
 	elseif formationrand == 4 then
-	mist.groupRandomDistSelf(AFName1, 5, 'EchelonR')	
-	mist.groupRandomDistSelf(AFName2, 5, 'EchelonR')	
-	mist.groupRandomDistSelf(AFName3, 5, 'EchelonR')	
-	mist.groupRandomDistSelf(AFName4, 5, 'EchelonR')	
+	mist.groupRandomDistSelf(Infantry_Name, 5, 'EchelonR')	
+
 	end
-
-
-return
+--return
 end
 ---
 
@@ -2169,13 +2161,181 @@ end
 end
 ---
 
+-----------------------------------
+function Mission_Complete_Checks(arg, time)
+-----------------------------------
+
+--airfield_complete = trigger.misc.getUserFlag('101')		-- when true this triggers the mission accomplished/message/clean up.
+--mud_complete = trigger.misc.getUserFlag('201')
+--convoy_complete = trigger.misc.getUserFlag('301')
+--intercept_complete = trigger.misc.getUserFlag('401')
+--bomber_complete = trigger.misc.getUserFlag('501')
+
+if trigger.misc.getUserFlag('102') == 1 then
+		trigger.action.setUserFlag('102',0)
+end
+
+if trigger.misc.getUserFlag('202') == 1 then
+		trigger.action.setUserFlag('202',0)
+end
+if trigger.misc.getUserFlag('302') == 1 then
+		trigger.action.setUserFlag('302',0)
+end
+if trigger.misc.getUserFlag('402') == 1 then
+		trigger.action.setUserFlag('402',0)
+end
+if trigger.misc.getUserFlag('502') == 1 then
+		trigger.action.setUserFlag('502',0)
+end
+
+	 
+
+
+if trigger.misc.getUserFlag('101') == 1 then
+if airfield == 1 then
+		local msg = {}
+		msg.text = ' Airfield task has been completed.'
+    msg.displayTime = 60
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		trigger.action.setUserFlag('102', 1)				-- stop victory
+		airfield = 0
+		airfield_complete = 0
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+		--trigger.action.deactivateGroup(Group.getByName(DefensesName))				-- deactivate airfield defenses	
+end
+end
+
+if trigger.misc.getUserFlag('201') == 1 then
+if mudtask == 1 then
+		local msg = {}
+		msg.text = ' Mud task has been completed.'
+    msg.displayTime = 60
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		trigger.action.setUserFlag('202', 1)				-- stop victory
+		mudtask = 0
+		mud_complete = 0
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+		--trigger.action.deactivateGroup(Group.getByName(MudName))				-- deactivate mud
+end
+end
+
+if trigger.misc.getUserFlag('301') == 1 then
+if convoytask == 1 then
+		local msg = {}
+		msg.text = ' Convoy task has been completed.'
+    msg.displayTime = 60
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		trigger.action.setUserFlag('302', 1)				-- stop victory
+		convoytask = 0
+		convoy_complete = 0
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+		--trigger.action.deactivateGroup(Group.getByName(MoveMud))				-- deactivate convoy
+end
+end
+
+
+if trigger.misc.getUserFlag('401') == 1 then
+if interceptortask == 1 then
+		local msg = {}
+		msg.text = ' Interceptor task has been completed.'
+    msg.displayTime = 60
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		interceptortask = 0
+		intercept_complete = 0
+		trigger.action.setUserFlag('402', 1)				-- stop victory
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+		--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
+end
+end
+
+if trigger.misc.getUserFlag('501') == 1 then
+if bombertask == 1 then
+		local msg = {}
+		msg.text = ' Bomber intercept task has been completed.'
+    msg.displayTime = 60
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		trigger.action.setUserFlag('502', 1)				-- stop victory
+		bombertask = 0
+		bomber_complete = 0
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+		--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+		--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+end
+end
+
+Debug_Show()
+return time + 5
+end
+---
+function Debug_Show()
+		if Debugger == 1 then
+		local msg = {}
+    msg.text = ' Debug variables'
+    msg.displayTime = 1
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		
+		local msg = {}
+    msg.text = ' TasksStart' ..tostring(airfield) ..tostring(mudtask) ..tostring(convoytask) ..tostring(intercepttask) ..tostring(bombertask)
+    msg.displayTime = 1
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		
+		local msg = {}
+    msg.text = ' CompletedTask' ..tostring(airfield_complete) ..tostring(mud_complete) ..tostring(convoy_complete) ..tostring(intercept_complete) ..tostring(bomber_complete)
+    msg.displayTime = 1
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		
+		local msg = {}
+    msg.text = ' Debug variables'
+    msg.displayTime = 1
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+		end
+return
+end
+
+function Debug_Toggle()
+  local Old_Set = Debugger
+  local New_Set = nil
+  local DebugSet = ""
+
+  if Old_Set == 1 then
+    New_Set = 0
+    Debugger = New_Set
+    DebugSet = "disabled"
+  end
+	
+  if Old_Set == 0 then
+    New_Set = 1
+    Debugger = New_Set
+    DebugSet = "enabled"
+  end
+
+  trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')
+  local msg = {} 
+    msg.text = ' Debug information is '..tostring(DebugSet)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+      mist.message.add(msg)
+  return
+end
+
+
 -- Scheduled functions (run on timer)
 ------------------------------------------------------------------
 timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
 timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
 timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
-mist.scheduleFunction(Move_Convoy, {nil, nil}, timer.getTime() + 10, 600, timer.getTime() + 3600) 
-mist.scheduleFunction(Move_Infantry, {nil, nil}, timer.getTime() + 10, 120,  timer.getTime() + 3600) 
-mist.scheduleFunction(Move_AF_Infantry, {nil, nil}, timer.getTime() + 10, 400,  timer.getTime() + 3600) 
+timer.scheduleFunction(Mission_Complete_Checks, nil, timer.getTime() + 5) 
+	
+	
+
 ------------------------------------------------------------------
 

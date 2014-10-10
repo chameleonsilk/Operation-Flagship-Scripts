@@ -3770,6 +3770,20 @@ mist.groupRandomDistSelf = function(gpData, dist, form, heading, speed)
 	return
 end
 
+mist.groupRandomDistSelfSafe = function(gpData, dist, form, heading, speed)
+	local pos = mist.getLeadPos(gpData)
+	local fakeZone = {}
+	  for i = 1, 100 do
+	fakeZone.radius = dist or math.random(300, 1000)
+	fakeZone.point = {x = pos.x, y, pos.y, z = pos.z}
+				if mist.isTerrainValid(fakeZone, {'LAND', 'ROAD'}) == true then				
+				break
+				end
+		end
+	mist.groupToRandomZone(gpData, fakeZone, form, heading, speed)
+	return
+end
+
 mist.groupToRandomZone = function(gpData, zone, form, heading, speed)
 	if type(gpData) == 'string' then
 		gpData = Group.getByName(gpData)

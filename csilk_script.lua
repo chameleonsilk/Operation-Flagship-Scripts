@@ -506,17 +506,20 @@ Infantry_Squads = 5
 	  [2] = 'Su-25 (BEasy)',
 	  [3] = 'MiG-27K (BEasy)',
 	  [4] = 'Su-17 (BEasy)',
-	}Attacker_Names_Normal = {
+	}
+	Attacker_Names_Normal = {
 	  [1] = 'Su-25T (BNormal)',
 	  [2] = 'Su-25 (BNormal)',
 	  [3] = 'MiG-27K (BNormal)',
 	  [4] = 'Su-17 (BNormal)',
-	}Attacker_Names_Hard = {
+	}
+	Attacker_Names_Hard = {
 	  [1] = 'Su-25T (BHard)',
 	  [2] = 'Su-25 (BHard)',
 	  [3] = 'MiG-27K (BHard)',
 	  [4] = 'Su-17 (BHard)',
-	}Attacker_Names_VeryHard = {
+	}
+	Attacker_Names_VeryHard = {
 	  [1] = 'Su-25T (BVeryHard)',
 	  [2] = 'Su-25 (BVeryHard)',
 	  [3] = 'MiG-27K (BVeryHard)',
@@ -536,13 +539,16 @@ Infantry_Squads = 5
 	Bomber_Names_Easy = {
 		[1] = 'Tu-22M3 (Easy)',
 	  [2] = 'Su-24M (Easy)',
-	}Bomber_Names_Normal = {
+	}
+	Bomber_Names_Normal = {
 		[1] = 'Tu-22M3 (Normal)',
 	  [2] = 'Su-24M (Normal)',
-	}Bomber_Names_Hard = {
+	}
+	Bomber_Names_Hard = {
 		[1] = 'Tu-22M3 (Hard)',
 	  [2] = 'Su-24M (Hard)',
-	}Bomber_Names_VeryHard = {
+	}
+	Bomber_Names_VeryHard = {
 		[1] = 'Tu-22M3 (VeryHard)',
 	  [2] = 'Su-24M (VeryHard)',
 	}
@@ -1353,11 +1359,7 @@ Infantry_Squads = 5
 			
 		formisttable = '[g]' .. MudName
 		targets = mist.makeUnitTable({formisttable})
-			local msg = {}
-	  msg.text = ' Creating mud task (this will create a pause on server.. please be patient) '
-	  msg.displayTime = 20
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+			
 		  for i = 1, 100 do
 	    if Task_Range == 1 then
 	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
@@ -1370,8 +1372,7 @@ Infantry_Squads = 5
 			elseif Task_Range == 5 then
 	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
 			elseif Task_Range == 6 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)				
-
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
 			end
 
 			
@@ -1384,12 +1385,7 @@ Infantry_Squads = 5
 
 		end
 
-
-							
-								
-							
-							
-	local mvars = {}
+		local mvars = {}
 	  mvars.groupName = MudName
 	  mvars.action = "respawn"
 	  mvars.point = mudPsn
@@ -1398,9 +1394,9 @@ Infantry_Squads = 5
 	  --mvars.radius = 20
 		mist.teleportToPoint(mvars)
 			
-
+		mist.spawnRandomizedGroup(MudName)
+			
 	 local infvars = {}
-
 		infvars.groupName = InfName1
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1408,9 +1404,10 @@ Infantry_Squads = 5
 	  --infvars.maxDisp = 10
 	  --infvars.radius = 20
 		mist.teleportToPoint(infvars)
-		
-			 local infvars = {}
 
+		--mist.spawnRandomizedGroup(InfName1)
+		
+		local infvars = {}
 		infvars.groupName = InfName2
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1419,8 +1416,7 @@ Infantry_Squads = 5
 	  --infvars.radius = 20
 		mist.teleportToPoint(infvars)
 		
-			 local infvars = {}
-
+		local infvars = {}
 		infvars.groupName = InfName3
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1429,8 +1425,8 @@ Infantry_Squads = 5
 	  --infvars.radius = 20
 		mist.teleportToPoint(infvars)
 		
-			 local infvars = {}
-
+		
+	local infvars = {}
 		infvars.groupName = InfName4
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1439,8 +1435,7 @@ Infantry_Squads = 5
 	  --infvars.radius = 20
 		mist.teleportToPoint(infvars)
 		
-			 local infvars = {}
-
+		local infvars = {}
 		infvars.groupName = InfName5
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1448,9 +1443,7 @@ Infantry_Squads = 5
 	  --infvars.maxDisp = 10
 	  --infvars.radius = 20
 		mist.teleportToPoint(infvars)
-
-		mist.spawnRandomizedGroup(InfName)
-		mist.spawnRandomizedGroup(MudName)
+		
 		local mvars = {}
 	  mvars.groupName = MudName
 	  mvars.action = "teleport"
@@ -1462,12 +1455,48 @@ Infantry_Squads = 5
 			
 
 	 local infvars = {}
-		infvars.groupName = InfName
+		infvars.groupName = InfName1
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+	  infvars.disperse = true
+	  infvars.maxDisp = 10
+	  infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 10
+	  infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 10
+	  infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 10
+	  infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 10
+	  infvars.radius = 20
 		mist.teleportToPoint(infvars)
 			    
 	  
@@ -1476,19 +1505,15 @@ Infantry_Squads = 5
 	  msg.displayTime = 20
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-	  
-		 _randompoint1 = {}
-		 _randompoint2 = {}
-		 _randompoint3 = {}
-			_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
-		_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
-		_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
+			  
+		 --_randompoint1 = {}
+		 --_randompoint2 = {}
+		-- _randompoint3 = {}
+		--_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
+		--_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
+		--_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
 			
-			MoveInf = InfName
-		local formationrand = mist.random(1,6)
-			mist.scheduleFunction(Move_Infantry, {InfName}, timer.getTime() + 5, 120,  timer.getTime() + 3600) 
-			
-		 local checkunits2 = {
+	 local checkunits2 = {
 	   groupName = MudName,
 	   percent = 33,
 		 flag = 201,
@@ -1646,7 +1671,7 @@ Infantry_Squads = 5
 		ConvoyFunc = mist.scheduleFunction(Move_Convoy, {MoveMud}, 5, 300) 
 		
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-		Make_Smoke(mudPsn, nil)
+		--Make_Smoke(mudPsn, nil)
 		--return
 		
 		local msg = {}
@@ -1890,11 +1915,11 @@ Infantry_Squads = 5
 				Scoord = mist.utils.zoneToVec3(_coord)
 				
 
-				local msg = {} 
-				msg.text = ' Attempted to smoke target area '
-				msg.displayTime = 5
-				msg.msgFor = {coa = {'all'}}
-	    	mist.message.add(msg)
+	--			local msg = {} 
+	--			msg.text = ' Attempted to smoke target area '
+	--			msg.displayTime = 5
+	--			msg.msgFor = {coa = {'all'}}
+	  --  	mist.message.add(msg)
 
 		trigger.action.smoke({x=Scoord.x + math.random(1,200), y= land.getHeight({x = Scoord.x, y = Scoord.z}), z= Scoord.z + math.random(1, 200)}, trigger.smokeColor.Red)
 		

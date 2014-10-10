@@ -1395,14 +1395,47 @@ Infantry_Squads = 5
 		mist.teleportToPoint(mvars)
 			
 		mist.spawnRandomizedGroup(MudName)
+		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		local use_randomizer = 0
+		use_randomizer = mist.random(0,1)
+		randomizer_disperse = mist.random(0,1)
+		randomizer_max_disperse = mist.random(40,120)
+		randomizer_radius = mist.random(80,140)
+		randomizer_inner_radius = mist.random(0,70)
+		
+		if use_randomizer == 1 then
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "teleport"
+	  mvars.point = mudPsn
+	  mvars.disperse = randomizer_disperse
+	  mvars.maxDisp = randomizer_max_disperse
+	  mvars.radius = randomizer_radius
+		mvars.innerRadius = randomizer_inner_radius
+		mist.teleportToPoint(mvars)
+		end
+		
+		if use_randomizer == 0 then
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "teleport"
+	  mvars.point = mudPsn
+		mist.teleportToPoint(mvars)
+		end
 			
 	 local infvars = {}
 		infvars.groupName = InfName1
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+		infvars.disperse = true
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 
 		--mist.spawnRandomizedGroup(InfName1)
@@ -1411,18 +1444,20 @@ Infantry_Squads = 5
 		infvars.groupName = InfName2
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+		infvars.disperse = true
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName3
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+		infvars.disperse = true
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		
@@ -1430,37 +1465,30 @@ Infantry_Squads = 5
 		infvars.groupName = InfName4
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+		infvars.disperse = true
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName5
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
+		infvars.disperse = true
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
-		local mvars = {}
-	  mvars.groupName = MudName
-	  mvars.action = "teleport"
-	  mvars.point = mudPsn
-	  --mvars.disperse = true
-	  --mvars.maxDisp = 100
-	  --mvars.radius = 20
-		mist.teleportToPoint(mvars)
-			
-
 	 local infvars = {}
 		infvars.groupName = InfName1
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = true
-	  infvars.maxDisp = 10
-	  infvars.radius = 20
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
@@ -1468,8 +1496,9 @@ Infantry_Squads = 5
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = true
-	  infvars.maxDisp = 10
-	  infvars.radius = 20
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
@@ -1477,8 +1506,9 @@ Infantry_Squads = 5
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = true
-	  infvars.maxDisp = 10
-	  infvars.radius = 20
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
@@ -1486,8 +1516,9 @@ Infantry_Squads = 5
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = true
-	  infvars.maxDisp = 10
-	  infvars.radius = 20
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
 		
 		local infvars = {}
@@ -1495,9 +1526,12 @@ Infantry_Squads = 5
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = true
-	  infvars.maxDisp = 10
-	  infvars.radius = 20
+	  infvars.maxDisp = 100
+	  infvars.radius = 100
+		infvars.innerRadius = 70
 		mist.teleportToPoint(infvars)
+		
+
 			    
 	  
 			local msg = {}

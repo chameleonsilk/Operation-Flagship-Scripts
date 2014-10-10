@@ -18,10 +18,11 @@
 	----------------
 	-- radio option variables are grouped by function. ie- 0a-3a
 	-- These variables define the displayed name for mission difficulty
-	local rad_option_8a = "Easy"
-	local rad_option_8b = "Normal"
-	local rad_option_8c = "Hard"
-	local rad_option_8d = "Very Hard"
+	local rad_option_8a = "Very Easy"
+	local rad_option_8b = "Easy"
+	local rad_option_8c = "Normal"
+	local rad_option_8d = "Hard"
+	local rad_option_8e = "Very Hard"
 
 	--These variables define displayed name for Task Spawn Distance
 	local rad_option_9a = "Scramble"
@@ -79,16 +80,17 @@
 	spawnPsn = {}
 	mudPsn = {}
 
-	Smoke = 1
+	Smoke = 0
 	Scoord  = {}
-	Difficulty = "Easy"
+	Difficulty = "Very Easy"
 	Difficultymod = 1
 	Range = "Standard"
 	Task_Range = 2
 
 	--This array contains all the available player aircraft at their respective airbase
 	Rad = {
-	  "Anapa-21 #1",
+	  "Anapa-86 #1",
+		"Anapa-21 #1",
 	  "Anapa-21 #2",
 	  "Anapa-21 #3",
 	  "Anapa-21 #4",
@@ -157,8 +159,12 @@
 	  "Nalchik-15C #3",
 	  "Nalchik-15C #4",
 	  "Nalchik-15C #5",
-	  "Nalchik-15C #6",
-	  "Tbilisi-21 #1",
+	  "Nalchik-A10A #1",
+		"Nalchik-A10C #1",
+		"Nalchik-25 #1",
+		"Nalchik-25T #1",
+	  "Tbilisi-86 #1",
+		"Tbilisi-21 #1",
 	  "Tbilisi-21 #2",
 	  "Tbilisi-21 #3",
 	  "Tbilisi-21 #4",
@@ -170,7 +176,24 @@
 	  "Tbilisi-15C #4",
 	  "Tbilisi-15C #5",
 	  "Tbilisi-15C #6",
-	  "Gudauta-21 #1",
+		"Tbilisi-25 #1",
+		"Tbilisi-25 #2",
+		"Tbilisi-25 #3",
+		"Tbilisi-25 #4",
+		"Tbilisi-25T #1",
+		"Tbilisi-25T #2",
+		"Tbilisi-25T #3",
+		"Tbilisi-25T #4",
+		"Tbilisi-A10A #1",
+		"Tbilisi-A10A #2",
+		"Tbilisi-A10A #3",
+		"Tbilisi-A10A #4",
+		"Tbilisi-A10C #1",
+		"Tbilisi-A10C #2",
+		"Tbilisi-A10C #3",
+		"Tbilisi-A10C #4",
+	  "Gudauta-86 #1",
+		"Gudauta-21 #1",
 	  "Gudauta-21 #2",
 	  "Gudauta-21 #3",
 	  "Gudauta-21 #4",
@@ -198,7 +221,8 @@
 		"Gudauta-A10C #2",
 		"Gudauta-A10C #3",
 		"Gudauta-A10C #4",
-	  "Kutaisi-21 #1",
+	  "Kutaisi-86 #1",
+		"Kutaisi-21 #1",
 	  "Kutaisi-21 #2",
 	  "Kutaisi-21 #3",
 	  "Kutaisi-21 #4",
@@ -210,7 +234,24 @@
 	  "Kutaisi-15C #4",
 	  "Kutaisi-15C #5",
 	  "Kutaisi-15C #6",
-	  "Maykop-21 #1",
+		"Kutaisi-A10A #1",
+		"Kutaisi-A10A #2",
+		"Kutaisi-A10A #3",
+		"Kutaisi-A10A #4",
+		"Kutaisi-A10C #1",
+		"Kutaisi-A10C #2",
+		"Kutaisi-A10C #3",
+		"Kutaisi-A10C #4",
+		"Kutaisi-25 #1",
+		"Kutaisi-25 #2",
+		"Kutaisi-25 #3",
+		"Kutaisi-25 #4",
+		"Kutaisi-25T #1",
+		"Kutaisi-25T #2",
+		"Kutaisi-25T #3",
+		"Kutaisi-25T #4",
+	  "Maykop-86 #1",
+		"Maykop-21 #1",
 	  "Maykop-21 #2",
 	  "Maykop-21 #3",
 	  "Maykop-21 #4",
@@ -245,6 +286,10 @@
 
 	Mud_Names = 2 -- variable for number of availale MUD Per Difficulty
 
+	Mud_VeryEasy = {
+	  [1] = "Mud (VeryEasy) #000",
+		[2] = "Mud (VeryEasy) #001",
+	}
 	Mud_Easy = {
 	  [1] = "Mud (Easy) #000",
 		[2] = "Mud (Easy) #001",
@@ -271,6 +316,10 @@
 
 	Mud_Convoys = 2 -- variable for number of availale Moving MUD Per Difficulty
 
+	Mud_Convoy_VeryEasy = {
+	  [1] = "Mud Convoy (VeryEasy) #000",
+		[2] = "Mud Convoy (VeryEasy) #001",
+	}
 	Mud_Convoy_Easy = {
 	  [1] = "Mud Convoy (Easy) #000",
 		[2] = "Mud Convoy (Easy) #001",
@@ -294,12 +343,42 @@
 	-----------------------------
 	--Iinfantry spawning array --
 	-----------------------------
-
-	Inf_Spawn = {
+Infantry_Squads = 5
+	
+	Infantry_VeryEasy = {
+		[1] = 'Infantry (VeryEasy) #000',
+		[2] = 'Infantry (VeryEasy) #001',
+		[3] = 'Infantry (VeryEasy) #002',
+		[4] = 'Infantry (VeryEasy) #003',
+		[5] = 'Infantry (VeryEasy) #004',
+	}
+	Infantry_Easy = {
 		[1] = 'Infantry (Easy) #000',
-		[2] = 'Infantry (Normal) #000',
-		[3] = 'Infantry (Hard) #000',
-		[4] = 'Infantry (VeryHard) #000',
+		[2] = 'Infantry (Easy) #001',
+		[3] = 'Infantry (Easy) #002',
+		[4] = 'Infantry (Easy) #003',
+		[5] = 'Infantry (Easy) #004',
+	}
+	Infantry_Normal = {
+		[1] = 'Infantry (Normal) #000',
+		[2] = 'Infantry (Normal) #001',
+		[3] = 'Infantry (Normal) #002',
+		[4] = 'Infantry (Normal) #003',
+		[5] = 'Infantry (Normal) #004',
+	}
+	Infantry_Hard = {
+		[1] = 'Infantry (Hard) #000',
+		[2] = 'Infantry (Hard) #001',
+		[3] = 'Infantry (Hard) #002',
+		[4] = 'Infantry (Hard) #003',
+		[5] = 'Infantry (Hard) #004',
+	}
+	Infantry_VeryHard = {
+		[1] = 'Infantry (VeryHard) #000',
+		[2] = 'Infantry (VeryHard) #001',
+		[3] = 'Infantry (VeryHard) #002',
+		[4] = 'Infantry (VeryHard) #003',
+		[5] = 'Infantry (VeryHard) #004',
 	}
 	---------------------------------
 	--End Infantry spawning array --
@@ -312,61 +391,76 @@
 
 	Fighter_Names = 12 -- variable for number of available fighters
 
+	Fighter_Names_VeryEasy = {
+	[1] = 'F-86 (Easy)',
+	[2] = 'F-86 (Easy)',
+	[3] = 'F-86 (Easy)',
+	[4] = 'F-86 (Easy)',
+	[5] = 'F-86 (Easy)',
+	[6] = 'F-86 (Easy)',
+	[7] = 'F-86 (Easy)',
+	[8] = 'F-86 (Easy)',
+	[9] = 'F-86 (Normal)',
+	[10] = 'F-86 (Normal)',
+	[11] = 'F-86 (Hard)',
+	[12] = 'F-86 (VeryHard)',
+	}
+	
 	Fighter_Names_Easy = {
 	  [1] = 'MiG-21 (Easy)',
 	  [2] = 'MiG-23 (Easy)',
-	  [3] = 'MiG-29S (Easy)',
-	  [4] = 'MiG-29A (Easy)',
-	  [5] = 'F-16C bl.52d (Easy)',
-	  [6] = 'Su-27 (Easy)',
-	  [7] = '2000-5 (Easy)',
-	  [8] = 'F-86 (Easy)',
-	  [9] = 'MiG-25PD (Easy)',
-	  [10] = 'F-16C (Easy)',
+	  [3] = 'MiG-21 (Easy)',
+	  [4] = 'MiG-23 (Easy)',
+	  [5] = 'MiG-21 (Easy)',
+		[6] = 'MiG-23 (Easy)',
+		[7] = 'F-4E (Easy)',
+	  [8] = 'F-5E (Easy)',	
+		[9] = 'F-4E (Easy)',
+	  [10] = 'F-5E (Easy)',	
 	  [11] = 'F-4E (Easy)',
 	  [12] = 'F-5E (Easy)',	
 	}
 	Fighter_Names_Normal = {
 	  [1] = 'MiG-21 (Normal)',
 	  [2] = 'MiG-23 (Normal)',
-	  [3] = 'MiG-29S (Normal)',
-	  [4] = 'MiG-29A (Normal)',
-	  [5] = 'F-16C bl.52d (Normal)',
-	  [6] = 'Su-27 (Normal)',
-	  [7] = '2000-5 (Normal)',
-	  [8] = 'F-86 (Normal)',
-	  [9] = 'MiG-25PD (Normal)',
-	  [10] = 'F-16C (Normal)',
-	  [11] = 'F-4E (Normal)',
-	  [12] = 'F-5E (Normal)',	
+	  [3] = 'MiG-21 (Hard)',
+	  [4] = 'MiG-23 (Hard)',
+	  [5] = 'F-4E (Normal)',
+	  [6] = 'F-5E (Normal)',	
+		[7] = 'F-4E (Hard)',
+	  [8] = 'F-5E (Hard)',
+		[9] = 'MiG-21 (Hard)',
+	  [10] = 'MiG-23 (Hard)',
+		[11] = 'F-4E (Hard)',
+	  [12] = 'F-5E (Hard)',
 	}
 	Fighter_Names_Hard = {
-	  [1] = 'MiG-21 (Hard)',
-	  [2] = 'MiG-23 (Hard)',
-	  [3] = 'MiG-29S (Hard)',
-	  [4] = 'MiG-29A (Hard)',
-	  [5] = 'F-16C bl.52d (Hard)',
-	  [6] = 'Su-27 (Hard)',
-	  [7] = '2000-5 (Hard)',
-	  [8] = 'F-86 (Hard)',
-	  [9] = 'MiG-25PD (Hard)',
-	  [10] = 'F-16C (Hard)',
-	  [11] = 'F-4E (Hard)',
-	  [12] = 'F-5E (Hard)',	
+	  [1] = 'MiG-29S (Normal)',
+		[2] = 'MiG-29S (Hard)',
+	  [3] = 'MiG-29A (Normal)',
+		[4] = 'MiG-29A (Hard)',
+	  [5] = 'F-16C bl.52d (Normal)',
+		[6] = 'MiG-25PD (Hard)',
+	  [7] = 'Su-27 (Normal)',
+		[8] = 'Su-27 (Hard)',
+	  [9] = '2000-5 (Hard)',
+	  [10] = '2000-5 (VeryHard)',
+	  [11] = 'F-16C (Normal)',
+		[12] = 'F-16C (Hard)',	
 	}
 	Fighter_Names_VeryHard = {
-	  [1] = 'MiG-21 (VeryHard)',
-	  [2] = 'MiG-23 (VeryHard)',
-	  [3] = 'MiG-29S (VeryHard)',
-	  [4] = 'MiG-29A (VeryHard)',
-	  [5] = 'F-16C bl.52d (VeryHard)',
-	  [6] = 'Su-27 (VeryHard)',
-	  [7] = '2000-5 (VeryHard)',
-	  [8] = 'F-86 (VeryHard)',
-	  [9] = 'MiG-25PD (VeryHard)',
-	  [10] = 'F-16C (VeryHard)',
-	  [11] = 'F-4E (VeryHard)',
-	  [12] = 'F-5E (VeryHard)',	
+	  [1] = 'MiG-29S (Hard)',
+		[2] = 'MiG-29S (VeryHard)',
+	  [3] = 'MiG-29A (Hard)',
+		[4] = 'MiG-29A (VeryHard)',
+	  [5] = 'F-16C bl.52d (Hard)',
+		[6] = 'F-16C bl.52d (VeryHard)',
+	  [7] = 'Su-27 (VeryHard)',
+		[8] = 'Su-27 (VeryHard)',
+		[9] = 'Su-27 (VeryHard)',
+	  [10] = 'MiG-25PD (VeryHard)',
+	  [11] = 'F-16C (VeryHard)',
+		[12] = 'Su-27 (Hard)',
 	}
 	------------------------
 	-- End Fighter Arrays --
@@ -378,6 +472,9 @@
 	-------------------------
 	-- Sochi Airfield Task --
 	-------------------------
+	Sochi_Names_VeryEasy = {
+		[1] = 'Sochi Airfield (Easy) #000',
+	}
 	Sochi_Names_Easy = {
 		[1] = 'Sochi Airfield (Easy) #000',
 	}
@@ -570,10 +667,11 @@
 	-- Wanks Code --
 	----------------
 	-- These commands set the function of the radio options in the difficulty sub-menu
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8a, DifficultySet, Set_Difficuty_Easy, nil) -- 'Easy'
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8b, DifficultySet, Set_Difficuty_Normal, nil) -- 'Normal'
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8c, DifficultySet, Set_Difficuty_Hard, nil) -- 'Hard'
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8d, DifficultySet, Set_Difficuty_VeryHard, nil) -- 'Very Hard'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8a, DifficultySet, Set_Difficuty_VeryEasy, nil) -- 'Very Easy'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8b, DifficultySet, Set_Difficuty_Easy, nil) -- 'Easy'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8c, DifficultySet, Set_Difficuty_Normal, nil) -- 'Normal'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8d, DifficultySet, Set_Difficuty_Hard, nil) -- 'Hard'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8e, DifficultySet, Set_Difficuty_VeryHard, nil) -- 'Very Hard'
 
 	-- These commands set the function of the radio options in the target range sub-menu
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9a, DistanceSet, Set_Distance_Scramble, nil) -- Scramble
@@ -616,31 +714,31 @@
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local msg = {}
 	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship... Alpha Test'
-	msg.displayTime = 60
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
 	local msg = {} 
 	msg.text = '  '
-	msg.displayTime = 20
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
 	local msg = {} 
 	msg.text = ' Mission utilizes heavily modified Interception Script by akp '
-	msg.displayTime = 20
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
 	local msg = {} 
 	msg.text = ' Global difficulty has been set to '..tostring(Difficulty)
-	msg.displayTime = 20
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
 	local msg = {} 
 	msg.text = ' Task spawn start range has been set to '..tostring(Range)
-	msg.displayTime = 20
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
@@ -675,18 +773,22 @@
 	intercepttask = 1
 
 	  if Difficultymod == 1 then
-	    grpName = Fighter_Names_Easy[rand]
+	    grpName = Fighter_Names_VeryEasy[rand]
 	  end
 		
 		if Difficultymod == 2 then
-	    grpName = Fighter_Names_Normal[rand]
+	    grpName = Fighter_Names_Easy[rand]
 	  end
 
 	  if Difficultymod == 3 then
-	    grpName = Fighter_Names_Hard[rand]
+	    grpName = Fighter_Names_Normal[rand]
 	  end
 
 	  if Difficultymod == 4 then
+	    grpName = Fighter_Names_Hard[rand]
+	  end
+		
+		if Difficultymod == 5 then
 	    grpName = Fighter_Names_VeryHard[rand]
 	  end
 
@@ -891,7 +993,7 @@
 	
 	if Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
-		egrpName = Fighter_Names_Easy[erand]
+		egrpName = Fighter_Names_VeryEasy[erand]
 	end
 
 	if Difficultymod == 2 then
@@ -906,7 +1008,12 @@
 	
 	if Difficultymod == 4 then
 		bgrpName = Bomber_Names_VeryHard[brand]
-		egrpName = Fighter_Names_Normal[erand]
+		egrpName = Fighter_Names_Hard[erand]
+	end
+	
+	if Difficultymod == 5 then
+		bgrpName = Bomber_Names_VeryHard[brand]
+		egrpName = Fighter_Names_VeryHard[erand]
 	end
 
 	if Task_Range == 1 then
@@ -1194,24 +1301,51 @@
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
 	if Difficultymod == 1 then
-	  MudName = Mud_Easy[mrand]
-		InfName = Inf_Spawn[1]
+	  MudName = Mud_VeryEasy[mrand]
+		InfName1 = Infantry_VeryEasy[1]
+		InfName2 = Infantry_VeryEasy[2]
+		InfName3 = Infantry_VeryEasy[3]
+		InfName4 = Infantry_VeryEasy[4]
+		InfName5 = Infantry_VeryEasy[5]
 	end
 
 	if Difficultymod == 2 then
-	  MudName = Mud_Normal[mrand]
-		InfName = Inf_Spawn[2]
+	  MudName = Mud_Easy[mrand]
+		InfName1 = Infantry_Easy[1]
+		InfName2 = Infantry_Easy[2]
+		InfName3 = Infantry_Easy[3]
+		InfName4 = Infantry_Easy[4]
+		InfName5 = Infantry_Easy[5]
 	end
 
 	if Difficultymod == 3 then
-	  MudName = Mud_Hard[mrand]
-		InfName = Inf_Spawn[3]
+	  MudName = Mud_Normal[mrand]
+		InfName1 = Infantry_Normal[1]
+		InfName2 = Infantry_Normal[2]
+		InfName3 = Infantry_Normal[3]
+		InfName4 = Infantry_Normal[4]
+		InfName5 = Infantry_Normal[5]
 	end
 
 	if Difficultymod == 4 then
-	  MudName = Mud_VeryHard[mrand]
-		InfName = Inf_Spawn[4]
+	  MudName = Mud_Hard[mrand]
+		InfName1 = Infantry_Hard[1]
+		InfName2 = Infantry_Hard[2]
+		InfName3 = Infantry_Hard[3]
+		InfName4 = Infantry_Hard[4]
+		InfName5 = Infantry_Hard[5]
 	end
+	
+	if Difficultymod == 5 then
+	  MudName = Mud_VeryHard[mrand]
+		InfName1 = Infantry_VeryHard[1]
+		InfName2 = Infantry_VeryHard[2]
+		InfName3 = Infantry_VeryHard[3]
+		InfName4 = Infantry_VeryHard[4]
+		InfName5 = Infantry_VeryHard[5]
+	end
+	
+		
 	
 
 		trigger.action.activateGroup(Group.getByName(MudName))
@@ -1267,7 +1401,47 @@
 
 	 local infvars = {}
 
-		infvars.groupName = InfName
+		infvars.groupName = InfName1
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+	  --infvars.disperse = true
+	  --infvars.maxDisp = 10
+	  --infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+
+		infvars.groupName = InfName2
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+	  --infvars.disperse = true
+	  --infvars.maxDisp = 10
+	  --infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+
+		infvars.groupName = InfName3
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+	  --infvars.disperse = true
+	  --infvars.maxDisp = 10
+	  --infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+
+		infvars.groupName = InfName4
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+	  --infvars.disperse = true
+	  --infvars.maxDisp = 10
+	  --infvars.radius = 20
+		mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+
+		infvars.groupName = InfName5
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
 	  --infvars.disperse = true
@@ -1323,9 +1497,35 @@
 	 }
 	 mist.flagFunc.group_alive_less_than(checkunits2)
 	 	
-	mist.removeFunction(InfFunc)
-		InfFunc = nil
-		InfFunc = mist.scheduleFunction(Move_Infantry, {InfName}, 5, 60) 
+	mist.removeFunction(InfFunc1)
+		InfFunc1 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc1 = mist.scheduleFunction(Move_Infantry, {InfName1}, randomizer_time, randomizer_time)
+		
+	mist.removeFunction(InfFunc2)
+		InfFunc2 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc2 = mist.scheduleFunction(Move_Infantry, {InfName2}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc3)
+		InfFunc3 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc3 = mist.scheduleFunction(Move_Infantry, {InfName3}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc4)
+		InfFunc4 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc4 = mist.scheduleFunction(Move_Infantry, {InfName4}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc4)
+		InfFunc5 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc5 = mist.scheduleFunction(Move_Infantry, {InfName5}, randomizer_time, randomizer_time)
 		
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
 
@@ -1355,19 +1555,22 @@
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
 	if Difficultymod == 1 then
-	  MudName = Mud_Convoy_Easy[mrand]
-
+	  MudName = Mud_Convoy_VeryEasy[mrand]
 		end
-
+	
 	if Difficultymod == 2 then
-	  MudName = Mud_Convoy_Normal[mrand]
+	  MudName = Mud_Convoy_Easy[mrand]
 		end
 
 	if Difficultymod == 3 then
-	  MudName = Mud_Convoy_Hard[mrand]
+	  MudName = Mud_Convoy_Normal[mrand]
 		end
 
 	if Difficultymod == 4 then
+	  MudName = Mud_Convoy_Hard[mrand]
+		end
+
+	if Difficultymod == 5 then
 	  MudName = Mud_Convoy_VeryHard[mrand]
 		end
 
@@ -1489,30 +1692,37 @@
 			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 		end
-
+	
 		if Difficultymod == 2 then
+			DefensesName = Sochi_Names_Easy[1]
+			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
+			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
+			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
+		end
+
+		if Difficultymod == 3 then
 			DefensesName = Sochi_Names_Normal[1]
 			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 		end
-			if Difficultymod == 3 then
+		
+			if Difficultymod == 4 then
 			DefensesName = Sochi_Names_Hard[1]
 			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-
 		end
 
-		if Difficultymod == 4 then
+		if Difficultymod == 5 then
 			DefensesName = Sochi_Names_VeryHard[1]
 			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
 			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
 			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-
 		end
 
 		else
@@ -1745,12 +1955,28 @@
 	----------------
 	-- Wanks Code --
 	----------------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Difficuty_VeryEasy()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = "Very Easy"
+	Difficultymod = 1
 
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Global difficulty has been set to '..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+
+	    return
+	end
+	------
+	
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_Easy()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local New_Set = "Easy"
-	Difficultymod = 1
+	Difficultymod = 2
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 	  local msg = {} 
@@ -1768,7 +1994,7 @@
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local New_Set = "Normal"
-	Difficultymod = 2
+	Difficultymod = 3
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 
@@ -1787,7 +2013,7 @@
 	function Set_Difficuty_Hard()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local New_Set = "Hard"
-	Difficultymod = 3
+	Difficultymod = 4
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 
@@ -1807,7 +2033,7 @@
 	function Set_Difficuty_VeryHard()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local New_Set = "Very Hard"
-	Difficultymod = 4
+	Difficultymod = 5
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 	  local msg = {} 

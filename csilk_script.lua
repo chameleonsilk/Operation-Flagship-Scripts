@@ -4,10 +4,16 @@
 
 	local rad_option_0a = "Recieve Bullseye Call"
 
-	local rad_option_1a = "Intercept: Fighters"
-	local rad_option_1b = "Intercept: Bomber and Escort"
-	local rad_option_1c = "Mud: Fortified"
-	local rad_option_1d = "Moving Mud: Convoy"
+	local rad_option_1a = "Interdict: CAP"
+	local rad_option_1b = "Interdict: Bombers"
+	local rad_option_1c = "Escort: BARCAP (NOT AVAILABLE)"
+	local rad_option_1d = "Mud: Fortified"
+	local rad_option_1e = "Mud: Convoy"
+	local rad_option_1f = "Mud: CAS (NOT AVAILABLE)"
+	local rad_option_1g = "Strike: Facilities"
+	local rad_option_1h = "Strike: Naval (NOT AVAILABLE)"
+	
+	
 
 	local rad_option_2a = "Assault: Sochi-Adler"
 
@@ -54,6 +60,7 @@
 	InfName = {}
 	MudGrp = {}
 	InfGrp = {}
+	SamName = {}
 	MoveMud = {}
 
 	smoke_marker = {}
@@ -90,6 +97,7 @@
 	--This array contains all the available player aircraft at their respective airbase
 	Rad = {
 	  "Anapa-86 #1",
+		"Anapa-86 #2",
 		"Anapa-21 #1",
 	  "Anapa-21 #2",
 	  "Anapa-21 #3",
@@ -126,12 +134,8 @@
 	  "Anapa-F15C #4",
 	  "Anapa-F15C #5",
 	  "Anapa-F15C #6",
-	  "Anapa-F86F #1",
-	  "Anapa-F86F #2",
-	  "Anapa-F86F #3",
-	  "Anapa-F86F #4",
-	  "Anapa-F86F #5",
-	  "Anapa-F86F #6",
+	  "Anapa-86 #1",
+	  "Anapa-86 #2",
 	  "Anapa-KA50 #1",
 	  "Anapa-KA50 #2",
 	  "Anapa-KA50 #3",
@@ -150,20 +154,25 @@
 	  "Anapa-Mi8 #4",
 	  "Nalchik-21 #1",
 	  "Nalchik-21 #2",
-	  "Nalchik-21 #3",
-	  "Nalchik-21 #4",
-	  "Nalchik-21 #5",
-	  "Nalchik-21 #6",
+	  "Nalchik-86 #1",
 	  "Nalchik-15C #1",
 	  "Nalchik-15C #2",
-	  "Nalchik-15C #3",
-	  "Nalchik-15C #4",
-	  "Nalchik-15C #5",
+	  "Nalchik-27 #1",
+	  "Nalchik-27 #2",
 	  "Nalchik-A10A #1",
+		"Nalchik-A10A #2",
 		"Nalchik-A10C #1",
+		"Nalchik-A10C #2",
 		"Nalchik-25 #1",
+		"Nalchik-25 #2",
 		"Nalchik-25T #1",
+		"Nalchik-25T #2",
 	  "Tbilisi-86 #1",
+		"Tbilisi-86 #2",
+		"Tbilisi-27 #1",
+		"Tbilisi-27 #2",
+		"Tbilisi-27 #3",
+		"Tbilisi-27 #4",
 		"Tbilisi-21 #1",
 	  "Tbilisi-21 #2",
 	  "Tbilisi-21 #3",
@@ -174,8 +183,6 @@
 	  "Tbilisi-15C #2",
 	  "Tbilisi-15C #3",
 	  "Tbilisi-15C #4",
-	  "Tbilisi-15C #5",
-	  "Tbilisi-15C #6",
 		"Tbilisi-25 #1",
 		"Tbilisi-25 #2",
 		"Tbilisi-25 #3",
@@ -192,7 +199,14 @@
 		"Tbilisi-A10C #2",
 		"Tbilisi-A10C #3",
 		"Tbilisi-A10C #4",
+		"Tbilisi-UH1H #1",
+	  "Tbilisi-UH1H #2",
+		"Tbilisi-KA50 #1",
+		"Tbilisi-KA50 #2",
+		"Tbilisi-Mi8 #1",
+		"Tbilisi-Mi8 #2",
 	  "Gudauta-86 #1",
+		"Gudauta-86 #2",
 		"Gudauta-21 #1",
 	  "Gudauta-21 #2",
 	  "Gudauta-21 #3",
@@ -202,9 +216,9 @@
 	  "Gudauta-15C #1",
 	  "Gudauta-15C #2",
 	  "Gudauta-15C #3",
-	  "Gudauta-15C #4",
-	  "Gudauta-15C #5",
-	  "Gudauta-15C #6",
+	  "Gudauta-27 #1",
+	  "Gudauta-27 #2",
+		"Gudauta-27 #3",
 		"Gudauta-25 #1",
 		"Gudauta-25 #2",
 		"Gudauta-25 #3",
@@ -222,6 +236,7 @@
 		"Gudauta-A10C #3",
 		"Gudauta-A10C #4",
 	  "Kutaisi-86 #1",
+		"Kutaisi-86 #2",
 		"Kutaisi-21 #1",
 	  "Kutaisi-21 #2",
 	  "Kutaisi-21 #3",
@@ -232,8 +247,10 @@
 	  "Kutaisi-15C #2",
 	  "Kutaisi-15C #3",
 	  "Kutaisi-15C #4",
-	  "Kutaisi-15C #5",
-	  "Kutaisi-15C #6",
+	  "Kutaisi-27 #1",
+	  "Kutaisi-27 #2",
+		"Kutaisi-27 #3",
+		"Kutaisi-27 #4",
 		"Kutaisi-A10A #1",
 		"Kutaisi-A10A #2",
 		"Kutaisi-A10A #3",
@@ -250,7 +267,11 @@
 		"Kutaisi-25T #2",
 		"Kutaisi-25T #3",
 		"Kutaisi-25T #4",
+		"Kutaisi-UH1H #1",
+		"Kutaisi-KA50 #1",
+		"Kutaisi-KA50 #2",
 	  "Maykop-86 #1",
+		"Maykop-86 #2",
 		"Maykop-21 #1",
 	  "Maykop-21 #2",
 	  "Maykop-21 #3",
@@ -261,8 +282,6 @@
 	  "Maykop-15C #2",
 	  "Maykop-15C #3",
 	  "Maykop-15C #4",
-	  "Maykop-15C #5",
-	  "Maykop-15C #6",
 		"Maykop-25 #1",
 		"Maykop-25 #2",
 		"Maykop-25 #3",
@@ -271,6 +290,10 @@
 		"Maykop-25T #2",
 		"Maykop-25T #3",
 		"Maykop-25T #4",
+		"Maykop-27 #1",
+		"Maykop-27 #2",
+		"Maykop-27 #3",
+		"Maykop-27 #4",
 		"Maykop-A10A #1",
 		"Maykop-A10A #2",
 		"Maykop-A10A #3",
@@ -279,6 +302,12 @@
 		"Maykop-A10C #2",
 		"Maykop-A10C #3",
 		"Maykop-A10C #4",
+		"Maykop-UH1H #1",
+	  "Maykop-UH1H #2",
+		"Maykop-KA50 #1",
+		"Maykop-KA50 #2",
+		"Maykop-Mi8 #1",
+		"Maykop-Mi8 #2",
 	}
 	-----------------------
 	-- Static MUD Arrays --
@@ -339,6 +368,37 @@
 	---------------------------
 	-- End Moving MUD Arrays --
 	---------------------------
+	
+	
+	-----------------------------
+	-- Surface to air missiles --
+	-----------------------------
+	Sam_Launchers = 2
+	
+	Sam_VeryEasy = {
+	[1] = 'Sam (VeryEasy) #000',
+	[2] = 'Sam (VeryEasy) #001',
+	}
+	
+	Sam_Easy = {
+	[1] = 'Sam (Easy) #000',
+	[2] = 'Sam (Easy) #001',
+	}
+	
+	Sam_Normal = {
+	[1] = 'Sam (Normal) #000',
+	[2] = 'Sam (Normal) #001',
+	}
+	
+	Sam_Hard = {
+	[1] = 'Sam (Hard) #000',
+	[2] = 'Sam (Hard) #001',
+	}
+	
+	Sam_VeryHard = {
+	[1] = 'Sam (VeryHard) #000',
+	[2] = 'Sam (VeryHard) #001',
+	}
 
 	-----------------------------
 	--Iinfantry spawning array --
@@ -634,6 +694,8 @@ Infantry_Squads = 5
 	    return
 	    end		
 		  Rad_GroupID = group:getID()
+			
+			
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9y, Debug, reloadscript, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, Debug_Toggle, nil)
@@ -644,31 +706,58 @@ Infantry_Squads = 5
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, AnapaPath, Create_Fighter_Intercept, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, AnapaPath, Create_Bomber_Intercept, 'Anapa')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Mud, 'Anapa')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, AnapaPath, Create_Mud_Convoy, 'Anapa')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Escort, 'Anapa')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, AnapaPath, Create_Mud, 'Anapa')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Mud_Convoy, 'Anapa')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, AnapaPath, Create_Mud_CAS, 'Anapa')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, AnapaPath, Create_Strike, 'Anapa')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, AnapaPath, Create_Naval, 'Anapa')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, MaykopPath, Create_Fighter_Intercept, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, MaykopPath, Create_Bomber_Intercept, 'Maykop')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Mud, 'Maykop')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, MaykopPath, Create_Mud_Convoy, 'Maykop')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Escort, 'Maykop')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, MaykopPath, Create_Mud, 'Maykop')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, MaykopPath, Create_Mud_Convoy, 'Maykop')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, MaykopPath, Create_Mud_CAS, 'Maykop')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, MaykopPath, Create_Strike, 'Maykop')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, MaykopPath, Create_Naval, 'Maykop')
+	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, GudautaPath, Create_Fighter_Intercept, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GudautaPath, Create_Bomber_Intercept, 'Gudauta')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, GudautaPath, Create_Mud, 'Gudauta')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, GudautaPath, Create_Mud_Convoy, 'Gudauta')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, GudautaPath, Create_Escort, 'Gudauta')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, GudautaPath, Create_Mud, 'Gudauta')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, GudautaPath, Create_Mud_Convoy, 'Gudauta')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, GudautaPath, Create_Mud_CAS, 'Gudauta')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, GudautaPath, Create_Strike, 'Gudauta')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, GudautaPath, Create_Naval, 'Gudauta')
+	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, KutaisiPath, Create_Fighter_Intercept, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Mud, 'Kutaisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Escort, 'Kutaisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, KutaisiPath, Create_Mud, 'Kutaisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, KutaisiPath, Create_Mud_CAS, 'Kutaisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, KutaisiPath, Create_Strike, 'Kutaisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, KutaisiPath, Create_Naval, 'Kutaisi')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Mud, 'Nalchik')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, NalchikPath, Create_Mud_Convoy, 'Nalchik')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Escort, 'Nalchik')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, NalchikPath, Create_Mud, 'Nalchik')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, NalchikPath, Create_Mud_Convoy, 'Nalchik')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, NalchikPath, Create_Mud_CAS, 'Nalchik')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, NalchikPath, Create_Strike, 'Nalchik')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, NalchikPath, Create_Naval, 'Nalchik')
+	
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, TbilisiPath, Create_Fighter_Intercept, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, TbilisiPath, Create_Bomber_Intercept, 'Tbilisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Mud, 'Tbilisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Escort, 'Tbilisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud, 'Tbilisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, TbilisiPath, Create_Mud_CAS, 'Tbilisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, TbilisiPath, Create_Strike, 'Tbilisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, TbilisiPath, Create_Naval, 'Tbilisi')
 		----------------
 	-- Wanks Code --
 	----------------
@@ -1131,12 +1220,6 @@ Infantry_Squads = 5
 				bpath[6].ETA_locked = false
 				bpath[6].speed_locked = true
 				
-				  local msg = {} 
-	  msg.text = ' Just before respawn '
-	  msg.displayTime = 20
-	  msg.msgFor = {coa = {'all'}} 
-	    mist.message.add(msg)
-				
 		  local bvars = {} 
 	  bvars.groupName = bgrpName
 	  bvars.action = "respawn"
@@ -1289,7 +1372,7 @@ Infantry_Squads = 5
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Create_Mud(_mArea)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	mzone = trigger.misc.getZone(_mArea)
+	local mzone = trigger.misc.getZone(_mArea)
 	local mrand = mist.random(1,Mud_Names)
 	mudtask = 1
 
@@ -1404,7 +1487,7 @@ Infantry_Squads = 5
 		local use_randomizer = 0
 		use_randomizer = mist.random(0,1)
 		randomizer_disperse = mist.random(0,1)
-		randomizer_max_disperse = mist.random(40,120)
+		randomizer_max_disperse = mist.random(120,220)
 		randomizer_radius = mist.random(80,140)
 		randomizer_inner_radius = mist.random(0,70)
 		
@@ -1580,7 +1663,7 @@ Infantry_Squads = 5
 		randomizer_time = mist.random(45,90)
 		InfFunc4 = mist.scheduleFunction(Move_Infantry, {InfName4}, randomizer_time, randomizer_time)
 		
-		mist.removeFunction(InfFunc4)
+		mist.removeFunction(InfFunc5)
 		InfFunc5 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
@@ -1593,6 +1676,388 @@ Infantry_Squads = 5
 
 	end
 	---
+	
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Create_Strike(_mArea)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local mzone = trigger.misc.getZone(_mArea)
+	local mrand = mist.random(1,Mud_Names)
+	local srand = mist.random(1,Sam_Launchers)
+	striketask = 1
+
+	--trigger.action.deactivateGroup(Group.getByName(InfName))
+	MudName = {}
+	InfName = {}
+	SamName = {}
+
+	--if MudName ==  then
+		local msg = {}
+	  msg.text = ' Creating Strike Mission.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+	if Difficultymod == 1 then
+	  MudName = Mud_VeryEasy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_VeryEasy[1]
+		InfName2 = Infantry_VeryEasy[2]
+		InfName3 = Infantry_VeryEasy[3]
+		InfName4 = Infantry_VeryEasy[4]
+		InfName5 = Infantry_VeryEasy[5]
+		SamName1 = Sam_VeryEasy[srand]
+	end
+
+	if Difficultymod == 2 then
+	  MudName = Mud_Easy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Easy[1]
+		InfName2 = Infantry_Easy[2]
+		InfName3 = Infantry_Easy[3]
+		InfName4 = Infantry_Easy[4]
+		InfName5 = Infantry_Easy[5]
+		SamName1 = Sam_Easy[srand]
+	end
+
+	if Difficultymod == 3 then
+	  MudName = Mud_Normal[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Normal[1]
+		InfName2 = Infantry_Normal[2]
+		InfName3 = Infantry_Normal[3]
+		InfName4 = Infantry_Normal[4]
+		InfName5 = Infantry_Normal[5]
+		SamName1 = Sam_Normal[srand]
+	end
+
+	if Difficultymod == 4 then
+	  MudName = Mud_Hard[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Hard[1]
+		InfName2 = Infantry_Hard[2]
+		InfName3 = Infantry_Hard[3]
+		InfName4 = Infantry_Hard[4]
+		InfName5 = Infantry_Hard[5]
+		SamName1 = Sam_Hard[srand]
+	end
+	
+	if Difficultymod == 5 then
+	  MudName = Mud_VeryHard[mrand]
+		--SamName = ''
+		InfName1 = Infantry_VeryHard[1]
+		InfName2 = Infantry_VeryHard[2]
+		InfName3 = Infantry_VeryHard[3]
+		InfName4 = Infantry_VeryHard[4]
+		InfName5 = Infantry_VeryHard[5]
+		SamName1 = Sam_VeryHard[srand]
+	end
+	
+		
+	
+
+		trigger.action.activateGroup(Group.getByName(MudName))
+		local MudGrpData = mist.getGroupData(MudName)
+			
+		formisttable = '[g]' .. MudName
+		targets = mist.makeUnitTable({formisttable})
+			
+		  for i = 1, 100 do
+	    if Task_Range == 1 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
+	    elseif Task_Range == 2 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
+	    elseif Task_Range == 3 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
+	    elseif Task_Range == 4 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
+			elseif Task_Range == 5 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
+			elseif Task_Range == 6 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
+			end
+
+			
+					if mist.isTerrainValid(mudPsn, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 250) < 5 then				
+					break
+
+					end
+		end
+		
+				local msg = {}
+	  msg.text = ' Building structures.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+		
+		local buildPsn = mist.utils.makeVec3(mudPsn)		
+			local vars = 
+			{
+			 type = "Tech combine",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z,
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "Workshop A",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(100, 200),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Repair workshop",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(100, 200),
+			 y = buildPsn.z + math.random(100,150),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)		
+
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		mist.teleportToPoint(mvars)
+		
+				local mvars = {}
+	  mvars.groupName = SamName1
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		mist.teleportToPoint(mvars)
+			
+		mist.spawnRandomizedGroup(MudName)
+		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		randomizer_disperse = mist.random(0,1)
+		randomizer_max_disperse = mist.random(200,300)
+		randomizer_radius = mist.random(200,275)
+		randomizer_inner_radius = mist.random(200,250)
+		
+		
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "teleport"
+	  mvars.point = mudPsn
+	  mvars.disperse = randomizer_disperse
+	  mvars.maxDisp = randomizer_max_disperse
+	  mvars.radius = randomizer_radius
+		mvars.innerRadius = randomizer_inner_radius
+		mist.teleportToPoint(mvars)
+		
+		
+		local mvars = {}
+	  mvars.groupName = SamName1
+	  mvars.action = "teleport"
+	  mvars.point = mudPsn
+	  mvars.disperse = randomizer_disperse
+	  mvars.maxDisp = randomizer_max_disperse + 100
+	  mvars.radius = randomizer_radius + 200
+		mvars.innerRadius = randomizer_inner_radius
+		mist.teleportToPoint(mvars)
+		
+			
+	 local infvars = {}
+		infvars.groupName = InfName1
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+
+		--mist.spawnRandomizedGroup(InfName1)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		
+	local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+	 local infvars = {}
+		infvars.groupName = InfName1
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		mist.teleportToPoint(infvars)
+		
+
+			    
+	  
+			local msg = {}
+	  msg.text = ' Strike task has been created '
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+			
+	 local checkstrike1 = {
+	   groupName = 'Strike1',
+		 flag = 601,
+			stopFlag = 610,
+		 toggle = true,
+	 }
+	 
+	 	 local checkstrike2 = {
+	   groupName = 'Strike2',
+		 flag = 602,
+			stopFlag = 610,
+		 toggle = true,
+	 }
+	 
+	 	 local checkstrike3 = {
+	   groupName = 'Strike3',
+		 flag = 603,
+			stopFlag = 610,
+		 toggle = true,
+	 }
+	 
+	 mist.flagFunc.group_dead(checkstrike1)
+	 mist.flagFunc.group_dead(checkstrike2)
+	 mist.flagFunc.group_dead(checkstrike3)
+	 	
+	mist.removeFunction(InfFunc1)
+		InfFunc1 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc1 = mist.scheduleFunction(Move_Infantry, {InfName1}, randomizer_time, randomizer_time)
+		
+	mist.removeFunction(InfFunc2)
+		InfFunc2 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc2 = mist.scheduleFunction(Move_Infantry, {InfName2}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc3)
+		InfFunc3 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc3 = mist.scheduleFunction(Move_Infantry, {InfName3}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc4)
+		InfFunc4 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc4 = mist.scheduleFunction(Move_Infantry, {InfName4}, randomizer_time, randomizer_time)
+		
+		mist.removeFunction(InfFunc5)
+		InfFunc5 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc5 = mist.scheduleFunction(Move_Infantry, {InfName5}, randomizer_time, randomizer_time)
+		
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
+
+		--Make_Smoke(mzone, nil)
+		--return
+
+	end
+	---
+	
+	
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Create_Mud_Convoy(_mArea)
@@ -2362,6 +2827,12 @@ Infantry_Squads = 5
 			trigger.action.setUserFlag('502',0)
 
 	end
+	
+	if trigger.misc.getUserFlag('610') == 1 then
+
+			trigger.action.setUserFlag('610',0)
+
+	end
 
 		 
 
@@ -2440,7 +2911,6 @@ Infantry_Squads = 5
 			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
 
 	end
-
 	end
 
 	if trigger.misc.getUserFlag('501') == 1 then
@@ -2461,14 +2931,37 @@ Infantry_Squads = 5
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
-
 	end
+	
+	if trigger.misc.getUserFlag('601') == 1 then
+		if trigger.misc.getUserFlag('602') == 1 then
+			if trigger.misc.getUserFlag('603') == 1 then
+				if striketask == 1 then
+				local msg = {}
+
+			msg.text = ' Strike mission completed.'
+
+	    msg.displayTime = 60
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			trigger.action.setUserFlag('610', 1)				-- stop victory
+			striketask = 0
+			strike_complete = 0
+
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+			
+				end
+			end
+		end
+	end
+
 
 	Debug_Show()
 	return time + 5
 
-	end
-
+end
 	---
 
 	function Debug_Show()
@@ -2483,14 +2976,14 @@ Infantry_Squads = 5
 			
 
 			local msg = {}
-	    msg.text = ' TasksStart' ..tostring(airfield) ..tostring(mudtask) ..tostring(convoytask) ..tostring(intercepttask) ..tostring(bombertask)
+	    msg.text = ' TasksStart' ..tostring(airfield) ..tostring(mudtask) ..tostring(convoytask) ..tostring(intercepttask) ..tostring(bombertask) ..tostring(striketask)
 	    msg.displayTime = 1
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 
 			
 			local msg = {}
-	    msg.text = ' CompletedTask' ..tostring(airfield_complete) ..tostring(mud_complete) ..tostring(convoy_complete) ..tostring(intercept_complete) ..tostring(bomber_complete)
+	    msg.text = ' CompletedTask' ..tostring(airfield_complete) ..tostring(mud_complete) ..tostring(convoy_complete) ..tostring(intercept_complete) ..tostring(bomber_complete) .tostring(strike_complete)
 	    msg.displayTime = 1
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)

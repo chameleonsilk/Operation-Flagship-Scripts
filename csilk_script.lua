@@ -1207,18 +1207,19 @@ Infantry_Squads = 5
 	      }, -- end of [2]
 	    }, -- end of tasks
 	  } -- end of params
-	}			bpath[1].ETA_locked = false
-				bpath[1].speed_locked = true
-				bpath[2].ETA_locked = false
-				bpath[2].speed_locked = true
-				bpath[3].ETA_locked = false
-				bpath[3].speed_locked = true
-				bpath[4].ETA_locked = false
-				bpath[4].speed_locked = true
-				bpath[5].ETA_locked = false
-				bpath[5].speed_locked = true
-				bpath[6].ETA_locked = false
-				bpath[6].speed_locked = true
+	}		
+bpath[1].ETA_locked = false
+bpath[1].speed_locked = true
+bpath[2].ETA_locked = false
+bpath[2].speed_locked = true
+bpath[3].ETA_locked = false
+bpath[3].speed_locked = true
+bpath[4].ETA_locked = false
+bpath[4].speed_locked = true
+bpath[5].ETA_locked = false
+bpath[5].speed_locked = true
+bpath[6].ETA_locked = false
+bpath[6].speed_locked = true
 				
 		  local bvars = {} 
 	  bvars.groupName = bgrpName

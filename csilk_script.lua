@@ -3,6 +3,8 @@
 	-- Flagship Script
 
 	local rad_option_0a = "Recieve Bullseye Call"
+	local rad_option_0b = "Recieve MGRS Grid"
+	local rad_option_0c = "Recieve BRA Call"
 
 	local rad_option_1a = "Interdict: CAP"
 	local rad_option_1b = "Interdict: Bombers"
@@ -46,7 +48,8 @@
 	--------------------
 	-- End Wanks Code --
 	--------------------
-
+	loopsthrough = 0
+	
 	Radio_Table = {}
 
 	zone = {}
@@ -699,7 +702,11 @@ Infantry_Squads = 5
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9y, Debug, reloadscript, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, Debug_Toggle, nil)
+	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall, nil)
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, MGRScall, nil)
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
+	
 	    
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
@@ -986,6 +993,15 @@ Infantry_Squads = 5
 	vars.point = spawnPsn
 	vars.route = path
 	mist.teleportToPoint(vars)			
+		
+	--loops_through = loops_through + 1	
+	
+	--local vars = {} 
+	--vars.groupName = grpName
+	--vars.action = "clone"
+	--vars.point = spawnPsn
+	--vars.route = path
+	--mist.teleportToPoint(vars)			
 
 	local con = grp:getController()
 	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
@@ -1378,8 +1394,12 @@ bpath[6].speed_locked = true
 	mudtask = 1
 
 	--trigger.action.deactivateGroup(Group.getByName(InfName))
-	MudName = {}
-	InfName = {}
+	local MudName = {}
+	local InfName1 = {}
+	local InfName2 = {}
+	local InfName3 = {}
+	local InfName4 = {}
+	local InfName5 = {}
 
 	--if MudName ==  then
 		local msg = {}
@@ -1439,6 +1459,11 @@ bpath[6].speed_locked = true
 	
 
 		trigger.action.activateGroup(Group.getByName(MudName))
+		trigger.action.activateGroup(Group.getByName(InfName1))
+		trigger.action.activateGroup(Group.getByName(InfName2))
+		trigger.action.activateGroup(Group.getByName(InfName3))
+		trigger.action.activateGroup(Group.getByName(InfName4))
+		trigger.action.activateGroup(Group.getByName(InfName5))
 		local MudGrpData = mist.getGroupData(MudName)
 			
 		formisttable = '[g]' .. MudName
@@ -1476,43 +1501,9 @@ bpath[6].speed_locked = true
 	  --mvars.disperse = true
 	  --mvars.maxDisp = 100
 	  --mvars.radius = 20
-		mist.teleportToPoint(mvars)
-			
-		mist.spawnRandomizedGroup(MudName)
+		MudName = mist.teleportToPoint(mvars)
 		
-		
-		local randomizer_disperse = 0
-		local randomizer_radius = 0
-		local randomizer_inner_radius = 0
-		local randomizer_max_disperse = 0
-		local use_randomizer = 0
-		use_randomizer = mist.random(0,1)
-		randomizer_disperse = mist.random(0,1)
-		randomizer_max_disperse = mist.random(120,220)
-		randomizer_radius = mist.random(80,140)
-		randomizer_inner_radius = mist.random(0,70)
-		
-		if use_randomizer == 1 then
-		local mvars = {}
-	  mvars.groupName = MudName
-	  mvars.action = "teleport"
-	  mvars.point = mudPsn
-	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = randomizer_max_disperse
-	  mvars.radius = randomizer_radius
-		mvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(mvars)
-		end
-		
-		if use_randomizer == 0 then
-		local mvars = {}
-	  mvars.groupName = MudName
-	  mvars.action = "teleport"
-	  mvars.point = mudPsn
-		mist.teleportToPoint(mvars)
-		end
-			
-	 local infvars = {}
+			 local infvars = {}
 		infvars.groupName = InfName1
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
@@ -1520,7 +1511,7 @@ bpath[6].speed_locked = true
 	  infvars.maxDisp = 100
 	  infvars.radius = 100
 		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		InfName1 = mist.teleportToPoint(infvars)
 
 		--mist.spawnRandomizedGroup(InfName1)
 		
@@ -1532,7 +1523,7 @@ bpath[6].speed_locked = true
 	  infvars.maxDisp = 100
 	  infvars.radius = 100
 		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		InfName2 = mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName3
@@ -1542,7 +1533,7 @@ bpath[6].speed_locked = true
 	  infvars.maxDisp = 100
 	  infvars.radius = 100
 		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		InfName3 = mist.teleportToPoint(infvars)
 		
 		
 	local infvars = {}
@@ -1553,7 +1544,7 @@ bpath[6].speed_locked = true
 	  infvars.maxDisp = 100
 	  infvars.radius = 100
 		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		InfName4 =  mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName5
@@ -1563,60 +1554,91 @@ bpath[6].speed_locked = true
 	  infvars.maxDisp = 100
 	  infvars.radius = 100
 		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		InfName5 = mist.teleportToPoint(infvars)		  
+			
+		mist.spawnRandomizedGroup(MudName)
+		mist.spawnRandomizedGroup(InfName1)
+		mist.spawnRandomizedGroup(InfName2)
+		mist.spawnRandomizedGroup(InfName3)
+		mist.spawnRandomizedGroup(InfName4)
+		mist.spawnRandomizedGroup(InfName5)
 		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		local use_randomizer = 0
+		--use_randomizer = mist.random(0,1)
+		randomizer_disperse = mist.random(0,1)
+		randomizer_max_disperse = mist.random(120,220)
+		randomizer_radius = mist.random(80,140)
+		randomizer_inner_radius = mist.random(0,70)
+		
+		--if use_randomizer == 1 then
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "teleport"
+	  mvars.point = mudPsn
+	  mvars.disperse = randomizer_disperse
+	  mvars.maxDisp = randomizer_max_disperse
+	  mvars.radius = randomizer_radius
+		mvars.innerRadius = randomizer_inner_radius
+		MudName = mist.teleportToPoint(mvars)
+
+			
 	 local infvars = {}
 		infvars.groupName = InfName1
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  infvars.disperse = true
-	  infvars.maxDisp = 100
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 270
+		InfName1 = mist.teleportToPoint(infvars)
+
+		--mist.spawnRandomizedGroup(InfName1)
 		
 		local infvars = {}
 		infvars.groupName = InfName2
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  infvars.disperse = true
-	  infvars.maxDisp = 100
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 270
+		InfName2 = mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName3
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  infvars.disperse = true
-	  infvars.maxDisp = 100
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 270
+		InfName3 = mist.teleportToPoint(infvars)
 		
-		local infvars = {}
+		
+	local infvars = {}
 		infvars.groupName = InfName4
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  infvars.disperse = true
-	  infvars.maxDisp = 100
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 270
+		InfName4 =  mist.teleportToPoint(infvars)
 		
 		local infvars = {}
 		infvars.groupName = InfName5
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
-	  infvars.disperse = true
-	  infvars.maxDisp = 100
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
-		
-
-			    
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 270
+		InfName5 = mist.teleportToPoint(infvars)		    
 	  
 			local msg = {}
 	  msg.text = ' Mud task has been created '
@@ -1624,47 +1646,35 @@ bpath[6].speed_locked = true
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 			  
-		 --_randompoint1 = {}
-		 --_randompoint2 = {}
-		-- _randompoint3 = {}
-		--_randompoint1 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
-		--_randompoint2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
-		--_randompoint3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.0000000000002, mzone.radius * 0.0000000000001)		
 			
-	 local checkunits2 = {
-	   groupName = MudName,
-	   percent = 33,
-		 flag = 201,
-		stopFlag = 202,
-		 toggle = true,
-	 }
-	 mist.flagFunc.group_alive_less_than(checkunits2)
+
 	 	
-	mist.removeFunction(InfFunc1)
+	  mist.removeFunction(InfFunc1)
+		mist.removeFunction(InfFunc2)
+		mist.removeFunction(InfFunc3)
+		mist.removeFunction(InfFunc4)
+		mist.removeFunction(InfFunc5)
+		
 		InfFunc1 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
 		InfFunc1 = mist.scheduleFunction(Move_Infantry, {InfName1}, randomizer_time, randomizer_time)
-		
-	mist.removeFunction(InfFunc2)
+		  
 		InfFunc2 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
 		InfFunc2 = mist.scheduleFunction(Move_Infantry, {InfName2}, randomizer_time, randomizer_time)
-		
-		mist.removeFunction(InfFunc3)
+	
 		InfFunc3 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
 		InfFunc3 = mist.scheduleFunction(Move_Infantry, {InfName3}, randomizer_time, randomizer_time)
 		
-		mist.removeFunction(InfFunc4)
 		InfFunc4 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
 		InfFunc4 = mist.scheduleFunction(Move_Infantry, {InfName4}, randomizer_time, randomizer_time)
-		
-		mist.removeFunction(InfFunc5)
+	
 		InfFunc5 = nil
 		local randomizer_time = 0
 		randomizer_time = mist.random(45,90)
@@ -1674,6 +1684,15 @@ bpath[6].speed_locked = true
 
 		--Make_Smoke(mzone, nil)
 		--return
+		
+			 local checkunits2 = {
+	   groupName = MudName,
+	   percent = 33,
+		 flag = 201,
+		stopFlag = 202,
+		 toggle = true,
+	 }
+	 mist.flagFunc.group_alive_less_than(checkunits2)
 
 	end
 	---
@@ -1687,9 +1706,381 @@ bpath[6].speed_locked = true
 	striketask = 1
 
 	--trigger.action.deactivateGroup(Group.getByName(InfName))
+	local MudName = {}
+	local InfName = {}
+	local SamName1 = {}
+
+	--if MudName ==  then
+		local msg = {}
+	  msg.text = ' Creating Strike Mission.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+	if Difficultymod == 1 then
+	  MudName = Mud_VeryEasy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_VeryEasy[1]
+		InfName2 = Infantry_VeryEasy[2]
+		InfName3 = Infantry_VeryEasy[3]
+		InfName4 = Infantry_VeryEasy[4]
+		InfName5 = Infantry_VeryEasy[5]
+		SamName1 = Sam_VeryEasy[srand]
+	end
+
+	if Difficultymod == 2 then
+	  MudName = Mud_VeryEasy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Easy[1]
+		InfName2 = Infantry_Easy[2]
+		InfName3 = Infantry_Easy[3]
+		InfName4 = Infantry_Easy[4]
+		InfName5 = Infantry_Easy[5]
+		SamName1 = Sam_Easy[srand]
+	end
+
+	if Difficultymod == 3 then
+	  MudName = Mud_Easy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Normal[1]
+		InfName2 = Infantry_Normal[2]
+		InfName3 = Infantry_Normal[3]
+		InfName4 = Infantry_Normal[4]
+		InfName5 = Infantry_Normal[5]
+		SamName1 = Sam_Normal[srand]
+	end
+
+	if Difficultymod == 4 then
+	  MudName = Mud_Easy[mrand]
+		--SamName = ''
+		InfName1 = Infantry_Hard[1]
+		InfName2 = Infantry_Hard[2]
+		InfName3 = Infantry_Hard[3]
+		InfName4 = Infantry_Hard[4]
+		InfName5 = Infantry_Hard[5]
+		SamName1 = Sam_Hard[srand]
+	end
+	
+	if Difficultymod == 5 then
+	  MudName = Mud_Normal[mrand]
+		--SamName = ''
+		InfName1 = Infantry_VeryHard[1]
+		InfName2 = Infantry_VeryHard[2]
+		InfName3 = Infantry_VeryHard[3]
+		InfName4 = Infantry_VeryHard[4]
+		InfName5 = Infantry_VeryHard[5]
+		SamName1 = Sam_VeryHard[srand]
+	end
+	
+		
+	
+
+		trigger.action.activateGroup(Group.getByName(MudName))
+		trigger.action.activateGroup(Group.getByName(SamName1))
+		trigger.action.activateGroup(Group.getByName(InfName1))
+		trigger.action.activateGroup(Group.getByName(InfName2))
+		trigger.action.activateGroup(Group.getByName(InfName3))
+		trigger.action.activateGroup(Group.getByName(InfName4))
+		trigger.action.activateGroup(Group.getByName(InfName5))
+		local MudGrpData = mist.getGroupData(MudName)
+			
+		formisttable = '[g]' .. MudName
+		targets = mist.makeUnitTable({formisttable})
+			
+		  for i = 1, 500 do
+	    if Task_Range == 1 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
+	    elseif Task_Range == 2 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
+	    elseif Task_Range == 3 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
+	    elseif Task_Range == 4 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
+			elseif Task_Range == 5 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
+			elseif Task_Range == 6 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
+			end
+
+			
+					if mist.isTerrainValid(mudPsn, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 300) < 5 then				
+					break
+
+					end
+		end
+		
+				local msg = {}
+	  msg.text = ' Building structures.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+		
+		local buildPsn = mist.utils.makeVec3(mudPsn)		
+			local vars = 
+			{
+			 type = "Tech combine",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z,
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "Workshop A",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(100, 200),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Repair workshop",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(100, 200),
+			 y = buildPsn.z + math.random(100,150),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)		
+
+		local mvars = {}
+	  mvars.groupName = MudName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		MudName = mist.teleportToPoint(mvars)
+		
+				local mvars = {}
+	  mvars.groupName = SamName1
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		SamName1 = mist.teleportToPoint(mvars)
+			
+		mist.spawnRandomizedGroup(MudName)
+		mist.spawnRandomizedGroup(SamName1)
+		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		randomizer_disperse = mist.random(0,1)
+		randomizer_max_disperse = mist.random(250,300)
+		randomizer_radius = mist.random(210,300)
+		randomizer_inner_radius = mist.random(185,209)
+		
+		local infvars = {}
+		infvars.groupName = InfName1
+	  infvars.action = "clone"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName1 = mist.teleportToPoint(infvars)
+
+		--mist.spawnRandomizedGroup(InfName1)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "clone"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName2 = mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "clone"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName3 = mist.teleportToPoint(infvars)
+		
+		
+	local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "clone"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName4 = mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "clone"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName5 = mist.teleportToPoint(infvars)
+		
+	 local infvars = {}
+		infvars.groupName = MudName
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		MudName = mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = SamName1
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		SamName1 = mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+		infvars.groupName = InfName1
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName1 =mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName2 =mist.teleportToPoint(infvars)
+		
+			 local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName3 =mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName4 =mist.teleportToPoint(infvars)
+		
+				local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "teleport"
+	  infvars.point = mudPsn
+	  infvars.disperse = true
+	  infvars.maxDisp = 300
+	  infvars.radius = 300
+		infvars.innerRadius = 275
+		InfName5 = mist.teleportToPoint(infvars)
+	 
+
+	--
+	
+	local Strike_Area = {
+  x = buildPsn.point.x,
+	y = buildPsn.point.y,
+	z = buildPsn.point.z,
+   radius = 400,
+	}
+	
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
+	 
+	 	
+	--mist.removeFunction(InfFunc1)
+		InfFunc1 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc1 = mist.scheduleFunction(Move_Infantry, {InfName1}, randomizer_time, randomizer_time)
+		
+	--mist.removeFunction(InfFunc2)
+		InfFunc2 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc2 = mist.scheduleFunction(Move_Infantry, {InfName2}, randomizer_time, randomizer_time)
+		
+		--mist.removeFunction(InfFunc3)
+		InfFunc3 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc3 = mist.scheduleFunction(Move_Infantry, {InfName3}, randomizer_time, randomizer_time)
+		
+		--mist.removeFunction(InfFunc4)
+		InfFunc4 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc4 = mist.scheduleFunction(Move_Infantry, {InfName4}, randomizer_time, randomizer_time)
+		
+		--mist.removeFunction(InfFunc5)
+		InfFunc5 = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		InfFunc5 = mist.scheduleFunction(Move_Infantry, {InfName5}, randomizer_time, randomizer_time)
+		
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
+
+		--target_smoked_5 = mist.scheduleFunction(Make_Smoke {Strike_Area},randomizer_time, randomizer_time)
+		
+		formisttable = '[g]' .. MudName
+		targets = mist.makeUnitTable({formisttable})
+		
+		local msg = {}
+	  msg.text = ' Strike task has been created '
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+ 
+
+	end
+	---
+	
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Create_Strike2(_mArea)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local mzone = trigger.misc.getZone(_mArea)
+	local mrand = mist.random(1,Mud_Names)
+	local srand = mist.random(1,Sam_Launchers)
+	striketask = 1
+
+	--trigger.action.deactivateGroup(Group.getByName(InfName))
 	MudName = {}
 	InfName = {}
-	SamName = {}
+	SamName1 = {}
 
 	--if MudName ==  then
 		local msg = {}
@@ -1994,31 +2385,18 @@ bpath[6].speed_locked = true
 	  msg.displayTime = 20
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-			
-	 local checkstrike1 = {
-	   groupName = 'Strike1',
-		 flag = 601,
-			stopFlag = 610,
-		 toggle = true,
-	 }
+ 
+	--
+	
+	 Strike_Area = {
+   x = buildPsn.point.x,
+	 y = buildPsn.point.y,
+	 z = buildPsn.point.z,
+   radius = 400,
+	}
+	
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
 	 
-	 	 local checkstrike2 = {
-	   groupName = 'Strike2',
-		 flag = 602,
-			stopFlag = 610,
-		 toggle = true,
-	 }
-	 
-	 	 local checkstrike3 = {
-	   groupName = 'Strike3',
-		 flag = 603,
-			stopFlag = 610,
-		 toggle = true,
-	 }
-	 
-	 mist.flagFunc.group_dead(checkstrike1)
-	 mist.flagFunc.group_dead(checkstrike2)
-	 mist.flagFunc.group_dead(checkstrike3)
 	 	
 	mist.removeFunction(InfFunc1)
 		InfFunc1 = nil
@@ -2473,7 +2851,38 @@ bpath[6].speed_locked = true
 	  return
 
 	end
+	---
+	
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function MGRScall()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'datalink.ogg')
+		
+			local msg = {} 
+			msg.units = targets
+			msg.acc = 4
+			msg.displayTime = 90
+			msg.msgFor = {coa = {'red'}} 
+			msg.text = ' Grid Reference: '
+			mist.msgMGRS(msg)
+	  return
+end
+---
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+function BRAcall()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'datalink.ogg')
+		
+			local msg = {} 
+			msg.units = targets
+			msg.acc = 4
+			msg.displayTime = 90
+			msg.msgFor = {coa = {'red'}} 
+			msg.text = ' Grid Reference: '
+			mist.msgMGRS(msg)
+	  return
+	end
 	---
 				
 
@@ -2829,9 +3238,9 @@ bpath[6].speed_locked = true
 
 	end
 	
-	if trigger.misc.getUserFlag('610') == 1 then
+	if trigger.misc.getUserFlag('602') == 1 then
 
-			trigger.action.setUserFlag('610',0)
+			trigger.action.setUserFlag('602',0)
 
 	end
 
@@ -2934,9 +3343,7 @@ bpath[6].speed_locked = true
 	end
 	end
 	
-	if trigger.misc.getUserFlag('601') == 1 then
-		if trigger.misc.getUserFlag('602') == 1 then
-			if trigger.misc.getUserFlag('603') == 1 then
+		if trigger.misc.getUserFlag('601') == 1 then
 				if striketask == 1 then
 				local msg = {}
 
@@ -2945,7 +3352,7 @@ bpath[6].speed_locked = true
 	    msg.displayTime = 60
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
-			trigger.action.setUserFlag('610', 1)				-- stop victory
+			trigger.action.setUserFlag('602', 1)				-- stop victory
 			striketask = 0
 			strike_complete = 0
 
@@ -2955,8 +3362,7 @@ bpath[6].speed_locked = true
 			
 				end
 			end
-		end
-	end
+	
 
 
 	Debug_Show()

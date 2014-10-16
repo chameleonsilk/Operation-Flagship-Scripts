@@ -6,6 +6,7 @@
 	local rad_option_0b = "Briefing: Last Strike"
 	local rad_option_0c = "Briefing: Last Convoy"
 	local rad_option_0d = "Briefing: Last Airdrome"
+	local rad_option_0e = "Briefing: Last Naval"
 
 	local rad_option_1a = "Interdict: CAP"
 	local rad_option_1b = "Interdict: Bombers"
@@ -14,7 +15,7 @@
 	local rad_option_1e = "Mud: Convoy"
 	local rad_option_1f = "Mud: CAS (NOT AVAILABLE)"
 	local rad_option_1g = "Strike: Facilities"
-	local rad_option_1h = "Strike: Naval (NOT AVAILABLE)"
+	local rad_option_1h = "Strike: Naval"
 	
 	
 
@@ -340,6 +341,79 @@
 	---------------------------
 	-- End Static MUD Arrays --
 	---------------------------
+	
+	
+	------------------------
+	--  Enemy Ship Arrays --
+	------------------------
+	Ship_Names = 2 -- variable for number of available ships per difficulty
+	
+	Ship_VeryEasy = {
+		[1] = "Ship (VeryEasy) #000",
+		[2] = "Ship (VeryEasy) #001",
+	}
+	Ship_Easy = {
+		[1] = "Ship (Easy) #000",
+		[2] = "Ship (Easy) #001",
+	}
+	Ship_Normal = {
+		[1] = "Ship (Normal) #000",
+		[2] = "Ship (Normal) #001",
+	}
+	Ship_Hard = {
+		[1] = "Ship (Hard) #000",
+		[2] = "Ship (Hard) #001",
+	}
+	Ship_VeryHard = {
+		[1] = "Ship (VeryHard) #000",
+		[2] = "Ship (VeryHard) #001",
+	}
+	--------------------------
+	-- End Ships 						--
+	--------------------------
+	
+	--------------------------
+	-- Boat								--
+	--------------------------
+		Boat_Names = 5 -- variable for number of available ships per difficulty
+	Boat_VeryEasy = {
+		[1] = "Boat (VeryEasy) #000",
+		[2] = "Boat (VeryEasy) #001",
+		[3] = "Boat (VeryEasy) #002",
+		[4] = "Boat (VeryEasy) #003",
+		[5] = "Boat (VeryEasy) #004",
+	}
+	Boat_Easy = {
+		[1] = "Boat (Easy) #000",
+		[2] = "Boat (Easy) #001",
+		[3] = "Boat (Easy) #002",
+		[4] = "Boat (Easy) #003",
+		[5] = "Boat (Easy) #004",
+	}
+	Boat_Normal = {
+		[1] = "Boat (Normal) #000",
+		[2] = "Boat (Normal) #001",
+		[3] = "Boat (Normal) #002",
+		[4] = "Boat (Normal) #003",
+		[5] = "Boat (Normal) #004",
+	}
+	Boat_Hard = {
+		[1] = "Boat (Hard) #000",
+		[2] = "Boat (Hard) #001",
+		[3] = "Boat (Hard) #002",
+		[4] = "Boat (Hard) #003",
+		[5] = "Boat (Hard) #004",
+	}
+	Boat_VeryHard = {
+		[1] = "Boat (VeryHard) #000",
+		[2] = "Boat (VeryHard) #001",
+		[3] = "Boat (VeryHard) #002",
+		[4] = "Boat (VeryHard) #003",
+		[5] = "Boat (VeryHard) #004",
+	}
+	--------------------------
+	-- End of Boat					--
+	--------------------------
 
 	-----------------------
 	-- Moving MUD Arrays --
@@ -750,6 +824,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, Bullscall2, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, Bullscall3, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, Calls, Bullscall4, nil)
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0e, Calls, Bullscall5, nil)
 
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
 	
@@ -764,7 +839,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Mud_Convoy, 'Anapa')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, AnapaPath, Create_Mud_CAS, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, AnapaPath, Create_Strike, 'Anapa')
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, AnapaPath, Create_Naval, 'Anapa')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, AnapaPath, Create_Naval, 'OceanNorth')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, MaykopPath, Create_Fighter_Intercept, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, MaykopPath, Create_Bomber_Intercept, 'Maykop')
@@ -782,7 +857,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, GudautaPath, Create_Mud_Convoy, 'Gudauta')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, GudautaPath, Create_Mud_CAS, 'Gudauta')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, GudautaPath, Create_Strike, 'Gudauta')
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, GudautaPath, Create_Naval, 'Gudauta')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, GudautaPath, Create_Naval, 'OceanMid')
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, KutaisiPath, Create_Fighter_Intercept, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
@@ -791,7 +866,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, KutaisiPath, Create_Mud_CAS, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, KutaisiPath, Create_Strike, 'Kutaisi')
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, KutaisiPath, Create_Naval, 'Kutaisi')
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, KutaisiPath, Create_Naval, 'OceanSouth')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
@@ -1743,7 +1818,7 @@ Infantry2_Squads = 5
 		randomizer_time = mist.random(45,90)
 		InfFunc5c = mist.scheduleFunction(Move_Infantry, {InfName5c}, randomizer_time, randomizer_time)
 		
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing4.ogg')
 
 		--Make_Smoke(mzone, nil)
 		--return
@@ -1788,9 +1863,9 @@ Infantry2_Squads = 5
 		local randomizer_inner_radius = 0
 		local randomizer_max_disperse = 0
 		randomizer_disperse = 1
-		randomizer_max_disperse = mist.random(150,265)
-		randomizer_radius = mist.random(250,300)
-		randomizer_inner_radius = mist.random(210,250)
+		randomizer_max_disperse = mist.random(50,75)
+		randomizer_radius = mist.random(300,375)
+		randomizer_inner_radius = mist.random(200,280)
 
 	--if MudName ==  then
 		local msg = {}
@@ -1813,7 +1888,7 @@ Infantry2_Squads = 5
 	end
 
 	if Difficultymod == 2 then
-	  MudName = Mud_VeryEasy[mrand]
+	  MudName = Mud_Easy[mrand]
 		--SamName = ''
 		InfName1 = Infantry2_Easy[1]
 		InfName2 = Infantry2_Easy[2]
@@ -1824,7 +1899,7 @@ Infantry2_Squads = 5
 	end
 
 	if Difficultymod == 3 then
-	  MudName = Mud_Easy[mrand]
+	  MudName = Mud_Normal[mrand]
 		--SamName = ''
 		InfName1 = Infantry2_Normal[1]
 		InfName2 = Infantry2_Normal[2]
@@ -1835,7 +1910,7 @@ Infantry2_Squads = 5
 	end
 
 	if Difficultymod == 4 then
-	  MudName = Mud_Easy[mrand]
+	  MudName = Mud_Hard[mrand]
 		--SamName = ''
 		InfName1 = Infantry2_Hard[1]
 		InfName2 = Infantry2_Hard[2]
@@ -1846,7 +1921,7 @@ Infantry2_Squads = 5
 	end
 	
 	if Difficultymod == 5 then
-	  MudName = Mud_Normal[mrand]
+	  MudName = Mud_VeryHard[mrand]
 		--SamName = ''
 		InfName1 = Infantry2_VeryHard[1]
 		InfName2 = Infantry2_VeryHard[2]
@@ -2264,10 +2339,10 @@ elseif randomobjects == 5 then
 		mvars.innerRadius = randomizer_inner_radius
 		MudNamed = mist.teleportToPoint(mvars)
 		
-		formisttable2 = '[g]' .. MudName
+		formisttable2 = '[g]' .. MudNamed	
 		targets2 = mist.makeUnitTable({formisttable2})
 		
-		AddOP(MudName) -- add MBOT to it
+		AddOP(MudNamed) -- add MBOT to it
 		
 		
 		
@@ -2470,7 +2545,7 @@ elseif randomobjects == 5 then
 	  msg.displayTime = 20
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing3.ogg')
 		
 			 local Strike_Area = {}
    Strike_Area.x = buildPsn.x
@@ -2479,6 +2554,396 @@ elseif randomobjects == 5 then
    radius = 1000
 	
 	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
+		
+end
+---
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Create_Naval(_mArea)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local mzone = trigger.misc.getZone(_mArea)
+	local mrand = mist.random(1,Ship_Names)
+	--local srand = mist.random(1,Sam_Launchers)
+	navaltask = 1
+
+	--trigger.action.deactivateGroup(Group.getByName(BoatName))
+	local ShipName = {}
+	local ShipNamed = {}
+	local BoatName1 = {}
+	local BoatName2 = {}
+	local BoatName3 = {}
+	local BoatName4 = {}
+	local BoatName5 = {}
+	local BoatName1d = {}
+	local BoatName2d = {}
+	local BoatName3d = {}
+	local BoatName4d = {}
+	local BoatName5d = {}
+	--local SamName1 = {}
+	--local SamName1d = {}
+			local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		randomizer_disperse = 1
+		randomizer_max_disperse = mist.random(3000,3000)
+		randomizer_radius = mist.random(3000,3000)
+		randomizer_inner_radius = mist.random(2000,2500)
+
+	--if MudName ==  then
+		local msg = {}
+	  msg.text = ' Creating Naval Mission.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+	if Difficultymod == 1 then
+	 ShipName = Ship_VeryEasy[mrand]
+		--SamName = ''
+		BoatName1 = Boat_VeryEasy[1]
+		BoatName2 = Boat_VeryEasy[2]
+		BoatName3 = Boat_VeryEasy[3]
+		BoatName4 = Boat_VeryEasy[4]
+		BoatName5 = Boat_VeryEasy[5]
+	end
+
+	if Difficultymod == 2 then
+	  ShipName = Ship_Easy[mrand]
+		--SamName = ''
+		BoatName1 = Boat_Easy[1]
+		BoatName2 = Boat_Easy[2]
+		BoatName3 = Boat_Easy[3]
+		BoatName4 = Boat_Easy[4]
+		BoatName5 = Boat_Easy[5]
+	end
+
+	if Difficultymod == 3 then
+	  ShipName = Ship_Normal[mrand]
+		--SamName = ''
+		BoatName1 = Boat_Normal[1]
+		BoatName2 = Boat_Normal[2]
+		BoatName3 = Boat_Normal[3]
+		BoatName4 = Boat_Normal[4]
+		BoatName5 = Boat_Normal[5]
+	end
+
+	if Difficultymod == 4 then
+	  ShipName = Ship_Hard[mrand]
+		--SamName = ''
+		BoatName1 = Boat_Hard[1]
+		BoatName2 = Boat_Hard[2]
+		BoatName3 = Boat_Hard[3]
+		BoatName4 = Boat_Hard[4]
+		BoatName5 = Boat_Hard[5]
+	end
+	
+	if Difficultymod == 5 then
+	  ShipName = Ship_VeryHard[mrand]
+		--SamName = ''
+		BoatName1 = Boat_VeryHard[1]
+		BoatName2 = Boat_VeryHard[2]
+		BoatName3 = Boat_VeryHard[3]
+		BoatName4 = Boat_VeryHard[4]
+		BoatName5 = Boat_VeryHard[5]
+	end
+	
+		
+	
+
+		--trigger.action.activateGroup(Group.getByName(ShipName))
+		--trigger.action.activateGroup(Group.getByName(SamName1))
+		--trigger.action.activateGroup(Group.getByName(InfName1))
+		--trigger.action.activateGroup(Group.getByName(InfName2))
+		--trigger.action.activateGroup(Group.getByName(InfName3))
+		--trigger.action.activateGroup(Group.getByName(InfName4))
+		--trigger.action.activateGroup(Group.getByName(InfName5))
+		--local MudGrpData = mist.getGroupData(ShipName)
+			
+
+			
+		  for i = 1, 500 do
+	    
+			if Task_Range == 1 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
+	    elseif Task_Range == 2 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
+	    elseif Task_Range == 3 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
+	    elseif Task_Range == 4 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
+			elseif Task_Range == 5 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
+			elseif Task_Range == 6 then
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
+			end
+
+			
+			
+				--	if mist.isTerrainValid(mudPsn, {'WATER'}) == true and
+					if mist.isTerrainValid(mudPsn, {'WATER'}) == true and mist.terrainHeightDiff(mudPsn, 100) < 2 then
+					break
+					end
+		end
+		
+
+		
+		local buildPsn = mist.utils.makeVec3(mudPsn)		
+			
+			--local randomobjects = 0
+			--local randomobjects = mist.random(1,9)
+			
+			local vars = 
+			{
+			 type = "Oil platform",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(1575, 1575),
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "Oil platform",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(2575, 3575),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Oil platform",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(1025, 2025),
+			 y = buildPsn.z + math.random(1025, 2025),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)
+
+
+				local msg = {}
+	  msg.text = ' Platforms placed.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+
+		
+		local navalvars = {}
+	  navalvars.groupName = ShipName
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = randomizer_max_disperse
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		ShipNamed = mist.teleportToPoint(navalvars)
+		
+		formisttable5 = '[g]' .. ShipNamed
+		targets5 = mist.makeUnitTable({formisttable5})
+		
+		AddOP(ShipNamed) -- add MBOT to it
+		
+		local msg = {}
+	  msg.text = ' Post Mbot.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+		
+
+		
+				local navalvars = {}
+		navalvars.groupName = BoatName1
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName1d = mist.teleportToPoint(navalvars)
+
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName2
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+		navalvars.disperse = true
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName2d = mist.teleportToPoint(navalvars)
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName3
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName3d = mist.teleportToPoint(navalvars)
+		
+		
+	local navalvars = {}
+		navalvars.groupName = BoatName4
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName4d = mist.teleportToPoint(navalvars)
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName5
+	  navalvars.action = "respawn"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName5d = mist.teleportToPoint(navalvars)		 
+		
+							local msg = {}
+	  msg.text = ' Post Boats.'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+			
+		--mist.spawnRandomizedGroup(ShipName)
+		--mist.spawnRandomizedGroup(ShipName)
+		--mist.spawnRandomizedGroup(BoatName1)
+		--mist.spawnRandomizedGroup(BoatName2)
+		--mist.spawnRandomizedGroup(BoatName3)
+		--mist.spawnRandomizedGroup(BoatName4)
+		--mist.spawnRandomizedGroup(BoatName5)		
+		
+		local navalvars = {}
+	  navalvars.groupName = ShipName
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+		ShipNamed = mist.teleportToPoint(navalvars)
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName1
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius
+		navalvars.innerRadius = randomizer_inner_radius
+		BoatName1d = mist.teleportToPoint(navalvars)
+
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName2
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius - 1000
+		navalvars.innerRadius = randomizer_inner_radius - 1000
+		BoatName2d = mist.teleportToPoint(navalvars)
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName3
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius - 1000
+		navalvars.innerRadius = randomizer_inner_radius - 1000
+		BoatName3d = mist.teleportToPoint(navalvars)
+		 
+		local navalvars = {}
+		navalvars.groupName = BoatName4
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius - 1000
+		navalvars.innerRadius = randomizer_inner_radius - 1000
+		BoatName4d = mist.teleportToPoint(navalvars)
+		
+		local navalvars = {}
+		navalvars.groupName = BoatName5
+	  navalvars.action = "teleport"
+	  navalvars.point = mudPsn
+	  navalvars.disperse = randomizer_disperse
+	  navalvars.maxDisp = 25
+	  navalvars.radius = randomizer_radius - 1000
+		navalvars.innerRadius = randomizer_inner_radius - 1000
+		BoatName5d = mist.teleportToPoint(navalvars)		 
+		
+ 
+	--
+
+	 
+	 
+		mist.removeFunction(ShipFunc1d)
+		mist.removeFunction(BoatFunc1d)
+		mist.removeFunction(BoatFunc2d)
+		mist.removeFunction(BoatFunc3d)
+		mist.removeFunction(BoatFunc4d)
+		mist.removeFunction(BoatFunc5d)
+		
+		
+		BoatFunc1d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		BoatFunc1d = mist.scheduleFunction(Move_Boats, {BoatName1d}, randomizer_time, randomizer_time)
+		  
+		BoatFunc2d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		BoatFunc2d = mist.scheduleFunction(Move_Boats, {BoatName2d}, randomizer_time, randomizer_time)
+	
+		BoatFunc3d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		BoatFunc3d = mist.scheduleFunction(Move_Boats, {BoatName3d}, randomizer_time, randomizer_time)
+		
+		BoatFunc4d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		BoatFunc4d = mist.scheduleFunction(Move_Boats, {BoatName4d}, randomizer_time, randomizer_time)
+	
+		BoatFunc5d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,90)
+		BoatFunc5d = mist.scheduleFunction(Move_Boats, {BoatName5d}, randomizer_time, randomizer_time)
+		
+		ShipFunc1d = nil
+		local randomizer_time = 0
+		randomizer_time = mist.random(45,690)
+		ShipFunc1d = mist.scheduleFunction(Move_Ships, {ShipNamed}, randomizer_time, randomizer_time)
+	
+		
+					local msg = {}
+	  msg.text = ' Naval task has been created '
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing3.ogg')
+		
+			 local Strike_Area2 = {}
+   Strike_Area2.x = buildPsn.x
+	 Strike_Area2.y = buildPsn.y
+	 Strike_Area2.z = buildPsn.z
+   radius = 13000
+	
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area2, flag = 701, req_num = 3, stopFlag = 702}
 		
 end
 ---
@@ -2848,6 +3313,63 @@ end
 	---
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Move_Ships(_Boats)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+		
+			
+	local randomizer_speed = 0
+	local randomizer_dir = 0
+	local randomizer_dist = 0
+	local Infantry_Name = {}
+	Boat_Name = _Boats
+	randomizer_speed = math.random(7,14)
+	randomizer_dir = math.random(90,270)
+	randomizer_dist = math.random(1500, 2000)
+
+			local formationrand = mist.random(1,1)
+			
+			if formationrand == 1 then
+		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Off Road', randomizer_dir, randomizer_speed)
+		end
+
+	--return
+	end
+
+	---
+	
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Move_Boats(_Boats)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+		
+			
+	local randomizer_speed = 0
+	local randomizer_dir = 0
+	local randomizer_dist = 0
+	local Infantry_Name = {}
+	Boat_Name = _Boats
+	randomizer_speed = math.random(44,50)
+	randomizer_dir = math.random(1,359)
+	randomizer_dist = math.random(1000, 4000)
+
+			local formationrand = mist.random(1,4)
+			
+			if formationrand == 1 then
+		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
+		
+			elseif formationrand == 3 then
+		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'EchelonL', randomizer_dir, randomizer_speed)
+
+		elseif formationrand == 4 then
+		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'EchelonR', randomizer_dir, randomizer_speed)
+
+		end
+
+	--return
+	end
+
+	---
+
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Make_Smoke(_coord)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			  local Scoord = {}
@@ -3091,9 +3613,63 @@ end
 
 	end
 	---
+	
+		------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Bullscall5()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'datalink.ogg')
+	local msg = {}
+	  msg.units = targets5
+	  msg.ref = 'red'
+	  msg.displayTime = 90
+	  msg.msgFor = {coa = {'red'}}
+	  msg.text = ' Bullseye at Maykop, Imperial: '
+	  msg.metric = false
+	  msg.alt = true
+	  mist.msgBullseye(msg)
+	  
+			local msg = {}
+	  msg.units = targets5
+	  msg.ref = 'red'
+	  msg.displayTime = 90
+	  msg.msgFor = {coa = {'red'}}
+	  msg.text = ' Bullseye at Maykop, Metric: '
+	  msg.metric = true
+	  msg.alt = true
+	    mist.msgBullseye(msg)
+			
 
-				
+		local msg = {}	
+		msg.units = targets5
+	  msg.ref = 'blue'
+	  msg.displayTime = 90
+	  msg.msgFor = {coa = {'red'}}
+	  msg.text = ' Bullseye at Khashuri, Imperial: '
+	  msg.metric = false
+	  msg.alt = true
+	  mist.msgBullseye(msg)
+	  
+			local msg = {}
+	  msg.units = targets5
+	  msg.ref = 'blue'
+	  msg.displayTime = 90
+	  msg.msgFor = {coa = {'red'}}
+	  msg.text = ' Bullseye at Khashuri, Metric: '
+	  msg.metric = true
+	  msg.alt = true
+	    mist.msgBullseye(msg)
+	  --return
+					local msg = {} 
+			msg.units = targets5
+			msg.acc = 2
+			msg.displayTime = 90
+			msg.msgFor = {coa = {'red'}} 
+			msg.text = ' Grid Reference: '
+			mist.msgMGRS(msg)
 
+	end
+	---
+	
 	----------------
 	-- Wanks Code --
 	----------------
@@ -3451,6 +4027,12 @@ end
 			trigger.action.setUserFlag('602',0)
 
 	end
+	
+		if trigger.misc.getUserFlag('702') == 1 then
+
+			trigger.action.setUserFlag('702',0)
+
+	end
 
 		 
 
@@ -3467,7 +4049,7 @@ end
 			trigger.action.setUserFlag('102', 1)				-- stop victory
 			airfield = 0
 			airfield_complete = 0
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(DefensesName))				-- deactivate airfield defenses	
 
 	end
@@ -3487,7 +4069,7 @@ end
 			trigger.action.setUserFlag('202', 1)				-- stop victory
 			mudtask = 0
 			mud_complete = 0
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(MudName))				-- deactivate mud
 
 	end
@@ -3506,7 +4088,7 @@ end
 			trigger.action.setUserFlag('302', 1)				-- stop victory
 			convoytask = 0
 			convoy_complete = 0
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(MoveMud))				-- deactivate convoy
 
 	end
@@ -3525,7 +4107,7 @@ end
 			interceptortask = 0
 			intercept_complete = 0
 			trigger.action.setUserFlag('402', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
 
 	end
@@ -3544,7 +4126,7 @@ end
 			bombertask = 0
 			bomber_complete = 0
 
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -3564,7 +4146,27 @@ end
 			striketask = 0
 			strike_complete = 0
 
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+			
+				end
+			end
+			
+					if trigger.misc.getUserFlag('701') == 1 then
+				if navaltask == 1 then
+				local msg = {}
+
+			msg.text = ' Naval mission completed.'
+
+	    msg.displayTime = 60
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			trigger.action.setUserFlag('702', 1)				-- stop victory
+			navaltask = 0
+			naval_complete = 0
+
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 			

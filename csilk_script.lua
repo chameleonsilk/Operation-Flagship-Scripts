@@ -1858,14 +1858,7 @@ Infantry2_Squads = 5
 	local InfName5d = {}
 	local SamName1 = {}
 	local SamName1d = {}
-			local randomizer_disperse = 0
-		local randomizer_radius = 0
-		local randomizer_inner_radius = 0
-		local randomizer_max_disperse = 0
-		randomizer_disperse = 1
-		randomizer_max_disperse = mist.random(50,75)
-		randomizer_radius = mist.random(300,375)
-		randomizer_inner_radius = mist.random(200,280)
+
 
 	--if MudName ==  then
 		local msg = {}
@@ -1972,7 +1965,7 @@ Infantry2_Squads = 5
 		local buildPsn = mist.utils.makeVec3(mudPsn)		
 			
 			local randomobjects = 0
-			local randomobjects = mist.random(1,9)
+			local randomobjects = mist.random(1,8)
 			
 	if randomobjects == 1 then
 			local vars = 
@@ -1981,7 +1974,7 @@ Infantry2_Squads = 5
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z,
+			 y = buildPsn.z + math.random(200,300),
 			 --name = "Strike1", 
 			 groupName = "Strike1",
 			 heading = 0.47123889803847
@@ -1993,7 +1986,7 @@ Infantry2_Squads = 5
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
+			 y = buildPsn.z + math.random(300, 600),
 			 --name = "Strike2", 
 			 groupName = "Strike2",
 			 heading = 0.47123889803847
@@ -2004,8 +1997,8 @@ Infantry2_Squads = 5
 			 type = "Repair workshop",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
 			 --name = "Strike3", 
 			 groupName = "Strike3",
 			 heading = 0.47123889803847
@@ -2014,13 +2007,13 @@ Infantry2_Squads = 5
 			
 			
 			elseif randomobjects == 2 then
-			local vars = 
+						local vars = 
 			{
-			 type = "TV tower",
+			 type = "Supermarket A",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z,
+			 y = buildPsn.z + math.random(200,300),
 			 --name = "Strike1", 
 			 groupName = "Strike1",
 			 heading = 0.47123889803847
@@ -2032,7 +2025,45 @@ Infantry2_Squads = 5
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
+			 y = buildPsn.z + math.random(300, 600),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Supermarket A",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)
+			
+						elseif randomobjects == 3 then
+						local vars = 
+			{
+			 type = "TV tower",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(200,300),
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "Supermarket A",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(300, 600),
 			 --name = "Strike2", 
 			 groupName = "Strike2",
 			 heading = 0.47123889803847
@@ -2043,138 +2074,22 @@ Infantry2_Squads = 5
 			 type = "TV tower",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
 			 --name = "Strike3", 
 			 groupName = "Strike3",
 			 heading = 0.47123889803847
 			}
 			mist.dynAddStatic(vars3)
 			
-			
-			elseif randomobjects == 3 then
-			local vars = 
-			{
-			 type = "Military staff",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
-			 --name = "Strike1", 
-			 groupName = "Strike1",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars)
-			local vars2 = 
-			{
-			 type = "Military staff",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
-			 --name = "Strike2", 
-			 groupName = "Strike2",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars2)
-			local vars3 = 
-			{
-			 type = "Military staff",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
-			 --name = "Strike3", 
-			 groupName = "Strike3",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars3)
-			
-	elseif randomobjects == 4 then
-			local vars = 
-			{
-			 type = "house2arm",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
-			 --name = "Strike1", 
-			 groupName = "Strike1",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars)
-			local vars2 = 
-			{
-			 type = "Tech combine",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
-			 --name = "Strike2", 
-			 groupName = "Strike2",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars2)
-			local vars3 = 
-			{
-			 type = "Military staff",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
-			 --name = "Strike3", 
-			 groupName = "Strike3",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars3)
-	
-			
-elseif randomobjects == 5 then
-			local vars = 
-			{
-			 type = "Military staff",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
-			 --name = "Strike1", 
-			 groupName = "Strike1",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars)
-			local vars2 = 
+									elseif randomobjects == 4 then
+						local vars = 
 			{
 			 type = "Bunker",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
-			 --name = "Strike2", 
-			 groupName = "Strike2",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars2)
-			local vars3 = 
-			{
-			 type = "outpost",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
-			 --name = "Strike3", 
-			 groupName = "Strike3",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars3)			
-	
-	elseif randomobjects == 6 then
-			local vars = 
-			{
-			 type = "Railway station",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
+			 y = buildPsn.z + math.random(200,300),
 			 --name = "Strike1", 
 			 groupName = "Strike1",
 			 heading = 0.47123889803847
@@ -2182,11 +2097,11 @@ elseif randomobjects == 5 then
 			mist.dynAddStatic(vars)
 			local vars2 = 
 			{
-			 type = "Railway station",
+			 type = "Sand Box",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
+			 y = buildPsn.z + math.random(300, 600),
 			 --name = "Strike2", 
 			 groupName = "Strike2",
 			 heading = 0.47123889803847
@@ -2194,65 +2109,25 @@ elseif randomobjects == 5 then
 			mist.dynAddStatic(vars2)
 			local vars3 = 
 			{
-			 type = "Railway station",
+			 type = "Military staff",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 150),
-			 y = buildPsn.z + math.random(250,100),
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
 			 --name = "Strike3", 
 			 groupName = "Strike3",
 			 heading = 0.47123889803847
 			}
 			mist.dynAddStatic(vars3)
-	
 			
-		elseif randomobjects == 7 then
-			local vars = 
-			{
-			 type = "WC",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
-			 --name = "Strike1", 
-			 groupName = "Strike1",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars)
-			local vars2 = 
+												elseif randomobjects == 5 then
+						local vars = 
 			{
 			 type = "Bunker",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(100, 200),
-			 --name = "Strike2", 
-			 groupName = "Strike2",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars2)
-			local vars3 = 
-			{
-			 type = "outpost",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 200),
-			 y = buildPsn.z + math.random(100,150),
-			 --name = "Strike3", 
-			 groupName = "Strike3",
-			 heading = 0.47123889803847
-			}
-			mist.dynAddStatic(vars3)
-	
-			
-			elseif randomobjects == 8 then
-			local vars = 
-			{
-			 type = "outpost",
-			 country = 'GEORGIA',
-			 category = "Fortifications", 
-			 x = buildPsn.x,
-			 y = buildPsn.z,
+			 y = buildPsn.z + math.random(200,300),
 			 --name = "Strike1", 
 			 groupName = "Strike1",
 			 heading = 0.47123889803847
@@ -2264,7 +2139,7 @@ elseif randomobjects == 5 then
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(80, 80),
+			 y = buildPsn.z + math.random(300, 600),
 			 --name = "Strike2", 
 			 groupName = "Strike2",
 			 heading = 0.47123889803847
@@ -2275,22 +2150,22 @@ elseif randomobjects == 5 then
 			 type = "Sandbox",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 100),
-			 y = buildPsn.z + math.random(100, 100),
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
 			 --name = "Strike3", 
 			 groupName = "Strike3",
 			 heading = 0.47123889803847
 			}
 			mist.dynAddStatic(vars3)
 			
-						elseif randomobjects == 8 then
-			local vars = 
+															elseif randomobjects == 6 then
+						local vars = 
 			{
-			 type = "Supermarket At",
+			 type = "Bunker",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z,
+			 y = buildPsn.z + math.random(200,300),
 			 --name = "Strike1", 
 			 groupName = "Strike1",
 			 heading = 0.47123889803847
@@ -2298,11 +2173,11 @@ elseif randomobjects == 5 then
 			mist.dynAddStatic(vars)
 			local vars2 = 
 			{
-			 type = "house2arm",
+			 type = "outpost",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
-			 y = buildPsn.z + math.random(80, 80),
+			 y = buildPsn.z + math.random(300, 600),
 			 --name = "Strike2", 
 			 groupName = "Strike2",
 			 heading = 0.47123889803847
@@ -2310,17 +2185,110 @@ elseif randomobjects == 5 then
 			mist.dynAddStatic(vars2)
 			local vars3 = 
 			{
-			 type = "Workshop A",
+			 type = "Military staff",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
-			 x = buildPsn.x + math.random(100, 100),
-			 y = buildPsn.z + math.random(100, 100),
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
 			 --name = "Strike3", 
 			 groupName = "Strike3",
 			 heading = 0.47123889803847
 			}
 			mist.dynAddStatic(vars3)
-		end
+			
+																		elseif randomobjects == 7 then
+						local vars = 
+			{
+			 type = "outpost",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(200,300),
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "Military staff",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(300, 600),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Sandbox",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)
+			
+																					elseif randomobjects == 8 then
+						local vars = 
+			{
+			 type = "TV Tower",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(200,300),
+			 --name = "Strike1", 
+			 groupName = "Strike1",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars)
+			local vars2 = 
+			{
+			 type = "TV Tower",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x,
+			 y = buildPsn.z + math.random(300, 600),
+			 --name = "Strike2", 
+			 groupName = "Strike2",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars2)
+			local vars3 = 
+			{
+			 type = "Military staff",
+			 country = 'GEORGIA',
+			 category = "Fortifications", 
+			 x = buildPsn.x + math.random(300, 590),
+			 y = buildPsn.z + math.random(300,600),
+			 --name = "Strike3", 
+			 groupName = "Strike3",
+			 heading = 0.47123889803847
+			}
+			mist.dynAddStatic(vars3)
+			
+			end
+			
+			 --type = "TV tower",			
+			 --type = "Supermarket A",			
+			 --type = "TV tower",			
+			 --type = "Military staff",			
+			 --type = "house2arm",			
+			 --type = "Tech combine",			
+			 --type = "Military staff",			 
+			 --type = "Bunker",			 
+			 --type = "outpost",
+			 --type = "Railway station",
+			 --type = "WC",
+			 --type = "Sandbox",
+			 --type = "house2arm",
+			 --type = "Workshop A",
+			 
 
 				local msg = {}
 	  msg.text = ' Done.'
@@ -2328,6 +2296,15 @@ elseif randomobjects == 5 then
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		randomizer_disperse = 1
+		randomizer_max_disperse = mist.random(275,325)
+		randomizer_radius = mist.random(550,550)
+		randomizer_inner_radius = 500
 		
 		local mvars = {}
 	  mvars.groupName = MudName
@@ -2350,7 +2327,7 @@ elseif randomobjects == 5 then
 	  mvars.groupName = SamName1
 	  mvars.action = "respawn"
 	  mvars.point = mudPsn
-	  mvars.disperse = randomizer_disperse
+	  mvars.disperse = randomizer_disperse 
 	  mvars.maxDisp = randomizer_max_disperse
 	  mvars.radius = randomizer_radius
 		mvars.innerRadius = randomizer_inner_radius
@@ -2361,7 +2338,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 225
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName1d = mist.teleportToPoint(infvars)
@@ -2371,9 +2348,8 @@ elseif randomobjects == 5 then
 		infvars.groupName = InfName2
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
-		infvars.disperse = true
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 225
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName2d = mist.teleportToPoint(infvars)
@@ -2383,7 +2359,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 225
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName3d = mist.teleportToPoint(infvars)
@@ -2394,7 +2370,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 225
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName4d = mist.teleportToPoint(infvars)
@@ -2404,7 +2380,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "respawn"
 	  infvars.point = mudPsn
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 225
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName5d = mist.teleportToPoint(infvars)		 
@@ -2435,20 +2411,21 @@ elseif randomobjects == 5 then
 	  mvars.groupName = MudName
 	  mvars.action = "teleport"
 	  mvars.point = mudPsn
+		mvars.disperse = randomizer_disperse
+	  mvars.maxDisp = randomizer_max_disperse
+	  mvars.radius = randomizer_radius
+		mvars.innerRadius = randomizer_inner_radius
 		MudName5d = mist.teleportToPoint(mvars)
-		
-
 	
-		
 		
 		local mvars = {}
 	  mvars.groupName = SamName1
 	  mvars.action = "teleport"
 	  mvars.point = mudPsn
 	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = randomizer_max_disperse - 100
-	  mvars.radius = randomizer_radius + 300
-		mvars.innerRadius = randomizer_inner_radius + 200
+	  mvars.maxDisp = randomizer_max_disperse
+	  mvars.radius = randomizer_radius
+		mvars.innerRadius = randomizer_inner_radius
 		SamName1d = mist.teleportToPoint(mvars)
 		
 		local infvars = {}
@@ -2456,7 +2433,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = 25
+	  mvars.maxDisp = 100
 	  mvars.radius = randomizer_radius
 		mvars.innerRadius = randomizer_inner_radius
 		InfName1d = mist.teleportToPoint(infvars)
@@ -2467,7 +2444,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = 25
+	  mvars.maxDisp = 100
 	  mvars.radius = randomizer_radius
 		mvars.innerRadius = randomizer_inner_radius
 		InfName2d = mist.teleportToPoint(infvars)
@@ -2477,7 +2454,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = 25
+	  mvars.maxDisp = 100
 	  mvars.radius = randomizer_radius
 		mvars.innerRadius = randomizer_inner_radius
 		InfName3d = mist.teleportToPoint(infvars)
@@ -2487,7 +2464,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = 25
+	  mvars.maxDisp = 100
 	  mvars.radius = randomizer_radius
 		mvars.innerRadius = randomizer_inner_radius
 		InfName4d = mist.teleportToPoint(infvars)
@@ -2497,7 +2474,7 @@ elseif randomobjects == 5 then
 	  infvars.action = "teleport"
 	  infvars.point = mudPsn
 	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 25
+	  infvars.maxDisp = 100
 	  infvars.radius = randomizer_radius
 		infvars.innerRadius = randomizer_inner_radius
 		InfName5d = mist.teleportToPoint(infvars)		 
@@ -2548,9 +2525,9 @@ elseif randomobjects == 5 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing3.ogg')
 		
 			 local Strike_Area = {}
-   Strike_Area.x = buildPsn.x
-	 Strike_Area.y = buildPsn.y
-	 Strike_Area.z = buildPsn.z
+   Strike_Area.x = mudPsn.x
+	 Strike_Area.y = mudPsn.y
+	 Strike_Area.z = mudPsn.z
    radius = 1000
 	
 	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}

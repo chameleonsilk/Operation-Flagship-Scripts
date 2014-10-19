@@ -1367,7 +1367,7 @@ Put this code in a DO SCRIPT action that is triggered by an F10 radio menu selec
 function reloadscript()
 ----------------------------------
 do
-  local fName = lfs.writedir() .. [[csilk_script.lua]]
+  local fName = lfs.writedir() .. [[csilk_core.lua]]
   doScriptFile(fName)
   
   local fName = lfs.writedir() .. [[csilk_airborne.lua]]

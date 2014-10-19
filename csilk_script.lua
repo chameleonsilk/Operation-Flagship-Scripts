@@ -21,7 +21,12 @@
 
 	local rad_option_2a = "Assault: Sochi-Adler"
 
-	local rad_option_7a = "Enemy Smoke Markers"
+	local rad_option_7a = "Total Annhilation"
+	local rad_option_7b = "75 pct"
+	local rad_option_7c = "66 pct"
+	local rad_option_7d = "50 pct"
+	local rad_option_7e = "33 pct"
+	local rad_option_7f = "0 pct, debug only"
 
 	----------------
 	-- Wanks Code --
@@ -50,24 +55,16 @@
 	--------------------
 	-- End Wanks Code --
 	--------------------
-	loopsthrough = 0
-	
 	Radio_Table = {}
 
-	zone = {}
-	bzone = {}
-	mzone = ""
-
-	grpName = {}
+	--zone = {}
+	--bzone = {}
+	--mzone = ""
+	--grpName = {}
+	--bgrpName = {}
+	--egrpName = {}
 	
-	bgrpName = {}
-	egrpName = {}
 
-
-	
-	smoke_marker = {}
-
-	Loops = 0
 	RunwayID = 0
 	Debugger = 0
 
@@ -76,7 +73,11 @@
 	convoytask = 0
 	intercepttask = 0
 	bombertask = 0
-
+	striketask = 0
+	navaltask = 0
+	
+	naval_complete = 0
+	strike_complete = 0
 	airfield_complete = 0
 	mud_complete = 0
 	convoy_complete = 0
@@ -90,8 +91,8 @@
 	spawnPsn = {}
 	mudPsn = {}
 
-	Smoke = 0
-	Scoord  = {}
+	Percentage = "very heavy losses"
+	Percentagemod = 75
 	Difficulty = "Very Easy"
 	Difficultymod = 1
 	Range = "Standard"
@@ -779,6 +780,7 @@ Infantry2_Squads = 5
 	----------------
 	--The are sub-menu variables, the parent menu is GameSet
 	DifficultySet = missionCommands.addSubMenu("Set Difficulty", GameSet)
+	PercentageSet = missionCommands.addSubMenu("Set Damage Goal", GameSet)
 	DistanceSet = missionCommands.addSubMenu("Set Spawn Range", GameSet)
 
 	--------------------
@@ -829,7 +831,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
 	
 	    
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, AnapaPath, Create_Fighter_Intercept, 'Anapa')
@@ -886,7 +888,11 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, TbilisiPath, Create_Mud_CAS, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, TbilisiPath, Create_Strike, 'Tbilisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1h, TbilisiPath, Create_Naval, 'Tbilisi')
-		----------------
+	
+	
+	
+	
+	----------------
 	-- Wanks Code --
 	----------------
 	-- These commands set the function of the radio options in the difficulty sub-menu
@@ -895,6 +901,16 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8c, DifficultySet, Set_Difficuty_Normal, nil) -- 'Normal'
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8d, DifficultySet, Set_Difficuty_Hard, nil) -- 'Hard'
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_8e, DifficultySet, Set_Difficuty_VeryHard, nil) -- 'Very Hard'
+	
+	----------------
+	-- Percentage --
+	----------------
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, PercentageSet, Set_Percentage_100, nil) -- '100pct'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7b, PercentageSet, Set_Percentage_75, nil) -- '75pct'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7c, PercentageSet, Set_Percentage_66, nil) -- '66pct'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7d, PercentageSet, Set_Percentage_50, nil) -- '50pct'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7e, PercentageSet, Set_Percentage_33, nil) -- '33pct'
+	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7f, PercentageSet, Set_Percentage_0, nil) -- '0pct'
 
 	-- These commands set the function of the radio options in the target range sub-menu
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9a, DistanceSet, Set_Distance_Scramble, nil) -- Scramble
@@ -904,7 +920,6 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9e, DistanceSet, Set_Distance_Veryfar, nil) -- Very far
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9f, DistanceSet, Set_Distance_Distant, nil) -- Distant
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9g, DistanceSet, Set_Distance_Random, nil) -- Random
-
 	--------------------
 	-- End Wanks Code --
 	--------------------
@@ -967,6 +982,12 @@ Infantry2_Squads = 5
 
 	local msg = {} 
 	msg.text = ' Task spawn start range has been set to '..tostring(Range)
+	msg.displayTime = 45
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+	
+	local msg = {} 
+	msg.text = ' Percentage of destruction has been set to '..tostring(Percentage)
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
@@ -1145,9 +1166,9 @@ Infantry2_Squads = 5
 		
 	checkunits4 = {
 	groupName = grpName,
-	percent = 40,
-	flag = 401,
-	stopFlag = 402,
+	percent = Percentagemod,
+	flag = '401',
+	stopFlag = '402',
 	toggle = true,
 	}
 	mist.flagFunc.group_alive_less_than(checkunits4)
@@ -1501,9 +1522,9 @@ bpath[6].speed_locked = true
 
 		local checkunits5 = {
 		groupName = bgrpName,
-		percent = 40,
-		flag = 501,
-		stopFlag = 502,
+		percent = Percentagemod,
+		flag = '501',
+		stopFlag = '502',
 		 toggle = true,
 	 }
 	 mist.flagFunc.group_alive_less_than(checkunits5)
@@ -1591,6 +1612,15 @@ bpath[6].speed_locked = true
 	end
 	
 		
+			local checkunits2 = {
+	  groupName = MudName,
+	  percent = Percentagemod,
+		flag = '201',
+		stopFlag = '202',
+		toggle = true,
+		}
+		mist.flagFunc.group_alive_less_than(checkunits2)
+	
 	
 
 		--trigger.action.activateGroup(Group.getByName(MudName))
@@ -1641,6 +1671,8 @@ bpath[6].speed_locked = true
 		targets = mist.makeUnitTable({formisttable})
 		
 		AddOP(MudNamec) -- add MBOT to it
+		
+
 		
 			 local infvars = {}
 		infvars.groupName = InfName1
@@ -1726,6 +1758,7 @@ bpath[6].speed_locked = true
 		MudNamec = mist.teleportToPoint(mvars)
 
 
+		
 			
 	 local infvars = {}
 		infvars.groupName = InfName1
@@ -1780,8 +1813,10 @@ bpath[6].speed_locked = true
 		infvars.innerRadius = 270
 		InfName5c = mist.teleportToPoint(infvars)		    
 	  
+
+		
 			local msg = {}
-	  msg.text = ' Mud task has been created '
+	  msg.text = ' Mud task has been created ' ..tostring(MudName)
 	  msg.displayTime = 20
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
@@ -1824,14 +1859,9 @@ bpath[6].speed_locked = true
 		--Make_Smoke(mzone, nil)
 		--return
 		
-			 local checkunits2 = {
-	   groupName = MudName,
-	   percent = 33,
-		 flag = 201,
-		stopFlag = 202,
-		 toggle = true,
-	 }
-	 mist.flagFunc.group_alive_less_than(checkunits2)
+
+		
+
 
 	end
 	---
@@ -2086,7 +2116,7 @@ bpath[6].speed_locked = true
 									elseif randomobjects == 4 then
 						local vars = 
 			{
-			 type = "Bunker",
+			 type = "Tech combine",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
@@ -2148,7 +2178,7 @@ bpath[6].speed_locked = true
 			mist.dynAddStatic(vars2)
 			local vars3 = 
 			{
-			 type = "Sandbox",
+			 type = "Tech combine",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x + math.random(300, 590),
@@ -2162,7 +2192,7 @@ bpath[6].speed_locked = true
 															elseif randomobjects == 6 then
 						local vars = 
 			{
-			 type = "Bunker",
+			 type = "Tech combine",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x,
@@ -2224,7 +2254,7 @@ bpath[6].speed_locked = true
 			mist.dynAddStatic(vars2)
 			local vars3 = 
 			{
-			 type = "Sandbox",
+			 type = "Tech combine",
 			 country = 'GEORGIA',
 			 category = "Fortifications", 
 			 x = buildPsn.x + math.random(300, 590),
@@ -2531,7 +2561,7 @@ bpath[6].speed_locked = true
 	 Strike_Area.z = mudPsn.z
    radius = 1000
 	
-	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = '601', req_num = 3, stopFlag =' 602'}
 		
 end
 ---
@@ -2921,7 +2951,7 @@ end
 	 Strike_Area2.z = buildPsn.z
    radius = 13000
 	
-	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area2, flag = 701, req_num = 3, stopFlag = 702}
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area2, flag = '701', req_num = 3, stopFlag = '702'}
 		
 end
 ---
@@ -2938,8 +2968,8 @@ end
 	local mrand = mist.random(1,Mud_Convoys)
 	convoytask = 1
 	
-	MudName = {}
-	ConvoySend = {}
+	--local MudName = ""
+	local ConvoySend = {}
 
 		local msg = {}
 	  msg.text = ' Creating Moving Mud.'
@@ -2969,13 +2999,9 @@ end
 	  MudName = Mud_Convoy_VeryHard[mrand]
 		end
 
-		trigger.action.activateGroup(Group.getByName(MudName))
-		local MudGrpData = mist.getGroupData(MudName)
-
-
-		
-
-			
+		--trigger.action.activateGroup(Group.getByName(MudName))
+		--local MudGrpData = mist.getGroupData(MudName)
+	
 		  for i = 1, 100 do
 	    if Task_Range == 1 then
 	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
@@ -3017,6 +3043,8 @@ end
 	  --mvars.maxDisp = 100
 	  --mvars.radius = 20
 		MudNameb = mist.teleportToPoint(mvars)
+		
+
 								
 								
 	local mvars = {}
@@ -3027,6 +3055,10 @@ end
 	  --mvars.maxDisp = 100
 	  --mvars.radius = 20
 		MudNameb = mist.teleportToPoint(mvars)
+		
+	
+		
+
 			
 		formisttable3 = '[g]' .. MudNameb
 		targets3 = mist.makeUnitTable({formisttable3})
@@ -3044,17 +3076,19 @@ end
 		--Make_Smoke(mudPsn, nil)
 		--return
 		
-					local checkunits3 = {
+		local checkunits3 = {
 	  groupName = MudNameb,
-	  percent = 33,
-		flag = 301,
-		stopFlag = 302,
-		 toggle = true,
+	  percent = Percentagemod,
+		flag = '301',
+		stopFlag = '302',
+		--toggle = true,
 	 }
-	 mist.flagFunc.group_alive_less_than(checkunits3)
+		mist.flagFunc.group_alive_less_than(checkunits3)
 		
+		
+
 		local msg = {}
-	  msg.text = ' Convoy has been created.'
+	  msg.text = ' Convoy has been created.' ..tostring(MudNameb)
 	  msg.displayTime = 5
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
@@ -3193,11 +3227,12 @@ end
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-		 local checkunits1 = {
+	
+		local checkunits1 = {
 	  groupName = DefensesName,
-	  percent = 33,
-		flag = 101,
-		stopFlag = 102,
+	  percent = Percentagemod,
+		flag = '101',
+		stopFlag = '102',
 		 toggle = true,
 	 }
 	 mist.flagFunc.group_alive_less_than(checkunits1)
@@ -3647,6 +3682,104 @@ end
 
 	end
 	---
+	
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_100()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "total destruction"
+	Percentagemod = 5
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_75()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "catastrophic losses"
+	Percentagemod = 25
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_66()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "very heavy losses"
+	Percentagemod = 33
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_50()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "heavy losses"
+	Percentagemod = 50
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_33()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "light losses"
+	Percentagemod = 66
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Percentage_0()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local Percentage = "no losses"
+	Percentagemod = 100
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Task destruction goal has been set to '..tostring(Percentage)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	    	mist.message.add(msg)
+
+	    --return
+	end
+	------
+	
 	
 	----------------
 	-- Wanks Code --
@@ -4153,46 +4286,37 @@ end
 	
 
 
-	Debug_Show()
-	--return time + 5
+	--Debug_Show()
+	return time + 5
 
 end
 	---
 
-	function Debug_Show()
+	function Debug_Show(arg, time)
 
-			if Debugger == 1 then
+		if Debugger == 1 then
 			local msg = {}
 	    msg.text = ' Debug variables'
-	    msg.displayTime = 1
+	    msg.displayTime = 4
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 
 			
 
 			local msg = {}
-	    msg.text = ' TasksStart' ..tostring(airfield) ..tostring(mudtask) ..tostring(convoytask) ..tostring(intercepttask) ..tostring(bombertask) ..tostring(striketask)
-	    msg.displayTime = 1
+	    msg.text = ' Tasks Start' ..tostring(airfield) ..tostring(mudtask) ..tostring(convoytask) ..tostring(intercepttask) ..tostring(bombertask) ..tostring(striketask) ..tostring(navaltask)
+	    msg.displayTime = 4
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 
 			
 			local msg = {}
-	    msg.text = ' CompletedTask' ..tostring(airfield_complete) ..tostring(mud_complete) ..tostring(convoy_complete) ..tostring(intercept_complete) ..tostring(bomber_complete) .tostring(strike_complete)
-	    msg.displayTime = 1
+	    msg.text = ' Completed Task' ..tostring(airfield_complete) ..tostring(mud_complete) ..tostring(convoy_complete) ..tostring(intercept_complete) ..tostring(bomber_complete) ..tostring(strike_complete) ..tostring(naval_complete)
+	    msg.displayTime = 4
 	    msg.msgFor = {coa = {'all'}}
-	    mist.message.add(msg)
-			
-
-			local msg = {}
-	    msg.text = ' Debug variables'
-	    msg.displayTime = 1
-	    msg.msgFor = {coa = {'all'}}
-	    mist.message.add(msg)
-
+			mist.message.add(msg)
 			end
-
-
+			return time + 5
 	end
 
 	function Debug_Toggle()
@@ -4229,5 +4353,6 @@ end
 
 	timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
 	timer.scheduleFunction(Mission_Complete_Checks, nil, timer.getTime() + 5) 
+	timer.scheduleFunction(Debug_Show, nil, timer.getTime() + 5) 
 	------------------------------------------------------------------
 

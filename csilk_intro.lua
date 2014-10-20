@@ -62,7 +62,6 @@ function Introduce_Mission(arg, time)
   if pickSFX == 4 then
     trigger.action.outSoundForCoalition(coalition.side.RED, 'variation4.ogg')
   end
-return
 end
 
 --------------------------------

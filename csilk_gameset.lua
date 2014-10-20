@@ -362,3 +362,28 @@ end
 -----------------------------------
 -- End Change Smoke Set Function --
 -----------------------------------
+
+function Debug_Toggle()
+  local Old_Set = Debugger
+  local New_Set = nil
+  local DebugSet = ""
+
+  if Old_Set == 1 then
+    New_Set = 0
+    Debugger = New_Set
+    DebugSet = "disabled"
+  end
+    if Old_Set == 0 then
+    New_Set = 1
+    Debugger = New_Set
+    DebugSet = "enabled"
+  end
+
+  trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')
+  local msg = {} 
+    msg.text = ' Debug information is '..tostring(DebugSet)
+    msg.displayTime = 20
+    msg.msgFor = {coa = {'all'}}
+    mist.message.add(msg)
+ -- return
+end

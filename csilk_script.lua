@@ -3,19 +3,19 @@
 	-- Flagship Script
 
 	local rad_option_0a = "Briefing: Last Mud"
-	local rad_option_0b = "Briefing: Last Strike"
+	--local rad_option_0b = "Briefing: Last Strike"
 	local rad_option_0c = "Briefing: Last Convoy"
-	local rad_option_0d = "Briefing: Last Airdrome"
+	--local rad_option_0d = "Briefing: Last Airdrome"
 	local rad_option_0e = "Briefing: Last Naval"
 
 	local rad_option_1a = "Interdict: CAP"
 	local rad_option_1b = "Interdict: Bombers"
 	local rad_option_1c = "Create ground task"
   local rad_option_1d = "Hunt convoy"
-	local rad_option_1e = "Strike: Facilities"
+	--local rad_option_1e = "Strike: Facilities"
 	local rad_option_1f = "Strike: Naval"
 
-	local rad_option_2a = "Assault: Sochi-Adler"
+	--local rad_option_2a = "Assault: Sochi-Adler"
 	--local rad_option_7a = "Enemy Smoke Markers"
 
 	----------------
@@ -23,40 +23,47 @@
 	----------------
 	-- radio option variables are grouped by function. ie- 0a-3a
 	-- These variables define the displayed name for mission difficulty
-	local rad_option_8a = "WW2 / Trucks"
-	local rad_option_8b = "Korean / APCs"
-	local rad_option_8c = "Vietnam / IFVs"
-	local rad_option_8d = "Hard / Light MBTs"
-	local rad_option_8e = "Macho / Heavy MBTs"
+	local rad_option_8a = "World War II"
+	local rad_option_8b = "Korean"
+	local rad_option_8c = "Early Vietnam (default)"
+	local rad_option_8d = "Post Vietnam"
+	local rad_option_8e = "Cold War"
   
   local rad_option_10a = "1 enemy plane"
-  local rad_option_10b = "2 enemy planes"
+  local rad_option_10b = "2 enemy planes (default)"
   local rad_option_10c = "4 enemy planes"
   local rad_option_10d = "2 x 4 enemy planes"
   
   local rad_option_11a = "No radar SAMs"
-  local rad_option_11b = "Short range radar SAMs"
-  local rad_option_11c = "Medium range radar SAMs"
-  local rad_option_11d = "Long range radar SAMs"
-  local rad_option_11e = "All zones of coverage"
+  local rad_option_11b = "Short range"
+  local rad_option_11c = "Medium range (default)"
+  local rad_option_11d = "Long range"
+  local rad_option_11e = "All envelopes"
   
   local rad_option_12a = "No IR SAM"
   local rad_option_12b = "Vehicle based"
-  local rad_option_12c = "Manpads"
+  local rad_option_12c = "Manpads (default)"
   local rad_option_12d = "Both"
   local rad_option_12e = "Extra vehicle based with Manpads"
   
   local rad_option_13a = "No AI SEAD Flights"
-  local rad_option_13b = "2 Allied SEAD planes"
+  local rad_option_13b = "2 Allied SEAD planes (default)"
   local rad_option_13c = "4 Allied SEAD planes"
   
   local rad_option_14a = "No enemy helos"
-  local rad_option_14b = "2 enemy helos"
+  local rad_option_14b = "2 enemy helos (default)"
   local rad_option_14c = "4 enemy helos"
   local rad_option_14d = "2 x 4 enemy helos"
   
-  local rad_option_16a = "Disable CA"
+  local rad_option_16a = "Disabled CA (Default)"
   local rad_option_16b = "Enable CA"
+  
+  local rad_option_17a = "AAA Enabled (Default)"
+  local rad_option_17b = "AAA Disabled"
+  
+  local rad_option_18a = "Buildings enabled (Default)"
+  local rad_option_18b = "Buildings disabled"
+  
   
   
 
@@ -131,15 +138,17 @@
 	Scoord  = {}
 	Difficulty = "Normal"
 	Difficultymod = 1
-	Range = "Standard"
-	Task_Range = 3
-  Groupsizes = 1
-  Samradar = 2
-  Saminfared = 2
+	Range = "Close"
+	Task_Range = 2
+  Groupsizes = 2
+  Samradar = 3
+  Saminfared = 3
   SEAD = 2
   eHelo = 2
   aHelo = 2
   CACAS = 1
+  EnemyAD = 2
+  EnemyFort = 2
   admin_lock = trigger.misc.getUserFlag(666)
   
   if admin_lock == 1 then
@@ -177,7 +186,13 @@
     "MudREDCAS (VeryHard) #002",
     "MudREDCAS (VeryHard) #003",
     "MudREDCAS (VeryHard) #004",
-	  "Anapa-86 #1",
+	  "Anapa-P51D #1",
+    "Anapa-P51D #2",
+    "Anapa-K4 #2",
+    "Anapa-K4 #1",
+    "Anapa-D9 #1",
+    "Anapa-D9 #2",
+    "Anapa-86 #1",
 		"Anapa-86 #2",
 		"Anapa-21 #1",
 	  "Anapa-21 #2",
@@ -395,7 +410,7 @@
 	-- Static MUD Arrays --
 	-----------------------
 
-	Mud_Names = 6 -- variable for number of availale MUD Per Difficulty
+	Mud_Names = 5 -- variable for number of availale MUD Per Difficulty
 
 	Mud_VeryEasy = {
 	  [1] = "Mud (VeryEasy) #001",
@@ -403,7 +418,7 @@
     [3] = "Mud (VeryEasy) #003",
     [4] = "Mud (VeryEasy) #004",
     [5] = "Mud (VeryEasy) #005",
-    [6] = "Mud (VeryEasy) #006",
+    --[6] = "Mud (VeryEasy) #006",
 	}
 	Mud_Easy = {
     [1] = "Mud (Easy) #001",
@@ -411,7 +426,7 @@
     [3] = "Mud (Easy) #003",
     [4] = "Mud (Easy) #004",
     [5] = "Mud (Easy) #005",
-    [6] = "Mud (Easy) #006",
+    --[6] = "Mud (Easy) #006",
 	}
 	Mud_Normal = {
 	  [1] = "Mud (Normal) #001",
@@ -427,7 +442,7 @@
     [3] = "Mud (Hard) #003",
     [4] = "Mud (Hard) #004",
     [5] = "Mud (Hard) #005",
-    [6] = "Mud (Hard) #006",
+    --[6] = "Mud (Hard) #006",
 	}
 	Mud_VeryHard = {
 	  [1] = "Mud (VeryHard) #001",
@@ -435,7 +450,60 @@
     [3] = "Mud (VeryHard) #003",
     [4] = "Mud (VeryHard) #004",
     [5] = "Mud (VeryHard) #005",
-    [6] = "Mud (VeryHard) #006",
+    --[6] = "Mud (VeryHard) #006",
+	}
+	---------------------------
+	-- End Static MUD Arrays --
+	---------------------------
+  	-----------------------
+	-- AD MUD Arrays --
+	-----------------------
+
+	AD_Groups = 2 -- variable for number of availale MUD Per Difficulty
+
+	AD_VeryEasy = {
+	  [1] = "AD (VeryEasy) #001",
+    [2] = "AD (VeryEasy) #002",
+    [3] = "AD (VeryEasy) #003",
+    [4] = "AD (VeryEasy) #004",
+    [5] = "AD (VeryEasy) #005",
+    [6] = "AD (VeryEasy) #006",
+	}
+  
+  AD_Easy = {
+	  [1] = "AD (Easy) #001",
+    [2] = "AD (Easy) #002",
+    [3] = "AD (Easy) #003",
+    [4] = "AD (Easy) #004",
+    [5] = "AD (Easy) #005",
+    [6] = "AD (Easy) #006",
+	}
+  
+  AD_Normal = {
+	  [1] = "AD (Normal) #001",
+    [2] = "AD (Normal) #002",
+    [3] = "AD (Normal) #003",
+    [4] = "AD (Normal) #004",
+    [5] = "AD (Normal) #005",
+    [6] = "AD (Normal) #006",
+	}
+  
+  AD_Hard = {
+	  [1] = "AD (Hard) #001",
+    [2] = "AD (Hard) #002",
+    [3] = "AD (Hard) #003",
+    [4] = "AD (Hard) #004",
+    [5] = "AD (Hard) #005",
+    [6] = "AD (Hard) #006",
+	}
+  
+   AD_VeryHard = {
+	  [1] = "AD (VeryHard) #001",
+    [2] = "AD (VeryHard) #002",
+    [3] = "AD (VeryHard) #003",
+    [4] = "AD (VeryHard) #004",
+    [5] = "AD (VeryHard) #005",
+    [6] = "AD (VeryHard) #006",
 	}
 	---------------------------
 	-- End Static MUD Arrays --
@@ -1221,39 +1289,54 @@ Infantry2_Squads = 5
 
 	-- Removes submenus so that reloading the script does not result in duplicate submenus in the list
 	-- this was added because of the loading of the script debug option.
-	missionCommands.removeItem({"Mission Info"})
+	--missionCommands.removeItem({"Mission Info"})
 	--missionCommands.removeItem({"Airfield Tasks"})
-	missionCommands.removeItem({"Anapa Tasks"})
-	missionCommands.removeItem({"Maykop Tasks"})
-	missionCommands.removeItem({"Gudauta Tasks"})
-	missionCommands.removeItem({"Kutaisi Tasks"})
-	missionCommands.removeItem({"Nalchik Tasks"})
-	missionCommands.removeItem({"Tbilisi Tasks"})
-	missionCommands.removeItem({"OPFS Settings"})
-	missionCommands.removeItem({"Debug"})
+	--missionCommands.removeItem({"Anapa Tasks"})
+	--missionCommands.removeItem({"Maykop Tasks"})
+	--missionCommands.removeItem({"Gudauta Tasks"})
+	--missionCommands.removeItem({"Kutaisi Tasks"})
+	--missionCommands.removeItem({"Nalchik Tasks"})
+	--missionCommands.removeItem({"Tbilisi Tasks"})
+	--missionCommands.removeItem({"OPFS Settings"})
+	--missionCommands.removeItem({"Debug"})
 	
 	 --variables defining f10 sub-menu items
 	Calls = missionCommands.addSubMenu("Mission Info",nil)
 	--Airdromes = missionCommands.addSubMenu("Airfield Tasks",nil)
-	AnapaPath = missionCommands.addSubMenu("Anapa Tasks",nil)
-	MaykopPath = missionCommands.addSubMenu("Maykop Tasks",nil)
-	GudautaPath = missionCommands.addSubMenu("Gudauta Tasks",nil)
-	KutaisiPath = missionCommands.addSubMenu("Kutaisi Tasks",nil)
-	NalchikPath = missionCommands.addSubMenu("Nalchik Tasks",nil)
-	TbilisiPath = missionCommands.addSubMenu("Tbilisi Tasks",nil)
-	GameSet = missionCommands.addSubMenu("OPFS Settings",nil)
+
+  
+  
+  
+  
+  
+  
+  Creationkit = missionCommands.addSubMenu("Task Creation",nil)
+	GameSet = missionCommands.addSubMenu("Set Options",nil)
 	--Debug = missionCommands.addSubMenu("Debug",nil)
+  
+  AnapaPath = missionCommands.addSubMenu("Anapa", Creationkit)
+	MaykopPath = missionCommands.addSubMenu("Maykop", Creationkit)
+	GudautaPath = missionCommands.addSubMenu("Gudauta", Creationkit)
+	KutaisiPath = missionCommands.addSubMenu("Kutaisi", Creationkit)
+	NalchikPath = missionCommands.addSubMenu("Nalchik", Creationkit)
+	TbilisiPath = missionCommands.addSubMenu("Tbilisi", Creationkit)
+  
 
 	--The are sub-menu variables, the parent menu is GameSet
-	DifficultySet = missionCommands.addSubMenu("Set Spawn Difficulty", GameSet)
-	DistanceSet = missionCommands.addSubMenu("Set Task Spawn Distance", GameSet)
-  SizeSet = missionCommands.addSubMenu("Set Fighter Group Size", GameSet)
-  RadarSamSet = missionCommands.addSubMenu("Set Radar SAM threat level", GameSet)
-  IRSamSet = missionCommands.addSubMenu("Set IR SAM threat level", GameSet)
-  SEADSet = missionCommands.addSubMenu("Allied SEAD settings", GameSet)
-  eHeloSet = missionCommands.addSubMenu("Enemy Helo settings", GameSet)
-  aHeloSet = missionCommands.addSubMenu("Allied Helo settings", GameSet)
-  Combinedarms = missionCommands.addSubMenu("Combined Arms", GameSet)
+	DifficultySet = missionCommands.addSubMenu("Difficulty", GameSet)
+	DistanceSet = missionCommands.addSubMenu("Distance", GameSet)
+  FortSet = missionCommands.addSubMenu("Buildings", GameSet)
+  SizeSet = missionCommands.addSubMenu("A2A", GameSet)
+  ADSet = missionCommands.addSubMenu("AAA", GameSet)
+  RadarSamSet = missionCommands.addSubMenu("Radar SAM", GameSet)
+  IRSamSet = missionCommands.addSubMenu("IR SAM", GameSet)
+  SEADSet = missionCommands.addSubMenu("AI SEAD", GameSet)
+  eHeloSet = missionCommands.addSubMenu("Helos", GameSet)
+  --aHeloSet = missionCommands.addSubMenu("Allied Helo settings", GameSet)
+  Combinedarms = missionCommands.addSubMenu("CA", GameSet)
+  --Combinedarms = missionCommands.addSubMenu("Combined Arms", GameSet)
+  
+  
 
 	---------------
 	-- RADIO ADD --
@@ -1291,9 +1374,9 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, Debug_Toggle, nil)
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall1, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, Bullscall2, nil)
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, Bullscall2, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, Bullscall3, nil)
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, Calls, Bullscall4, nil)
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, Calls, Bullscall4, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0e, Calls, Bullscall5, nil)
 
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
@@ -1315,7 +1398,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Escort, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Mud, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, AnapaPath, Create_Mud_Convoy, 'Anapa')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Strike, 'Anapa')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Strike, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, AnapaPath, Create_Naval, 'OceanNorth')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, MaykopPath, Create_Fighter_Intercept, 'Maykop')
@@ -1323,7 +1406,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Escort, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Mud, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, MaykopPath, Create_Mud_Convoy, 'Maykop')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, MaykopPath, Create_Strike, 'Maykop')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, MaykopPath, Create_Strike, 'Maykop')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, MaykopPath, Create_Naval, 'Maykop')
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, GudautaPath, Create_Fighter_Intercept, 'Gudauta')
@@ -1339,7 +1422,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Escort, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Mud, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Strike, 'Kutaisi')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Strike, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, KutaisiPath, Create_Naval, 'OceanSouth')
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
@@ -1347,7 +1430,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Escort, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Mud, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, NalchikPath, Create_Mud_Convoy, 'Nalchik')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, NalchikPath, Create_Strike, 'Nalchik')
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, NalchikPath, Create_Strike, 'Nalchik')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, NalchikPath, Create_Naval, 'Nalchik')
 	
 
@@ -1356,7 +1439,7 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Escort, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Mud, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, TbilisiPath, Create_Strike, 'Tbilisi')
+--	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, TbilisiPath, Create_Strike, 'Tbilisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, TbilisiPath, Create_Naval, 'Tbilisi')
 		----------------
 	-- Wanks Code --
@@ -1397,6 +1480,12 @@ Infantry2_Squads = 5
   -- These commands set CA options
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+    -- These commands set air defense options
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_17a, ADSet, Set_AD_Level_2, nil) -- 'AAA enabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_17b, ADSet, Set_AD_Level_1, nil) -- 'AAA disabled
+      -- These commands set air defense options
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_18a, FortSet, Set_Fort_Level_2, nil) -- 'AAA enabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_18b, FortSet, Set_Fort_Level_1, nil) -- 'AAA disabled
 	-- These commands set the function of the radio options in the target range sub-menu
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9a, DistanceSet, Set_Distance_Scramble, nil) -- Scramble
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9b, DistanceSet, Set_Distance_Close, nil) -- Close
@@ -1610,32 +1699,32 @@ Infantry2_Squads = 5
     
 
 	  if Task_Range == 1 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.75, zone.radius * 0.40)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.60, zone.radius * 0.40)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
 	  end
 
 	  if Task_Range == 2 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.00, zone.radius * 0.75)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.70, zone.radius * 0.60)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
 	  end
 
 	  if Task_Range == 3 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.25, zone.radius * 1.00)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.80, zone.radius * 0.70)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
 	  end
 
 	  if Task_Range == 4 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.50, zone.radius * 1.25)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.90, zone.radius * 0.80)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
 	  end
 		
 		if Task_Range == 5 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.75, zone.radius * 1.50)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.00, zone.radius * 0.90)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
 	  end
 		
 	  if Task_Range == 6 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 2.00, zone.radius * 1.75)
+	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.50, zone.radius * 1.00)
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
 	  end
     
@@ -1730,7 +1819,7 @@ Infantry2_Squads = 5
 	
 	--local vars = {} 
 	--vars.groupName = grpName
-	--vars.action = "clone"
+	--vars.action = "respawn"
 	--vars.point = spawnPsn
 	--vars.route = path
 	--mist.teleportToPoint(vars)			
@@ -1869,7 +1958,7 @@ Infantry2_Squads = 5
 	
 	--local vars = {} 
 	--vars.groupName = grpName
-	--vars.action = "clone"
+	--vars.action = "respawn"
 	--vars.point = spawnPsn
 	--vars.route = path
 	--mist.teleportToPoint(vars)			
@@ -1977,23 +2066,24 @@ Infantry2_Squads = 5
   local brand = mist.random(1,2)
   local erand = mist.random(1,Fighter_Names)
 	
-	if Difficultymod == 1 then
+	if Groupsizes == 1 then
+      if Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
 		egrpName = Fighter_Names_VeryEasy[erand]
 	end
 
-	if Difficultymod == 2 then
+		if Difficultymod == 2 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Easy[erand]
 	end
-
-	if Difficultymod == 3 then
-		bgrpName = Bomber_Names_Hard[brand]
+  
+  if Difficultymod == 3 then
+		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Normal[erand]
 	end
-	
+
 	if Difficultymod == 4 then
-		bgrpName = Bomber_Names_VeryHard[brand]
+		bgrpName = Bomber_Names_Hard[brand]
 		egrpName = Fighter_Names_Hard[erand]
 	end
 	
@@ -2001,6 +2091,88 @@ Infantry2_Squads = 5
 		bgrpName = Bomber_Names_VeryHard[brand]
 		egrpName = Fighter_Names_VeryHard[erand]
 	end
+end
+
+	if Groupsizes == 2 then
+      if Difficultymod == 1 then
+		bgrpName = Bomber_Names_Easy[brand]
+		egrpName = Fighter_Names_VeryEasyx2[erand]
+	end
+
+		if Difficultymod == 2 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Easyx2[erand]
+	end
+  
+  if Difficultymod == 3 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Normalx2[erand]
+	end
+
+	if Difficultymod == 4 then
+		bgrpName = Bomber_Names_Hard[brand]
+		egrpName = Fighter_Names_Hardx2[erand]
+	end
+	
+	if Difficultymod == 5 then
+		bgrpName = Bomber_Names_VeryHard[brand]
+		egrpName = Fighter_Names_VeryHardx2[erand]
+	end
+end
+
+	if Groupsizes == 3 then
+      if Difficultymod == 1 then
+		bgrpName = Bomber_Names_Easy[brand]
+		egrpName = Fighter_Names_VeryEasyx4[erand]
+	end
+
+		if Difficultymod == 2 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Easyx4[erand]
+	end
+  
+  if Difficultymod == 3 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Normalx4[erand]
+	end
+
+	if Difficultymod == 4 then
+		bgrpName = Bomber_Names_Hard[brand]
+		egrpName = Fighter_Names_Hardx4[erand]
+	end
+	
+	if Difficultymod == 5 then
+		bgrpName = Bomber_Names_VeryHard[brand]
+		egrpName = Fighter_Names_VeryHardx4[erand]
+	end
+end
+
+	if Groupsizes == 3 then
+      if Difficultymod == 1 then
+		bgrpName = Bomber_Names_Easy[brand]
+		egrpName = Fighter_Names_VeryEasyx4[erand]
+	end
+
+		if Difficultymod == 2 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Easyx4[erand]
+	end
+  
+  if Difficultymod == 3 then
+		bgrpName = Bomber_Names_Normal[brand]
+		egrpName = Fighter_Names_Normalx4[erand]
+	end
+
+	if Difficultymod == 4 then
+		bgrpName = Bomber_Names_Hard[brand]
+		egrpName = Fighter_Names_Hardx4[erand]
+	end
+	
+	if Difficultymod == 5 then
+		bgrpName = Bomber_Names_VeryHard[brand]
+		egrpName = Fighter_Names_VeryHardx4[erand]
+	end
+end
 
 	if Task_Range == 1 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
@@ -2270,6 +2442,7 @@ Infantry2_Squads = 5
    local seadrand = mist.random(1,SEAD_Names)
    local ehelorand = mist.random(1,Enemy_Helo_Names)
    	local mrandred = mist.random(1, Red_CAS_Names)
+    local pickedAD = mist.random(1, AD_Groups)
 	mudtask = 1
 
 	--trigger.action.deactivateGroup(Group.getByName(InfName))
@@ -2295,17 +2468,18 @@ Infantry2_Squads = 5
   local aHeloName = {}
   local aHeloName2 = {}
   local MudREDCASName = {}
+  local ADName = {}
   
 	
 
 	--if MudName ==  then
 		local msg = {}
-	  msg.text = ' Creating Mud.'
-	  msg.displayTime = 5
+	  msg.text = ' Creating ground attack task.'
+	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 
-	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+	
 
 	if Difficultymod == 1 then
 	  MudName = Mud_VeryEasy[mrand]
@@ -2315,6 +2489,7 @@ Infantry2_Squads = 5
 		InfName4 = Infantry_VeryEasy[4]
 		InfName5 = Infantry_VeryEasy[5]
     MudREDCASName = MudREDCAS_VeryEasy[mrandred]
+    ADName = AD_VeryEasy[pickedAD]
 	end
 
 	if Difficultymod == 2 then
@@ -2325,6 +2500,7 @@ Infantry2_Squads = 5
 		InfName4 = Infantry_Easy[4]
 		InfName5 = Infantry_Easy[5]
     MudREDCASName = MudREDCAS_Easy[mrandred]
+    ADName = AD_Easy[pickedAD]
 	end
 
 	if Difficultymod == 3 then
@@ -2335,6 +2511,7 @@ Infantry2_Squads = 5
 		InfName4 = Infantry_Normal[4]
 		InfName5 = Infantry_Normal[5]
     MudREDCASName = MudREDCAS_Normal[mrandred]
+    ADName = AD_Normal[pickedAD]
 	end
 
 	if Difficultymod == 4 then
@@ -2345,6 +2522,7 @@ Infantry2_Squads = 5
 		InfName4 = Infantry_Hard[4]
 		InfName5 = Infantry_Hard[5]
     MudREDCASName = MudREDCAS_Hard[mrandred]
+    ADName = AD_Hard[pickedAD]
 	end
 	
 	if Difficultymod == 5 then
@@ -2355,6 +2533,7 @@ Infantry2_Squads = 5
 		InfName4 = Infantry_VeryHard[4]
 		InfName5 = Infantry_VeryHard[5]
     MudREDCASName = MudREDCAS_VeryHard[mrandred]
+    ADName = AD_VeryHard[pickedAD]
 	end
   
       if Samradar == 1 then
@@ -2499,61 +2678,70 @@ Infantry2_Squads = 5
       end
     
     
+   local distran = mist.random(10000,17500)
+   local minran = mist.random(7500,10000)
+   
+   local distran2 = mist.random(42500,65000)
+   local minran2 = mist.random(39000,42500)
+   
+   local heloran = mist.random(1, 1000)
+   local heloran2 = mist.random(1, 1000)
 
   
-	for i = 1, 100 do
+	for i = 1, 1000 do
 	    if Task_Range == 1 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.35, mzone.radius * 0.25)
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
         seadPsn = mist.getRandPointInCircle(mzone.point, 0)
         heloPsn = mudPsn
-        heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-        heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+        heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+        heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 	    elseif Task_Range == 2 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.55, mzone.radius * 0.35)
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
          seadPsn = mist.getRandPointInCircle(mzone.point, 0)
          heloPsn = mudPsn
-         heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-         heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+         heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+         heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 	    elseif Task_Range == 3 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.75, mzone.radius * 0.55)
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
          seadPsn = mist.getRandPointInCircle(mzone.point, 0)
          heloPsn = mudPsn
-         heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-         heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+         heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+         heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 	    elseif Task_Range == 4 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.90, mzone.radius * 0.75)		
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
          seadPsn = mist.getRandPointInCircle(mzone.point, 0)
          heloPsn = mudPsn
-         heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-         heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+         heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+         heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 			elseif Task_Range == 5 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.15, mzone.radius * 0.90)
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
          seadPsn = mist.getRandPointInCircle(mzone.point, 0)
          heloPsn = mudPsn
-         heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-         heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+         heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+         heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 			elseif Task_Range == 6 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
-        samPsn = mist.getRandPointInCircle(mudPsn, 18000, 8000)
-        samPsn2 = mist.getRandPointInCircle(mudPsn, 36000, 40000)
-         seadPsn = mist.getRandPointInCircle(mzone.point, 0)
+	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.35, mzone.radius * 1.15)
+        samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
+        samPsn2 = mist.getRandPointInCircle(mudPsn, distran2, minran2)
+         seadPsn = mist.getRandPointInCircle(mzone.point, 200)
          heloPsn = mudPsn
-         heloPsn2 = mist.getRandPointInCircle(heloPsn, 10000)
-         heloPsn3 = mist.getRandPointInCircle(heloPsn, 10000)
+         heloPsn2 = mist.getRandPointInCircle(heloPsn, heloran)
+         heloPsn3 = mist.getRandPointInCircle(heloPsn, heloran2)
 			end
-
+      
+    
 			
-					if mist.isTerrainValid(mudPsn, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 19) < 4 then
+								if mist.isTerrainValid(mudPsn, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 19) < 4 then
           if mist.isTerrainValid(samPsn, {'LAND'}) == true and mist.terrainHeightDiff(samPsn, 19) < 8 then
           if mist.isTerrainValid(samPsn2, {'LAND'}) == true and mist.terrainHeightDiff(samPsn2, 19) < 8 then
           break
@@ -2562,10 +2750,12 @@ Infantry2_Squads = 5
 					end
           end
 		end
+          
+		
     
     local msg = {}
 	  msg.text = ' Suitable Spawn Located... Keep in mind some are better then others.'
-	  msg.displayTime = 5
+	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
     
@@ -2577,19 +2767,17 @@ Infantry2_Squads = 5
     
     		local MudGrpData = mist.getGroupData(MudName)
     
-    		local msg = {}
-	  msg.text = ' Sam and Mud Group Data Recieved... Attempting respawn.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 
 		local mvars = {}
 	  mvars.groupName = MudName
 	  mvars.action = "respawn"
 	  mvars.point = mudPsn
 	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 25
+    --mvars.groupId = mist.random(9999, 9999999)
+	  mvars.maxDisp = 285
+	  mvars.radius = 0
+    mvars.innerRadius = 50
 		mist.teleportToPoint(mvars)
 		
 --		formisttable = ''
@@ -2598,929 +2786,22 @@ Infantry2_Squads = 5
     
       
             AddOP(MudName) -- add MBOT to it
-			
-          		local msg = {}
-	  msg.text = ' MBOT Intelligence Added'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)      		
+		random_markers(MudName, 50, 500, "Red", 480, 1800)	
+  		
 
         		local msg = {}
-	  msg.text = ' Mud Spawned Ok.'
-	  msg.displayTime = 5
+	  msg.text = ' Enemy ground forces spawned.'
+	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-	
-    local infvars = {}
-		infvars.groupName = InfName1
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-		infvars.disperse = true
-	  infvars.maxDisp = 400
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
-
-		--mist.spawnRandomizedGroup(InfName1)
-		
-		local infvars = {}
-		infvars.groupName = InfName2
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-		infvars.disperse = true
-	  infvars.maxDisp = 400
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
-		
-		local infvars = {}
-		infvars.groupName = InfName3
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-		infvars.disperse = true
-	  infvars.maxDisp = 400
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
-		
-		
-	local infvars = {}
-		infvars.groupName = InfName4
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-		infvars.disperse = true
-	  infvars.maxDisp = 400
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)
-		
-		local infvars = {}
-		infvars.groupName = InfName5
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-		infvars.disperse = true
-	  infvars.maxDisp = 400
-	  infvars.radius = 100
-		infvars.innerRadius = 70
-		mist.teleportToPoint(infvars)		  
-			
-		--mist.spawnRandomizedGroup(MudName)
-		--mist.spawnRandomizedGroup(InfName1)
-		--mist.spawnRandomizedGroup(InfName2)
-		--mist.spawnRandomizedGroup(InfName3)
-		--mist.spawnRandomizedGroup(InfName4)
-		--mist.spawnRandomizedGroup(InfName5)
-    
-            		local msg = {}
-	  msg.text = ' Infantry Spawned Ok.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-    
-    
-		
-		
-		local randomizer_disperse = 0
-		local randomizer_radius = 0
-		local randomizer_inner_radius = 0
-		local randomizer_max_disperse = 0
-		local use_randomizer = 0
-		--use_randomizer = mist.random(0,1)
-	
-	  
-
-		
-		mist.removeFunction(InfFunc1c)
-		mist.removeFunction(InfFunc2c)
-		mist.removeFunction(InfFunc3c)
-		mist.removeFunction(InfFunc4c)
-		mist.removeFunction(InfFunc5c)
-
-		local randomizer_time = 0
-		randomizer_time = mist.random(90,180)
-
-    InfFunc1c = mist.scheduleFunction(Move_Infantry,{InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc2c = mist.scheduleFunction(Move_Infantry,{InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc3c = mist.scheduleFunction(Move_Infantry,{InfName3}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc4c = mist.scheduleFunction(Move_Infantry,{InfName4}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc5c = mist.scheduleFunction(Move_Infantry,{InfName5}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    
-  
-			
-				local msg = {}
-	  msg.text = ' Infantry Patroling Ok '
-	  msg.displayTime = 20
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-    
-		
-
-
-		--Make_Smoke(mzone, nil)
-		--return
-	 --mist.flagFunc.group_alive_less_than(checkunits2)
-   
-   	--	local completevars = {}
-    --completevars.groupName = MudName
-   --completevars.flag =  202
-   --completevars.percent = 33
-   --completevars.toggle = true
-   
- --mist.flagFunc.group_alive_more_than(completevars)
- 
-   
-
-   --			local msg = {}
-	  --msg.text = ' Flag 202 set to trigger at 33 percent health '
-	  --msg.displayTime = 5
-	  --msg.msgFor = {coa = {'all'}}
-	  --mist.message.add(msg)
-    
-         local msg = {}
-	  msg.text = ' Spawning SAMs now'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-  
-  
-  
-     if Samradar == 2 then
-		local mvars = {}
-	  mvars.groupName = RadarSamName
-	  mvars.action = "respawn"
-	  mvars.point = samPsn
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    end
-    
-    if Samradar == 3 then
-		local mvars = {}
-	  mvars.groupName = RadarSamName
-	  mvars.action = "respawn"
-	  mvars.point = samPsn
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    end
-    
-    if Samradar == 4 then
-		local mvars = {}
-    mvars.groupName = RadarSamName
-	  mvars.action = "respawn"
-	  mvars.point = samPsn2
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    end
-    
-        if Samradar == 5 then
-				local mvars = {}
-	  mvars.groupName = RadarSamName3
-	  mvars.action = "respawn"
-	  mvars.point = samPsn2
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    
-    local mvars = {}
-	  mvars.groupName = RadarSamName2
-	  mvars.action = "respawn"
-	  mvars.point = samPsn
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    
-    mvars.groupName = RadarSamName
-	  mvars.action = "respawn"
-	  mvars.point = samPsn
-	  mvars.disperse = false
-	  --mvars.maxDisp = 0
-	  --mvars.radius = 0
-		mist.teleportToPoint(mvars)
-    end
-    
-    if Saminfared == 2 then
-		local mvars = {}
-	  mvars.groupName = IRSamName
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    end
-    
-    if Saminfared == 3 then
-		local mvars = {}
-	  mvars.groupName = IRSamName
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    end
-    
-        if Saminfared == 4 then
-		local mvars = {}
-	  mvars.groupName = IRSamName2
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    
-    
-    mvars.groupName = IRSamName
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    end
-    
-            if Saminfared == 5 then
-				local mvars = {}
-	  mvars.groupName = IRSamName3
-	  mvars.action = "respawn"
-	  mvars.point = samPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    
-    
-    local mvars = {}
-	  mvars.groupName = IRSamName2
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    
-    
-    mvars.groupName = IRSamName
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = true
-	  mvars.maxDisp = 300
-	  mvars.radius = 200
-		mist.teleportToPoint(mvars)
-    end
-    
-        		local msg = {}
-	  msg.text = ' SAMs Spawned Ok.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-  
-  
-  
-  
-  
-
-    
-  
-    
-    
-    -------------------- this part adds in the SEAD flight if applicable by user settings during the mission                
-
-    
-    if SEAD >= 2 then    
-      	local msg = {} 
-        
-             if SEAD == 2 and Difficultymod == 1 then
-	    seadName = SEAD_Names_VeryEasy2x[seadrand]
-      end
-      
-     if SEAD == 2 and Difficultymod == 2 then
-	    seadName = SEAD_Names_Easy2x[seadrand]
-      end
-     if SEAD == 2 and Dfficultymod == 3 then
-	    seadName = SEAD_Names_Normal2x[seadrand]
-      end
-      
-            if SEAD == 2 and Difficultymod == 4 then
-	    seadName = SEAD_Names_Hard2x[seadrand]
-      end
-      
-            if SEAD == 2 and Difficultymod == 5 then
-	    seadName = SEAD_Names_VeryHard2x[seadrand]
-      end
-   
-    
-      if SEAD == 3 and Difficultymod == 1 then
-	    seadName = SEAD_Names_VeryEasy4x[seadrand]
-      end
-      
-      if SEAD == 3 and Difficultymod == 2 then
-	    seadName = SEAD_Names_Easy4x[seadrand]
-      end
-      if SEAD == 3 and Difficultymod == 3 then
-	    seadName = SEAD_Names_Normal4x[seadrand]
-      end
-      
-            if SEAD == 3 and Difficultymod == 4 then
-	    seadName = SEAD_Names_Hard4x[seadrand]
-      end
-      
-            if SEAD == 3 and Difficultymod == 5 then
-	    seadName = SEAD_Names_VeryHard4x[seadrand]
-      end
-        
-	msg.text = ' SEAD Plane selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-		
-	trigger.action.activateGroup(Group.getByName(seadName))
-	seadgrp = Group.getByName(seadName)
-  
-
-	
-	local InitwpSpeed = mist.random(400,500)
-	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
-	local wpAlt = 3000
-  local wpAlt2 = mist.random(4000,6000)
-	local wpPsn = mist.getRandPointInCircle(samPsn, 0)
-	local wpPsn2 = mist.getRandPointInCircle(seadPsn, 10000)
-  local path = {}
-					path[1] = mist.fixedWing.buildWP(seadPsn, "TakeOffParking", wpSpeed, wpalt, "BARO")
-					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt2, "BARO")
-					path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
-					path[1].task = {
-					id = "ComboTask",
-					params = {
-						tasks = {
-            [1] = {
-	            number = 1,
-	            auto = true,
-	            id = "EngageTargets",
-	            enabled = true,
-	            key = "SEAD",
-	            params = {
-	              targetTypes = {
-	                [1] = "Air Defence",
-	              }, -- end of targetTypes
-	              priority = 0,
-	            }, -- end of params
-	          }, -- end of [1]
-	          [2] = {
-	            number = 2,
-	            auto = false,
-	            id = "Orbit",
-	            enabled = true,
-	            params = {
-	              altitudeEdited = false,
-	              pattern = "Race-Track",
-	              speed = wpSpeed,
-	              altitude = wpAlt,
-	              speedEdited = true,
-	            }, -- end of params
-	          }, -- end of [2]
-	          [3] = {
-	            enabled = true,
-	            auto = false,
-	            id = "WrappedAction",
-	            number = 1,
-	            params = {
-	              action = {
-	                id = "Option",
-	                params = {
-	                  value = false,
-	                  name = 6,
-	                }, -- end of params
-	              }, -- end of action
-	            }, -- end of params
-	          }, -- end of [3]
-	        }, -- end of tasks
-	      } -- end of params
-	    }
-      
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-      
-		
-	local vars = {} 
-	vars.groupName = seadName
-	vars.action = "respawn"
-	vars.point = seadPsn
-	vars.route = path
-	mist.teleportToPoint(vars)			
-  
-  	local msg = {} 
-	msg.text = ' SEAD Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
-
-	local con = seadgrp:getController()
-	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
-	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
-	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
-	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
-	      
-	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
-  	local msg = {} 
-	msg.text = ' Allied SEAD Flight Created Ok.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-  end
-  
-  
-  
-  
-  
-    -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
-                      --seadName = {}
-                  		local msg = {}          
-	  msg.text = ' Enemy Helo init Ok.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-    
-    
-      	local msg = {} 
-	msg.text = ' Helo selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-		
-	trigger.action.activateGroup(Group.getByName(eHeloName))
-  ehelogrp = Group.getByName(eHeloName)
-  
-	
-  
-
-	
-	local eInitwpSpeed = mist.random(60,225)
-	local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
-	local ewpAlt = mist.random(100,200)
-  local ewpAlt2 = mist.random(50,100)
-  local hpath = {}
-					hpath[1] = mist.heli.buildWP(heloPsn, ewpSpeed, ewpAlt, "BARO")
-          hpath[2] = mist.heli.buildWP(heloPsn2, ewpSpeed, ewpAlt2, "BARO")
-					hpath[1].task = {
-					id = "ComboTask",
-					params = {
-						tasks = {
-              [1] = {
-	            number = 1,
-	            auto = true,
-	            id = "EngageTargets",
-	            enabled = true,
-	            key = "CAS",
-	            params = {
-	              targetTypes = {
-                [1] = "Helicopters",
-                [2] = "Ground Units",
-                [3] = "Light armed ships",
-                [4] = "Air",
-                }, -- end of ["targetTypes"]
-	              priority = 0,
-	            }, -- end of params
-	          }, -- end of [1]
-	          [2] = {
-	            number = 2,
-	            auto = false,
-	            id = "Orbit",
-	            enabled = true,
-	            params = {
-	              altitudeEdited = false,
-	              pattern = "Circle",
-	              speed = wpSpeed,
-	              altitude = wpAlt,
-	              speedEdited = true,
-	            }, -- end of params
-	          }, -- end of [2]
-	          [3] = {
-	            enabled = true,
-	            auto = false,
-	            id = "WrappedAction",
-	            number = 1,
-	            params = {
-	              action = {
-	                id = "Option",
-	                params = {
-	                  value = false,
-	                  name = 6,
-	                }, -- end of params
-	              }, -- end of action
-	            }, -- end of params
-	          }, -- end of [3]
-	        }, -- end of tasks
-	      } -- end of params
-	    }
-      
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-      
-		
-	local vars = {} 
-	vars.groupName = eHeloName
-	vars.action = "respawn"
-	vars.point = heloPsn
-	vars.route = hpath
-	mist.teleportToPoint(vars)			
-  
-  	local msg = {} 
-	msg.text = ' Enemy Helo spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
-
-	local con = ehelogrp:getController()
-	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
-	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
-	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
-	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
-  
-   	local msg = {} 
-	msg.text = ' Enemy Helo Flight Created Ok.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-	
-	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
-
-  
-  
-   
-  
-  
-  if eHelo == 4 then
-      -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
-                      --seadName = {}
-                  		local msg = {}          
-	  msg.text = ' Enemy Helo init Ok.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-    
-
-      	local msg = {} 
-	msg.text = ' Helo selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-		
-	trigger.action.activateGroup(Group.getByName(eHeloName2))
-  ehelogrp2 = Group.getByName(eHeloName2)
-  
-	
-  
-
-	
-	local eInitwpSpeed = mist.random(60,225)
-	local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
-	local ewpAlt = mist.random(100,200)
-  local ewpAlt2 = mist.random(50,100)
-  local hpath = {}
-					hpath[1] = mist.heli.buildWP(heloPsn3, ewpSpeed, ewpAlt, "BARO")
-          hpath[2] = mist.heli.buildWP(heloPsn, ewpSpeed, ewpAlt2, "BARO")
-					hpath[1].task = {
-					id = "ComboTask",
-					params = {
-						tasks = {
-              [1] = {
-	            number = 1,
-	            auto = true,
-	            id = "EngageTargets",
-	            enabled = true,
-	            key = "CAS",
-	            params = {
-	              targetTypes = {
-                [1] = "Helicopters",
-                [2] = "Ground Units",
-                [3] = "Light armed ships",
-                [4] = "Air",
-                }, -- end of ["targetTypes"]
-	              priority = 0,
-	            }, -- end of params
-	          }, -- end of [1]
-	          [2] = {
-	            number = 2,
-	            auto = false,
-	            id = "Orbit",
-	            enabled = true,
-	            params = {
-	              altitudeEdited = false,
-	              pattern = "Circle",
-	              speed = wpSpeed,
-	              altitude = wpAlt,
-	              speedEdited = true,
-	            }, -- end of params
-	          }, -- end of [2]
-	          [3] = {
-	            enabled = true,
-	            auto = false,
-	            id = "WrappedAction",
-	            number = 1,
-	            params = {
-	              action = {
-	                id = "Option",
-	                params = {
-	                  value = false,
-	                  name = 6,
-	                }, -- end of params
-	              }, -- end of action
-	            }, -- end of params
-	          }, -- end of [3]
-	        }, -- end of tasks
-	      } -- end of params
-	    }
-      
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-      
-		
-	local vars = {} 
-	vars.groupName = eHeloName2
-	vars.action = "respawn"
-	vars.point = heloPsn3
-	vars.route = hpath
-	mist.teleportToPoint(vars)			
-  
-  	local msg = {} 
-	msg.text = ' Enemy Helo spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
-
-	local con = ehelogrp2:getController()
-	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
-	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
-	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
-	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
-	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
-	      
-           	local msg = {} 
-	msg.text = ' 2nd Enemy Helo Flight Created Ok.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-        
-        end  
-	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
-
-  
-  
- 
-  
-  -- this part spawns CA forces
-         if CACAS == 2 then
-
-	--if MudName ==  then
-		local msg = {}
-	  msg.text = ' Creating RED CA forces'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-
-	--trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
-
-		--trigger.action.activateGroup(Group.getByName(MudName))
-		--trigger.action.activateGroup(Group.getByName(InfName1))
-		--trigger.action.activateGroup(Group.getByName(InfName2))
-		--trigger.action.activateGroup(Group.getByName(InfName3))
-		--trigger.action.activateGroup(Group.getByName(InfName4))
-		--trigger.action.activateGroup(Group.getByName(InfName5))
-		
-    local MudREDGrpData = mist.getGroupData(MudREDCASName)
-   
-    
-    		local msg = {}
-	  msg.text = ' Group data parsed '
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
- 
-
-    for i = 1, 100 do
-        mzone2 = mist.getLeadPos(MudName)
-        mudPsn3 = {x = mzone2.x + math.random(8000,10000), y = mzone2.y, z = mzone2.z + math.random(1,8000)}
-        
-        					if mist.isTerrainValid(mudPsn3, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 19) < 2 then				
-					break
-					end
-		end
-        
-
-            		local msg = {}
-	  msg.text = ' 2nd POS data created'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+    ---------------------------
     
     
     
-		
-		local mvars2 = {}
-	  mvars2.groupName = MudREDCASName
-	  mvars2.action = "respawn"
-	  mvars2.point = mudPsn3
-	  --mvars.disperse = true
-	  --mvars.maxDisp = 100
-	  --mvars.radius = 20
-		MudREDCASNamec = mist.teleportToPoint(mvars2)
-		
-		
-		local randomizer_disperse = 0
-		local randomizer_radius = 0
-		local randomizer_inner_radius = 0
-		local randomizer_max_disperse = 0
-		local use_randomizer = 0
-		--use_randomizer = mist.random(0,1)
-		randomizer_disperse = mist.random(0,1)
-		randomizer_max_disperse = mist.random(220,320)
-		randomizer_radius = mist.random(220,280)
-		randomizer_inner_radius = mist.random(200,220)
-		
-		--if use_randomizer == 1 then
-
     
-    		local mvars2 = {}
-	  mvars2.groupName = MudREDCASName
-	  mvars2.action = "teleport"
-	  mvars2.point = mudPsn3
-	  mvars2.disperse = randomizer_disperse
-	  mvars2.maxDisp = randomizer_max_disperse
-	  mvars2.radius = randomizer_radius
-		mvars2.innerRadius = randomizer_inner_radius
-		MudREDCASNamec = mist.teleportToPoint(mvars2)
-
-
-			 	
-	
-		--trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing4.ogg')
-
-   
-		local msg = {}
-	  msg.text = ' CA forces spawned Ok.'
-	  msg.displayTime = 20
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-	end
-  
-  
-  
-  end
-  
-  
-  
-  
-  
-
-  
-	---
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function Create_Strike(_mArea)
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local mzone = trigger.misc.getZone(_mArea)
-	local mrand = mist.random(1,Mud_Names)
-	local srand = mist.random(1,Sam_Launchers)
+    if EnemyFort == 2 then
 	striketask = 1
 
-	--trigger.action.deactivateGroup(Group.getByName(InfName))
-	local MudName = {}
-	local MudNamed = {}
-	local InfName1 = {}
-	local InfName2 = {}
-	local InfName3 = {}
-	local InfName4 = {}
-	local InfName5 = {}
-	local InfName1d = {}
-	local InfName2d = {}
-	local InfName3d = {}
-	local InfName4d = {}
-	local InfName5d = {}
-	local SamName1 = {}
-	local SamName1d = {}
-
-
-	--if MudName ==  then
-		local msg = {}
-	  msg.text = ' Creating Strike Mission.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-
-	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
-
-	if Difficultymod == 1 then
-	  MudName = Mud_VeryEasy[mrand]
-		--SamName = ''
-		InfName1 = Infantry2_VeryEasy[1]
-		InfName2 = Infantry2_VeryEasy[2]
-		InfName3 = Infantry2_VeryEasy[3]
-		InfName4 = Infantry2_VeryEasy[4]
-		InfName5 = Infantry2_VeryEasy[5]
-		SamName1 = Sam_VeryEasy[srand]
-	end
-
-	if Difficultymod == 2 then
-	  MudName = Mud_Easy[mrand]
-		--SamName = ''
-		InfName1 = Infantry2_Easy[1]
-		InfName2 = Infantry2_Easy[2]
-		InfName3 = Infantry2_Easy[3]
-		InfName4 = Infantry2_Easy[4]
-		InfName5 = Infantry2_Easy[5]
-		SamName1 = Sam_Easy[srand]
-	end
-
-	if Difficultymod == 3 then
-	  MudName = Mud_Normal[mrand]
-		--SamName = ''
-		InfName1 = Infantry2_Normal[1]
-		InfName2 = Infantry2_Normal[2]
-		InfName3 = Infantry2_Normal[3]
-		InfName4 = Infantry2_Normal[4]
-		InfName5 = Infantry2_Normal[5]
-		SamName1 = Sam_Normal[srand]
-	end
-
-	if Difficultymod == 4 then
-	  MudName = Mud_Hard[mrand]
-		--SamName = ''
-		InfName1 = Infantry2_Hard[1]
-		InfName2 = Infantry2_Hard[2]
-		InfName3 = Infantry2_Hard[3]
-		InfName4 = Infantry2_Hard[4]
-		InfName5 = Infantry2_Hard[5]
-		SamName1 = Sam_Hard[srand]
-	end
-	
-	if Difficultymod == 5 then
-	  MudName = Mud_VeryHard[mrand]
-		--SamName = ''
-		InfName1 = Infantry2_VeryHard[1]
-		InfName2 = Infantry2_VeryHard[2]
-		InfName3 = Infantry2_VeryHard[3]
-		InfName4 = Infantry2_VeryHard[4]
-		InfName5 = Infantry2_VeryHard[5]
-		SamName1 = Sam_VeryHard[srand]
-	end
-	
-		
-	
-
-		--trigger.action.activateGroup(Group.getByName(MudName))
-		--trigger.action.activateGroup(Group.getByName(SamName1))
-		--trigger.action.activateGroup(Group.getByName(InfName1))
-		--trigger.action.activateGroup(Group.getByName(InfName2))
-		--trigger.action.activateGroup(Group.getByName(InfName3))
-		--trigger.action.activateGroup(Group.getByName(InfName4))
-		--trigger.action.activateGroup(Group.getByName(InfName5))
-		--local MudGrpData = mist.getGroupData(MudName)
-			
-
-			
-		  for i = 1, 500 do
-	    if Task_Range == 1 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.25, mzone.radius * 0.10)
-	    elseif Task_Range == 2 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-	    elseif Task_Range == 3 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.65, mzone.radius * 0.40)
-	    elseif Task_Range == 4 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.85, mzone.radius * 0.65)		
-			elseif Task_Range == 5 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.00, mzone.radius * 0.85)	
-			elseif Task_Range == 6 then
-	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 1.25, mzone.radius * 1.05)
-			end
-
-			
-					if mist.isTerrainValid(mudPsn, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 80) < 25 then				
-					break
-
-					end
-		end
 		
 
 		
@@ -3853,137 +3134,11 @@ Infantry2_Squads = 5
 			 
 
 				local msg = {}
-	  msg.text = ' Done.'
-	  msg.displayTime = 5
+	  msg.text = ' Static buildings spawned.'
+	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 
-		
-		local randomizer_disperse = 0
-		local randomizer_radius = 0
-		local randomizer_inner_radius = 0
-		local randomizer_max_disperse = 0
-		randomizer_disperse = 1
-		randomizer_max_disperse = mist.random(275,325)
-		randomizer_radius = mist.random(100,200)
-		randomizer_inner_radius = 100
-		
-		local mvars = {}
-	  mvars.groupName = MudName
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = randomizer_disperse
-	  mvars.maxDisp = randomizer_max_disperse
-	  mvars.radius = randomizer_radius
-		mvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(mvars)
-		targets2 = mist.makeUnitTable({'[g]' .. mvars.groupName})
-		
-		
-		
-   
-		
-		
-				local mvars = {}
-	  mvars.groupName = SamName1
-	  mvars.action = "respawn"
-	  mvars.point = mudPsn
-	  mvars.disperse = randomizer_disperse 
-	  mvars.maxDisp = randomizer_max_disperse
-	  mvars.radius = randomizer_radius
-		mvars.innerRadius = randomizer_inner_radius
-		SamName1 = mist.teleportToPoint(mvars)
-		
-				local infvars = {}
-		infvars.groupName = InfName1
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 225
-	  infvars.radius = randomizer_radius
-		infvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(infvars)
-
-		
-		local infvars = {}
-		infvars.groupName = InfName2
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 225
-	  infvars.radius = randomizer_radius
-		infvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(infvars)
-		
-		local infvars = {}
-		infvars.groupName = InfName3
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 225
-	  infvars.radius = randomizer_radius
-		infvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(infvars)
-		
-		
-	local infvars = {}
-		infvars.groupName = InfName4
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 225
-	  infvars.radius = randomizer_radius
-		infvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(infvars)
-		
-		local infvars = {}
-		infvars.groupName = InfName5
-	  infvars.action = "respawn"
-	  infvars.point = mudPsn
-	  infvars.disperse = randomizer_disperse
-	  infvars.maxDisp = 225
-	  infvars.radius = randomizer_radius
-		infvars.innerRadius = randomizer_inner_radius
-		mist.teleportToPoint(infvars)		 
-		
-
-			
-		--mist.spawnRandomizedGroup(MudName)
-		--mist.spawnRandomizedGroup(MudName)
-		--mist.spawnRandomizedGroup(InfName1)
-		--mist.spawnRandomizedGroup(InfName2)
-		--mist.spawnRandomizedGroup(InfName3)
-		--mist.spawnRandomizedGroup(InfName4)
-		--mist.spawnRandomizedGroup(InfName5)
-		
-		
-		
- 
-	--
-
-	 
-	 
-		mist.removeFunction(InfFunc1d)
-		mist.removeFunction(InfFunc2d)
-		mist.removeFunction(InfFunc3d)
-		mist.removeFunction(InfFunc4d)
-		mist.removeFunction(InfFunc5d)
-		
-		
-    local randomizer_time = 0
-		randomizer_time = mist.random(90,180)
-    
-    InfFunc1d = mist.scheduleFunction(Move_Infantry, {InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc2d = mist.scheduleFunction(Move_Infantry, {InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc3d = mist.scheduleFunction(Move_Infantry, {InfName3}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc4d = mist.scheduleFunction(Move_Infantry, {InfName4}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    InfFunc5d = mist.scheduleFunction(Move_Infantry, {InfName5}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
-    
-    							local msg = {}
-	  msg.text = ' Infantry patroling Ok.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
 	
 		
 
@@ -3996,23 +3151,802 @@ Infantry2_Squads = 5
 	
 	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
   
-  					local msg = {}
-	  msg.text = ' Flag 601 will be set when 3 buildings destroyed at strike area'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing3.ogg')
-  
-  AddOP(MudName) -- add MBOT to it
-		
-              		local msg = {}
-	  msg.text = ' MBOT Intelligence Added'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-		
+
+    
 end
----
+    
+    
+    
+    if EnemyAD == 2 then
+    -----------------------------------
+        		local MudADData = mist.getGroupData(ADName)
+    
+
+
+		local mvars = {}
+	  mvars.groupName = ADName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 800
+	  mvars.radius = 800
+    mvars.innerRadius = 400 
+		mist.teleportToPoint(mvars)
+		
+--		formisttable = ''
+		--targets = mist.makeUnitTable({'[g]' .. MudName})
+    
+    
+      
+            AddOP(ADName) -- add MBOT to it
+			
+		
+
+        		local msg = {}
+	  msg.text = ' AAA Spawned'
+	  msg.displayTime = 3
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    end
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
+    local infvars = {}
+		infvars.groupName = InfName1
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 800
+	  infvars.radius = 800
+		infvars.innerRadius = 170
+		mist.teleportToPoint(infvars)
+
+		--mist.spawnRandomizedGroup(InfName1)
+		
+		local infvars = {}
+		infvars.groupName = InfName2
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 800
+	  infvars.radius = 800
+		infvars.innerRadius = 170
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName3
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 200
+	  infvars.radius = 800
+		infvars.innerRadius = 270
+		mist.teleportToPoint(infvars)
+		
+		
+	local infvars = {}
+		infvars.groupName = InfName4
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 600
+	  infvars.radius = 800
+		infvars.innerRadius = 270
+		mist.teleportToPoint(infvars)
+		
+		local infvars = {}
+		infvars.groupName = InfName5
+	  infvars.action = "respawn"
+	  infvars.point = mudPsn
+		infvars.disperse = true
+	  infvars.maxDisp = 700
+	  infvars.radius = 700
+		infvars.innerRadius = 370
+		mist.teleportToPoint(infvars)		  
+			
+		--mist.spawnRandomizedGroup(MudName)
+		--mist.spawnRandomizedGroup(InfName1)
+		--mist.spawnRandomizedGroup(InfName2)
+		--mist.spawnRandomizedGroup(InfName3)
+		--mist.spawnRandomizedGroup(InfName4)
+		--mist.spawnRandomizedGroup(InfName5)
+    
+            		local msg = {}
+	  msg.text = ' Infantry Spawned Ok.'
+	  msg.displayTime = 3
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+    
+		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		local use_randomizer = 0
+		--use_randomizer = mist.random(0,1)
+	
+	  
+
+		
+		mist.removeFunction(InfFunc1c)
+		mist.removeFunction(InfFunc2c)
+		mist.removeFunction(InfFunc3c)
+		mist.removeFunction(InfFunc4c)
+		mist.removeFunction(InfFunc5c)
+
+		local randomizer_time = 0
+		randomizer_time = mist.random(90,180)
+
+    InfFunc1c = mist.scheduleFunction(Move_Infantry,{InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
+    InfFunc2c = mist.scheduleFunction(Move_Infantry,{InfName1}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
+    InfFunc3c = mist.scheduleFunction(Move_Infantry,{InfName3}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
+    InfFunc4c = mist.scheduleFunction(Move_Infantry,{InfName4}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
+    InfFunc5c = mist.scheduleFunction(Move_Infantry,{InfName5}, timer.getTime() + 1, randomizer_time, timer.getTime() + 3600)
+    
+  
+
+		
+
+
+		--Make_Smoke(mzone, nil)
+		--return
+	 --mist.flagFunc.group_alive_less_than(checkunits2)
+   
+   	--	local completevars = {}
+    --completevars.groupName = MudName
+   --completevars.flag =  202
+   --completevars.percent = 33
+   --completevars.toggle = true
+   
+ --mist.flagFunc.group_alive_more_than(completevars)
+ 
+   
+
+   --			local msg = {}
+	  --msg.text = ' Flag 202 set to trigger at 33 percent health '
+	  --msg.displayTime = 5
+	  --msg.msgFor = {coa = {'all'}}
+	  --mist.message.add(msg)
+    
+
+  
+  
+  
+     if Samradar == 2 then
+		local mvars = {}
+	  mvars.groupName = RadarSamName
+	  mvars.action = "respawn"
+	  mvars.point = samPsn
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    end
+    
+    if Samradar == 3 then
+		local mvars = {}
+	  mvars.groupName = RadarSamName
+	  mvars.action = "respawn"
+	  mvars.point = samPsn
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    end
+    
+    if Samradar == 4 then
+		local mvars = {}
+    mvars.groupName = RadarSamName
+	  mvars.action = "respawn"
+	  mvars.point = samPsn2
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    end
+    
+        if Samradar == 5 then
+				local mvars = {}
+	  mvars.groupName = RadarSamName3
+	  mvars.action = "respawn"
+	  mvars.point = samPsn2
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    
+    local mvars = {}
+	  mvars.groupName = RadarSamName2
+	  mvars.action = "respawn"
+	  mvars.point = samPsn
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    
+    mvars.groupName = RadarSamName
+	  mvars.action = "respawn"
+	  mvars.point = samPsn
+	  mvars.disperse = false
+	  --mvars.maxDisp = 0
+	  --mvars.radius = 0
+		mist.teleportToPoint(mvars)
+    end
+    
+    if Saminfared == 2 then
+		local mvars = {}
+	  mvars.groupName = IRSamName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    end
+    
+    if Saminfared == 3 then
+		local mvars = {}
+	  mvars.groupName = IRSamName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    end
+    
+        if Saminfared == 4 then
+		local mvars = {}
+	  mvars.groupName = IRSamName2
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    
+    
+    mvars.groupName = IRSamName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    end
+    
+            if Saminfared == 5 then
+				local mvars = {}
+	  mvars.groupName = IRSamName3
+	  mvars.action = "respawn"
+	  mvars.point = samPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    
+    
+    local mvars = {}
+	  mvars.groupName = IRSamName2
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    
+    
+    mvars.groupName = IRSamName
+	  mvars.action = "respawn"
+	  mvars.point = mudPsn
+	  mvars.disperse = true
+	  mvars.maxDisp = 300
+	  mvars.radius = 400
+		mist.teleportToPoint(mvars)
+    end
+    
+        		local msg = {}
+	  msg.text = ' SAMs Spawned Ok.'
+	  msg.displayTime = 3
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+  
+  
+  
+  
+  
+
+    
+  
+    
+    
+    -------------------- this part adds in the SEAD flight if applicable by user settings during the mission                
+
+    
+    if SEAD >= 2 then    
+      	local msg = {} 
+        
+             if SEAD == 2 and Difficultymod == 1 then
+	    seadName = SEAD_Names_VeryEasy2x[seadrand]
+      end
+      
+     if SEAD == 2 and Difficultymod == 2 then
+	    seadName = SEAD_Names_Easy2x[seadrand]
+      end
+     if SEAD == 2 and Dfficultymod == 3 then
+	    seadName = SEAD_Names_Normal2x[seadrand]
+      end
+      
+            if SEAD == 2 and Difficultymod == 4 then
+	    seadName = SEAD_Names_Hard2x[seadrand]
+      end
+      
+            if SEAD == 2 and Difficultymod == 5 then
+	    seadName = SEAD_Names_VeryHard2x[seadrand]
+      end
+   
+    
+      if SEAD == 3 and Difficultymod == 1 then
+	    seadName = SEAD_Names_VeryEasy4x[seadrand]
+      end
+      
+      if SEAD == 3 and Difficultymod == 2 then
+	    seadName = SEAD_Names_Easy4x[seadrand]
+      end
+      if SEAD == 3 and Difficultymod == 3 then
+	    seadName = SEAD_Names_Normal4x[seadrand]
+      end
+      
+            if SEAD == 3 and Difficultymod == 4 then
+	    seadName = SEAD_Names_Hard4x[seadrand]
+      end
+      
+            if SEAD == 3 and Difficultymod == 5 then
+	    seadName = SEAD_Names_VeryHard4x[seadrand]
+      end
+        
+
+		
+	trigger.action.activateGroup(Group.getByName(seadName))
+	seadgrp = Group.getByName(seadName)
+  
+
+	
+	local InitwpSpeed = mist.random(400,500)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = 3000
+  local wpAlt2 = mist.random(4000,6000)
+	local wpPsn = mist.getRandPointInCircle(samPsn, 0)
+	local wpPsn2 = mist.getRandPointInCircle(seadPsn, 10000)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(seadPsn, "TakeOffParking", wpSpeed, wpalt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt2, "BARO")
+					path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+            [1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "SEAD",
+	            params = {
+	              targetTypes = {
+	                [1] = "Air Defence",
+	              }, -- end of targetTypes
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+  
+		
+	local vars = {} 
+	vars.groupName = seadName
+	vars.action = "respawn"
+	vars.point = seadPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' SEAD Plane spawned.'
+	msg.displayTime = 3
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)	
+
+	local con = seadgrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+	      
+	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  
+
+  
+  
+  
+  
+  
+    -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
+                      --seadName = {}
+   
+
+		
+	trigger.action.activateGroup(Group.getByName(eHeloName))
+  ehelogrp = Group.getByName(eHeloName)
+  
+	
+  
+
+	
+	local eInitwpSpeed = mist.random(60,225)
+	local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
+	local ewpAlt = mist.random(100,200)
+  local ewpAlt2 = mist.random(50,100)
+  local hpath = {}
+					hpath[1] = mist.heli.buildWP(heloPsn, ewpSpeed, ewpAlt, "BARO")
+          hpath[2] = mist.heli.buildWP(heloPsn2, ewpSpeed, ewpAlt2, "BARO")
+					hpath[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+              [1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+                [1] = "Helicopters",
+                [2] = "Ground Units",
+                [3] = "Light armed ships",
+                [4] = "Air",
+                }, -- end of ["targetTypes"]
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Circle",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+
+      
+		
+	local vars = {} 
+	vars.groupName = eHeloName
+	vars.action = "respawn"
+	vars.point = heloPsn
+	vars.route = hpath
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' Enemy Helo spawned.'
+	msg.displayTime = 3
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)	
+
+	local con = ehelogrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  
+
+	
+	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  
+
+  
+  
+   
+  
+  
+  if eHelo == 4 then
+      -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
+                      --seadName = {}
+
+
+		
+	trigger.action.activateGroup(Group.getByName(eHeloName2))
+  ehelogrp2 = Group.getByName(eHeloName2)
+  
+	
+  
+
+	
+	local eInitwpSpeed = mist.random(60,225)
+	local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
+	local ewpAlt = mist.random(100,200)
+  local ewpAlt2 = mist.random(50,100)
+  local hpath = {}
+					hpath[1] = mist.heli.buildWP(heloPsn3, ewpSpeed, ewpAlt, "BARO")
+          hpath[2] = mist.heli.buildWP(heloPsn, ewpSpeed, ewpAlt2, "BARO")
+					hpath[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+              [1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+                [1] = "Helicopters",
+                [2] = "Ground Units",
+                [3] = "Light armed ships",
+                [4] = "Air",
+                }, -- end of ["targetTypes"]
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Circle",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+
+      
+		
+	local vars = {} 
+	vars.groupName = eHeloName2
+	vars.action = "respawn"
+	vars.point = heloPsn3
+	vars.route = hpath
+	mist.teleportToPoint(vars)			
+  
+
+
+	local con = ehelogrp2:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+
+        
+        end  
+	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  
+
+   	local msg = {} 
+	msg.text = ' Enemy Helo spawned'
+	msg.displayTime = 3
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)	
+  
+ 
+  
+  -- this part spawns CA forces
+         if CACAS == 2 then
+
+	--if MudName ==  then
+		local msg = {}
+	  msg.text = ' Creating RED CA forces'
+	  msg.displayTime = 3
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+
+	--trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+		--trigger.action.activateGroup(Group.getByName(MudName))
+		--trigger.action.activateGroup(Group.getByName(InfName1))
+		--trigger.action.activateGroup(Group.getByName(InfName2))
+		--trigger.action.activateGroup(Group.getByName(InfName3))
+		--trigger.action.activateGroup(Group.getByName(InfName4))
+		--trigger.action.activateGroup(Group.getByName(InfName5))
+		
+    local MudREDGrpData = mist.getGroupData(MudREDCASName)
+   
+
+ 
+
+    for i = 1, 100 do
+        mzone2 = mist.getLeadPos(MudName)
+        mudPsn3 = {x = mzone2.x + math.random(8000,10000), y = mzone2.y, z = mzone2.z + math.random(1,8000)}
+        
+        					if mist.isTerrainValid(mudPsn3, {'LAND'}) == true and mist.terrainHeightDiff(mudPsn, 19) < 2 then				
+					break
+					end
+		end
+        
+
+    
+    
+    
+		
+		local mvars2 = {}
+	  mvars2.groupName = MudREDCASName
+	  mvars2.action = "respawn"
+	  mvars2.point = mudPsn3
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		MudREDCASNamec = mist.teleportToPoint(mvars2)
+		
+		
+		local randomizer_disperse = 0
+		local randomizer_radius = 0
+		local randomizer_inner_radius = 0
+		local randomizer_max_disperse = 0
+		local use_randomizer = 0
+		--use_randomizer = mist.random(0,1)
+		randomizer_disperse = mist.random(0,1)
+		randomizer_max_disperse = mist.random(220,320)
+		randomizer_radius = mist.random(220,280)
+		randomizer_inner_radius = mist.random(200,220)
+		
+		--if use_randomizer == 1 then
+
+    
+    		local mvars2 = {}
+	  mvars2.groupName = MudREDCASName
+	  mvars2.action = "teleport"
+	  mvars2.point = mudPsn3
+	  mvars2.disperse = randomizer_disperse
+	  mvars2.maxDisp = randomizer_max_disperse
+	  mvars2.radius = randomizer_radius
+		mvars2.innerRadius = randomizer_inner_radius
+		MudREDCASNamec = mist.teleportToPoint(mvars2)
+
+
+			 	
+	random_move(MudREDCASName, {MudName, ADName}, 16, 32, 50, 1, "Random", 60, mzone)
+  random_markers(MudREDCASName, 50, 500, "Blue", 480, 1800)
+  
+
+   
+   --random_move("Blue_Inf_1",{"Red_Inf_1", "Red_Inf_2"}, 6, 12, 50, 1, "Random",  60, "Redretreat")
+   
+		local msg = {}
+	  msg.text = 'Combined Arms player now has access to ground forces near the task area.'
+	  msg.displayTime = 60
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+	end
+  
+  
+  
+  
+  
+  local randomizer_tune = mist.random(1,4)
+  
+  if randomizer_tune == 1 then
+  trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+  end
+  
+  if randomizer_tune == 2 then
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing3.ogg')
+    end
+    
+    if randomizer_tune == 3 then
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing4.ogg')
+    end
+    
+        if randomizer_tune == 4 then
+		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
+    end
+
+  
+  
+  
+  
+  
+  end
+  end
+ --- 
+  
+  
+  
+  
+
+  
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Create_Naval(_mArea)
@@ -5138,6 +5072,62 @@ mist.removeFunction(ConvoyFunc)
 	      mist.message.add(msg)
 	end
 	------	
+     ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_AD_Level_1()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " has been disabled"
+	EnemyAD = 1
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy air defenses at task'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+     ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_AD_Level_2()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " has been enabled."
+	EnemyAD = 2
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy air defenses at task'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+       ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Fort_Level_1()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " has been disabled"
+	EnemyFort = 1
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy buildings'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+     ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Fort_Level_2()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " has been enabled."
+	EnemyFort = 2
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy buildings'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
   
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_SEAD_Level_1()
@@ -6026,6 +6016,191 @@ end
 	end
 
 	
+  
+  
+  
+  
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function random_move(_grp, _targetNames, _minspeed, _maxspeed, _oradius, _iradius, _form, _orderfrequency, _returnzone)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
+  local grpName = ""
+  local target = ""
+  local targetgroup = ""
+  local targetNames = {}
+  local path = {} 
+  local targetPos = {}
+  local unitPos = {}
+  local returnPos = {}
+  local maxdist = 0
+  local mindist = 0
+  local oradius = _oradius
+  local iradius = _iradius
+  local orderfrequency = _orderfrequency
+  local form = _form
+  local commandedgroup = ""
+  local zonetouse = ""
+  local maxvelocity = _maxspeed
+  local minvelocity = _minspeed
+  local randomizer_speed = math.random(minvelocity, maxvelocity)
+  local formationrand = mist.random(1,3)
+  local errormargin = {}
+  
+  targetNames = _targetNames
+  commandedgroup = _grp
+  zonetouse = _returnzone
+  grpName = Group.getByName(commandedgroup) 
+  unitPos = mist.getLeadPos(grpName)
+  zonetouse = _returnzone
+  returnPos = mist.utils.zoneToVec3(zonetouse)
+  returnPos = {x = returnPos.x + math.random(iradius,oradius), y = returnPos.y, z = returnPos.z + math.random(iradius,oradius)}
+ 
+  if unitPos == nil then
+        return
+        end
+  
+  for selected = 1, #targetNames do
+        targetgroup = targetNames[selected]
+        target = Group.getByName(targetgroup) 
+        targetPos = mist.getLeadPos(target)      
+     
+        if targetPos ~= nil then
+        
+                    errormargin = mist.getRandPointInCircle(targetPos, oradius, iradius)
+        
+               			if form == "Random" then
+                    if formationrand == 1 then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'Rank', randomizer_speed) 
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'Rank', randomizer_speed) 
+      
+                    elseif formationrand == 2 then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'EchelonL', randomizer_speed)
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'EchelonL', randomizer_speed) 
+
+                    elseif formationrand == 3 then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'EchelonR', randomizer_speed)
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'EchelonR', randomizer_speed) 
+                    end
+                    end
+                    
+                    if form == "EchelonR" then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'EchelonR', randomizer_speed)
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'EchelonR', randomizer_speed) 
+                    
+                    elseif form == "EchelonL" then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'EchelonL', randomizer_speed)
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'EchelonL', randomizer_speed) 
+                    
+                    
+                    elseif form == "Rank" then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'Rank', randomizer_speed) 
+                    path[#path + 1] = mist.ground.buildWP(errormargin, 'Rank', randomizer_speed) 
+                    end
+                    
+                    if scheduled == true then
+                    mist.removeFunction(execution)
+                    end
+
+                    execution = mist.scheduleFunction(random_move, {_grp, _targetNames, _minspeed, _maxspeed, _oradius, _iradius, _form, _orderfrequency, _returnzone}, timer.getTime() + _orderfrequency)
+                    
+                    mist.goRoute(grpName, path)  
+                    scheduled = true
+                    
+                    break
+        end
+  end
+                    if targetPos == nil then
+                    path[#path + 1] = mist.ground.buildWP(unitPos, 'Rank', randomizer_speed) 
+                    path[#path + 1] = mist.ground.buildWP(returnPos, 'Rank', randomizer_speed) 
+                    mist.goRoute(grpName, path)
+                    end
+  
+  
+	end
+	---
+  
+  function random_markers(_group, _mindistance, _maxdistance, _color, _interval, _endsmoke)
+local zonetouse = ""
+local mindist = 0
+local maxdist = 0
+local mindist2 = 0
+local maxdist2 = 0
+local mindist3 = 0
+local maxdist3 = 0
+local unitPos = {}
+local decision = ""
+local unitstouse = ""
+local direction = 0
+local delay = 0
+local interval = _interval
+local endsmoke = _endsmoke
+
+unittouse = Group.getByName(_group) 
+
+mindist = _mindistance
+maxdist = _maxdistance
+mindist2 = mindist + 7
+maxdist2 = maxdist + 7
+mindist3 = mindist + 14
+maxdist3 = maxdist + 14
+direction = math.random(1,4)
+delay = math.random(5,15)
+decision = _color
+
+unitPos = mist.getLeadPos(unittouse)
+
+if unitPos == nil then
+return
+end
+
+  if decision == "Blue" then
+    if direction == 1 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.Blue)
+    elseif direction == 2 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.Blue)
+    elseif direction == 3 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z - math.random(mindist,maxdist)}, trigger.smokeColor.Blue)
+    elseif direction == 4 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z - math.random(mindist,maxdist)}, trigger.smokeColor.Blue)
+    end
+   end
+    
+      if decision == "Red" then
+    if direction == 1 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.Red)
+    elseif direction == 2 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.Red)
+    elseif direction == 3 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z - math.random(mindist,maxdist)}, trigger.smokeColor.Red)
+    elseif direction == 4 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z - math.random(mindist,maxdist)}, trigger.smokeColor.Red)
+    end
+   end
+    
+      if decision == "White" then
+    if direction == 1 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x + math.random(mindist2,maxdist2), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist2,maxdist3)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x + math.random(mindist3,maxdist3), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist2,maxdist3)}, trigger.smokeColor.White)
+    elseif direction == 2 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x - math.random(mindist2,maxdist2), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist2)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x - math.random(mindist3,maxdist3), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist3)}, trigger.smokeColor.White)
+    elseif direction == 3 then
+      trigger.action.smoke({x=unitPos.x + math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x + math.random(mindist2,maxdist2), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist2,maxdist3)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x + math.random(mindist3,maxdist3), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist2,maxdist3)}, trigger.smokeColor.White)
+    elseif direction == 4 then
+      trigger.action.smoke({x=unitPos.x - math.random(mindist,maxdist), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x - math.random(mindist2,maxdist2), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist2)}, trigger.smokeColor.White)
+      trigger.action.smoke({x=unitPos.x - math.random(mindist3,maxdist3), y= land.getHeight({x = unitPos.x, y = unitPos.z}), z=unitPos.z + math.random(mindist,maxdist3)}, trigger.smokeColor.White)
+    end
+      end
+end
+  
+  
+  
+  
+  
 
 	------------------------------------------------------------------
 	timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)

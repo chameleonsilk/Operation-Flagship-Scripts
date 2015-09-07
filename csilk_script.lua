@@ -10,9 +10,10 @@
 
 	local rad_option_1a = "Interdict: CAP"
 	local rad_option_1b = "Interdict: Bombers"
+  local rad_option_1e = "Interdict: Attackers"
 	local rad_option_1c = "Create ground task"
   local rad_option_1d = "Hunt convoy"
-	--local rad_option_1e = "Strike: Facilities"
+	
 	local rad_option_1f = "Strike: Naval"
 
 	--local rad_option_2a = "Assault: Sochi-Adler"
@@ -29,8 +30,8 @@
 	local rad_option_8d = "Post Vietnam"
 	local rad_option_8e = "Cold War"
   
-  local rad_option_10a = "1 enemy plane"
-  local rad_option_10b = "2 enemy planes (default)"
+  local rad_option_10a = "1 enemy plane (default)"
+  local rad_option_10b = "2 enemy planes"
   local rad_option_10c = "4 enemy planes"
   local rad_option_10d = "2 x 4 enemy planes"
   
@@ -55,14 +56,20 @@
   local rad_option_14c = "4 enemy helos"
   local rad_option_14d = "2 x 4 enemy helos"
   
-  local rad_option_16a = "Disabled CA (Default)"
-  local rad_option_16b = "Enable CA"
+  local rad_option_16b = "Disabled CA"
+  local rad_option_16a = "Enable CA (Default)"
   
   local rad_option_17a = "AAA Enabled (Default)"
   local rad_option_17b = "AAA Disabled"
   
   local rad_option_18a = "Buildings enabled (Default)"
   local rad_option_18b = "Buildings disabled"
+  
+  local rad_option_19a = "Attackers enabled (Default)"
+  local rad_option_19b = "Attackers disabled"
+  
+  local rad_option_20a = "Fighters enabled (Default)"
+  local rad_option_20b = "Fighters disabled"
   
   
   
@@ -90,9 +97,12 @@
 	zone = {}
 	bzone = {}
 	mzone = {}
+  azone = {}
 
 	grpName = {}
   grpName2 = {}
+  grpNameA = {}
+  grpName2A = {}
   --MudREDCASName = {}
 	--MudREDCASNameb = {}
 	bgrpName = {}
@@ -133,6 +143,7 @@
 	mudPsn = {}
   mudPsn2 = {}
   mudPsn3 = {}
+  airzone = {}
 
 	Smoke = 0
 	Scoord  = {}
@@ -140,15 +151,16 @@
 	Difficultymod = 1
 	Range = "Close"
 	Task_Range = 2
-  Groupsizes = 2
+  Groupsizes = 1
   Samradar = 3
   Saminfared = 3
   SEAD = 2
   eHelo = 2
   aHelo = 2
-  CACAS = 1
+  CACAS = 2
   EnemyAD = 2
   EnemyFort = 2
+  eAttack = 2
   admin_lock = trigger.misc.getUserFlag(666)
   
   if admin_lock == 1 then
@@ -1217,32 +1229,75 @@ Infantry2_Squads = 5
 	------------------------------------
 	-- The following arrays contain available enemy aircraft the Spawn Fighter function pulls from
 
-	Attacker_Names = 4 -- variable for number of availale ground attackers
+	Attacker_Names = 2 -- variable for number of availale ground attackers
 
+  
+  	Attacker_Names_VeryEasy = {
+	  [1] = 'Enemy Attacker (VeryEasy) #000',
+	  [2] = 'Enemy Attacker (VeryEasy) #001',
+
+	}
 	Attacker_Names_Easy = {
-	  [1] = 'Su-25T (BEasy)',
-	  [2] = 'Su-25 (BEasy)',
-	  [3] = 'MiG-27K (BEasy)',
-	  [4] = 'Su-17 (BEasy)',
+	  [1] = 'Enemy Attacker (Easy) #000',
+	  [2] = 'Enemy Attacker (Easy) #001',
 	}
 	Attacker_Names_Normal = {
-	  [1] = 'Su-25T (BNormal)',
-	  [2] = 'Su-25 (BNormal)',
-	  [3] = 'MiG-27K (BNormal)',
-	  [4] = 'Su-17 (BNormal)',
+	  [1] = 'Enemy Attacker (Normal) #000',
+	  [2] = 'Enemy Attacker (Normal) #001',
 	}
 	Attacker_Names_Hard = {
-	  [1] = 'Su-25T (BHard)',
-	  [2] = 'Su-25 (BHard)',
-	  [3] = 'MiG-27K (BHard)',
-	  [4] = 'Su-17 (BHard)',
+	  [1] = 'Enemy Attacker (Hard) #000',
+	  [2] = 'Enemy Attacker (Hard) #001',
 	}
 	Attacker_Names_VeryHard = {
-	  [1] = 'Su-25T (BVeryHard)',
-	  [2] = 'Su-25 (BVeryHard)',
-	  [3] = 'MiG-27K (BVeryHard)',
-	  [4] = 'Su-17 (BVeryHard)',
+	  [1] = 'Enemy Attacker (VeryHard) #000',
+	  [2] = 'Enemy Attacker (VeryHard) #001',
 	}
+  
+  
+  Attacker_Names_VeryEasyx2 = {
+	  [1] = '2Enemy Attacker (VeryEasy) #000',
+	  [2] = '2Enemy Attacker (VeryEasy) #001',
+	}
+  	Attacker_Names_Easyx2 = {
+	  [1] = '2Enemy Attacker (Easy) #000',
+	  [2] = '2Enemy Attacker (Easy) #001',
+	}
+	Attacker_Names_Normalx2 = {
+	  [1] = '2Enemy Attacker (Normal) #000',
+	  [2] = '2Enemy Attacker (Normal) #001',
+	}
+	Attacker_Names_Hardx2 = {
+	  [1] = '2Enemy Attacker (Hard) #000',
+	  [2] = '2Enemy Attacker (Hard) #001',
+	}
+	Attacker_Names_VeryHardx2 = {
+	  [1] = '2Enemy Attacker (VeryHard) #000',
+	  [2] = '2Enemy Attacker (VeryHard) #001',
+	}
+  
+   	Attacker_Names_VeryEasyx4 = {
+	  [1] = '4Enemy Attacker (Easy) #000',
+	  [2] = '4Enemy Attacker (Easy) #001',
+	}
+  	Attacker_Names_Easyx4 = {
+	  [1] = '4Enemy Attacker (VeryEasy) #000',
+	  [2] = '4Enemy Attacker (VeryEasy) #001',
+	}
+	Attacker_Names_Normalx4 = {
+	  [1] = '4Enemy Attacker (Normal) #000',
+	  [2] = '4Enemy Attacker (Normal) #001',
+	}
+	Attacker_Names_Hardx4 = {
+	  [1] = '4Enemy Attacker (Hard) #000',
+	  [2] = '4Enemy Attacker (Hard) #001',
+	}
+	Attacker_Names_VeryHardx4 = {
+	  [1] = '4Enemy Attacker (VeryHard) #000',
+	  [2] = '4Enemy Attacker (VeryHard) #001',
+	}
+  
+  
 	------------------------------
 	-- End Ground Attack Arrays --
 	------------------------------
@@ -1330,10 +1385,12 @@ Infantry2_Squads = 5
   ADSet = missionCommands.addSubMenu("AAA", GameSet)
   RadarSamSet = missionCommands.addSubMenu("Radar SAM", GameSet)
   IRSamSet = missionCommands.addSubMenu("IR SAM", GameSet)
-  SEADSet = missionCommands.addSubMenu("AI SEAD", GameSet)
-  eHeloSet = missionCommands.addSubMenu("Helos", GameSet)
+  SEADSet = missionCommands.addSubMenu("Friendly SEAD", GameSet)
+  eHeloSet = missionCommands.addSubMenu("Enemy Helos", GameSet)
+  eAttackSet = missionCommands.addSubMenu("Enemy CAS", GameSet)
   --aHeloSet = missionCommands.addSubMenu("Allied Helo settings", GameSet)
   Combinedarms = missionCommands.addSubMenu("CA", GameSet)
+  
   --Combinedarms = missionCommands.addSubMenu("Combined Arms", GameSet)
   
   
@@ -1395,6 +1452,7 @@ Infantry2_Squads = 5
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, AnapaPath, Create_Fighter_Intercept, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, AnapaPath, Create_Bomber_Intercept, 'Anapa')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Attacker_Intercept, 'Anapa')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Escort, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, AnapaPath, Create_Mud, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, AnapaPath, Create_Mud_Convoy, 'Anapa')
@@ -1403,6 +1461,7 @@ Infantry2_Squads = 5
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, MaykopPath, Create_Fighter_Intercept, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, MaykopPath, Create_Bomber_Intercept, 'Maykop')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, MaykopPath, Create_Attacker_Intercept, 'Maykop')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Escort, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, MaykopPath, Create_Mud, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, MaykopPath, Create_Mud_Convoy, 'Maykop')
@@ -1411,6 +1470,7 @@ Infantry2_Squads = 5
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, GudautaPath, Create_Fighter_Intercept, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GudautaPath, Create_Bomber_Intercept, 'Gudauta')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, GudautaPath, Create_Attacker_Intercept, 'Gudauta')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, GudautaPath, Create_Escort, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, GudautaPath, Create_Mud, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, GudautaPath, Create_Mud_Convoy, 'Gudauta')
@@ -1419,6 +1479,7 @@ Infantry2_Squads = 5
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, KutaisiPath, Create_Fighter_Intercept, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Attacker_Intercept, 'Kutaisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Escort, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, KutaisiPath, Create_Mud, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
@@ -1427,6 +1488,7 @@ Infantry2_Squads = 5
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Escort, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, NalchikPath, Create_Mud, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, NalchikPath, Create_Mud_Convoy, 'Nalchik')
@@ -1436,6 +1498,7 @@ Infantry2_Squads = 5
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, TbilisiPath, Create_Fighter_Intercept, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, TbilisiPath, Create_Bomber_Intercept, 'Tbilisi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, TbilisiPath, Create_Attacker_Intercept, 'Tbilisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Escort, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1c, TbilisiPath, Create_Mud, 'Tbilisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
@@ -1486,6 +1549,9 @@ Infantry2_Squads = 5
       -- These commands set air defense options
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_18a, FortSet, Set_Fort_Level_2, nil) -- 'AAA enabled
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_18b, FortSet, Set_Fort_Level_1, nil) -- 'AAA disabled
+        -- These commands set attacker options
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_19a, eAttackSet, Set_eAttacker_Level_2, nil) -- 'Attackers Disabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_19b, eAttackSet, Set_eAttacker_Level_1, nil) -- 'Attackers Enabled
 	-- These commands set the function of the radio options in the target range sub-menu
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9a, DistanceSet, Set_Distance_Scramble, nil) -- Scramble
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9b, DistanceSet, Set_Distance_Close, nil) -- Close
@@ -1739,9 +1805,9 @@ Infantry2_Squads = 5
 	
 	local InitwpSpeed = mist.random(600,700)
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
-	local wpAlt = mist.random(5000,8000)
+	local wpAlt = mist.random(4000,7000)
 	local wpPsn = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.15, zone.radius * 0.01)
-	local wpPsn2 = mist.getRandPointInCircle(spawnPsn, zone.radius * 2.00, zone.radius * 1.50)
+	local wpPsn2 = mist.getRandPointInCircle(zone.point, 15000)
   local path = {}
 					path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
 					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
@@ -1879,7 +1945,7 @@ Infantry2_Squads = 5
 	
 	local InitwpSpeed = mist.random(600,700)
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
-	local wpAlt = mist.random(5000,8000)
+	local wpAlt = mist.random(4000,5000)
 	local wpPsn = mist.getRandPointInCircle(spawnPsn2, zone.radius * 0.15, zone.radius * 0.01)
 	local wpPsn2 = mist.getRandPointInCircle(spawnPsn2, zone.radius * 2.00, zone.radius * 1.50)
   local path = {}
@@ -1993,7 +2059,6 @@ Infantry2_Squads = 5
 	end
 
 	---
-
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Create_Bomber_Intercept(_bArea)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2214,7 +2279,7 @@ end
 									
 	local bInitwpSpeed = mist.random(525,625)
 	local bwpSpeed = mist.utils.kmphToMps(bInitwpSpeed)
-	local bwpAlt = mist.random(6100,9000)
+	local bwpAlt = mist.random(3500,7000)
 	local bwpPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.50, bzone.radius * 0.35)
 	local bwpPsn2 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.02, bzone.radius * 0.01)
 	local bwpPsn3 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.25, bzone.radius * 0.15)
@@ -2304,7 +2369,7 @@ end
 	  
 	  local eInitwpSpeed = mist.random(700,900)
 	  local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
-	  local ewpAlt = mist.random(2000,6000)
+	  local ewpAlt = mist.random(4000,6000)
 	  
 	  epath[1] = mist.fixedWing.buildWP(bspawnPsn, ewpSpeed, ewpAlt, "BARO")
 	  epath[2] = mist.fixedWing.buildWP(bwpPsn, ewpSpeed, ewpAlt, "BARO")
@@ -2429,6 +2494,414 @@ end
 
 	 --return
 	end
+	---
+  
+   ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Create_Attacker_Intercept(_cArea)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- based off of Kutaisi Intercept script by akp, but modified for my own use.
+	azone = trigger.misc.getZone(_cArea)
+	local rand = mist.random(1,Attacker_Names)
+	intercepttask = 1
+
+  if Groupsizes == 1 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasy[rand]
+	  end
+		
+		if Difficultymod == 2 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_Easy[rand]
+	  end
+
+	  if Difficultymod == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_Normal[rand]
+	  end
+
+	  if Difficultymod == 4 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_Hard[rand]
+	  end
+		
+		if Difficultymod == 5 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryHard[rand]
+	  end
+  
+  
+  if Groupsizes == 2 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasyx2[rand]
+	  end
+
+		if Difficultymod == 2 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_Easyx2[rand]
+	  end
+
+	  if Difficultymod == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_Normalx2[rand]
+	  end
+
+	  if Difficultymod == 4 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_Hardx2[rand]
+	  end
+		
+		if Difficultymod == 5 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryHardx2[rand]
+	  end
+  
+  
+  if Groupsizes == 3 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+    	      
+  if Groupsizes == 4 and Difficultymod == 1 then
+      grpNameA = Attacker_Names_VeryEasyx4[rand]
+	    grpName2A = Attacker_Names_VeryEasyx2[rand]
+	  end
+
+		
+		if Groupsizes == 4 and Difficultymod == 2 then
+    grpNameA = Attacker_Names_Easyx4[rand]
+	    grpName2A = Attacker_Names_Easyx2[rand]
+	  end
+
+	  if Groupsizes == 4 and Difficultymod == 3 then
+    grpNameA = Attacker_Names_Normalx4[rand]
+	    grpName2A = Attacker_Names_Normalx2[rand]
+	  end
+
+	  if Groupsizes == 4 and Difficultymod == 4 then
+    grpNameA = Attacker_Names_Hardx4[rand]
+	    grpName2A = Attacker_Names_Hardx2[rand]
+	  end
+		
+		if Groupsizes == 4 and Difficultymod == 5 then
+    grpNameA = Attacker_Names_VeryHardx4[rand]
+	    grpName2A = Attacker_Names_VeryHardx2[rand]
+	  end
+	  
+  
+  
+
+
+   
+      	local msg = {} 
+	msg.text = ' Attacker selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	  spawnPsn = {}
+    
+
+	  if Task_Range == 1 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.60, azone.radius * 0.40)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
+	  end
+
+	  if Task_Range == 2 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.70, azone.radius * 0.60)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
+	  end
+
+	  if Task_Range == 3 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.80, azone.radius * 0.70)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
+	  end
+
+	  if Task_Range == 4 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.90, azone.radius * 0.80)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+		
+		if Task_Range == 5 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 1.00, azone.radius * 0.90)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+		
+	  if Task_Range == 6 then
+	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 1.50, azone.radius * 1.00)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+    
+      	local msg = {} 
+	msg.text = ' Spawn position selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	trigger.action.activateGroup(Group.getByName(grpNameA))
+	agrp = Group.getByName(grpNameA)
+	
+	local InitwpSpeed = mist.random(500,700)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = mist.random(2000,3500)
+	local wpPsn = mist.getRandPointInCircle(spawnPsn, azone.radius * 0.15, azone.radius * 0.01)
+	local wpPsn2 = mist.getRandPointInCircle(spawnPsn, azone.radius * 2.00, azone.radius * 1.50)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
+					path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+							[1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+                      [1] = "Ground Units",
+                      [2] = "Air",
+	              }, -- end of targetTypes
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+        	local msg = {} 
+	msg.text = ' Path created.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+      
+		
+	local vars = {} 
+	vars.groupName = grpNameA
+	vars.action = "respawn"
+	vars.point = spawnPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' Plane spawned.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	--loops_through = loops_through + 1	
+	
+	--local vars = {} 
+	--vars.groupName = grpName
+	--vars.action = "respawn"
+	--vars.point = spawnPsn
+	--vars.route = path
+	--mist.teleportToPoint(vars)			
+
+	local con = agrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  
+  
+  if Groupsizes == 4  then
+  
+        	local msg = {} 
+	msg.text = ' 2nd Plane selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+  
+  spawnPsn2 = {}
+    
+
+	  if Task_Range == 1 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 0.75, azone.radius * 0.40)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
+	  end
+
+	  if Task_Range == 2 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.00, azone.radius * 0.75)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
+	  end
+
+	  if Task_Range == 3 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.25, azone.radius * 1.00)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
+	  end
+
+	  if Task_Range == 4 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.50, azone.radius * 1.25)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+		
+		if Task_Range == 5 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.75, azone.radius * 1.50)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+		
+	  if Task_Range == 6 then
+	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 2.00, azone.radius * 1.75)
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
+	  end
+  
+  
+  trigger.action.activateGroup(Group.getByName(grpName2A))
+	agrp2 = Group.getByName(grpName2A)
+	
+	local InitwpSpeed = mist.random(500,700)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = mist.random(2000,3750)
+	local wpPsn = mist.getRandPointInCircle(spawnPsn2, azone.radius * 0.15, azone.radius * 0.01)
+	local wpPsn2 = mist.getRandPointInCircle(spawnPsn2, azone.radius * 2.00, azone.radius * 1.50)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+							[1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+	                [1] = "Ground Units",
+                  [2] = "Air",
+	              }, -- end of targetTypes
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+        	local msg = {} 
+	msg.text = ' Path created.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+      
+		
+	local vars = {} 
+	vars.groupName = grpName2A
+	vars.action = "respawn"
+	vars.point = wpPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' Plane spawned.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	--loops_through = loops_through + 1	
+	
+	--local vars = {} 
+	--vars.groupName = grpName
+	--vars.action = "respawn"
+	--vars.point = spawnPsn
+	--vars.route = path
+	--mist.teleportToPoint(vars)			
+
+	local con = agrp2:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  end
+		
+	--checkunits4 = {
+	--groupName = grpName,
+	--percent = 40,
+	--flag = 401,
+	--stopFlag = 402,
+	--toggle = true,
+	--}
+	--mist.flagFunc.group_alive_less_than(checkunits4)
+  
+
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  
+  	local msg = {} 
+	msg.text = ' Attacker intercept task has been created, search and destroy target.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	end
 
 	---
  
@@ -2440,6 +2913,7 @@ end
   local randradsam = mist.random(1,Radar_SAM)
   local randirsam = mist.random(1,IR_SAM)
    local seadrand = mist.random(1,SEAD_Names)
+   local attackrand = mist.random(1,Attacker_Names)
    local ehelorand = mist.random(1,Enemy_Helo_Names)
    	local mrandred = mist.random(1, Red_CAS_Names)
     local pickedAD = mist.random(1, AD_Groups)
@@ -2469,6 +2943,8 @@ end
   local aHeloName2 = {}
   local MudREDCASName = {}
   local ADName = {}
+  local attackName = {}
+  local attackName2 = {}
   
 	
 
@@ -2676,6 +3152,9 @@ end
       eHeloName = Enemy_Helo_Names_VeryHard4x[ehelorand]
       eHeloName2 = Enemy_Helo_Names_VeryHard8x[ehelorand]
       end
+      
+
+            
     
     
    local distran = mist.random(10000,17500)
@@ -2796,6 +3275,372 @@ end
 	  mist.message.add(msg)
     ---------------------------
     
+    
+          if eAttack == 2 then
+      -- based off of Kutaisi Intercept script by akp, but modified for my own use.
+	
+  
+ airzone = trigger.misc.getZone("Enemyair")
+  
+	local rand = mist.random(1,Attacker_Names)
+	intercepttask = 1
+
+  if Groupsizes == 1 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasy[rand]
+	  end
+		
+		if Difficultymod == 2 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_Easy[rand]
+	  end
+
+	  if Difficultymod == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_Normal[rand]
+	  end
+
+	  if Difficultymod == 4 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_Hard[rand]
+	  end
+		
+		if Difficultymod == 5 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryHard[rand]
+	  end
+  
+  
+  if Groupsizes == 2 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasyx2[rand]
+	  end
+
+		if Difficultymod == 2 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_Easyx2[rand]
+	  end
+
+	  if Difficultymod == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_Normalx2[rand]
+	  end
+
+	  if Difficultymod == 4 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_Hardx2[rand]
+	  end
+		
+		if Difficultymod == 5 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryHardx2[rand]
+	  end
+  
+  
+  if Groupsizes == 3 and Difficultymod == 1 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 2 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 3 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 4 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+      if Groupsizes == 3 and Difficultymod == 5 then
+	    grpNameA = Attacker_Names_VeryEasyx4[rand]
+	  end
+    
+    	      
+  if Groupsizes == 4 and Difficultymod == 1 then
+      grpNameA = Attacker_Names_VeryEasyx4[rand]
+	    grpName2A = Attacker_Names_VeryEasyx2[rand]
+	  end
+
+		
+		if Groupsizes == 4 and Difficultymod == 2 then
+    grpNameA = Attacker_Names_Easyx4[rand]
+	    grpName2A = Attacker_Names_Easyx2[rand]
+	  end
+
+	  if Groupsizes == 4 and Difficultymod == 3 then
+    grpNameA = Attacker_Names_Normalx4[rand]
+	    grpName2A = Attacker_Names_Normalx2[rand]
+	  end
+
+	  if Groupsizes == 4 and Difficultymod == 4 then
+    grpNameA = Attacker_Names_Hardx4[rand]
+	    grpName2A = Attacker_Names_Hardx2[rand]
+	  end
+		
+		if Groupsizes == 4 and Difficultymod == 5 then
+    grpNameA = Attacker_Names_VeryHardx4[rand]
+	    grpName2A = Attacker_Names_VeryHardx2[rand]
+	  end
+	  
+  
+  
+
+
+   
+      	local msg = {} 
+	msg.text = ' Attacker selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	  spawnPsn = {}
+    
+      for i = 1, 1000 do
+      spawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(spawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
+    
+      	local msg = {} 
+	msg.text = ' Spawn position selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	trigger.action.activateGroup(Group.getByName(grpNameA))
+	agrp = Group.getByName(grpNameA)
+	
+	local InitwpSpeed = mist.random(600,700)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = mist.random(1000,4000)
+	local wpPsn = mist.getRandPointInCircle(spawnPsn, 10000)
+	local wpPsn2 = mist.getRandPointInCircle(mudPsn, 5000)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt, "BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+							[1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+                      [1] = "Ground Units",
+                      [2] = "Air",
+	              }, -- end of targetTypes
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+        	local msg = {} 
+	msg.text = ' Path created.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+      
+		
+	local vars = {} 
+	vars.groupName = grpNameA
+	vars.action = "respawn"
+	vars.point = spawnPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' Plane spawned.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	--loops_through = loops_through + 1	
+	
+	--local vars = {} 
+	--vars.groupName = grpName
+	--vars.action = "respawn"
+	--vars.point = spawnPsn
+	--vars.route = path
+	--mist.teleportToPoint(vars)			
+
+	local con = agrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  
+  
+  if Groupsizes == 4  then
+  
+        	local msg = {} 
+	msg.text = ' 2nd Plane selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+  
+  spawnPsn2 = {}
+    
+
+      for i = 1, 1000 do
+      spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.00)
+      local InZone2 = mist.pointInPolygon(point, mist.getGroupPoints('Border')) 
+      if InZone2 == true then break
+      end
+      end
+  
+  
+  trigger.action.activateGroup(Group.getByName(grpName2A))
+	agrp2 = Group.getByName(grpName2A)
+	
+	local InitwpSpeed = mist.random(600,700)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = mist.random(1000,4000)
+	local wpPsn = mist.getRandPointInCircle(spawnPsn2, 5000)
+	local wpPsn2 = mist.getRandPointInCircle(mudPsn, 10000)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+							[1] = {
+	            number = 1,
+	            auto = true,
+	            id = "EngageTargets",
+	            enabled = true,
+	            key = "CAS",
+	            params = {
+	              targetTypes = {
+	                [1] = "Ground Units",
+                  [2] = "Air",
+	              }, -- end of targetTypes
+	              priority = 0,
+	            }, -- end of params
+	          }, -- end of [1]
+	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    }
+      
+        	local msg = {} 
+	msg.text = ' Path created.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+      
+		
+	local vars = {} 
+	vars.groupName = grpName2A
+	vars.action = "respawn"
+	vars.point = wpPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' Plane spawned.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	--loops_through = loops_through + 1	
+	
+	--local vars = {} 
+	--vars.groupName = grpName
+	--vars.action = "respawn"
+	--vars.point = spawnPsn
+	--vars.route = path
+	--mist.teleportToPoint(vars)			
+
+	local con = agrp2:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  end
+		
+	--checkunits4 = {
+	--groupName = grpName,
+	--percent = 40,
+	--flag = 401,
+	--stopFlag = 402,
+	--toggle = true,
+	--}
+	--mist.flagFunc.group_alive_less_than(checkunits4)
+  
+
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
+  
+  	local msg = {} 
+	msg.text = ' Attacker intercept task has been created, search and destroy target.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	end
+ 
+
+	---
+      
+      
+     
     
     
     
@@ -3528,12 +4373,12 @@ end
 	local InitwpSpeed = mist.random(400,500)
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
 	local wpAlt = 3000
-  local wpAlt2 = mist.random(4000,6000)
+  local wpAlt2 = mist.random(3000,4000)
 	local wpPsn = mist.getRandPointInCircle(samPsn, 0)
 	local wpPsn2 = mist.getRandPointInCircle(seadPsn, 10000)
   local path = {}
-					path[1] = mist.fixedWing.buildWP(seadPsn, "TakeOffParking", wpSpeed, wpalt, "BARO")
-					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt2, "BARO")
+					path[1] = mist.fixedWing.buildWP(seadPsn, wpSpeed, wpalt2, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
 					path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
 					path[1].task = {
 					id = "ComboTask",
@@ -3548,6 +4393,7 @@ end
 	            params = {
 	              targetTypes = {
 	                [1] = "Air Defence",
+                  [2] = "Ground Units",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -3628,7 +4474,7 @@ end
 	
 	local eInitwpSpeed = mist.random(60,225)
 	local ewpSpeed = mist.utils.kmphToMps(eInitwpSpeed)
-	local ewpAlt = mist.random(100,200)
+	local ewpAlt = mist.random(300,700)
   local ewpAlt2 = mist.random(50,100)
   local hpath = {}
 					hpath[1] = mist.heli.buildWP(heloPsn, ewpSpeed, ewpAlt, "BARO")
@@ -3645,10 +4491,8 @@ end
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                [1] = "Helicopters",
+                [1] = "Air",
                 [2] = "Ground Units",
-                [3] = "Light armed ships",
-                [4] = "Air",
                 }, -- end of ["targetTypes"]
 	              priority = 0,
 	            }, -- end of params
@@ -3661,8 +4505,8 @@ end
 	            params = {
 	              altitudeEdited = false,
 	              pattern = "Circle",
-	              speed = wpSpeed,
-	              altitude = wpAlt,
+	              speed = ewpSpeed,
+	              altitude = ewpAlt,
 	              speedEdited = true,
 	            }, -- end of params
 	          }, -- end of [2]
@@ -3749,10 +4593,8 @@ end
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                [1] = "Helicopters",
+                [1] = "Air",
                 [2] = "Ground Units",
-                [3] = "Light armed ships",
-                [4] = "Air",
                 }, -- end of ["targetTypes"]
 	              priority = 0,
 	            }, -- end of params
@@ -3765,8 +4607,8 @@ end
 	            params = {
 	              altitudeEdited = false,
 	              pattern = "Circle",
-	              speed = wpSpeed,
-	              altitude = wpAlt,
+	              speed = ewpSpeed,
+	              altitude = ewpAlt,
 	              speedEdited = true,
 	            }, -- end of params
 	          }, -- end of [2]
@@ -5095,6 +5937,35 @@ mist.removeFunction(ConvoyFunc)
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 	  local msg = {} 
 	    msg.text = ' Enemy air defenses at task'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------
+         ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_eAttacker_Level_1()
+
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " has been disabled"
+	eAttack = 1
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy buildings'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+         ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_eAttacker_Level_2()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " have been enabled"
+	eAttack = 2
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' Enemy CAS planes'..tostring(New_Set)
 	    msg.displayTime = 20
 	    msg.msgFor = {coa = {'all'}}
 	      mist.message.add(msg)

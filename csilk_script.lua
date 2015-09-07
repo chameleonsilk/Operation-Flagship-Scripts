@@ -2650,11 +2650,10 @@ end
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
 	local wpAlt = mist.random(2000,3500)
 	local wpPsn = mist.getRandPointInCircle(spawnPsn, azone.radius * 0.15, azone.radius * 0.01)
-	local wpPsn2 = mist.getRandPointInCircle(spawnPsn, azone.radius * 2.00, azone.radius * 1.50)
+	local wpPsn2 = mist.getRandPointInCircle(azone.point, 10000)
   local path = {}
 					path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
-					path[2] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
-					path[3] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
 					path[1].task = {
 					id = "ComboTask",
 					params = {
@@ -2791,7 +2790,7 @@ end
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
 	local wpAlt = mist.random(2000,3750)
 	local wpPsn = mist.getRandPointInCircle(spawnPsn2, azone.radius * 0.15, azone.radius * 0.01)
-	local wpPsn2 = mist.getRandPointInCircle(spawnPsn2, azone.radius * 2.00, azone.radius * 1.50)
+	local wpPsn2 = mist.getRandPointInCircle(azone.point, 10000)
   local path = {}
 					path[1] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpAlt, "BARO")
 					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt,"BARO")
@@ -3510,8 +3509,8 @@ end
     
 
       for i = 1, 1000 do
-      spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.00)
-      local InZone2 = mist.pointInPolygon(point, mist.getGroupPoints('Border')) 
+      spawnPsn2 = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      local InZone2 = mist.pointInPolygon(spawnPsn2, mist.getGroupPoints('Border')) 
       if InZone2 == true then break
       end
       end

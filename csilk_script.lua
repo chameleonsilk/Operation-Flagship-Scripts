@@ -75,13 +75,13 @@
   
 
 	--These variables define displayed name for Task Spawn Distance
-	local rad_option_9a = "Scramble"
+	local rad_option_9a = "Very Close"
 	local rad_option_9b = "Close"
 	local rad_option_9c = "Standard"
 	local rad_option_9d = "Far"
 	local rad_option_9e = "Very Far"
 	local rad_option_9f = "Distant"
-	local rad_option_9g = "Random"
+	--local rad_option_9g = "Random"
 
 	--Debug radio command (must have modified mission_scripting.lua in dcs scripts folder to not sanitize ios and lfs)
 	--local rad_option_9y = "Debugging - Reload Script"
@@ -143,7 +143,8 @@
 	mudPsn = {}
   mudPsn2 = {}
   mudPsn3 = {}
-  airzone = {}
+
+  airzone = trigger.misc.getZone("Enemyair")
 
 	Smoke = 0
 	Scoord  = {}
@@ -1309,7 +1310,12 @@ Infantry2_Squads = 5
 
 	Bomber_Names = 2 --variable for number of availale fighters
 
-	Bomber_Names_Easy = {
+	
+  	Bomber_Names_VeryEasy = {
+		[1] = 'Tu-22M3 (VeryEasy)',
+	  [2] = 'Su-24M (VeryEasy)',
+	}
+  Bomber_Names_Easy = {
 		[1] = 'Tu-22M3 (Easy)',
 	  [2] = 'Su-24M (Easy)',
 	}
@@ -1559,7 +1565,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9d, DistanceSet, Set_Distance_Far, nil) -- Far
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9e, DistanceSet, Set_Distance_Veryfar, nil) -- Very far
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9f, DistanceSet, Set_Distance_Distant, nil) -- Distant
-	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9g, DistanceSet, Set_Distance_Random, nil) -- Random
+	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9g, DistanceSet, Set_Distance_Random, nil) -- Random
 
 	--------------------
 	-- End Wanks Code --
@@ -1762,37 +1768,13 @@ Infantry2_Squads = 5
 	mist.message.add(msg)
 
 	  spawnPsn = {}
-    
 
-	  if Task_Range == 1 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.60, zone.radius * 0.40)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-	  end
-
-	  if Task_Range == 2 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.70, zone.radius * 0.60)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
-	  end
-
-	  if Task_Range == 3 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.80, zone.radius * 0.70)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
-	  end
-
-	  if Task_Range == 4 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 0.90, zone.radius * 0.80)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-		if Task_Range == 5 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.00, zone.radius * 0.90)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-	  if Task_Range == 6 then
-	    spawnPsn = mist.getRandPointInCircle(zone.point, zone.radius * 1.50, zone.radius * 1.00)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
+      for i = 1, 1000 do
+      spawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(spawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
     
       	local msg = {} 
 	msg.text = ' Spawn position selected.'
@@ -1907,37 +1889,14 @@ Infantry2_Squads = 5
 	mist.message.add(msg)
   
   spawnPsn2 = {}
-    
 
-	  if Task_Range == 1 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 0.75, zone.radius * 0.40)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-	  end
-
-	  if Task_Range == 2 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 1.00, zone.radius * 0.75)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
-	  end
-
-	  if Task_Range == 3 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 1.25, zone.radius * 1.00)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
-	  end
-
-	  if Task_Range == 4 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 1.50, zone.radius * 1.25)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-		if Task_Range == 5 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 1.75, zone.radius * 1.50)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-	  if Task_Range == 6 then
-	    spawnPsn2 = mist.getRandPointInCircle(zone.point, zone.radius * 2.00, zone.radius * 1.75)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
+      for i = 1, 1000 do
+      spawnPsn2 = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(spawnPsn2, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
+      
   
   
   trigger.action.activateGroup(Group.getByName(grpName2))
@@ -2239,52 +2198,37 @@ end
 	end
 end
 
-	if Task_Range == 1 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.70, bzone.radius * 0.50)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.50, bzone.radius * 0.35)
-	end
-
-	if Task_Range == 2 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.00, bzone.radius * 0.80)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.80, bzone.radius * 0.60)
-	end
-
-	if Task_Range == 3 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.25, bzone.radius * 0.90)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.90, bzone.radius * 0.75)
-	end
-
-	if Task_Range == 4 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.25)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.25, bzone.radius * 1.00)
-	end
-	
-	if Task_Range == 5 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.75, bzone.radius * 1.50)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.50, bzone.radius * 1.25)
-	end
-
-	if Task_Range == 6 then
-		trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-		bspawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 2.00, bzone.radius * 1.75)
-		espawnPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.75, bzone.radius * 1.50)
-	end
-
+	  bspawnPsn = {}
+    espawnPsn = {}
+    
+    
+      for i = 1, 1000 do
+      bspawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(bspawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
+     
+    
+         for i = 1, 1000 do
+      espawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(espawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end     
+ 
+  
+  
 	trigger.action.activateGroup(Group.getByName(bgrpName))
 									
 	local bInitwpSpeed = mist.random(525,625)
 	local bwpSpeed = mist.utils.kmphToMps(bInitwpSpeed)
-	local bwpAlt = mist.random(3500,7000)
+	local bwpAlt = mist.random(5500,7000)
 	local bwpPsn = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.50, bzone.radius * 0.35)
 	local bwpPsn2 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.02, bzone.radius * 0.01)
 	local bwpPsn3 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.25, bzone.radius * 0.15)
 	local bwpPsn4 = mist.getRandPointInCircle(bzone.point, bzone.radius * 0.35, bzone.radius * 0.15)
-	local bwpPsn5 = mist.getRandPointInCircle(bzone.point, bzone.radius * 2.00, bzone.radius * 1.99)
+	local bwpPsn5 = mist.getRandPointInCircle(bzone.point, bzone.radius * 1.00, bzone.radius * 0.15)
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')			
 
@@ -2310,7 +2254,7 @@ end
 	      	  attackQtyLimit = false,
 	      	  attackQty = 1,
 	      	  expend = "Auto",
-	      	  altitude = 3750,
+	      	  altitude = bwpAlt,
 	      	  directionEnabled = false,
 	      	  groupAttack = true,
 	      	  runwayId = RunwayID,
@@ -2354,6 +2298,9 @@ end
 	  bvars.point = bspawnPsn
 	  bvars.route = bpath
 		mist.teleportToPoint(bvars)
+    
+
+
 	  
 	  bgrp = Group.getByName(bgrpName)
 	  
@@ -2607,35 +2554,12 @@ end
 	  spawnPsn = {}
     
 
-	  if Task_Range == 1 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.60, azone.radius * 0.40)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-	  end
-
-	  if Task_Range == 2 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.70, azone.radius * 0.60)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
-	  end
-
-	  if Task_Range == 3 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.80, azone.radius * 0.70)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
-	  end
-
-	  if Task_Range == 4 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 0.90, azone.radius * 0.80)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-		if Task_Range == 5 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 1.00, azone.radius * 0.90)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-	  if Task_Range == 6 then
-	    spawnPsn = mist.getRandPointInCircle(azone.point, azone.radius * 1.50, azone.radius * 1.00)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
+  for i = 1, 1000 do
+      spawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(spawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
     
       	local msg = {} 
 	msg.text = ' Spawn position selected.'
@@ -2750,37 +2674,13 @@ end
 	mist.message.add(msg)
   
   spawnPsn2 = {}
-    
-
-	  if Task_Range == 1 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 0.75, azone.radius * 0.40)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'scramble.ogg')
-	  end
-
-	  if Task_Range == 2 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.00, azone.radius * 0.75)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'standard.ogg')
-	  end
-
-	  if Task_Range == 3 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.25, azone.radius * 1.00)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'far.ogg')
-	  end
-
-	  if Task_Range == 4 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.50, azone.radius * 1.25)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-		if Task_Range == 5 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 1.75, azone.radius * 1.50)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
-		
-	  if Task_Range == 6 then
-	    spawnPsn2 = mist.getRandPointInCircle(azone.point, azone.radius * 2.00, azone.radius * 1.75)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'veryfar.ogg')
-	  end
+   
+      for i = 1, 1000 do
+      spawnPsn2 = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      InZone = mist.pointInPolygon(spawnPsn, mist.getGroupPoints('Border')) 
+      if InZone == true then break
+      end
+      end
   
   
   trigger.action.activateGroup(Group.getByName(grpName2A))
@@ -3159,8 +3059,8 @@ end
    local distran = mist.random(10000,17500)
    local minran = mist.random(7500,10000)
    
-   local distran2 = mist.random(42500,65000)
-   local minran2 = mist.random(39000,42500)
+   local distran2 = mist.random(62500,85000)
+   local minran2 = mist.random(55000,62499)
    
    local heloran = mist.random(1, 1000)
    local heloran2 = mist.random(1, 1000)
@@ -3279,7 +3179,7 @@ end
       -- based off of Kutaisi Intercept script by akp, but modified for my own use.
 	
   
- airzone = trigger.misc.getZone("Enemyair")
+
   
 	local rand = mist.random(1,Attacker_Names)
 	intercepttask = 1
@@ -3510,8 +3410,8 @@ end
 
       for i = 1, 1000 do
       spawnPsn2 = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
-      local InZone2 = mist.pointInPolygon(spawnPsn2, mist.getGroupPoints('Border')) 
-      if InZone2 == true then break
+      local InZone = mist.pointInPolygon(spawnPsn2, mist.getGroupPoints('Border')) 
+      if InZone == true then break
       end
       end
   

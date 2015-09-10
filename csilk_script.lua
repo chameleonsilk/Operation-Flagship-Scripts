@@ -1916,7 +1916,7 @@ Infantry2_Squads = 5
 	groupName = grpName,
 	flag = 101,
 	stopFlag = 102,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -2041,7 +2041,7 @@ Infantry2_Squads = 5
 	groupName = grpName2,
 	flag = 103,
 	stopFlag = 104,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   end
@@ -2350,7 +2350,7 @@ end
 	groupName = bgrpName,
 	flag = 201,
 	stopFlag = 202,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
 
@@ -2452,7 +2452,7 @@ end
 	groupName = egrpName,
 	flag = 203,
 	stopFlag = 204,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
       
@@ -2700,7 +2700,7 @@ end
 	groupName = grpName,
 	flag = 301,
 	stopFlag = 302,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -2827,7 +2827,7 @@ end
   --percent = 33,
 	flag = 303,
 	stopFlag = 304,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -3387,7 +3387,7 @@ end
 	percent = 33,
 	flag = 301,
 	stopFlag = 302,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_alive_less_than(checkunits)
   
@@ -3537,7 +3537,7 @@ end
 	percent = 33,
 	flag = 303,
 	stopFlag = 304,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_alive_less_than(checkunits)
   
@@ -3956,7 +3956,7 @@ end
 	groupName = ADName,
 	flag = 501,
 	stopFlag = 502,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4107,7 +4107,7 @@ end
 	groupName = RadarSamName,
 	flag = 701,
 	stopFlag = 702,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4127,7 +4127,7 @@ end
 	groupName = RadarSamName,
 	flag = 703,
 	stopFlag = 704,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4147,7 +4147,7 @@ end
 	groupName = RadarSamName,
 	flag = 705,
 	stopFlag = 706,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4170,7 +4170,7 @@ end
 	groupName = ADName,
 	flag = 705,
 	stopFlag = 706,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4187,7 +4187,7 @@ end
 	groupName = ADName,
 	flag = 703,
 	stopFlag = 704,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4203,7 +4203,7 @@ end
 	groupName = ADName,
 	flag = 701,
 	stopFlag = 702,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4223,7 +4223,7 @@ end
 	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4244,7 +4244,7 @@ end
 	groupName = IRSamName,
 	flag = 603,
 	stopFlag = 604,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4266,7 +4266,7 @@ end
 	groupName = IRSamName,
 	flag = 603,
 	stopFlag = 604,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4285,7 +4285,7 @@ end
 	groupName = IRSamName2,
 	flag = 601,
 	stopFlag = 602,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4306,7 +4306,7 @@ end
 	groupName = IRSamName3,
 	flag = 605,
 	stopFlag = 606,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4324,7 +4324,7 @@ end
 	groupName = IRSamName2,
 	flag = 603,
 	stopFlag = 604,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4342,7 +4342,7 @@ end
 	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4488,7 +4488,7 @@ SEADtask = 1
 	groupName = seadName,
 	flag = 2001,
 	stopFlag = 2002,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
   
@@ -4668,7 +4668,7 @@ eHelotask = 1
 	groupName = eHeloName,
 	flag = 801,
 	stopFlag = 802,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4780,7 +4780,7 @@ eHelotask2 = 1
 	groupName = eHeloName2,
 	flag = 803,
 	stopFlag = 804,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -5423,7 +5423,7 @@ local checkunits = {
 	groupName = MudName,
 	flag = 901,
 	stopFlag = 902,
-  toggle = true,
+  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
 			
@@ -6513,6 +6513,100 @@ mist.removeFunction(ConvoyFunc)
 	   -- msg.displayTime = 1
 	   -- msg.msgFor = {coa = {'all'}}
 	   -- mist.message.add(msg)
+     
+     	if trigger.misc.getUserFlag('102') == 1 then
+			trigger.action.setUserFlag('102',0)
+
+	end
+  
+       	if trigger.misc.getUserFlag('104') == 1 then
+			trigger.action.setUserFlag('104',0)
+
+	end
+
+	if trigger.misc.getUserFlag('202') == 1 then
+			trigger.action.setUserFlag('202',0)
+
+	end
+  if trigger.misc.getUserFlag('204') == 1 then
+			trigger.action.setUserFlag('204',0)
+
+	end
+
+	if trigger.misc.getUserFlag('302') == 1 then
+			trigger.action.setUserFlag('302',0)
+
+	end
+  
+  	if trigger.misc.getUserFlag('304') == 1 then
+			trigger.action.setUserFlag('304',0)
+
+	end
+
+	if trigger.misc.getUserFlag('402') == 1 then
+			trigger.action.setUserFlag('402',0)
+
+	end
+
+	if trigger.misc.getUserFlag('502') == 1 then
+
+			trigger.action.setUserFlag('502',0)
+
+	end
+	
+	if trigger.misc.getUserFlag('602') == 1 then
+
+			trigger.action.setUserFlag('602',0)
+
+	end
+	
+		if trigger.misc.getUserFlag('702') == 1 then
+
+			trigger.action.setUserFlag('702',0)
+
+	end
+  
+  		if trigger.misc.getUserFlag('704') == 1 then
+
+			trigger.action.setUserFlag('704',0)
+
+	end
+  
+  		if trigger.misc.getUserFlag('706') == 1 then
+
+			trigger.action.setUserFlag('706',0)
+
+	end
+  
+  		if trigger.misc.getUserFlag('802') == 1 then
+
+			trigger.action.setUserFlag('802',0)
+
+	end
+  
+  		if trigger.misc.getUserFlag('804') == 1 then
+
+			trigger.action.setUserFlag('804',0)
+
+	end
+  
+    		if trigger.misc.getUserFlag('902') == 1 then
+
+			trigger.action.setUserFlag('902',0)
+
+	end
+  
+    		if trigger.misc.getUserFlag('1002') == 1 then
+
+			trigger.action.setUserFlag('1002',0)
+      
+	end
+  
+    		if trigger.misc.getUserFlag('2002') == 1 then
+
+			trigger.action.setUserFlag('2002',0)
+
+	end
 
 	if trigger.misc.getUserFlag('101') == 1 and fightertask == 1 then
 			local msg = {}

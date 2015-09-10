@@ -6521,7 +6521,7 @@ mist.removeFunction(ConvoyFunc)
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
-      Fightertask = 0
+      fightertask = 0
 			trigger.action.setUserFlag('101',0)
 			trigger.action.setUserFlag('102', 1)				-- stop victory
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
@@ -6531,12 +6531,12 @@ mist.removeFunction(ConvoyFunc)
   
   	if trigger.misc.getUserFlag('103') == 1 and fightertask2 == 1 then
 			local msg = {}
-			msg.text = ' A flight of enemy fighters has been destroyed'
+			msg.text = ' A flight of enemy fighters has been destroyed.'
 	    msg.displayTime = 60
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
-      Fightertask2 = 0
+      fightertask2 = 0
 			trigger.action.setUserFlag('103',0)
 			trigger.action.setUserFlag('104', 1)				-- stop victory
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')

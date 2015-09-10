@@ -25,7 +25,7 @@
 	-- radio option variables are grouped by function. ie- 0a-3a
 	-- These variables define the displayed name for mission difficulty
 	local rad_option_8a = "World War II"
-	local rad_option_8b = "Korean"
+	local rad_option_8b = "Korea"
 	local rad_option_8c = "Vietnam (default)"
 	local rad_option_8d = "Gulf War"
 	local rad_option_8e = "Cold War"
@@ -117,19 +117,27 @@
 	RunwayID = 0
 	Debugger = 0
 
-	airfield = 0
-	mudtask = 0
+	
+	
 	convoytask = 0
-	intercepttask = 0
+	fightertask = 0
+  fightertask2 = 0
 	bombertask = 0
-  castask = 0
+  attacktask = 0
+  attacktask2 = 0
+  SEADtask = 0
+  eHelotask = 0
+  eHelotask2 = 0
+  RADtaskA = 0 -- S
+  RADtaskB = 0 -- M
+  RADtaskC = 0 -- L
+  IRtaskA = 0 -- manpad
+  IRtaskB = 0 -- m IR
+  AAAtask = 0
+  mudtask = 0
+  
 
-	airfield_complete = 0
-	mud_complete = 0
-	convoy_complete = 0
-	intercept_complete = 0
-	bomber_complete = 0
-  cas_complete = 0
+	
   
 
 	message = {}
@@ -199,20 +207,40 @@
     "MudREDCAS (VeryHard) #002",
     "MudREDCAS (VeryHard) #003",
     "MudREDCAS (VeryHard) #004",
-	  "Anapa-P51D #1",
+	  "Anapa-L39ZA #1",
+    "Anapa-L39ZA #2",
+    "Anapa-Su27 #1",
+    "Anapa-Su27 #2",
+    "Anapa-Su27 #3",
+    "Anapa-Su27 #4",
+    "Anapa-C101EB #1",
+    "Anapa-C101EB #2",
+    "Anapa-Hawk #1",
+    "Anapa-Hawk #2",
+    "Anapa-P51D #1",
     "Anapa-P51D #2",
-    "Anapa-K4 #2",
+    "Anapa-P51D #3",
+    "Anapa-P51D #4",
     "Anapa-K4 #1",
+    "Anapa-K4 #2",
+    "Anapa-K4 #3",
+    "Anapa-K4 #4",
     "Anapa-D9 #1",
     "Anapa-D9 #2",
+    "Anapa-D9 #3",
+    "Anapa-D9 #4",
     "Anapa-86 #1",
 		"Anapa-86 #2",
+    "Anapa-86 #3",
+		"Anapa-86 #4",
 		"Anapa-21 #1",
 	  "Anapa-21 #2",
 	  "Anapa-21 #3",
 	  "Anapa-21 #4",
-	  "Anapa-21 #5",
-	  "Anapa-21 #6",
+    "Anapa-15 #1",
+	  "Anapa-15 #2",
+	  "Anapa-15 #3",
+	  "Anapa-15 #4",
 	  "Anapa-25T #1",
 	  "Anapa-25T #2",
 	  "Anapa-25T #3",
@@ -229,30 +257,18 @@
 	  "Anapa-A10C #2",
 	  "Anapa-A10C #3",
 	  "Anapa-A10C #4",
-	  "Anapa-A10C #5",
-	  "Anapa-A10C #6",
 	  "Anapa-A10A #1",
 	  "Anapa-A10A #2",
 	  "Anapa-A10A #3",
 	  "Anapa-A10A #4",
-	  "Anapa-A10A #5",
-	  "Anapa-A10A #6",
 	  "Anapa-F15C #1",
 	  "Anapa-F15C #2",
 	  "Anapa-F15C #3",
 	  "Anapa-F15C #4",
-	  "Anapa-F15C #5",
-	  "Anapa-F15C #6",
-	  "Anapa-86 #1",
-	  "Anapa-86 #2",
 	  "Anapa-KA50 #1",
 	  "Anapa-KA50 #2",
 	  "Anapa-KA50 #3",
 	  "Anapa-KA50 #4",
-	  "Anapa-KA50 #5",
-	  "Anapa-KA50 #6",
-	  "Anapa-KA50 #7",
-	  "Anapa-KA50 #8",
 	  "Anapa-UH1H #1",
 	  "Anapa-UH1H #2",
 	  "Anapa-UH1H #3",
@@ -350,12 +366,12 @@
 	  "Kutaisi-21 #2",
 	  "Kutaisi-21 #3",
 	  "Kutaisi-21 #4",
-	  "Kutaisi-21 #5",
-	  "Kutaisi-21 #6",
-	  "Kutaisi-15C #1",
-	  "Kutaisi-15C #2",
-	  "Kutaisi-15C #3",
-	  "Kutaisi-15C #4",
+	  "Kutaisi-F15C #1",
+	  "Kutaisi-F15C #2",
+	  "Kutaisi-F15C #3",
+	  "Kutaisi-F15C #4",
+    "Kutaisi-15 #1",
+	  "Kutaisi-15 #2",
 	  "Kutaisi-27 #1",
 	  "Kutaisi-27 #2",
 		"Kutaisi-27 #3",
@@ -377,8 +393,21 @@
 		"Kutaisi-25T #3",
 		"Kutaisi-25T #4",
 		"Kutaisi-UH1H #1",
+    "Kutaisi-UH1H #2",
+    "Kutaisi-Mi8 #1",
+    "Kutaisi-Mi8 #2",
 		"Kutaisi-KA50 #1",
 		"Kutaisi-KA50 #2",
+    "Kutaisi-KA50 #3",
+		"Kutaisi-KA50 #4",
+    "Kutaisi-KA50 #3",
+		"Kutaisi-KA50 #4",
+    "Kutaisi-K4 #1",
+    "Kutaisi-K4 #2",
+    "Kutaisi-D9 #1",
+    "Kutaisi-D9 #2",
+    "Kutaisi-P51D #1",
+    "Kutaisi-P51D #2",
 	  "Maykop-86 #1",
 		"Maykop-86 #2",
 		"Maykop-21 #1",
@@ -1449,6 +1478,10 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
   
+    -- These commands set CA options
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+  
   
   --	local rad_option_1a = "Interdict: CAP"
 	--local rad_option_1b = "Interdict: Bombers"
@@ -1548,8 +1581,8 @@ Infantry2_Squads = 5
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_14d, eHeloSet, Set_eHelo_Level_4, nil) -- '8 helo
   -- These commands set if the allied side will have helos
   -- These commands set CA options
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+  --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
+  --missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
     -- These commands set air defense options
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_17a, ADSet, Set_AD_Level_2, nil) -- 'AAA enabled
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_17b, ADSet, Set_AD_Level_1, nil) -- 'AAA disabled
@@ -1666,7 +1699,7 @@ Infantry2_Squads = 5
 -- based off of Kutaisi Intercept script by akp, but modified for my own use.
 	zone = trigger.misc.getZone(_Area)
 	local rand = mist.random(1,Fighter_Names)
-	intercepttask = 1
+	fightertask = 1
 
   if Groupsizes == 1 and Difficultymod == 1 then
 	    grpName = Fighter_Names_VeryEasy[rand]
@@ -1879,6 +1912,14 @@ Infantry2_Squads = 5
 	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
   
+  	local checkcap= {
+	groupName = grpName,
+	flag = 101,
+	stopFlag = 102,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
+  
   
   if Groupsizes == 4  then
   
@@ -1888,6 +1929,7 @@ Infantry2_Squads = 5
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
   
+  	fightertask2 = 1
   spawnPsn2 = {}
 
       for i = 1, 1000 do
@@ -1994,16 +2036,21 @@ Infantry2_Squads = 5
 	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
 	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  
+  	local checkcap= {
+	groupName = grpName2,
+	flag = 103,
+	stopFlag = 104,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
   end
 		
-	--checkunits4 = {
-	--groupName = grpName,
-	--percent = 40,
-	--flag = 401,
-	--stopFlag = 402,
-	--toggle = true,
-	--}
-	--mist.flagFunc.group_alive_less_than(checkunits4)
+
+  
+  
+  
+ 
   
 
 
@@ -2299,7 +2346,13 @@ end
 	  bvars.route = bpath
 		mist.teleportToPoint(bvars)
     
-
+  local checkcap= {
+	groupName = bgrpName,
+	flag = 201,
+	stopFlag = 202,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
 
 	  
 	  bgrp = Group.getByName(bgrpName)
@@ -2394,6 +2447,15 @@ end
 	      evars.route = epath
 	      mist.teleportToPoint(evars)
 	    
+      
+        local checkcap= {
+	groupName = egrpName,
+	flag = 203,
+	stopFlag = 204,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
+      
 	    egrp = Group.getByName(egrpName)
 	    
 	    local econ = egrp:getController()
@@ -2430,14 +2492,6 @@ end
 
 		
 
-		local checkunits5 = {
-		groupName = bgrpName,
-		percent = 40,
-		flag = 501,
-		stopFlag = 502,
-		 toggle = true,
-	 }
-	 mist.flagFunc.group_alive_less_than(checkunits5)
 
 	 --return
 	end
@@ -2449,7 +2503,7 @@ end
 -- based off of Kutaisi Intercept script by akp, but modified for my own use.
 	azone = trigger.misc.getZone(_cArea)
 	local rand = mist.random(1,Attacker_Names)
-	intercepttask = 1
+	attacktask = 1
 
   if Groupsizes == 1 and Difficultymod == 1 then
 	    grpNameA = Attacker_Names_VeryEasy[rand]
@@ -2642,6 +2696,14 @@ end
 	vars.route = path
 	mist.teleportToPoint(vars)			
   
+          local checkcap= {
+	groupName = grpName,
+	flag = 301,
+	stopFlag = 302,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
+  
   	local msg = {} 
 	msg.text = ' Plane spawned.'
 	msg.displayTime = 20
@@ -2673,6 +2735,8 @@ end
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
   
+  
+  attacktask2 = 1
   spawnPsn2 = {}
    
       for i = 1, 1000 do
@@ -2757,6 +2821,15 @@ end
 	vars.point = wpPsn
 	vars.route = path
 	mist.teleportToPoint(vars)			
+  
+            local checkcap= {
+	groupName = grpName2A,
+  --percent = 33,
+	flag = 303,
+	stopFlag = 304,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkcap)
   
   	local msg = {} 
 	msg.text = ' Plane spawned.'
@@ -2983,74 +3056,7 @@ end
     
     
     
-    if eHelo == 2 and Difficultymod == 1 then
-      eHeloName = Enemy_Helo_Names_VeryEasy2x[ehelorand]
-      end
-      
-      if eHelo == 2 and Difficultymod == 2 then
-      eHeloName = Enemy_Helo_Names_Easy2x[ehelorand]
-      end
-      
-      if eHelo == 2 and Difficultymod == 3 then
-      eHeloName = Enemy_Helo_Names_Normal2x[ehelorand]
-      end
-      
-      if eHelo == 2 and Difficultymod == 4 then
-      eHeloName = Enemy_Helo_Names_Hard2x[ehelorand]
-      end
-      
-      if eHelo == 2 and Difficultymod == 5 then
-      eHeloName = Enemy_Helo_Names_VeryHard2x[ehelorand]
-      end
-    
-    
-    
-    
-    if eHelo == 3 and Difficultymod == 1 then
-      eHeloName = Enemy_Helo_Names_VeryEasy4x[ehelorand]
-      end
-      
-       if eHelo == 3 and Difficultymod == 2 then
-      eHeloName = Enemy_Helo_Names_Easy4x[ehelorand]
-      end
-      
-       if eHelo == 3 and Difficultymod == 3 then
-      eHeloName = Enemy_Helo_Names_Normal4x[ehelorand]
-      end
-      
-       if eHelo == 3 and Difficultymod == 4 then
-      eHeloName = Enemy_Helo_Names_Hard4x[ehelorand]
-      end
-      
-       if eHelo == 3 and Difficultymod == 5 then
-      eHeloName = Enemy_Helo_Names_VeryHard4x[ehelorand]
-      end
-    
-    
-        if eHelo == 4 and Difficultymod == 1 then
-      eHeloName = Enemy_Helo_Names_VeryEasy4x[ehelorand]
-      eHeloName2 = Enemy_Helo_Names_VeryEasy8x[ehelorand]
-      end
-      
-      if eHelo == 4 and Difficultymod == 2 then
-      eHeloName = Enemy_Helo_Names_Easy4x[ehelorand]
-      eHeloName2 = Enemy_Helo_Names_Easy8x[ehelorand]
-      end
-      
-      if eHelo == 4 and Difficultymod == 3 then
-      eHeloName = Enemy_Helo_Names_Normal4x[ehelorand]
-      eHeloName2 = Enemy_Helo_Names_Normal8x[ehelorand]
-      end
-      
-      if eHelo == 4 and Difficultymod == 4 then
-      eHeloName = Enemy_Helo_Names_Hard4x[ehelorand]
-      eHeloName2 = Enemy_Helo_Names_Hard8x[ehelorand]
-      end
-      
-      if eHelo == 4 and Difficultymod == 5 then
-      eHeloName = Enemy_Helo_Names_VeryHard4x[ehelorand]
-      eHeloName2 = Enemy_Helo_Names_VeryHard8x[ehelorand]
-      end
+
       
 
             
@@ -3374,6 +3380,17 @@ end
 	vars.route = path
 	mist.teleportToPoint(vars)			
   
+  
+  
+  	local checkunits = {
+	groupName = grpName2A,
+	percent = 33,
+	flag = 301,
+	stopFlag = 302,
+  toggle = true,
+	}
+	mist.flagFunc.group_alive_less_than(checkunits)
+  
   	local msg = {} 
 	msg.text = ' Plane spawned.'
 	msg.displayTime = 20
@@ -3405,6 +3422,7 @@ end
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
   
+  attacktask2 = 1
   spawnPsn2 = {}
     
 
@@ -3514,14 +3532,14 @@ end
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
   end
 		
-	--checkunits4 = {
-	--groupName = grpName,
-	--percent = 40,
-	--flag = 401,
-	--stopFlag = 402,
-	--toggle = true,
-	--}
-	--mist.flagFunc.group_alive_less_than(checkunits4)
+	local checkunits = {
+	groupName = grpName2A,
+	percent = 33,
+	flag = 303,
+	stopFlag = 304,
+  toggle = true,
+	}
+	mist.flagFunc.group_alive_less_than(checkunits)
   
 
 
@@ -3893,7 +3911,7 @@ end
 	 Strike_Area.z = mudPsn.z
    radius = 1000
 	
-	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 601, req_num = 3, stopFlag = 602}
+	mist.flagFunc.mapobjs_dead_zones { zones = Strike_Area, flag = 1001, req_num = 3, stopFlag = 1002}
   
 
     
@@ -3905,8 +3923,7 @@ end
     -----------------------------------
         		local MudADData = mist.getGroupData(ADName)
     
-
-
+    
 		local mvars = {}
 	  mvars.groupName = ADName
 	  mvars.action = "respawn"
@@ -3934,8 +3951,14 @@ end
     end
     
     
-    
-    
+
+	local checkunits = {
+	groupName = ADName,
+	flag = 501,
+	stopFlag = 502,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     
     
     
@@ -4070,6 +4093,7 @@ end
   
   
      if Samradar == 2 then
+     RADtaskA = 1
 		local mvars = {}
 	  mvars.groupName = RadarSamName
 	  mvars.action = "respawn"
@@ -4078,9 +4102,18 @@ end
 	  --mvars.maxDisp = 0
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
+    
+        	local checkunits = {
+	groupName = RadarSamName,
+	flag = 701,
+	stopFlag = 702,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits) 
     end
     
     if Samradar == 3 then
+    RADtaskB = 1
 		local mvars = {}
 	  mvars.groupName = RadarSamName
 	  mvars.action = "respawn"
@@ -4089,9 +4122,19 @@ end
 	  --mvars.maxDisp = 0
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
+    
+            	local checkunits = {
+	groupName = RadarSamName,
+	flag = 703,
+	stopFlag = 704,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits) 
     end
+
     
     if Samradar == 4 then
+    RADtaskC = 1
 		local mvars = {}
     mvars.groupName = RadarSamName
 	  mvars.action = "respawn"
@@ -4100,9 +4143,20 @@ end
 	  --mvars.maxDisp = 0
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
+            	local checkunits = {
+	groupName = RadarSamName,
+	flag = 705,
+	stopFlag = 706,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits) 
     end
     
+    
         if Samradar == 5 then
+        RADtaskA = 1
+        RADtaskB = 1
+        RADtaskC = 1
 				local mvars = {}
 	  mvars.groupName = RadarSamName3
 	  mvars.action = "respawn"
@@ -4111,6 +4165,14 @@ end
 	  --mvars.maxDisp = 0
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
+    
+    	local checkunits = {
+	groupName = ADName,
+	flag = 705,
+	stopFlag = 706,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     
     local mvars = {}
 	  mvars.groupName = RadarSamName2
@@ -4121,6 +4183,14 @@ end
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
     
+    	local checkunits = {
+	groupName = ADName,
+	flag = 703,
+	stopFlag = 704,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
+    
     mvars.groupName = RadarSamName
 	  mvars.action = "respawn"
 	  mvars.point = samPsn
@@ -4128,10 +4198,19 @@ end
 	  --mvars.maxDisp = 0
 	  --mvars.radius = 0
 		mist.teleportToPoint(mvars)
+    
+    	local checkunits = {
+	groupName = ADName,
+	flag = 701,
+	stopFlag = 702,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     end
     
     if Saminfared == 2 then
-		local mvars = {}
+		IRtaskA = 1
+    local mvars = {}
 	  mvars.groupName = IRSamName
 	  mvars.action = "respawn"
 	  mvars.point = mudPsn
@@ -4139,9 +4218,19 @@ end
 	  mvars.maxDisp = 300
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
+    
+          	local checkunits = {
+	groupName = IRSamName,
+	flag = 601,
+	stopFlag = 602,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     end
+   
     
     if Saminfared == 3 then
+    IRtaskB = 1
 		local mvars = {}
 	  mvars.groupName = IRSamName
 	  mvars.action = "respawn"
@@ -4150,9 +4239,20 @@ end
 	  mvars.maxDisp = 300
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
+    
+          	local checkunits = {
+	groupName = IRSamName,
+	flag = 603,
+	stopFlag = 604,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     end
     
+    
         if Saminfared == 4 then
+        IRtaskA = 1
+        IRtaskB = 1
 		local mvars = {}
 	  mvars.groupName = IRSamName2
 	  mvars.action = "respawn"
@@ -4162,6 +4262,15 @@ end
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
     
+          	local checkunits = {
+	groupName = IRSamName,
+	flag = 603,
+	stopFlag = 604,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
+    
+    
     
     mvars.groupName = IRSamName
 	  mvars.action = "respawn"
@@ -4170,9 +4279,20 @@ end
 	  mvars.maxDisp = 300
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
+    
+    
+        	local checkunits = {
+	groupName = IRSamName2,
+	flag = 601,
+	stopFlag = 602,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     end
     
             if Saminfared == 5 then
+            IRtaskA = 1
+            IRtaskB = 1
 				local mvars = {}
 	  mvars.groupName = IRSamName3
 	  mvars.action = "respawn"
@@ -4181,6 +4301,14 @@ end
 	  mvars.maxDisp = 300
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
+    
+                  	local checkunits = {
+	groupName = IRSamName3,
+	flag = 605,
+	stopFlag = 606,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     
     
     local mvars = {}
@@ -4192,6 +4320,14 @@ end
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
     
+              	local checkunits = {
+	groupName = IRSamName2,
+	flag = 603,
+	stopFlag = 604,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
+    
     
     mvars.groupName = IRSamName
 	  mvars.action = "respawn"
@@ -4200,14 +4336,22 @@ end
 	  mvars.maxDisp = 300
 	  mvars.radius = 400
 		mist.teleportToPoint(mvars)
-    end
+    
+    
+              	local checkunits = {
+	groupName = IRSamName,
+	flag = 601,
+	stopFlag = 602,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
     
         		local msg = {}
 	  msg.text = ' SAMs Spawned Ok.'
 	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-  
+  end
   
   
   
@@ -4220,7 +4364,8 @@ end
     -------------------- this part adds in the SEAD flight if applicable by user settings during the mission                
 
     
-    if SEAD >= 2 then    
+    if SEAD >= 2 then  
+SEADtask = 1    
       	local msg = {} 
         
              if SEAD == 2 and Difficultymod == 1 then
@@ -4262,6 +4407,7 @@ end
 	    seadName = SEAD_Names_VeryHard4x[seadrand]
       end
         
+
 
 		
 	trigger.action.activateGroup(Group.getByName(seadName))
@@ -4338,6 +4484,14 @@ end
 	vars.route = path
 	mist.teleportToPoint(vars)			
   
+            	local checkunits = {
+	groupName = seadName,
+	flag = 2001,
+	stopFlag = 2002,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
+  
   	local msg = {} 
 	msg.text = ' SEAD Plane spawned.'
 	msg.displayTime = 3
@@ -4352,7 +4506,7 @@ end
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
 	      
 	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
+ end 
 
   
   
@@ -4361,6 +4515,79 @@ end
   
     -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
                       --seadName = {}
+   
+if eHelo >= 2 then
+
+eHelotask = 1
+
+       if eHelo == 2 and Difficultymod == 1 then
+      eHeloName = Enemy_Helo_Names_VeryEasy2x[ehelorand]
+      end
+      
+      if eHelo == 2 and Difficultymod == 2 then
+      eHeloName = Enemy_Helo_Names_Easy2x[ehelorand]
+      end
+      
+      if eHelo == 2 and Difficultymod == 3 then
+      eHeloName = Enemy_Helo_Names_Normal2x[ehelorand]
+      end
+      
+      if eHelo == 2 and Difficultymod == 4 then
+      eHeloName = Enemy_Helo_Names_Hard2x[ehelorand]
+      end
+      
+      if eHelo == 2 and Difficultymod == 5 then
+      eHeloName = Enemy_Helo_Names_VeryHard2x[ehelorand]
+      end
+    
+    
+    
+    
+    if eHelo == 3 and Difficultymod == 1 then
+      eHeloName = Enemy_Helo_Names_VeryEasy4x[ehelorand]
+      end
+      
+       if eHelo == 3 and Difficultymod == 2 then
+      eHeloName = Enemy_Helo_Names_Easy4x[ehelorand]
+      end
+      
+       if eHelo == 3 and Difficultymod == 3 then
+      eHeloName = Enemy_Helo_Names_Normal4x[ehelorand]
+      end
+      
+       if eHelo == 3 and Difficultymod == 4 then
+      eHeloName = Enemy_Helo_Names_Hard4x[ehelorand]
+      end
+      
+       if eHelo == 3 and Difficultymod == 5 then
+      eHeloName = Enemy_Helo_Names_VeryHard4x[ehelorand]
+      end
+    
+    
+        if eHelo == 4 and Difficultymod == 1 then
+      eHeloName = Enemy_Helo_Names_VeryEasy4x[ehelorand]
+      eHeloName2 = Enemy_Helo_Names_VeryEasy8x[ehelorand]
+      end
+      
+      if eHelo == 4 and Difficultymod == 2 then
+      eHeloName = Enemy_Helo_Names_Easy4x[ehelorand]
+      eHeloName2 = Enemy_Helo_Names_Easy8x[ehelorand]
+      end
+      
+      if eHelo == 4 and Difficultymod == 3 then
+      eHeloName = Enemy_Helo_Names_Normal4x[ehelorand]
+      eHeloName2 = Enemy_Helo_Names_Normal8x[ehelorand]
+      end
+      
+      if eHelo == 4 and Difficultymod == 4 then
+      eHeloName = Enemy_Helo_Names_Hard4x[ehelorand]
+      eHeloName2 = Enemy_Helo_Names_Hard8x[ehelorand]
+      end
+      
+      if eHelo == 4 and Difficultymod == 5 then
+      eHeloName = Enemy_Helo_Names_VeryHard4x[ehelorand]
+      eHeloName2 = Enemy_Helo_Names_VeryHard8x[ehelorand]
+      end
    
 
 		
@@ -4437,6 +4664,15 @@ end
 	vars.route = hpath
 	mist.teleportToPoint(vars)			
   
+              	local checkunits = {
+	groupName = eHeloName,
+	flag = 801,
+	stopFlag = 802,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits) 
+    end
+  
   	local msg = {} 
 	msg.text = ' Enemy Helo spawned.'
 	msg.displayTime = 3
@@ -4464,7 +4700,7 @@ end
       -------------------- this part adds in the enemy Helo flight if applicable by user settings during the mission
                       --seadName = {}
 
-
+eHelotask2 = 1
 		
 	trigger.action.activateGroup(Group.getByName(eHeloName2))
   ehelogrp2 = Group.getByName(eHeloName2)
@@ -4540,6 +4776,15 @@ end
 	vars.route = hpath
 	mist.teleportToPoint(vars)			
   
+                	local checkunits = {
+	groupName = eHeloName2,
+	flag = 803,
+	stopFlag = 804,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits) 
+    end
+  
 
 
 	local con = ehelogrp2:getController()
@@ -4550,7 +4795,7 @@ end
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
 
         
-        end  
+     
 	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
   
 
@@ -4559,6 +4804,8 @@ end
 	msg.displayTime = 3
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)	
+  
+  end
   
  
   
@@ -4648,7 +4895,7 @@ end
 	  msg.displayTime = 60
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
-	end
+	
   
   
   
@@ -4677,7 +4924,7 @@ end
   
   
   
-  end
+
   end
  --- 
   
@@ -5172,7 +5419,13 @@ end
 		mist.teleportToPoint(mvars)
 								
 								
-
+local checkunits = {
+	groupName = MudName,
+	flag = 901,
+	stopFlag = 902,
+  toggle = true,
+	}
+	mist.flagFunc.group_dead(checkunits)    
 			
 
 		MoveMud = MudName
@@ -5205,177 +5458,12 @@ mist.removeFunction(ConvoyFunc)
 
 
 	end
-
 	---
-
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function Create_Airfield(_afArea)
-
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	mzone = trigger.misc.getZone(_afArea)
-	airfield = 1
-
-	--trigger.action.deactivateGroup(Group.getByName(InfName))
-	AFName1 = 'Infantry (Airdrome) #000'
-	AFName2 = 'Infantry (Airdrome) #001'
-	AFName3 = 'Infantry (Airdrome) #002'
-	AFName4 = 'Infantry (Airdrome) #003'
-	DefensesNames = ""
-	airdromePsn = {}
-
-	--if MudName ==  then
-		local msg = {}
-	  msg.text = ' Creating Airfield Defenses at ' ..tostring(_afArea)
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-
-	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
-
-	if _afArea == 'Sochi' then
-		if Difficultymod == 1 then
-			DefensesName = Sochi_Names_Easy[1]
-			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-		end
-	
-		if Difficultymod == 2 then
-			DefensesName = Sochi_Names_Easy[1]
-			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-		end
-
-		if Difficultymod == 3 then
-			DefensesName = Sochi_Names_Normal[1]
-			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-		end
-		
-			if Difficultymod == 4 then
-			DefensesName = Sochi_Names_Hard[1]
-			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-		end
-
-		if Difficultymod == 5 then
-			DefensesName = Sochi_Names_VeryHard[1]
-			airdromePsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn2 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.60, mzone.radius * 0.45)
-			airdromePsn4 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-			airdromePsn3 = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.40, mzone.radius * 0.25)
-		end
-
-		else
-
-		local msg = {}
-			msg.text = ' Bad Airfield Name'
-			msg.displayTime = 5
-			msg.msgFor = {coa = {'all'}}
-			mist.message.add(msg)
-			return
-
-		end
-
-
-				trigger.action.activateGroup(Group.getByName(DefensesName))
-			
-
-		formisttable4 = '[g]' .. MudNameb
-		targets = mist.makeUnitTable({'[g]' .. mvars.groupName})
-		
-		AddOP(MudNameb) -- add MBOT to it
-
-
-		mist.respawnGroup(DefensesName)
-		mist.spawnRandomizedGroup(DefensesName)
-
-			local infvars = {}
-		infvars.groupName = AFName1
-	  infvars.action = "respawn"
-	  infvars.point = airdromePsn
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
-		mist.teleportToPoint(infvars)
-			local infvars = {}
-		infvars.groupName = AFName2
-	  infvars.action = "respawn"
-	  infvars.point = airdromePsn2
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
-		mist.teleportToPoint(infvars)
-			local infvars = {}
-
-		infvars.groupName = AFName3
-	  infvars.action = "respawn"
-	  infvars.point = airdromePsn3
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
-		mist.teleportToPoint(infvars)
-			local infvars = {}
-		infvars.groupName = AFName4
-	  infvars.action = "respawn"
-	  infvars.point = airdromePsn4
-	  --infvars.disperse = true
-	  --infvars.maxDisp = 10
-	  --infvars.radius = 20
-		mist.teleportToPoint(infvars)
-			local msg = {}
-
-	  msg.text = ' Created airfield task'
-	  msg.displayTime = 20
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing.ogg')
-		 local checkunits1 = {
-	  groupName = DefensesName,
-	  percent = 33,
-		flag = 101,
-		stopFlag = 102,
-		 toggle = true,
-	 }
-	 mist.flagFunc.group_alive_less_than(checkunits1)
-	 
-	 mist.removeFunction(AFFunc1)
-	 mist.removeFunction(AFFunc2)
-	 mist.removeFunction(AFFunc3)
-	 mist.removeFunction(AFFunc4)
-	 
-	 local randomizer_time = 0
-	 randomizer_time = mist.random(45,90)
-	 
-		AFFunc1 = nil
-		AFFunc1 = mist.scheduleFunction(Move_Infantry, {AFName1}, randomizer_time, randomizer_time) 
-		
-		AFFunc2 = nil
-		AFFunc2 = mist.scheduleFunction(Move_Infantry, {AFName2}, randomizer_time, randomizer_time) 
-		
-		AFFunc3 = nil
-		AFFunc3 = mist.scheduleFunction(Move_Infantry, {AFName3}, randomizer_time, randomizer_time) 
-		
-		AFFunc4 = nil
-		AFFunc4 = mist.scheduleFunction(Move_Infantry, {AFName4}, randomizer_time, randomizer_time) 
-	   
-	  
-
-	end
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Move_Convoy(_Mud)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 	local MoveConvoy = {}
-
 	local randomizer_speed = 0
 	local randomizer_dir = 0
 	local randomizer_dist = 0
@@ -5388,18 +5476,13 @@ mist.removeFunction(ConvoyFunc)
 		mist.groupRandomDistSelf(MoveConvoy, randomizer_dist, 'Cone', randomizer_dir, randomizer_speed)
 			elseif formationrand == 2 then
 		mist.groupRandomDistSelf(MoveConvoy, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
-	
 		end
-
-	--return
 	end
 	---
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Move_Infantry(_infantry)
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-		
-			
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------		
 	local randomizer_speed = 0
 	local randomizer_dir = 0
 	local randomizer_dist = 0
@@ -5409,29 +5492,20 @@ mist.removeFunction(ConvoyFunc)
 	randomizer_dir = math.random(1,359)
 	randomizer_dist = math.random(25, 200)
 
-			local formationrand = mist.random(1,3)
+		local formationrand = mist.random(1,3)
 			
-			if formationrand == 1 then
+		if formationrand == 1 then
 		mist.groupRandomDistSelf(Infantry_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
-		
-			elseif formationrand == 2 then
+		elseif formationrand == 2 then
 		mist.groupRandomDistSelf(Infantry_Name, randomizer_dist, 'EchelonL', randomizer_dir, randomizer_speed)
-
 		elseif formationrand == 3 then
 		mist.groupRandomDistSelf(Infantry_Name, randomizer_dist, 'EchelonR', randomizer_dir, randomizer_speed)
-
 		end
-
-	--return
 	end
-
 	---
-
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Move_Ships(_Boats)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-		
-			
 	local randomizer_speed = 0
 	local randomizer_dir = 0
 	local randomizer_dist = 0
@@ -5441,21 +5515,12 @@ mist.removeFunction(ConvoyFunc)
 	randomizer_dir = math.random(90,270)
 	randomizer_dist = math.random(1500, 2000)
 
-		
-			mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
-		
-		
-
-	--return
+	mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
 	end
-
 	---
-	
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Move_Boats(_Boats)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------	
-		
-			
 	local randomizer_speed = 0
 	local randomizer_dir = 0
 	local randomizer_dist = 0
@@ -5465,42 +5530,17 @@ mist.removeFunction(ConvoyFunc)
 	randomizer_dir = math.random(1,359)
 	randomizer_dist = math.random(1000, 4000)
 
-			local formationrand = mist.random(1,4)
+		local formationrand = mist.random(1,4)
 			
-			if formationrand == 1 then
-		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)
-		
-			elseif formationrand == 3 then
+		if formationrand == 1 then
+		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'Rank', randomizer_dir, randomizer_speed)	
+		elseif formationrand == 3 then
 		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'EchelonL', randomizer_dir, randomizer_speed)
-
 		elseif formationrand == 4 then
 		mist.groupRandomDistSelf(Boat_Name, randomizer_dist, 'EchelonR', randomizer_dir, randomizer_speed)
-
 		end
-
-	--return
-	end
-
-	---
-
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function Make_Smoke(_coord)
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			  local Scoord = {}
-				Scoord = mist.utils.zoneToVec3(_coord)
-				
-
-	--			local msg = {} 
-	--			msg.text = ' Attempted to smoke target area '
-	--			msg.displayTime = 5
-	--			msg.msgFor = {coa = {'all'}}
-	  --  	mist.message.add(msg)
-
-		trigger.action.smoke({x=Scoord.x + math.random(1,200), y= land.getHeight({x = Scoord.x, y = Scoord.z}), z= Scoord.z + math.random(1, 200)}, trigger.smokeColor.Red)
-		
 	end
 	---
-
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Bullscall1()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -5554,7 +5594,6 @@ mist.removeFunction(ConvoyFunc)
 			msg.text = ' Grid Reference: '
 			mist.msgMGRS(msg)
 	  --return
-
 	end
 	---
 	
@@ -5610,8 +5649,6 @@ mist.removeFunction(ConvoyFunc)
 			msg.msgFor = {coa = {'red'}} 
 			msg.text = ' Grid Reference: '
 			mist.msgMGRS(msg)
-	 
-
 	end
 	---
 	
@@ -5668,7 +5705,6 @@ mist.removeFunction(ConvoyFunc)
 			msg.msgFor = {coa = {'red'}} 
 			msg.text = ' Grid Reference: '
 			mist.msgMGRS(msg)
-
 	end
 	---
 	
@@ -5724,7 +5760,6 @@ mist.removeFunction(ConvoyFunc)
 			msg.msgFor = {coa = {'red'}} 
 			msg.text = ' Grid Reference: '
 			mist.msgMGRS(msg)
-
 	end
 	---
 	
@@ -5780,12 +5815,14 @@ mist.removeFunction(ConvoyFunc)
 			msg.msgFor = {coa = {'red'}} 
 			msg.text = ' Grid Reference: '
 			mist.msgMGRS(msg)
-
 	end
 	---
   --                            'END OF BULLSEYE CALL STUFF --
-  ---
-   ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------------------------------------------
+  
+  -- PARAMTER SETTINGS BY RADIO CONTROL, A LOT OF THIS STUFF NEEDS TO BE REDONE INTO MUCH BETTER AND A VERSATILE SINGLE FUNCTION
+  
+  ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_CACAS_Level_1()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local New_Set = " not recieve any units to help with this task"
@@ -6240,7 +6277,7 @@ mist.removeFunction(ConvoyFunc)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_VeryEasy()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local New_Set = "Very Easy"
+	local New_Set = "WW2"
 	Difficultymod = 1
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
@@ -6254,7 +6291,7 @@ mist.removeFunction(ConvoyFunc)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_Easy()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local New_Set = "Easy"
+	local New_Set = "Korea"
 	Difficultymod = 2
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
@@ -6269,7 +6306,7 @@ mist.removeFunction(ConvoyFunc)
 	function Set_Difficuty_Normal()
 
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local New_Set = "Normal"
+	local New_Set = "Vietnam"
 	Difficultymod = 3
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
@@ -6285,7 +6322,7 @@ mist.removeFunction(ConvoyFunc)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_Hard()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local New_Set = "Hard"
+	local New_Set = "Gulf war"
 	Difficultymod = 4
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
@@ -6301,7 +6338,7 @@ mist.removeFunction(ConvoyFunc)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_VeryHard()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	local New_Set = "Very Hard"
+	local New_Set = "Modern"
 	Difficultymod = 5
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
@@ -6425,40 +6462,7 @@ mist.removeFunction(ConvoyFunc)
 	      mist.message.add(msg)
 	end
 	------
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	function Change_Smoke_Set()
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	  local Old_Set = Smoke
-	  local New_Set = nil
-	  local SmokeSet = ""
-
-	  if Old_Set == 1 then
-	    New_Set = 0
-	    Smoke = New_Set
-	    SmokeSet = "disabled"
-	  end
-		  if Old_Set == 0 then
-	    New_Set = 1
-	    Smoke = New_Set
-	    SmokeSet = "enabled"
-
-	  end
-
-	  trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')
-
-	  local msg = {} 
-	    msg.text = ' Marking of enemy mud with smoke is '..tostring(SmokeSet)
-
-	    msg.displayTime = 20
-	    msg.msgFor = {coa = {'all'}}
-	      mist.message.add(msg)
-	end
-	----
-	--[[Useage example:
-	if you have the file named "ScriptFile.lua" in Saved Games/DCS.
-	Put this code in a DO SCRIPT action that is triggered by an F10 radio menu selection.
-	]]
-
+	
 	----------------------------------
 	function reloadscript()
 	----------------------------------
@@ -6504,221 +6508,304 @@ mist.removeFunction(ConvoyFunc)
 	-----------------------------------
 	function Mission_Complete_Checks(arg, time)
 	-----------------------------------
+		--	local msg = {}
+		--	msg.text = ' Checking.'
+	   -- msg.displayTime = 1
+	   -- msg.msgFor = {coa = {'all'}}
+	   -- mist.message.add(msg)
 
-	--airfield_complete = trigger.misc.getUserFlag('101')		-- when true this triggers the mission accomplished/message/clean up.
-	--mud_complete = trigger.misc.getUserFlag('201')
-	--convoy_complete = trigger.misc.getUserFlag('301')
-	--intercept_complete = trigger.misc.getUserFlag('401')
-	--bomber_complete = trigger.misc.getUserFlag('501')
-
-	if trigger.misc.getUserFlag('102') == 1 then
-			trigger.action.setUserFlag('102',0)
-
+	if trigger.misc.getUserFlag('101') == 1 and fightertask == 1 then
+			local msg = {}
+			msg.text = ' A flight of enemy fighters has been destroyed'
+	    msg.displayTime = 60
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      Fightertask = 0
+			trigger.action.setUserFlag('101',0)
+			trigger.action.setUserFlag('102', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
+      
 	end
-
-	if trigger.misc.getUserFlag('202') == 1 then
-			trigger.action.setUserFlag('202',0)
-
-	end
-
-	if trigger.misc.getUserFlag('302') == 1 then
-			trigger.action.setUserFlag('302',0)
-
-	end
-
-	if trigger.misc.getUserFlag('402') == 1 then
-
-			trigger.action.setUserFlag('402',0)
-
-	end
-
-	if trigger.misc.getUserFlag('502') == 1 then
-
-			trigger.action.setUserFlag('502',0)
-
-	end
-	
-	if trigger.misc.getUserFlag('602') == 1 then
-
-			trigger.action.setUserFlag('602',0)
-
+  
+  	if trigger.misc.getUserFlag('103') == 1 and fightertask2 == 1 then
+			local msg = {}
+			msg.text = ' A flight of enemy fighters has been destroyed'
+	    msg.displayTime = 60
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      Fightertask2 = 0
+			trigger.action.setUserFlag('103',0)
+			trigger.action.setUserFlag('104', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
+      
 	end
 	
-		if trigger.misc.getUserFlag('702') == 1 then
 
-			trigger.action.setUserFlag('702',0)
+	if trigger.misc.getUserFlag('201') == 1 and bombertask == 1 then
+			local msg = {}
+			msg.text = ' Bombers have been destroyed'
+	    msg.displayTime = 60
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      bombertask = 0
+      trigger.action.setUserFlag('201',0)
+			trigger.action.setUserFlag('202', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
   
-  		if trigger.misc.getUserFlag('802') == 1 then
-
-			trigger.action.setUserFlag('802',0)
-
-	end
-
-		 
-
-	if trigger.misc.getUserFlag('101') == 1 then
-
-	if airfield == 1 then
-
+  	if trigger.misc.getUserFlag('203') == 1 and bombertask == 1 then
 			local msg = {}
-			msg.text = ' Airfield task has been completed.'
-
+			msg.text = ' Escort fighters have been destroyed'
 	    msg.displayTime = 60
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
-			trigger.action.setUserFlag('102', 1)				-- stop victory
-			airfield = 0
-			airfield_complete = 0
+			
+      --bombertask = 0        -- do not clear this until the bombers are dead from 201 / 202
+      trigger.action.setUserFlag('201',0)
+			trigger.action.setUserFlag('204', 1)				-- stop victory
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
-			--trigger.action.deactivateGroup(Group.getByName(DefensesName))				-- deactivate airfield defenses	
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
-
-	end
-
-	if trigger.misc.getUserFlag('201') == 1 then
-
-	if mudtask == 1 then
-
+  
+  	if trigger.misc.getUserFlag('301') == 1 and attacktask == 1 then
 			local msg = {}
-			msg.text = ' Mud task has been completed.'
-
-	    msg.displayTime = 60
+			msg.text = ' A flight of enemy ground attack planes have been destroyed'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
-			trigger.action.setUserFlag('202', 1)				-- stop victory
-			mudtask = 0
-			mud_complete = 0
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
-			--trigger.action.deactivateGroup(Group.getByName(MudName))				-- deactivate mud
-
-	end
-
-	end
-
-	if trigger.misc.getUserFlag('301') == 1 then
-	if convoytask == 1 then
-
-			local msg = {}
-			msg.text = ' Convoy task has been completed.'
-
-	    msg.displayTime = 60
-	    msg.msgFor = {coa = {'all'}}
-	    mist.message.add(msg)
+			
+      attacktask = 0
+      trigger.action.setUserFlag('301',0)
 			trigger.action.setUserFlag('302', 1)				-- stop victory
-			convoytask = 0
-			convoy_complete = 0
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
-			--trigger.action.deactivateGroup(Group.getByName(MoveMud))				-- deactivate convoy
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
-
-	end
-
-	if trigger.misc.getUserFlag('401') == 1 then
-	if interceptortask == 1 then
+  
+    	if trigger.misc.getUserFlag('303') == 1 and attacktask2 == 1 then
 			local msg = {}
-
-			msg.text = ' Interceptor task has been completed.'
-
-	    msg.displayTime = 60
+			msg.text = ' A flight of enemy ground attack planes have been destroyed'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
-			interceptortask = 0
-			intercept_complete = 0
+			
+      attacktask2 = 0
+      trigger.action.setUserFlag('303',0)
+			trigger.action.setUserFlag('304', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+    	if trigger.misc.getUserFlag('401') == 1 and mudtask == 1 then
+			local msg = {}
+			msg.text = ' Fortified enemy units destroyed.'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      mudtask = 0
+      trigger.action.setUserFlag('401',0)
 			trigger.action.setUserFlag('402', 1)				-- stop victory
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
-			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
-	end
-
-	if trigger.misc.getUserFlag('501') == 1 then
-	if bombertask == 1 then
+  
+      	if trigger.misc.getUserFlag('501') == 1 and AAAtask == 1 then
 			local msg = {}
-
-			msg.text = ' Bomber intercept task has been completed.'
-
-	    msg.displayTime = 60
+			msg.text = ' AAA destroyed at task site.'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
+			
+      AAAtask = 0
+      trigger.action.setUserFlag('501',0)
 			trigger.action.setUserFlag('502', 1)				-- stop victory
-			bombertask = 0
-			bomber_complete = 0
-
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
-	end
-	
-		if trigger.misc.getUserFlag('601') == 1 then
-				if striketask == 1 then
-				local msg = {}
-
-			msg.text = ' Strike mission completed.'
-
-	    msg.displayTime = 60
+  
+        	if trigger.misc.getUserFlag('601') == 1 and IRtaskA == 1 then
+			local msg = {}
+			msg.text = ' Manpads have been destroyed'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
+			
+      IRtaskA = 0
+      trigger.action.setUserFlag('601',0)
 			trigger.action.setUserFlag('602', 1)				-- stop victory
-			striketask = 0
-			strike_complete = 0
-
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
-			
-				end
-			end
-			
-					if trigger.misc.getUserFlag('701') == 1 then
-				if navaltask == 1 then
-				local msg = {}
 
-			msg.text = ' Naval mission completed.'
-
-	    msg.displayTime = 60
+	end
+  
+          	if trigger.misc.getUserFlag('603') == 1 and IRtaskB == 1 then
+			local msg = {}
+			msg.text = ' Mobilized IR SAMs have been destroyed'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
+			
+      IRtaskB = 0
+      trigger.action.setUserFlag('603',0)
+			trigger.action.setUserFlag('604', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+    
+          	if trigger.misc.getUserFlag('701') == 1 and RADtaskA == 1 then
+			local msg = {}
+			msg.text = ' Short range SAMs have been eliminated'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      RADtaskA = 0
+      trigger.action.setUserFlag('701',0)
 			trigger.action.setUserFlag('702', 1)				-- stop victory
-			navaltask = 0
-			naval_complete = 0
-
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
-			
-				end
-			end
-      
-      					if trigger.misc.getUserFlag('801') == 1 then
-				if castask == 1 then
-				local msg = {}
 
-			msg.text = ' CAS mission completed.'
-
-	    msg.displayTime = 60
+	end
+  
+            	if trigger.misc.getUserFlag('703') == 1 and RADtaskB == 1 then
+			local msg = {}
+			msg.text = ' Medium range SAMs have been destroyed'
+	    msg.displayTime = 300
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
-			trigger.action.setUserFlag('802', 1)				-- stop victory
-			castask = 0
-			cas_complete = 0
-
+			
+      RADtaskB = 0
+      trigger.action.setUserFlag('703',0)
+			trigger.action.setUserFlag('704', 1)				-- stop victory
 			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+              	if trigger.misc.getUserFlag('705') == 1 and RADtaskC == 1 then
+			local msg = {}
+			msg.text = ' Long range SAMs have been destroyed'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
 			
-				end
-			end
+      RADtaskC = 0
+      trigger.action.setUserFlag('705',0)
+			trigger.action.setUserFlag('706', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+              	if trigger.misc.getUserFlag('801') == 1 and eHelotask == 1 then
+			local msg = {}
+			msg.text = ' Enemy helos have been destroyed'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      eHelotask = 0
+      trigger.action.setUserFlag('801',0)
+			trigger.action.setUserFlag('802', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+                	if trigger.misc.getUserFlag('803') == 1 and eHelotask2 == 1 then
+			local msg = {}
+			msg.text = ' Enemy helos have been destroyed'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      eHelotask2 = 0
+      trigger.action.setUserFlag('803',0)
+			trigger.action.setUserFlag('804', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+                	if trigger.misc.getUserFlag('901') == 1 and convoytask == 1 then
+			local msg = {}
+			msg.text = ' Enemy convoy has been stopped'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      convoytask = 0
+      trigger.action.setUserFlag('901',0)
+			trigger.action.setUserFlag('902', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+                  	if trigger.misc.getUserFlag('1001') == 1 and striketask == 1 then
+			local msg = {}
+			msg.text = ' Enemy structures have been demolished'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      striketask = 0
+      trigger.action.setUserFlag('1001',0)
+			trigger.action.setUserFlag('1002', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+                    	if trigger.misc.getUserFlag('2001') == 1 and SEADtask == 1 then
+			local msg = {}
+			msg.text = ' We have lost our SEAD flight!'
+	    msg.displayTime = 300
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      SEADtask = 0
+      trigger.action.setUserFlag('2001',0)
+			trigger.action.setUserFlag('2002', 1)				-- stop victory
+			--trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+	
 	
 
-
-	Debug_Show()
-	--return time + 5
+	--Debug_Show()
+	return time + 5
 
 end
 	---

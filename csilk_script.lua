@@ -156,8 +156,8 @@
 
 	Smoke = 0
 	Scoord  = {}
-	Difficulty = "Normal"
-	Difficultymod = 1
+	Difficulty = "Vietnam"
+	Difficultymod = 3
 	Range = "Close"
 	Task_Range = 2
   Groupsizes = 1
@@ -366,10 +366,10 @@
 	  "Kutaisi-21 #2",
 	  "Kutaisi-21 #3",
 	  "Kutaisi-21 #4",
-	  "Kutaisi-F15C #1",
-	  "Kutaisi-F15C #2",
-	  "Kutaisi-F15C #3",
-	  "Kutaisi-F15C #4",
+	  "Kutaisi-15C #1",
+	  "Kutaisi-15C #2",
+	  "Kutaisi-15C #3",
+	  "Kutaisi-15C #4",
     "Kutaisi-15 #1",
 	  "Kutaisi-15 #2",
 	  "Kutaisi-27 #1",
@@ -770,21 +770,21 @@
   IR_SAM = 3
   
 	Sam_IR_Threat_2 = {
-	[1] = 'IRThreat2 SAM #1',
-	[2] = 'IRThreat2 SAM #2',
-  [3] = 'IRThreat2 SAM #3',
+	[1] = 'IRthreat2 SAM #1',
+	[2] = 'IRthreat2 SAM #2',
+  [3] = 'IRthreat2 SAM #3',
 	}
 	
 	Sam_IR_Threat_3 = {
-	[1] = 'IRThreat3 SAM #1',
-	[2] = 'IRThreat3 SAM #2',
-  [3] = 'IRThreat3 SAM #3',
+	[1] = 'IRthreat3 SAM #1',
+	[2] = 'IRthreat3 SAM #2',
+  [3] = 'IRthreat3 SAM #3',
 	}
   
   	Sam_IR_Threat_4 = {
-	[1] = 'IRThreat4 SAM #1',
-	[2] = 'IRThreat4 SAM #2',
-  [3] = 'IRThreat4 SAM #3',
+	[1] = 'IRthreat4 SAM #1',
+	[2] = 'IRthreat4 SAM #2',
+  [3] = 'IRthreat4 SAM #3',
 	}
 
 	-----------------------------
@@ -1632,7 +1632,7 @@ Infantry2_Squads = 5
 	function Introduce_Mission(arg, time)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local msg = {}
-	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship... the ongoing alpha Test'
+	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship...'
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
@@ -1701,99 +1701,101 @@ Infantry2_Squads = 5
 	local rand = mist.random(1,Fighter_Names)
 	fightertask = 1
 
-  if Groupsizes == 1 and Difficultymod == 1 then
-	    grpName = Fighter_Names_VeryEasy[rand]
-	  end
-		
-		if Difficultymod == 2 and Difficultymod == 2 then
-	    grpName = Fighter_Names_Easy[rand]
-	  end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
-	    grpName = Fighter_Names_Normal[rand]
-	  end
+    
+    
+    if Groupsizes == 1 and Difficultymod == 1 then
+		grpName = Fighter_Names_VeryEasy[rand]
+	end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
-	    grpName = Fighter_Names_Hard[rand]
-	  end
-		
-		if Difficultymod == 5 and Difficultymod == 5 then
-	    grpName = Fighter_Names_VeryHard[rand]
-	  end
+		if Groupsizes == 1 and Difficultymod == 2 then
+		grpName = Fighter_Names_Easy[rand]
+	end
   
+  if Groupsizes == 1 and Difficultymod == 3 then
+		grpName = Fighter_Names_Normal[rand]
+	end
+
+	if Groupsizes == 1 and Difficultymod == 4 then
+		grpName = Fighter_Names_Hard[rand]
+	end
+	
+	if Groupsizes == 1 and Difficultymod == 5 then
+		grpName = Fighter_Names_VeryHard[rand]
+	end
+
+
+
+      if Groupsizes == 2 and Difficultymod == 1 then
+		grpName = Fighter_Names_VeryEasyx2[rand]
+	end
+
+		if Groupsizes == 2 and Difficultymod == 2 then
+		grpName = Fighter_Names_Easyx2[rand]
+	end
   
-  if Groupsizes == 2 and Difficultymod == 1 then
-	    grpName = Fighter_Names_VeryEasyx2[rand]
-	  end
+  if Groupsizes == 2 and Difficultymod == 3 then
+		grpName = Fighter_Names_Normalx2[rand]
+	end
 
-		if Difficultymod == 2 and Difficultymod == 2 then
-	    grpName = Fighter_Names_Easyx2[rand]
-	  end
+	if Groupsizes == 2 and Difficultymod == 4 then
+		grpName = Fighter_Names_Hardx2[rand]
+	end
+	
+	if Groupsizes == 2 and Difficultymod == 5 then
+		grpName = Fighter_Names_VeryHardx2[rand]
+	end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
-	    grpName = Fighter_Names_Normalx2[rand]
-	  end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
-	    grpName = Fighter_Names_Hardx2[rand]
-	  end
-		
-		if Difficultymod == 5 and Difficultymod == 5 then
-	    grpName = Fighter_Names_VeryHardx2[rand]
-	  end
+
+      if Groupsizes == 3 and Difficultymod == 1 then
+		grpName = Fighter_Names_VeryEasyx4[rand]
+	end
+
+		if Groupsizes == 3 and Difficultymod == 2 then
+		grpName = Fighter_Names_Normalx4[rand]
+	end
   
+  if Groupsizes == 3 and Difficultymod == 3 then
+		grpName = Fighter_Names_Normalx4[rand]
+	end
+
+	if Groupsizes == 3 and Difficultymod == 4 then
+		grpName = Fighter_Names_Hardx4[rand]
+	end
+	
+	if Groupsizes == 3 and Difficultymod == 5 then
+		grpName = Fighter_Names_VeryHardx4[rand]
+	end
+
+
+if Groupsizes == 4 and Difficultymod == 1 then
+		grpName = Fighter_Names_VeryEasyx4[rand]
+		grpName2 = Fighter_Names_VeryEasyx8[rand]
+	end
+
+		
+    if Groupsizes == 4 and Difficultymod == 2 then
+		grpName = Fighter_Names_Normalx4[rand]
+		grpName2 = Fighter_Names_Easyx8[rand]
+	end
   
-  if Groupsizes == 3 and Difficultymod == 1 then
-	    grpName = Fighter_Names_VeryEasyx4[rand]
-	  end
-    
-      if Groupsizes == 3 and Difficultymod == 2 then
-	    grpName = Fighter_Names_VeryEasyx4[rand]
-	  end
-    
-      if Groupsizes == 3 and Difficultymod == 3 then
-	    grpName = Fighter_Names_VeryEasyx4[rand]
-	  end
-    
-      if Groupsizes == 3 and Difficultymod == 4 then
-	    grpName = Fighter_Names_VeryEasyx4[rand]
-	  end
-    
-      if Groupsizes == 3 and Difficultymod == 5 then
-	    grpName = Fighter_Names_VeryEasyx4[rand]
-	  end
-    
-    	      
-  if Groupsizes == 4 and Difficultymod == 1 then
-      grpName = Fighter_Names_VeryEasyx4[rand]
-	    grpName2 = Fighter_Names_VeryEasyx8[rand]
-	  end
+  if Groupsizes == 4 and Difficultymod == 3 then
+		grpName = Fighter_Names_Normalx4[rand]
+		grpName2 = Fighter_Names_Normalx8[rand]
+	end
 
-		
-		if Groupsizes == 4 and Difficultymod == 2 then
-    grpName = Fighter_Names_Easyx4[rand]
-	    grpName2 = Fighter_Names_Easyx8[rand]
-	  end
+	if Groupsizes == 4 and Difficultymod == 4 then
+		grpName = Fighter_Names_Hardx4[rand]
+		grpName2 = Fighter_Names_Hardx8[rand]
+	end
+	
+	if Groupsizes == 4 and Difficultymod == 5 then
+		grpName = Fighter_Names_VeryHardx4[rand]
+		grpName2 = Fighter_Names_VeryHardx8[rand]
+	end
 
-	  if Groupsizes == 4 and Difficultymod == 3 then
-    grpName = Fighter_Names_Normalx4[rand]
-	    grpName2 = Fighter_Names_Normalx8[rand]
-	  end
-
-	  if Groupsizes == 4 and Difficultymod == 4 then
-    grpName = Fighter_Names_Hardx4[rand]
-	    grpName2 = Fighter_Names_Hardx8[rand]
-	  end
-		
-		if Groupsizes == 4 and Difficultymod == 5 then
-    grpName = Fighter_Names_VeryHardx4[rand]
-	    grpName2 = Fighter_Names_VeryHardx8[rand]
-	  end
 	  
-  
-  
-
-
    
       	local msg = {} 
 	msg.text = ' Plane selected.'
@@ -2509,19 +2511,19 @@ end
 	    grpNameA = Attacker_Names_VeryEasy[rand]
 	  end
 		
-		if Difficultymod == 2 and Difficultymod == 2 then
+		if Groupsizes == 1 and Difficultymod == 2 then
 	    grpNameA = Attacker_Names_Easy[rand]
 	  end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
+	  if Groupsizes == 1 and Difficultymod == 3 then
 	    grpNameA = Attacker_Names_Normal[rand]
 	  end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
+	  if Groupsizes == 1 and Difficultymod == 4 then
 	    grpNameA = Attacker_Names_Hard[rand]
 	  end
 		
-		if Difficultymod == 5 and Difficultymod == 5 then
+		if Groupsizes == 1 and Difficultymod == 5 then
 	    grpNameA = Attacker_Names_VeryHard[rand]
 	  end
   
@@ -2530,19 +2532,19 @@ end
 	    grpNameA = Attacker_Names_VeryEasyx2[rand]
 	  end
 
-		if Difficultymod == 2 and Difficultymod == 2 then
+		if Groupsizes == 2 and Difficultymod == 2 then
 	    grpNameA = Attacker_Names_Easyx2[rand]
 	  end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
+	  if Groupsizes == 2 and Difficultymod == 3 then
 	    grpNameA = Attacker_Names_Normalx2[rand]
 	  end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
+	  if Groupsizes == 2 and Difficultymod == 4 then
 	    grpNameA = Attacker_Names_Hardx2[rand]
 	  end
 		
-		if Difficultymod == 5 and Difficultymod == 5 then
+		if Groupsizes == 2 and Difficultymod == 5 then
 	    grpNameA = Attacker_Names_VeryHardx2[rand]
 	  end
   
@@ -2700,7 +2702,6 @@ end
 	groupName = grpName,
 	flag = 301,
 	stopFlag = 302,
-  --toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -3016,11 +3017,11 @@ end
     --local RadSamGrpData2 = mist.getGroupData(RadarSamName2)
   end
   
-  if Saminfared == 1 then
-      IRSamName = ""
-      IRSamName2 = ""
-      IRSamName3 = ""
-      end
+  --if Saminfared == 1 then
+    --  IRSamName = ""
+    --  IRSamName2 = ""
+    --  IRSamName3 = ""
+   --   end
   
     if Saminfared == 2 then
     IRSamName = Sam_IR_Threat_2[randirsam]
@@ -3188,25 +3189,25 @@ end
 
   
 	local rand = mist.random(1,Attacker_Names)
-	intercepttask = 1
+	attacktask = 1
 
   if Groupsizes == 1 and Difficultymod == 1 then
 	    grpNameA = Attacker_Names_VeryEasy[rand]
 	  end
 		
-		if Difficultymod == 2 and Difficultymod == 2 then
+		if Groupsizes == 1 and Difficultymod == 2 then
 	    grpNameA = Attacker_Names_Easy[rand]
 	  end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
+	  if Groupsizes == 1 and Difficultymod == 3 then
 	    grpNameA = Attacker_Names_Normal[rand]
 	  end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
+	  if Groupsizes == 1 and Difficultymod == 4 then
 	    grpNameA = Attacker_Names_Hard[rand]
 	  end
 		
-		if Difficultymod == 5 and Difficultymod == 5 then
+		if Groupsizes == 1 and Difficultymod == 5 then
 	    grpNameA = Attacker_Names_VeryHard[rand]
 	  end
   
@@ -3215,19 +3216,19 @@ end
 	    grpNameA = Attacker_Names_VeryEasyx2[rand]
 	  end
 
-		if Difficultymod == 2 and Difficultymod == 2 then
+		if Groupsizes == 2 and Difficultymod == 2 then
 	    grpNameA = Attacker_Names_Easyx2[rand]
 	  end
 
-	  if Difficultymod == 3 and Difficultymod == 3 then
+	  if Groupsizes == 2 and Difficultymod == 3 then
 	    grpNameA = Attacker_Names_Normalx2[rand]
 	  end
 
-	  if Difficultymod == 4 and Difficultymod == 4 then
+	  if Groupsizes == 2 and Difficultymod == 4 then
 	    grpNameA = Attacker_Names_Hardx2[rand]
 	  end
 		
-		if Difficultymod == 5 and Difficultymod == 5 then
+		if Groupsizes == 2 and Difficultymod == 5 then
 	    grpNameA = Attacker_Names_VeryHardx2[rand]
 	  end
   
@@ -3383,13 +3384,12 @@ end
   
   
   	local checkunits = {
-	groupName = grpName2A,
-	percent = 33,
+	groupName = grpNameA,
 	flag = 301,
 	stopFlag = 302,
   --toggle = true,
 	}
-	mist.flagFunc.group_alive_less_than(checkunits)
+	mist.flagFunc.group_dead(checkunits)
   
   	local msg = {} 
 	msg.text = ' Plane spawned.'
@@ -3530,17 +3530,16 @@ end
 	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
 	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
-  end
+  
 		
 	local checkunits = {
 	groupName = grpName2A,
-	percent = 33,
 	flag = 303,
 	stopFlag = 304,
   --toggle = true,
 	}
-	mist.flagFunc.group_alive_less_than(checkunits)
-  
+	mist.flagFunc.group_dead(checkunits)
+  end
 
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
@@ -4208,7 +4207,7 @@ end
 	mist.flagFunc.group_dead(checkunits)    
     end
     
-    if Saminfared == 2 then
+ if Saminfared == 2 then
 		IRtaskA = 1
     local mvars = {}
 	  mvars.groupName = IRSamName
@@ -4263,7 +4262,7 @@ end
 		mist.teleportToPoint(mvars)
     
           	local checkunits = {
-	groupName = IRSamName,
+	groupName = IRSamName2,
 	flag = 603,
 	stopFlag = 604,
   --toggle = true,
@@ -4282,7 +4281,7 @@ end
     
     
         	local checkunits = {
-	groupName = IRSamName2,
+	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
   --toggle = true,
@@ -4290,7 +4289,7 @@ end
 	mist.flagFunc.group_dead(checkunits)    
     end
     
-            if Saminfared == 5 then
+    if Saminfared == 5 then
             IRtaskA = 1
             IRtaskB = 1
 				local mvars = {}

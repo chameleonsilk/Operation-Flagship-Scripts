@@ -81,7 +81,7 @@
 	local rad_option_9d = "Far"
 	local rad_option_9e = "Very Far"
 	local rad_option_9f = "Distant"
-	--local rad_option_9g = "Random"
+	local rad_option_9g = "Random"
 
 	--Debug radio command (must have modified mission_scripting.lua in dcs scripts folder to not sanitize ios and lfs)
 	--local rad_option_9y = "Debugging - Reload Script"
@@ -98,6 +98,7 @@
 	bzone = {}
 	mzone = {}
   azone = {}
+  Rad = {}
 
 	grpName = {}
   grpName2 = {}
@@ -182,32 +183,7 @@
 	if admin_lock == 0 then
   Rad = {
     "ADMIN AIRCRAFT",
-    "MudREDCAS (VeryEasy) #000",
-    "MudREDCAS (VeryEasy) #001",
-    "MudREDCAS (VeryEasy) #002",
-    "MudREDCAS (VeryEasy) #003",
-    "MudREDCAS (VeryEasy) #004",
-    "MudREDCAS (Easy) #000",
-    "MudREDCAS (Easy) #001",
-    "MudREDCAS (Easy) #002",
-    "MudREDCAS (Easy) #003",
-    "MudREDCAS (Easy) #004",
-    "MudREDCAS (Normal) #000",
-    "MudREDCAS (Normal) #001",
-    "MudREDCAS (Normal) #002",
-    "MudREDCAS (Normal) #003",
-    "MudREDCAS (Normal) #004",
-    "MudREDCAS (Hard) #000",
-    "MudREDCAS (Hard) #001",
-    "MudREDCAS (Hard) #002",
-    "MudREDCAS (Hard) #003",
-    "MudREDCAS (Hard) #004",
-    "MudREDCAS (VeryHard) #000",
-    "MudREDCAS (VeryHard) #001",
-    "MudREDCAS (VeryHard) #002",
-    "MudREDCAS (VeryHard) #003",
-    "MudREDCAS (VeryHard) #004",
-	  "Anapa-L39ZA #1",
+    "Anapa-L39ZA #1",
     "Anapa-L39ZA #2",
     "Anapa-Su27 #1",
     "Anapa-Su27 #2",
@@ -501,7 +477,7 @@
 	-- AD MUD Arrays --
 	-----------------------
 
-	AD_Groups = 2 -- variable for number of availale MUD Per Difficulty
+	AD_Groups = 6 -- variable for number of availale MUD Per Difficulty
 
 	AD_VeryEasy = {
 	  [1] = "AD (VeryEasy) #001",
@@ -1379,16 +1355,12 @@ Infantry2_Squads = 5
 
 	-- Removes submenus so that reloading the script does not result in duplicate submenus in the list
 	-- this was added because of the loading of the script debug option.
-	--missionCommands.removeItem({"Mission Info"})
-	--missionCommands.removeItem({"Airfield Tasks"})
-	--missionCommands.removeItem({"Anapa Tasks"})
-	--missionCommands.removeItem({"Maykop Tasks"})
-	--missionCommands.removeItem({"Gudauta Tasks"})
-	--missionCommands.removeItem({"Kutaisi Tasks"})
-	--missionCommands.removeItem({"Nalchik Tasks"})
-	--missionCommands.removeItem({"Tbilisi Tasks"})
-	--missionCommands.removeItem({"OPFS Settings"})
-	--missionCommands.removeItem({"Debug"})
+	missionCommands.removeItem({"Mission Info"})
+	missionCommands.removeItem({"Task Creation"})
+	missionCommands.removeItem({"Set Options"})
+	missionCommands.removeItem({"Combined Arms"})
+  
+
 	
 	 --variables defining f10 sub-menu items
 	Calls = missionCommands.addSubMenu("Mission Info",nil)
@@ -1473,14 +1445,15 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0e, Calls, Bullscall5, nil)
 
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
+      -- These commands set CA options
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
 	
 	    
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
   
-    -- These commands set CA options
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
-  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+
   
   
   --	local rad_option_1a = "Interdict: CAP"
@@ -1600,6 +1573,8 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9e, DistanceSet, Set_Distance_Veryfar, nil) -- Very far
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9f, DistanceSet, Set_Distance_Distant, nil) -- Distant
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9g, DistanceSet, Set_Distance_Random, nil) -- Random
+  
+  
 
 	--------------------
 	-- End Wanks Code --
@@ -1619,6 +1594,12 @@ Infantry2_Squads = 5
 	    if unit == nil then
 	      local playerName = unit:getPlayerName()
 	    end
+      
+      	local msg = {} 
+	msg.text = ' check '
+	msg.displayTime = 1
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
 
 	  end
 	  timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
@@ -2139,113 +2120,111 @@ if Groupsizes == 4 and Difficultymod == 1 then
   local brand = mist.random(1,2)
   local erand = mist.random(1,Fighter_Names)
 	
-	if Groupsizes == 1 then
-      if Difficultymod == 1 then
+  
+  
+	if Groupsizes == 1 and Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
 		egrpName = Fighter_Names_VeryEasy[erand]
 	end
 
-		if Difficultymod == 2 then
+		if Groupsizes == 1 and Difficultymod == 2 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Easy[erand]
 	end
   
-  if Difficultymod == 3 then
+  if Groupsizes == 1 and Difficultymod == 3 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Normal[erand]
 	end
 
-	if Difficultymod == 4 then
+	if Groupsizes == 1 and Difficultymod == 4 then
 		bgrpName = Bomber_Names_Hard[brand]
 		egrpName = Fighter_Names_Hard[erand]
 	end
 	
-	if Difficultymod == 5 then
+	if Groupsizes == 1 and Difficultymod == 5 then
 		bgrpName = Bomber_Names_VeryHard[brand]
 		egrpName = Fighter_Names_VeryHard[erand]
 	end
-end
 
-	if Groupsizes == 2 then
-      if Difficultymod == 1 then
+
+	if Groupsizes == 2 and Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
 		egrpName = Fighter_Names_VeryEasyx2[erand]
 	end
 
-		if Difficultymod == 2 then
+		if Groupsizes == 2 and Difficultymod == 2 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Easyx2[erand]
 	end
   
-  if Difficultymod == 3 then
+  if Groupsizes == 2 and Difficultymod == 3 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Normalx2[erand]
 	end
 
-	if Difficultymod == 4 then
+	if Groupsizes == 2 and Difficultymod == 4 then
 		bgrpName = Bomber_Names_Hard[brand]
 		egrpName = Fighter_Names_Hardx2[erand]
 	end
 	
-	if Difficultymod == 5 then
+	if Groupsizes == 2 and Difficultymod == 5 then
 		bgrpName = Bomber_Names_VeryHard[brand]
 		egrpName = Fighter_Names_VeryHardx2[erand]
 	end
-end
 
-	if Groupsizes == 3 then
-      if Difficultymod == 1 then
+
+	if Groupsizes == 3 and Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
 		egrpName = Fighter_Names_VeryEasyx4[erand]
 	end
 
-		if Difficultymod == 2 then
+		if Groupsizes == 3 and Difficultymod == 2 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Easyx4[erand]
 	end
   
-  if Difficultymod == 3 then
+  if Groupsizes == 3 and Difficultymod == 3 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Normalx4[erand]
 	end
 
-	if Difficultymod == 4 then
+	if Groupsizes == 3 and Difficultymod == 4 then
 		bgrpName = Bomber_Names_Hard[brand]
 		egrpName = Fighter_Names_Hardx4[erand]
 	end
 	
-	if Difficultymod == 5 then
+	if Groupsizes == 3 and Difficultymod == 5 then
 		bgrpName = Bomber_Names_VeryHard[brand]
 		egrpName = Fighter_Names_VeryHardx4[erand]
 	end
-end
 
-	if Groupsizes == 3 then
-      if Difficultymod == 1 then
+
+	if Groupsizes == 4 and Difficultymod == 1 then
 		bgrpName = Bomber_Names_Easy[brand]
 		egrpName = Fighter_Names_VeryEasyx4[erand]
 	end
 
-		if Difficultymod == 2 then
+		if Groupsizes == 4 and Difficultymod == 2 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Easyx4[erand]
 	end
   
-  if Difficultymod == 3 then
+  if Groupsizes == 4 and Difficultymod == 3 then
 		bgrpName = Bomber_Names_Normal[brand]
 		egrpName = Fighter_Names_Normalx4[erand]
 	end
 
-	if Difficultymod == 4 then
+	if Groupsizes == 4 and Difficultymod == 4 then
 		bgrpName = Bomber_Names_Hard[brand]
 		egrpName = Fighter_Names_Hardx4[erand]
 	end
 	
-	if Difficultymod == 5 then
+	if Groupsizes == 4 and Difficultymod == 5 then
 		bgrpName = Bomber_Names_VeryHard[brand]
 		egrpName = Fighter_Names_VeryHardx4[erand]
 	end
-end
+
 
 	  bspawnPsn = {}
     espawnPsn = {}

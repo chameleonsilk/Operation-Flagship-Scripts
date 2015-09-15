@@ -1620,7 +1620,7 @@ Infantry2_Squads = 5
 	function Introduce_Mission(arg, time)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local msg = {}
-	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship 0.75D...'
+	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship 0.76...'
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
@@ -7251,7 +7251,7 @@ end
     return_time = 97
     end
   end
-  
+  end
   
   return time + return_time
   end

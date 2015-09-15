@@ -15,6 +15,7 @@
   local rad_option_1d = "Hunt convoy"
 	
 	local rad_option_1f = "Strike: Naval"
+  
 
 	--local rad_option_2a = "Assault: Sochi-Adler"
 	--local rad_option_7a = "Enemy Smoke Markers"
@@ -71,6 +72,9 @@
   local rad_option_20a = "Fighters enabled (Default)"
   local rad_option_20b = "Fighters disabled"
   
+  local rad_option_21a = "Music Enabled (Default)"
+  local rad_option_21b = "Music Disable"
+  
   
   
 
@@ -119,24 +123,27 @@
 	Debugger = 0
 
 	
-	
-	convoytask = 0
-	fightertask = 0
-  fightertask2 = 0
-	bombertask = 0
-  attacktask = 0
-  attacktask2 = 0
-  SEADtask = 0
-  eHelotask = 0
-  eHelotask2 = 0
-  RADtaskA = 0 -- S
-  RADtaskB = 0 -- M
-  RADtaskC = 0 -- L
-  IRtaskA = 0 -- manpad
-  IRtaskB = 0 -- m IR
-  AAAtask = 0
-  mudtask = 0
+	escorttask = 1
+  escorttask2 = 1
+	convoytask = 1
+	fightertask = 1
+  fightertask2 = 1
+	bombertask = 1
+  attacktask = 1
+  attacktask2 = 1
+  SEADtask = 1
+  eHelotask = 1
+  eHelotask2 = 1
+  RADtaskA = 1 -- S
+  RADtaskB = 1 -- M
+  RADtaskC = 1 -- L
+  IRtaskA = 1 -- manpad
+  IRtaskB = 1 -- m IR
+  AAAtask = 1
+  mudtask = 1
   
+  
+ Music = 1
 
 	
   
@@ -171,6 +178,7 @@
   EnemyAD = 2
   EnemyFort = 2
   eAttack = 2
+  MusicSet = 1
   admin_lock = trigger.misc.getUserFlag(666)
   
   if admin_lock == 1 then
@@ -452,7 +460,7 @@
     [3] = "Mud (Normal) #003",
     [4] = "Mud (Normal) #004",
     [5] = "Mud (Normal) #005",
-    [6] = "Mud (Normal) #006",
+    --[6] = "Mud (Normal) #006",
 	}
 	Mud_Hard = {
 	  [1] = "Mud (Hard) #001",
@@ -1317,24 +1325,24 @@ Infantry2_Squads = 5
 
 	
   	Bomber_Names_VeryEasy = {
-		[1] = 'Tu-22M3 (VeryEasy)',
+		[1] = 'Su-24M (VeryEasy)',
 	  [2] = 'Su-24M (VeryEasy)',
 	}
   Bomber_Names_Easy = {
-		[1] = 'Tu-22M3 (Easy)',
+		[1] = 'Su-24M (Easy)',
 	  [2] = 'Su-24M (Easy)',
 	}
 	Bomber_Names_Normal = {
-		[1] = 'Tu-22M3 (Normal)',
+		[1] = 'Su-24M (Normal)',
 	  [2] = 'Su-24M (Normal)',
 	}
 	Bomber_Names_Hard = {
-		[1] = 'Tu-22M3 (Hard)',
-	  [2] = 'Su-24M (Hard)',
+		[1] = 'Su-24M (Hard)',
+	  [2] = 'Tu-22M3 (Hard)',
 	}
 	Bomber_Names_VeryHard = {
 		[1] = 'Tu-22M3 (VeryHard)',
-	  [2] = 'Su-24M (VeryHard)',
+	  [2] = 'Tu-22M3 (VeryHard)',
 	}
 	------------------------
 	-- End Bomber Arrays --
@@ -1359,6 +1367,7 @@ Infantry2_Squads = 5
 	missionCommands.removeItem({"Task Creation"})
 	missionCommands.removeItem({"Set Options"})
 	missionCommands.removeItem({"Combined Arms"})
+  missionCommands.removeItem({"Music"})
   
 
 	
@@ -1375,6 +1384,7 @@ Infantry2_Squads = 5
   Creationkit = missionCommands.addSubMenu("Task Creation",nil)
 	GameSet = missionCommands.addSubMenu("Set Options",nil)
   Combinedarms = missionCommands.addSubMenu("Combined Arms", nil)
+  Musicset = missionCommands.addSubMenu("Music", nil)
 	--Debug = missionCommands.addSubMenu("Debug",nil)
   
   AnapaPath = missionCommands.addSubMenu("Anapa", Creationkit)
@@ -1448,6 +1458,9 @@ Infantry2_Squads = 5
       -- These commands set CA options
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+  
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21a, Musicset, Set_Music_Enable, nil) -- 'Music enable
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21b, Musicset, Set_Music_Disable, nil) -- 'Music disable
 	
 	    
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
@@ -1594,12 +1607,6 @@ Infantry2_Squads = 5
 	    if unit == nil then
 	      local playerName = unit:getPlayerName()
 	    end
-      
-      	local msg = {} 
-	msg.text = ' check '
-	msg.displayTime = 1
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
 
 	  end
 	  timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
@@ -1613,7 +1620,7 @@ Infantry2_Squads = 5
 	function Introduce_Mission(arg, time)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local msg = {}
-	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship...'
+	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship 0.75D...'
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
@@ -1650,7 +1657,7 @@ Infantry2_Squads = 5
   
   local msg = {} 
 	msg.text = ' PLEASE CONSULT AN ADMIN BEFORE CREATING ANY TASKS FOR YOURSELF'
-	msg.displayTime = 180
+	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
@@ -2045,6 +2052,8 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
+  
+
 	end
 
 	---
@@ -2054,6 +2063,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	-- based off of Kutaisi Intercept script by akp, but modified for my own use.
 	bzone = trigger.misc.getZone(_bArea)
 	bombertask = 1
+  escorttask = 1
 	bspawnPsn = {}
 	espawnPsn = {}
 	bpath = {}
@@ -2445,6 +2455,8 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
 				econ:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 				econ:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+        
+        
 	    
 	    local msg = {}
 	    msg.text = ' Choosing from interceptor list. Plane number  '..tostring(brand)..tostring(bgrpName)..tostring(_bArea)
@@ -2714,9 +2726,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	msg.displayTime = 20
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
-  
-  
-  attacktask2 = 1
+ 
   spawnPsn2 = {}
    
       for i = 1, 1000 do
@@ -3168,7 +3178,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
   
 	local rand = mist.random(1,Attacker_Names)
-	attacktask = 1
+	attacktask2 = 1
 
   if Groupsizes == 1 and Difficultymod == 1 then
 	    grpNameA = Attacker_Names_VeryEasy[rand]
@@ -6250,7 +6260,35 @@ mist.removeFunction(ConvoyFunc)
 	      mist.message.add(msg)
 	end
 	------
+  	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Music_Disable()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	Music = 2
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+
+	  local msg = {}
+	    msg.text = ' Music disabled '
+
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
   
+    	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_Music_Enable()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  Music = 1
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
+
+	  local msg = {}
+	    msg.text = ' Music enabled '
+
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
   
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Difficuty_VeryEasy()
@@ -6521,6 +6559,12 @@ mist.removeFunction(ConvoyFunc)
 
 	end
 
+    	if trigger.misc.getUserFlag('305') == 1 then
+			trigger.action.setUserFlag('306',0)
+
+	end
+
+  
 	if trigger.misc.getUserFlag('402') == 1 then
 			trigger.action.setUserFlag('402',0)
 
@@ -6589,14 +6633,14 @@ mist.removeFunction(ConvoyFunc)
 	if trigger.misc.getUserFlag('101') == 1 and fightertask == 1 then
 			local msg = {}
 			msg.text = ' A flight of enemy fighters has been destroyed'
-	    msg.displayTime = 60
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       fightertask = 0
 			trigger.action.setUserFlag('101',0)
 			trigger.action.setUserFlag('102', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
       
 	end
@@ -6604,14 +6648,14 @@ mist.removeFunction(ConvoyFunc)
   	if trigger.misc.getUserFlag('103') == 1 and fightertask2 == 1 then
 			local msg = {}
 			msg.text = ' A flight of enemy fighters has been destroyed.'
-	    msg.displayTime = 60
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       fightertask2 = 0
 			trigger.action.setUserFlag('103',0)
 			trigger.action.setUserFlag('104', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(grpName))				-- deactivate fighters
       
 	end
@@ -6620,30 +6664,48 @@ mist.removeFunction(ConvoyFunc)
 	if trigger.misc.getUserFlag('201') == 1 and bombertask == 1 then
 			local msg = {}
 			msg.text = ' Bombers have been destroyed'
-	    msg.displayTime = 60
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       bombertask = 0
       trigger.action.setUserFlag('201',0)
 			trigger.action.setUserFlag('202', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
 	end
   
-  	if trigger.misc.getUserFlag('203') == 1 and bombertask == 1 then
+  	if trigger.misc.getUserFlag('203') == 1 and escorttask == 1 then
 			local msg = {}
 			msg.text = ' Escort fighters have been destroyed'
-	    msg.displayTime = 60
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
+      escorttask = 0
       --bombertask = 0        -- do not clear this until the bombers are dead from 201 / 202
-      trigger.action.setUserFlag('201',0)
+      trigger.action.setUserFlag('203',0)
 			trigger.action.setUserFlag('204', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
+			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
+			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
+
+	end
+  
+    	if trigger.misc.getUserFlag('205') == 1 and escorttask2 == 1 then                       ------ currently not even used
+			local msg = {}
+			msg.text = ' Escort fighters have been destroyed'
+	    msg.displayTime = 10
+	    msg.msgFor = {coa = {'all'}}
+	    mist.message.add(msg)
+			
+      escorttask2 = 0
+      --bombertask = 0        -- do not clear this until the bombers are dead from 201 / 202
+      trigger.action.setUserFlag('205',0)
+			trigger.action.setUserFlag('206', 1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6652,14 +6714,14 @@ mist.removeFunction(ConvoyFunc)
   	if trigger.misc.getUserFlag('301') == 1 and attacktask == 1 then
 			local msg = {}
 			msg.text = ' A flight of enemy ground attack planes have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       attacktask = 0
       trigger.action.setUserFlag('301',0)
 			trigger.action.setUserFlag('302', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6668,14 +6730,14 @@ mist.removeFunction(ConvoyFunc)
     	if trigger.misc.getUserFlag('303') == 1 and attacktask2 == 1 then
 			local msg = {}
 			msg.text = ' A flight of enemy ground attack planes have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       attacktask2 = 0
       trigger.action.setUserFlag('303',0)
 			trigger.action.setUserFlag('304', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6684,14 +6746,14 @@ mist.removeFunction(ConvoyFunc)
     	if trigger.misc.getUserFlag('401') == 1 and mudtask == 1 then
 			local msg = {}
 			msg.text = ' Fortified enemy units destroyed.'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       mudtask = 0
       trigger.action.setUserFlag('401',0)
 			trigger.action.setUserFlag('402', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6700,14 +6762,14 @@ mist.removeFunction(ConvoyFunc)
       	if trigger.misc.getUserFlag('501') == 1 and AAAtask == 1 then
 			local msg = {}
 			msg.text = ' AAA destroyed at task site.'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       AAAtask = 0
       trigger.action.setUserFlag('501',0)
 			trigger.action.setUserFlag('502', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6716,14 +6778,14 @@ mist.removeFunction(ConvoyFunc)
         	if trigger.misc.getUserFlag('601') == 1 and IRtaskA == 1 then
 			local msg = {}
 			msg.text = ' Manpads have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       IRtaskA = 0
       trigger.action.setUserFlag('601',0)
 			trigger.action.setUserFlag('602', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6732,14 +6794,14 @@ mist.removeFunction(ConvoyFunc)
           	if trigger.misc.getUserFlag('603') == 1 and IRtaskB == 1 then
 			local msg = {}
 			msg.text = ' Mobilized IR SAMs have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       IRtaskB = 0
       trigger.action.setUserFlag('603',0)
 			trigger.action.setUserFlag('604', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6749,14 +6811,14 @@ mist.removeFunction(ConvoyFunc)
           	if trigger.misc.getUserFlag('701') == 1 and RADtaskA == 1 then
 			local msg = {}
 			msg.text = ' Short range SAMs have been eliminated'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       RADtaskA = 0
       trigger.action.setUserFlag('701',0)
 			trigger.action.setUserFlag('702', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6765,14 +6827,14 @@ mist.removeFunction(ConvoyFunc)
             	if trigger.misc.getUserFlag('703') == 1 and RADtaskB == 1 then
 			local msg = {}
 			msg.text = ' Medium range SAMs have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       RADtaskB = 0
       trigger.action.setUserFlag('703',0)
 			trigger.action.setUserFlag('704', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6781,14 +6843,14 @@ mist.removeFunction(ConvoyFunc)
               	if trigger.misc.getUserFlag('705') == 1 and RADtaskC == 1 then
 			local msg = {}
 			msg.text = ' Long range SAMs have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       RADtaskC = 0
       trigger.action.setUserFlag('705',0)
 			trigger.action.setUserFlag('706', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6797,14 +6859,14 @@ mist.removeFunction(ConvoyFunc)
               	if trigger.misc.getUserFlag('801') == 1 and eHelotask == 1 then
 			local msg = {}
 			msg.text = ' Enemy helos have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       eHelotask = 0
       trigger.action.setUserFlag('801',0)
 			trigger.action.setUserFlag('802', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6813,14 +6875,14 @@ mist.removeFunction(ConvoyFunc)
                 	if trigger.misc.getUserFlag('803') == 1 and eHelotask2 == 1 then
 			local msg = {}
 			msg.text = ' Enemy helos have been destroyed'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       eHelotask2 = 0
       trigger.action.setUserFlag('803',0)
 			trigger.action.setUserFlag('804', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6829,14 +6891,14 @@ mist.removeFunction(ConvoyFunc)
                 	if trigger.misc.getUserFlag('901') == 1 and convoytask == 1 then
 			local msg = {}
 			msg.text = ' Enemy convoy has been stopped'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       convoytask = 0
       trigger.action.setUserFlag('901',0)
 			trigger.action.setUserFlag('902', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6845,14 +6907,14 @@ mist.removeFunction(ConvoyFunc)
                   	if trigger.misc.getUserFlag('1001') == 1 and striketask == 1 then
 			local msg = {}
 			msg.text = ' Enemy structures have been demolished'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       striketask = 0
       trigger.action.setUserFlag('1001',0)
-			trigger.action.setUserFlag('1002', 1)				-- stop victory
-			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
+			trigger.action.setUserFlag('1002',1)				-- stop victory
+			trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncompleted.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
 
@@ -6861,13 +6923,13 @@ mist.removeFunction(ConvoyFunc)
                     	if trigger.misc.getUserFlag('2001') == 1 and SEADtask == 1 then
 			local msg = {}
 			msg.text = ' We have lost our SEAD flight!'
-	    msg.displayTime = 300
+	    msg.displayTime = 10
 	    msg.msgFor = {coa = {'all'}}
 	    mist.message.add(msg)
 			
       SEADtask = 0
       trigger.action.setUserFlag('2001',0)
-			trigger.action.setUserFlag('2002', 1)				-- stop victory
+			trigger.action.setUserFlag('2002',1)				-- stop victory
 			--trigger.action.outSoundForCoalition(coalition.side.RED, 'missioncomplete.ogg')
 			--trigger.action.deactivateGroup(Group.getByName(egrpName))				-- deactivate escorts
 			--trigger.action.deactivateGroup(Group.getByName(bgrpName))				-- deactivate bombers
@@ -7127,10 +7189,73 @@ end
 end
   
   
+  	
+	
+  
+ 
+
+  
+  function music_poll(arg, time)
   
   
+    if trigger.misc.getUserFlag('5001') == 1 then
+      trigger.action.setUserFlag('5001',0)
+  end
+  
+    if trigger.misc.getUserFlag('5003') == 1 then
+      trigger.action.setUserFlag('5003',0)
+  end
+   
+  mist.flagFunc.units_in_zones{ 
+   units = {'[blue][plane]'}, 
+   zones = {'Anapa', 'Maykop', 'Nalchik', 'Gudauta', 'Kutaisi', 'Tbilisi'}, 
+   flag = 5000,
+   toggle = true,
+   stopFlag = 5001, 
+   zone_type = 'cylinder',
+ }
+ 
+ mist.flagFunc.units_in_zones{ 
+   units = {'[red][plane]'}, 
+   zones = {'Anapa', 'Maykop', 'Nalchik', 'Gudauta', 'Kutaisi', 'Tbilisi'}, 
+   flag = 5002,
+   toggle = true,
+   stopFlag = 5003, 
+   zone_type = 'sphere',
+ }
+ 
+ timer.scheduleFunction(play_music, nil, timer.getTime() + 2)
+ end
+ 
+ function play_music(arg, time)
+  local return_time = 1
   
 
+        if Music == 1 then
+  
+  if trigger.misc.getUserFlag('5000') == 0 and trigger.misc.getUserFlag('5002') == 1 then
+  trigger.action.outSoundForCoalition(coalition.side.RED, 'takeoff.ogg') 
+  return_time = 86
+  end
+  
+  if trigger.misc.getUserFlag('5000') == 1 and trigger.misc.getUserFlag('5002') == 1 then
+  local randmusik = mist.random(1,2)
+  
+  if randmusik == 1 then
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'danger.ogg')
+    return_time = 87
+    end
+    
+  if randmusik == 2 then
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'battle.ogg')
+    return_time = 97
+    end
+  end
+  
+  
+  return time + return_time
+  end
+ 
 	------------------------------------------------------------------
 	timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
 	timer.scheduleFunction(Radio_Check, nil, timer.getTime() + 2)
@@ -7138,6 +7263,7 @@ end
 
 	timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
 	timer.scheduleFunction(Mission_Complete_Checks, nil, timer.getTime() + 5) 
+  timer.scheduleFunction(music_poll, nil, timer.getTime() + 60) 
 	------------------------------------------------------------------
 
   

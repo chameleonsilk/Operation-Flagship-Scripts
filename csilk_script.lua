@@ -72,8 +72,10 @@
   local rad_option_20a = "Fighters enabled (Default)"
   local rad_option_20b = "Fighters disabled"
   
-  local rad_option_21a = "Music Enabled (Default)"
-  local rad_option_21b = "Music Disable"
+  local rad_option_21a = "Music Enabled"
+  local rad_option_21b = "Music Disable (Default)"
+  
+  local rad_option_22a = "Spawn friendly AWACs"
   
   
   
@@ -142,10 +144,13 @@
   AAAtask = 1
   mudtask = 1
   
-  
- Music = 1
-
-	
+  -- for music function
+ Music = 0
+Tension_Set = 0
+Music_Battle_Sample = 1
+Music_Relaxed_Sample = 1
+Enemy = mist.makeUnitTable({'[blue][plane]'})
+	--
   
 
 	message = {}
@@ -159,6 +164,7 @@
 	mudPsn = {}
   mudPsn2 = {}
   mudPsn3 = {}
+  movePsn = {}
 
   airzone = trigger.misc.getZone("Enemyair")
 
@@ -178,7 +184,8 @@
   EnemyAD = 2
   EnemyFort = 2
   eAttack = 2
-  MusicSet = 1
+  fAWAC = 2
+  --MusicSet = 2
   admin_lock = trigger.misc.getUserFlag(666)
   
   if admin_lock == 1 then
@@ -1374,17 +1381,12 @@ Infantry2_Squads = 5
 	 --variables defining f10 sub-menu items
 	Calls = missionCommands.addSubMenu("Mission Info",nil)
 	--Airdromes = missionCommands.addSubMenu("Airfield Tasks",nil)
-
-  
-  
-  
-  
-  
   
   Creationkit = missionCommands.addSubMenu("Task Creation",nil)
 	GameSet = missionCommands.addSubMenu("Set Options",nil)
   Combinedarms = missionCommands.addSubMenu("Combined Arms", nil)
   Musicset = missionCommands.addSubMenu("Music", nil)
+  
 	--Debug = missionCommands.addSubMenu("Debug",nil)
   
   AnapaPath = missionCommands.addSubMenu("Anapa", Creationkit)
@@ -1399,7 +1401,7 @@ Infantry2_Squads = 5
 	DifficultySet = missionCommands.addSubMenu("Difficulty", GameSet)
 	DistanceSet = missionCommands.addSubMenu("Distance", GameSet)
   FortSet = missionCommands.addSubMenu("Buildings", GameSet)
-  SizeSet = missionCommands.addSubMenu("A2A", GameSet)
+  SizeSet = missionCommands.addSubMenu("Group Size", GameSet)
   ADSet = missionCommands.addSubMenu("AAA", GameSet)
   RadarSamSet = missionCommands.addSubMenu("Radar SAM", GameSet)
   IRSamSet = missionCommands.addSubMenu("IR SAM", GameSet)
@@ -1461,20 +1463,6 @@ Infantry2_Squads = 5
   
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21a, Musicset, Set_Music_Enable, nil) -- 'Music enable
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21b, Musicset, Set_Music_Disable, nil) -- 'Music disable
-	
-	    
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_7a, GameSet, Change_Smoke_Set, nil)
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_2a, Airdromes, Create_Airfield, 'Sochi')
-  
-
-  
-  
-  --	local rad_option_1a = "Interdict: CAP"
-	--local rad_option_1b = "Interdict: Bombers"
-	--local rad_option_1c = "Create ground task"
-  --local rad_option_1d = "Hunt convoy"
-	--local rad_option_1e = "Strike: Facilities"
-	--local rad_option_1f = "Strike: Naval"
 	  
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, AnapaPath, Create_Fighter_Intercept, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, AnapaPath, Create_Bomber_Intercept, 'Anapa')
@@ -1484,6 +1472,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, AnapaPath, Create_Mud_Convoy, 'Anapa')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, AnapaPath, Create_Strike, 'Anapa')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, AnapaPath, Create_Naval, 'OceanNorth')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, AnapaPath, Create_Friendly_AWAC, 'OceanNorth') -- 'Run friendly Awac function
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, MaykopPath, Create_Fighter_Intercept, 'Maykop')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, MaykopPath, Create_Bomber_Intercept, 'Maykop')
@@ -1493,6 +1482,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, MaykopPath, Create_Mud_Convoy, 'Maykop')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, MaykopPath, Create_Strike, 'Maykop')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, MaykopPath, Create_Naval, 'Maykop')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, MaykopPath, Create_Friendly_AWAC, 'Maykop') -- 'Run friendly Awac function
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, GudautaPath, Create_Fighter_Intercept, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, GudautaPath, Create_Bomber_Intercept, 'Gudauta')
@@ -1502,6 +1492,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, GudautaPath, Create_Mud_Convoy, 'Gudauta')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1g, GudautaPath, Create_Strike, 'Gudauta')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, GudautaPath, Create_Naval, 'OceanMid')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, GudautaPath, Create_Friendly_AWAC, 'OceanMid') -- 'Run friendly Awac function
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, KutaisiPath, Create_Fighter_Intercept, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, KutaisiPath, Create_Bomber_Intercept, 'Kutaisi')
@@ -1511,6 +1502,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, KutaisiPath, Create_Mud_Convoy, 'Kutaisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, KutaisiPath, Create_Strike, 'Kutaisi')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, KutaisiPath, Create_Naval, 'OceanSouth')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, KutaisiPath, Create_Friendly_AWAC, 'OceanSouth') -- 'Run friendly Awac function
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, NalchikPath, Create_Fighter_Intercept, 'Nalchik')
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1b, NalchikPath, Create_Bomber_Intercept, 'Nalchik')
@@ -1520,6 +1512,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, NalchikPath, Create_Mud_Convoy, 'Nalchik')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, NalchikPath, Create_Strike, 'Nalchik')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, NalchikPath, Create_Naval, 'Nalchik')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, NalchikPath, Create_Friendly_AWAC, 'Nalchik') -- 'Run friendly Awac function
 	
 
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1a, TbilisiPath, Create_Fighter_Intercept, 'Tbilisi')
@@ -1530,6 +1523,7 @@ Infantry2_Squads = 5
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1d, TbilisiPath, Create_Mud_Convoy, 'Tbilisi')
 --	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1e, TbilisiPath, Create_Strike, 'Tbilisi')
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_1f, TbilisiPath, Create_Naval, 'Tbilisi')
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_22a, TbilisiPath, Create_Friendly_AWAC, 'Tbilisi') -- 'Run friendly Awac function
 		----------------
 	-- Wanks Code --
 	----------------
@@ -1638,6 +1632,12 @@ Infantry2_Squads = 5
 	mist.message.add(msg)
 	
 		local msg = {} 
+	msg.text = ' Mission utilizes Chameleon Silks Game music and rising tension script. '
+	msg.displayTime = 45
+	msg.msgFor = {coa = {'all'}}  
+	mist.message.add(msg)
+  
+  		local msg = {} 
 	msg.text = ' Mission utilizes Chameleon Silks task system script. '
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}}  
@@ -1906,7 +1906,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = grpName,
 	flag = 101,
 	stopFlag = 102,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -2031,7 +2031,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = grpName2,
 	flag = 103,
 	stopFlag = 104,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   end
@@ -2057,6 +2057,127 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	end
 
 	---
+  	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Create_Friendly_AWAC(_awacArea)
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- based off of Kutaisi Intercept script by akp, but modified for my own use.
+	awaczone = trigger.misc.getZone(_awacArea)
+	--local rand = mist.random(1,Fighter_Names)
+	fAwactask = 1  
+   
+   fAwacName = "Friendly AWAC"
+   
+      	local msg = {} 
+	msg.text = ' friendly AWAC selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	  spawnPsn = {}
+    movePsn = {}
+
+      for i = 1, 1000 do
+      spawnPsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 1.00)
+      movePsn = mist.getRandPointInCircle(airzone.point, airzone.radius * 10.00)
+      local InAwacZone = mist.pointInPolygon(movePsn, mist.getGroupPoints('fAwacZone')) 
+      if InAwacZone == true then break
+      end
+      end
+    
+      	local msg = {} 
+	msg.text = ' Spawn position selected.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+		
+	trigger.action.activateGroup(Group.getByName(fAwacName))
+	awacgrp = Group.getByName(fAwacName)
+  
+          	local msg = {} 
+	msg.text = ' Path started.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+	
+	local InitwpSpeed = mist.random(450,500)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = mist.random(6000,8000)
+	local wpPsn = mist.getRandPointInCircle(spawnPsn, zone.radius * 0.15, zone.radius * 0.01)
+	--local wpPsn2 = movePsn
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(spawnPsn, wpSpeed, wpAlt, "BARO")
+					path[2] = mist.fixedWing.buildWP(movePsn, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+					id = "ComboTask",
+					params = {
+						tasks = {
+            [1] = {
+	            number = 1,
+	            auto = false,
+	            id = "AWACS",
+	            enabled = true,
+	            }, -- end of params
+	          }, -- end of [1]
+            [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+	          [3] = {
+	            enabled = true,
+	            auto = false,
+	            id = "WrappedAction",
+	            number = 1,
+	            params = {
+	              action = {
+	                id = "Option",
+	                params = {
+	                  value = false,
+	                  name = 6,
+	                }, -- end of params
+	              }, -- end of action
+	            }, -- end of params
+	          }, -- end of [3]
+	        }, -- end of tasks
+	      } -- end of params
+	    
+      
+        	local msg = {} 
+	msg.text = ' Path created.'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+      
+		
+	local vars = {} 
+	vars.groupName = fAwacName
+	vars.action = "respawn"
+	vars.point = spawnPsn
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+  	local msg = {} 
+	msg.text = ' AWACS spawned but this function is a prototype and may not function correctly'
+	msg.displayTime = 20
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
+
+	local con = awacgrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+  
+  end
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Create_Bomber_Intercept(_bArea)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -2341,7 +2462,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = bgrpName,
 	flag = 201,
 	stopFlag = 202,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
 
@@ -2443,7 +2564,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = egrpName,
 	flag = 203,
 	stopFlag = 204,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
       
@@ -2817,7 +2938,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
   --percent = 33,
 	flag = 303,
 	stopFlag = 304,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
   
@@ -3376,7 +3497,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = grpNameA,
 	flag = 301,
 	stopFlag = 302,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)
   
@@ -3525,7 +3646,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	groupName = grpName2A,
 	flag = 303,
 	stopFlag = 304,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)
   end
@@ -3944,7 +4065,7 @@ end
 	groupName = ADName,
 	flag = 501,
 	stopFlag = 502,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4095,7 +4216,7 @@ end
 	groupName = RadarSamName,
 	flag = 701,
 	stopFlag = 702,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4115,7 +4236,7 @@ end
 	groupName = RadarSamName,
 	flag = 703,
 	stopFlag = 704,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4135,7 +4256,7 @@ end
 	groupName = RadarSamName,
 	flag = 705,
 	stopFlag = 706,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4158,7 +4279,7 @@ end
 	groupName = ADName,
 	flag = 705,
 	stopFlag = 706,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4175,7 +4296,7 @@ end
 	groupName = ADName,
 	flag = 703,
 	stopFlag = 704,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4191,7 +4312,7 @@ end
 	groupName = ADName,
 	flag = 701,
 	stopFlag = 702,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4211,7 +4332,7 @@ end
 	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4232,7 +4353,7 @@ end
 	groupName = IRSamName,
 	flag = 603,
 	stopFlag = 604,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4254,7 +4375,7 @@ end
 	groupName = IRSamName2,
 	flag = 603,
 	stopFlag = 604,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4273,7 +4394,7 @@ end
 	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     end
@@ -4294,7 +4415,7 @@ end
 	groupName = IRSamName3,
 	flag = 605,
 	stopFlag = 606,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4312,7 +4433,7 @@ end
 	groupName = IRSamName2,
 	flag = 603,
 	stopFlag = 604,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4330,7 +4451,7 @@ end
 	groupName = IRSamName,
 	flag = 601,
 	stopFlag = 602,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
     
@@ -4476,7 +4597,7 @@ SEADtask = 1
 	groupName = seadName,
 	flag = 2001,
 	stopFlag = 2002,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
   
@@ -4628,7 +4749,7 @@ eHelotask = 1
 	            enabled = true,
 	            auto = false,
 	            id = "WrappedAction",
-	            number = 1,
+	            number = 3,
 	            params = {
 	              action = {
 	                id = "Option",
@@ -4656,7 +4777,7 @@ eHelotask = 1
 	groupName = eHeloName,
 	flag = 801,
 	stopFlag = 802,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4768,7 +4889,7 @@ eHelotask2 = 1
 	groupName = eHeloName2,
 	flag = 803,
 	stopFlag = 804,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits) 
     end
@@ -4821,7 +4942,7 @@ eHelotask2 = 1
 
  
 
-    for i = 1, 100 do
+    for i = 1, 5000 do
         mzone2 = mist.getLeadPos(MudName)
         mudPsn3 = {x = mzone2.x + math.random(8000,10000), y = mzone2.y, z = mzone2.z + math.random(1,8000)}
         
@@ -5411,7 +5532,7 @@ local checkunits = {
 	groupName = MudName,
 	flag = 901,
 	stopFlag = 902,
-  --toggle = true,
+  toggle = true,
 	}
 	mist.flagFunc.group_dead(checkunits)    
 			
@@ -6263,7 +6384,7 @@ mist.removeFunction(ConvoyFunc)
   	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_Music_Disable()
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	Music = 2
+	Music = 0
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'range.ogg')  
 
@@ -7188,73 +7309,74 @@ end
       end
 end
   
-  
-  	
-	
-  
+function Music_Poll(arg, time) -- this will be used to setup the triggers to make
  
-
-  
-  function music_poll(arg, time)
-  
-  
-    if trigger.misc.getUserFlag('5001') == 1 then
-      trigger.action.setUserFlag('5001',0)
-  end
-  
-    if trigger.misc.getUserFlag('5003') == 1 then
-      trigger.action.setUserFlag('5003',0)
-  end
+ mist.flagFunc.units_in_moving_zones{ 
+   units = Rad, 
+   zone_units = Enemy, 
+   flag = 6000, 
+   radius = 11000, 
+   --stopflag = 2, 
+   --req_num = 1, 
+   --zone_type = 'sphere', 
+   interval = 1, 
+   toggle = true,
+ } 
    
-  mist.flagFunc.units_in_zones{ 
-   units = {'[blue][plane]'}, 
-   zones = {'Anapa', 'Maykop', 'Nalchik', 'Gudauta', 'Kutaisi', 'Tbilisi'}, 
-   flag = 5000,
-   toggle = true,
-   stopFlag = 5001, 
-   zone_type = 'cylinder',
- }
- 
- mist.flagFunc.units_in_zones{ 
-   units = {'[red][plane]'}, 
-   zones = {'Anapa', 'Maykop', 'Nalchik', 'Gudauta', 'Kutaisi', 'Tbilisi'}, 
-   flag = 5002,
-   toggle = true,
-   stopFlag = 5003, 
-   zone_type = 'sphere',
- }
- 
- timer.scheduleFunction(play_music, nil, timer.getTime() + 2)
- end
- 
- function play_music(arg, time)
-  local return_time = 1
-  
-
-        if Music == 1 then
-  
-  if trigger.misc.getUserFlag('5000') == 0 and trigger.misc.getUserFlag('5002') == 1 then
-  trigger.action.outSoundForCoalition(coalition.side.RED, 'takeoff.ogg') 
-  return_time = 86
-  end
-  
-  if trigger.misc.getUserFlag('5000') == 1 and trigger.misc.getUserFlag('5002') == 1 then
-  local randmusik = mist.random(1,2)
-  
-  if randmusik == 1 then
-    trigger.action.outSoundForCoalition(coalition.side.RED, 'danger.ogg')
-    return_time = 87
-    end
+timer.scheduleFunction(Play_Music, nil, timer.getTime() + 1 )
+   end
+   
+   function Play_Music(arg, time)
+    local Return_Time = 10
+    local Old_Tension_Set = Tension_Set
+    if Music == 1 then -- condition block only used if Music is enabled
+          --
+          if trigger.misc.getUserFlag('6000') == 0 then
+            Tension_Set = 0
+          end
+          
+          if trigger.misc.getUserFlag('6000') == 1 then
+            Tension_Set = 1
+          end
+       
+          -- set tension level based off of enemy present in GCI zone
+          --
+          if Tension_Set == 0 and Old_Tension_Set == 1 then
+          Music_Relaxed_Sample = 1
+          end
+          if Tension_Set == 1 and Old_Tension_Set == 0 then
+          Music_Battle_Sample = 1
+          end
+          -- set back to intro sample if the tension has changed    
     
-  if randmusik == 2 then
-    trigger.action.outSoundForCoalition(coalition.side.RED, 'battle.ogg')
-    return_time = 97
+          if Tension_Set == 0 and Music_Relaxed_Sample == 2 then -- play relaxed track
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'relaxed_mid_33sec.ogg') 
+    Return_Time = 33 -- sample is 10 seconds long
     end
-  end
-  end
-  
-  return time + return_time
-  end
+          
+          if Tension_Set == 0 and Music_Relaxed_Sample == 1 then -- play relaxed start
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'relaxed_start_12sec.ogg') 
+    Return_Time = 12
+    Music_Relaxed_Sample = 2 -- set to main sample
+    end
+          
+          if Tension_Set == 1 and Music_Battle_Sample == 2  then -- play battle track
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'battle_mid_41sec.ogg') 
+    Return_Time = 41 -- sample is 41 seconds long
+    end
+          
+          if Tension_Set == 1 and Music_Battle_Sample == 1  then -- play battle start
+    trigger.action.outSoundForCoalition(coalition.side.RED, 'battle_start_15sec.ogg') 
+    Return_Time = 15 -- sample is 16 seconds long
+    Music_Battle_Sample = 2 -- set to main sample
+    end
+    else
+    -- do not play anything
+    end
+    return time + Return_Time --  return exactly same time sample ends
+    end
+   -- func end   
+
  
 	------------------------------------------------------------------
 	timer.scheduleFunction(Radio_Add, nil, timer.getTime() + 5)
@@ -7262,8 +7384,8 @@ end
 
 
 	timer.scheduleFunction(Introduce_Mission, nil, timer.getTime() + 4)
-	timer.scheduleFunction(Mission_Complete_Checks, nil, timer.getTime() + 5) 
-  timer.scheduleFunction(music_poll, nil, timer.getTime() + 60) 
+	timer.scheduleFunction(Mission_Complete_Checks, nil, timer.getTime() + 2) 
+  timer.scheduleFunction(Music_Poll, nil, timer.getTime() + 30) 
 	------------------------------------------------------------------
 
   

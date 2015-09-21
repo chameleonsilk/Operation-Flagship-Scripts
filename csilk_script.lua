@@ -3,11 +3,11 @@
 
 	-- Flagship Script
 
-	local rad_option_0a = "Briefing: Last Mud"
-	--local rad_option_0b = "Briefing: Last Strike"
-	local rad_option_0c = "Briefing: Last Convoy"
+	local rad_option_0a = "Briefing: Last Created A-G"
+	local rad_option_0c = "Briefing: Last Created Convoy"
 	--local rad_option_0d = "Briefing: Last Airdrome"
 	local rad_option_0e = "Briefing: Last Naval"
+  local rad_option_0b = "GCI/AWACS Information"
 
 	local rad_option_1a = "Interdict: CAP"
 	local rad_option_1b = "Interdict: Bombers"
@@ -77,6 +77,8 @@
   local rad_option_21b = "Music Disable (Default)"
   
   local rad_option_22a = "Spawn friendly AWAC"
+  
+  
   
   
   
@@ -1455,10 +1457,10 @@ Infantry2_Squads = 5
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_9z, Debug, Debug_Toggle, nil)
 	
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0a, Calls, Bullscall1, nil)
-	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, Bullscall2, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, Bullscall3, nil)
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0d, Calls, Bullscall4, nil)
 	missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0e, Calls, Bullscall5, nil)
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0b, Calls, GCI_Information, nil)
 
 	--missionCommands.addCommandForGroup(Rad_GroupID, rad_option_0c, Calls, BRAcall, nil)
       -- These commands set CA options
@@ -1789,11 +1791,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
 	  
    
-      	local msg = {} 
-	msg.text = ' Plane selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 
 	  spawnPsn = {}
 
@@ -1803,12 +1801,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
       if InZone == true then break
       end
       end
-    
-      	local msg = {} 
-	msg.text = ' Spawn position selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	trigger.action.activateGroup(Group.getByName(grpName))
 	grp = Group.getByName(grpName)
@@ -1833,7 +1826,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAP",
 	            params = {
 	              targetTypes = {
-	                [1] = "Air",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -1870,11 +1863,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
       
 		
 	local vars = {} 
@@ -1883,12 +1872,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	vars.point = spawnPsn
 	vars.route = path
 	mist.teleportToPoint(vars)			
-  
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -1917,11 +1901,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
   
   if Groupsizes == 4  then
   
-        	local msg = {} 
-	msg.text = ' 2nd Plane selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
   
   	fightertask2 = 1
   spawnPsn2 = {}
@@ -1958,7 +1938,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAP",
 	            params = {
 	              targetTypes = {
-	                [1] = "Air",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -1995,11 +1975,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
       
 		
 	local vars = {} 
@@ -2009,11 +1985,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	vars.route = path
 	mist.teleportToPoint(vars)			
   
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -2051,8 +2023,8 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
   
   	local msg = {} 
-	msg.text = ' Intercept task has been created, search and destroy target.'
-	msg.displayTime = 20
+	msg.text = ' Spawned Task: CAP Flights'
+	msg.displayTime = 10
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
@@ -2071,11 +2043,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
    
    fAwacName = "Friendly AWAC"
    
-      	local msg = {} 
-	msg.text = ' friendly AWAC selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 
 	  spawnPsn = {}
     movePsn = {}
@@ -2088,20 +2056,12 @@ if Groupsizes == 4 and Difficultymod == 1 then
       end
       end
     
-      	local msg = {} 
-	msg.text = ' Spawn position selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	trigger.action.activateGroup(Group.getByName(fAwacName))
 	awacgrp = Group.getByName(fAwacName)
   
-          	local msg = {} 
-	msg.text = ' Path started.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 	
 	local InitwpSpeed = mist.random(450,500)
 	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
@@ -2122,9 +2082,22 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            id = "AWACS",
 	            enabled = true,
 	          }, -- end of [1]
-          [2] = 
+            	          [2] = {
+	            number = 2,
+	            auto = false,
+	            id = "Orbit",
+	            enabled = true,
+	            params = {
+	              altitudeEdited = false,
+	              pattern = "Race-Track",
+	              speed = wpSpeed,
+	              altitude = wpAlt2,
+	              speedEdited = true,
+	            }, -- end of params
+	          }, -- end of [2]
+          [3] = 
                                        {
-                                                            number = 2,
+                                                            number = 3,
                                                             auto = false,
                                                             id = "WrappedAction",
                                                             enabled = true,
@@ -2140,7 +2113,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
                                                                     }, -- end of ["params"]
                                                                 }, -- end of ["action"]
                                                             }, -- end of ["params"]
-                                                        }, -- end of [2]
+                                                        }, -- end of [3]
                                                         },
                                                         },
                                                         }
@@ -2165,12 +2138,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
         
                                             
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
-      
+
 		
 	local vars = {} 
 	vars.groupName = fAwacName
@@ -2179,16 +2147,17 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	vars.route = path
 	mist.teleportToPoint(vars)			
   
-  	local msg = {} 
-	msg.text = ' AWACS spawned but this function is a prototype and may not function correctly'
-	msg.displayTime = 20
+    	local msg = {} 
+	msg.text = ' Spawned Object: Friendly AWAC'
+	msg.displayTime = 10
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
+
 
 	local con = awacgrp:getController()
 	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
 	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
-	con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	--con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
 	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
   
@@ -2480,6 +2449,12 @@ if Groupsizes == 4 and Difficultymod == 1 then
   toggle = true,
 	}
 	mist.flagFunc.group_dead(checkcap)
+  
+          	local msg = {} 
+	msg.text = ' Spawned Task: Bombers and Escorts'
+	msg.displayTime = 10
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
 
 	  
 	  bgrp = Group.getByName(bgrpName)
@@ -2515,7 +2490,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	          key = "CAP",
 						params = {
 	            targetTypes = {
-	              [1] = "Air",
+	              [1] = "All",
 	            }, -- end of targetTypes
 	            priority = 0
 	          }, -- end of params
@@ -2584,6 +2559,9 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	mist.flagFunc.group_dead(checkcap)
       
 	    egrp = Group.getByName(egrpName)
+      
+
+      
 	    
 	    local econ = egrp:getController()
 	      econ:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
@@ -2591,38 +2569,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      econ:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
 				econ:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 				econ:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
-        
-        
-	    
-	    local msg = {}
-	    msg.text = ' Choosing from interceptor list. Plane number  '..tostring(brand)..tostring(bgrpName)..tostring(_bArea)
-	    msg.displayTime = 10
-	    msg.msgFor = {coa = {'all'}}
-	      mist.message.add(msg)
-	    
-	    local msg = {}
-	      msg.text = ' Choosing from escort list. Plane number  '..tostring(erand)..tostring(egrpName)..tostring(_bArea)
-	      msg.displayTime = 10
-	      msg.msgFor = {coa = {'all'}}
-	        mist.message.add(msg)
-	        
-	    local msg = {}
-	      msg.text = ' Bomber intercept task has been created. '
-	      msg.displayTime = 20
-	      msg.msgFor = {coa = {'all'}}
-	        mist.message.add(msg)
-	        
-	    local msg = {}
-	      msg.text = ' Escort is following  '..tostring(BomberID)
-	      msg.displayTime = 20
-	      msg.msgFor = {coa = {'all'}}
-	        mist.message.add(msg)
-	--end -- break for loop
 
-		
-
-
-	 --return
 	end
 	---
   
@@ -2728,11 +2675,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
 
    
-      	local msg = {} 
-	msg.text = ' Attacker selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 
 	  spawnPsn = {}
     
@@ -2744,11 +2687,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
       end
       end
     
-      	local msg = {} 
-	msg.text = ' Spawn position selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	trigger.action.activateGroup(Group.getByName(grpNameA))
 	agrp = Group.getByName(grpNameA)
@@ -2773,8 +2712,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                      [1] = "Ground Units",
-                      [2] = "Air",
+                      [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -2811,11 +2749,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
       
 		
 	local vars = {} 
@@ -2832,11 +2766,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	}
 	mist.flagFunc.group_dead(checkcap)
   
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -2857,11 +2787,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
   
   if Groupsizes == 4  then
   
-        	local msg = {} 
-	msg.text = ' 2nd Plane selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
  
   spawnPsn2 = {}
    
@@ -2896,8 +2822,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-	                [1] = "Ground Units",
-                  [2] = "Air",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -2934,11 +2859,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
       
 		
 	local vars = {} 
@@ -2957,11 +2878,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	}
 	mist.flagFunc.group_dead(checkcap)
   
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -2992,10 +2909,9 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
   	local msg = {} 
-	msg.text = ' Attacker intercept task has been created, search and destroy target.'
-	msg.displayTime = 20
+	msg.text = ' Spawned Task: CAS Flights'
+	msg.displayTime = 10
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
 
@@ -3316,8 +3232,8 @@ if Groupsizes == 4 and Difficultymod == 1 then
   		
 
         		local msg = {}
-	  msg.text = ' Enemy ground forces spawned.'
-	  msg.displayTime = 3
+	  msg.text = ' Spawned Object: Ground Force'
+	  msg.displayTime = 10
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
     ---------------------------
@@ -3426,11 +3342,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
 
    
-      	local msg = {} 
-	msg.text = ' Attacker selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 
 	  spawnPsn = {}
     
@@ -3441,11 +3353,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
       end
       end
     
-      	local msg = {} 
-	msg.text = ' Spawn position selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	trigger.action.activateGroup(Group.getByName(grpNameA))
 	agrp = Group.getByName(grpNameA)
@@ -3470,8 +3378,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                      [1] = "Ground Units",
-                      [2] = "Air",
+                      [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -3508,11 +3415,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
       
 		
 	local vars = {} 
@@ -3532,11 +3435,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	}
 	mist.flagFunc.group_dead(checkunits)
   
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -3546,6 +3445,12 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	--vars.point = spawnPsn
 	--vars.route = path
 	--mist.teleportToPoint(vars)			
+  
+          	local msg = {} 
+	msg.text = ' Spawned Object: CAS Planes'
+	msg.displayTime = 10
+	msg.msgFor = {coa = {'all'}} 
+	mist.message.add(msg)
 
 	local con = agrp:getController()
 	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
@@ -3557,11 +3462,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
   
   if eAttack == 2 and Groupsizes == 4  then
   
-        	local msg = {} 
-	msg.text = ' 2nd Plane selected.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
   
   attacktask2 = 1
   spawnPsn2 = {}
@@ -3598,8 +3499,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-	                [1] = "Ground Units",
-                  [2] = "Air",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -3636,11 +3536,6 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	      } -- end of params
 	    }
       
-        	local msg = {} 
-	msg.text = ' Path created.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
       
 		
 	local vars = {} 
@@ -3649,12 +3544,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 	vars.point = wpPsn
 	vars.route = path
 	mist.teleportToPoint(vars)			
-  
-  	local msg = {} 
-	msg.text = ' Plane spawned.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 		
 	--loops_through = loops_through + 1	
 	
@@ -3684,12 +3574,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
 
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
-  
-  	local msg = {} 
-	msg.text = ' Attacker intercept task has been created, search and destroy target.'
-	msg.displayTime = 20
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)
+
 end
 	end
  
@@ -4036,8 +3921,8 @@ end
 			 
 
 				local msg = {}
-	  msg.text = ' Static buildings spawned.'
-	  msg.displayTime = 3
+	  msg.text = ' Spawned Object: Statics'
+	  msg.displayTime = 10
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 
@@ -4084,7 +3969,7 @@ end
 		
 
           		local msg = {}
-	  msg.text = ' Spawned Object: AAA completed'
+	  msg.text = ' Spawned Object: AAA'
 	  msg.displayTime = 10
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
@@ -4170,8 +4055,8 @@ end
 		--mist.spawnRandomizedGroup(InfName5)
     
            		local msg = {}
-	  msg.text = ' Spawned Object: Infantry completed'
-	  msg.displayTime = 3
+	  msg.text = ' Spawned Object: Infantry'
+	  msg.displayTime = 10
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
     
@@ -4489,7 +4374,7 @@ end
   
   
           		local msg = {}
-	  msg.text = ' Spawned Object: SAMS completed'
+	  msg.text = ' Spawned Object: SAMS'
 	  msg.displayTime = 10
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
@@ -4533,8 +4418,7 @@ SEADtask = 1
 	            key = "SEAD",
 	            params = {
 	              targetTypes = {
-	                [1] = "Air Defence",
-                  [2] = "Ground Units",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -4589,8 +4473,8 @@ SEADtask = 1
 	mist.flagFunc.group_dead(checkunits)    
   
   	local msg = {} 
-	msg.text = ' SEAD Plane spawned.'
-	msg.displayTime = 3
+	msg.text = ' Spawned Object: Allied SEAD Flight'
+	msg.displayTime = 10
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)	
 
@@ -4635,8 +4519,7 @@ SEADtask = 1
 	            key = "SEAD",
 	            params = {
 	              targetTypes = {
-	                [1] = "Air Defence",
-                  [2] = "Ground Units",
+	                [1] = "All",
 	              }, -- end of targetTypes
 	              priority = 0,
 	            }, -- end of params
@@ -4690,11 +4573,6 @@ SEADtask = 1
 	}
 	mist.flagFunc.group_dead(checkunits)    
   
-  	local msg = {} 
-	msg.text = ' SEAD Plane spawned.'
-	msg.displayTime = 3
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
 
 	local con = seadgrp:getController()
 	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
@@ -4717,11 +4595,6 @@ SEADtask = 1
 if eHelo >= 2 then
 eHelotask = 1
 
-  	local msg = {} 
-	msg.text = ' Helo script'
-	msg.displayTime = 3
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
 
        if eHelo == 2 and Difficultymod == 1 then
       eHeloName = Enemy_Helo_Names_VeryEasy2x[ehelorand]
@@ -4820,8 +4693,7 @@ eHelotask = 1
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                [1] = "Air",
-                [2] = "Ground Units",
+                [1] = "All",
                 }, -- end of ["targetTypes"]
 	              priority = 0,
 	            }, -- end of params
@@ -4876,11 +4748,7 @@ eHelotask = 1
 	mist.flagFunc.group_dead(checkunits) 
     
   
-  	local msg = {} 
-	msg.text = ' Enemy Helo spawned.'
-	msg.displayTime = 3
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	
+  
 
 	local con = ehelogrp:getController()
 	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
@@ -4895,7 +4763,12 @@ eHelotask = 1
   
 
   
-  
+   	local msg = {} 
+	msg.text = ' Spawned Object: Helicopters'
+	msg.displayTime = 3
+	msg.msgFor = {coa = {'all'}} 
+  mist.message.add(msg)
+  end
    
   
   
@@ -4931,8 +4804,7 @@ eHelotask2 = 1
 	            key = "CAS",
 	            params = {
 	              targetTypes = {
-                [1] = "Air",
-                [2] = "Ground Units",
+                [1] = "All",
                 }, -- end of ["targetTypes"]
 	              priority = 0,
 	            }, -- end of params
@@ -4998,12 +4870,8 @@ eHelotask2 = 1
 	con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
 	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
 end
- 	local msg = {} 
-	msg.text = ' Enemy Helo spawned'
-	msg.displayTime = 3
-	msg.msgFor = {coa = {'all'}} 
-	mist.message.add(msg)	 
-  end
+
+
         
      
 	--trigger.action.outSoundForCoalition(coalition.side.RED, 'airtask.ogg')
@@ -5019,11 +4887,7 @@ end
 if CACAS == 2 then
 
 	--if MudName ==  then
-		local msg = {}
-	  msg.text = ' Creating RED CA forces'
-	  msg.displayTime = 3
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 
 	--trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
@@ -5048,14 +4912,7 @@ if CACAS == 2 then
 					end
 		end
         
-
-        		local msg = {}
-	  msg.text = 'Combined Arms spawn found.'
-	  msg.displayTime = 60
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
-    
-    
+   
     
 		
 		local mvars2 = {}
@@ -5103,8 +4960,8 @@ if CACAS == 2 then
    --random_move("Blue_Inf_1",{"Red_Inf_1", "Red_Inf_2"}, 6, 12, 50, 1, "Random",  60, "Redretreat")
    
 		local msg = {}
-	  msg.text = 'Combined Arms player now has access to ground forces near the task area.'
-	  msg.displayTime = 60
+	  msg.text = ' Spawned Object: Combined Arms Forces'
+	  msg.displayTime = 3
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
 	
@@ -5176,11 +5033,6 @@ if CACAS == 2 then
 		randomizer_inner_radius = mist.random(2000,2500)
 
 	--if MudName ==  then
-		local msg = {}
-	  msg.text = ' Creating Naval Mission.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
@@ -5317,11 +5169,7 @@ if CACAS == 2 then
 			mist.dynAddStatic(vars3)
 
 
-				local msg = {}
-	  msg.text = ' Platforms placed.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 
 		
 		local navalvars = {}
@@ -5339,11 +5187,7 @@ if CACAS == 2 then
 		
 		AddOP(navalvars.groupName) -- add MBOT to it
 		
-		local msg = {}
-	  msg.text = ' Post Mbot.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 		
 
 		
@@ -5400,11 +5244,7 @@ if CACAS == 2 then
 		navalvars.innerRadius = randomizer_inner_radius
 		mist.teleportToPoint(navalvars)		 
 		
-							local msg = {}
-	  msg.text = ' Post Boats.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 			
 		--mist.spawnRandomizedGroup(ShipName)
 		--mist.spawnRandomizedGroup(ShipName)
@@ -5516,7 +5356,7 @@ if CACAS == 2 then
 	
 		
 					local msg = {}
-	  msg.text = ' Naval task has been created '
+	  msg.text = ' Spawned Object: Naval'
 	  msg.displayTime = 20
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
@@ -5548,11 +5388,7 @@ end
 	MudName = {}
 	ConvoySend = {}
 
-		local msg = {}
-	  msg.text = ' Creating Moving Mud.'
-	  msg.displayTime = 5
-	  msg.msgFor = {coa = {'all'}}
-	  mist.message.add(msg)
+
 
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
 
@@ -5657,11 +5493,11 @@ mist.removeFunction(ConvoyFunc)
     		targets3 = mist.makeUnitTable({'[g]' .. mvars.groupName})
 		--AddOP(mvars.groupName) -- add MBOT to it
     
-    --local msg = {}
-	  --msg.text = ' MBOT Intelligence added.'
-	  --msg.displayTime = 5
-	  --msg.msgFor = {coa = {'all'}}
-	  --mist.message.add(msg)
+    local msg = {}
+	  msg.text = ' Spawned Task: Convoy Hunt'
+	  msg.displayTime = 5
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
 
 
 	end
@@ -6026,8 +5862,73 @@ mist.removeFunction(ConvoyFunc)
 	---
   --                            'END OF BULLSEYE CALL STUFF --
   -------------------------------------------------------------
-  
   -- PARAMTER SETTINGS BY RADIO CONTROL, A LOT OF THIS STUFF NEEDS TO BE REDONE INTO MUCH BETTER AND A VERSATILE SINGLE FUNCTION
+  
+  		------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function GCI_Information()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		--Anapa:
+--#2 - 901 @ 121Mhz AM
+--Maykop:
+--#11 - 902 @ 125Mhz AM
+--Gudauta:
+--#6 - 903 @ 130Mhz AM
+--Kutaisi:
+--#10 - 904 @ 134Mhz AM
+--Nalchik:
+--#14 - 905 @ 136Mhz AM
+--Tbilisi-Lochini:
+--#19 - 906 @ 138Mhz AM
+
+      					local msg = {}
+	  msg.text = ' American forces can use Overlord @ 131Mhz AM if AWACs active'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+--    trigger.action.outSoundForCoalition(coalition.side.RED, 'datalink.ogg')
+						local msg = {}
+	  msg.text = ' Channel #2, Callsign 901 @ 121Mhz AM for Anapa GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+    					local msg = {}
+	  msg.text = ' Channel #11, Callsign 902 @ 125Mhz AM for Maykop GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+	
+    					local msg = {}
+	  msg.text = ' Channel #6, Callsign 903 @ 130Mhz AM for Gudauta GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+      					local msg = {}
+	  msg.text = ' Channel #10, Callsign 904 @ 134Mhz AM for Kutaisi GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+      					local msg = {}
+	  msg.text = ' Channel #14, Callsign 905 @ 136hz AM for Nalchik GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+    
+      					local msg = {}
+	  msg.text = ' Channel #19, Callsign 906 @ 138hz AM for Tbilisi GCI'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+    
+
+	end
+	---
+  --                            'END OF BULLSEYE CALL STUFF --
+  -------------------------------------------------------------
   
   ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	function Set_CACAS_Level_1()
@@ -7413,14 +7314,13 @@ function Music_Poll(arg, time) -- this will be used to setup the triggers to mak
    units = {'[blue][plane]'}, 
    zones = {'Anapa', 'Nalchik', 'Gudauta', 'Tbilisi', 'Maykop', 'Kutaisi'},
    flag = 6000, 
-   --radius = 110000, 
+   radius = 110000, 
    --stopflag = 2, 
    --req_num = 1, 
    --zone_type = 'sphere', 
-   interval = 1, 
+   --interval = 1, 
    toggle = true,
  } 
-   
   timer.scheduleFunction(Play_Music, nil, timer.getTime() + 1) 
    end
    

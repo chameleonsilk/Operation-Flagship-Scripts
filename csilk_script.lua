@@ -60,6 +60,8 @@
   
   local rad_option_16a = "Disabled CA (Default)"
   local rad_option_16b = "Enable CA"
+  local rad_option_16c = "Disable JTAC"
+  local rad_option_16d = "Enable JTAC (Default)"
   
   local rad_option_17a = "AAA Enabled (Default)"
   local rad_option_17b = "AAA Disabled"
@@ -67,8 +69,8 @@
   local rad_option_18a = "Buildings enabled (Default)"
   local rad_option_18b = "Buildings disabled"
   
-  local rad_option_19a = "Attackers enabled (Default)"
-  local rad_option_19b = "Attackers disabled"
+  local rad_option_19a = "Attackers enabled"
+  local rad_option_19b = "Attackers disabled (Default)"
   
   local rad_option_20a = "Fighters enabled (Default)"
   local rad_option_20b = "Fighters disabled"
@@ -106,6 +108,8 @@
 	zone = {}
 	bzone = {}
 	mzone = {}
+  mzone2 = {}
+  jtaczone = {}
   azone = {}
   Rad = {}
 
@@ -163,6 +167,7 @@ Music_Relaxed_Sample = 1
   heloPsn2 = {}
   heloPsn3 = {}
 	seadPsn = {}
+  jtacpos = {}
   bspawnPsn = {}
 	espawnPsn = {}
 	spawnPsn = {}
@@ -185,6 +190,7 @@ Music_Relaxed_Sample = 1
   SEAD = 2
   eHelo = 2
   aHelo = 2
+  JTAC = 1
   CACAS = 1
   EnemyAD = 2
   EnemyFort = 2
@@ -1466,6 +1472,8 @@ Infantry2_Squads = 5
       -- These commands set CA options
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16a, Combinedarms, Set_CACAS_Level_1, nil) -- 'CA disabled
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16b, Combinedarms, Set_CACAS_Level_2, nil) -- 'CA enabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16c, Combinedarms, Set_JTAC_Level_2, nil) -- 'JTAC disabled
+  missionCommands.addCommandForGroup(Rad_GroupID, rad_option_16d, Combinedarms, Set_JTAC_Level_1, nil) -- 'JTAC enabled
   
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21a, Musicset, Set_Music_Enable, nil) -- 'Music enable
   missionCommands.addCommandForGroup(Rad_GroupID, rad_option_21b, Musicset, Set_Music_Disable, nil) -- 'Music disable
@@ -1620,7 +1628,7 @@ Infantry2_Squads = 5
 	function Introduce_Mission(arg, time)
 	------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	local msg = {}
-	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship 0.78...'
+	msg.text = ' Chameleon_Silk is proud to present, Operation Flagship 0.79...'
 	msg.displayTime = 45
 	msg.msgFor = {coa = {'all'}} 
 	mist.message.add(msg)
@@ -3130,7 +3138,7 @@ if Groupsizes == 4 and Difficultymod == 1 then
    local heloran2 = mist.random(1, 1000)
 
   
-	for i = 1, 1000 do
+	for i = 1, 9999999 do
 	    if Task_Range == 1 then
 	      mudPsn = mist.getRandPointInCircle(mzone.point, mzone.radius * 0.35, mzone.radius * 0.25)
         samPsn = mist.getRandPointInCircle(mudPsn, distran, minran)
@@ -4969,7 +4977,7 @@ if CACAS == 2 then
   
   
   
-  
+  if Music == 0 then
   local randomizer_tune = mist.random(1,4)
   
   if randomizer_tune == 1 then
@@ -4987,8 +4995,293 @@ if CACAS == 2 then
         if randomizer_tune == 4 then
 		trigger.action.outSoundForCoalition(coalition.side.RED, 'bombing2.ogg')
     end
+   end
   end
-  end
+  
+  
+  if JTAC == 1 then
+
+	--if MudName ==  then
+
+
+	--trigger.action.outSoundForCoalition(coalition.side.RED, 'groundtask.ogg')
+
+		--trigger.action.activateGroup(Group.getByName(MudName))
+		--trigger.action.activateGroup(Group.getByName(InfName1))
+		--trigger.action.activateGroup(Group.getByName(InfName2))
+		--trigger.action.activateGroup(Group.getByName(InfName3))
+		--trigger.action.activateGroup(Group.getByName(InfName4))
+		--trigger.action.activateGroup(Group.getByName(InfName5))
+		
+    --local MudREDGrpData = mist.getGroupData("Jtac")
+   
+
+ jtaczone = {}
+
+    for i = 1, 5000 do
+        jtaczone = mist.getLeadPos(MudName)
+        
+                local mix_it_up = math.random(1,2)
+                
+                
+              if mix_it_up == 1 then
+        jtacpos = {x = jtaczone.x + math.random(25000,30000), y = jtaczone.y, z = jtaczone.z}
+              end
+              
+               if mix_it_up == 2 then
+               jtacpos = {x = jtaczone.x, y = jtaczone.y, z = jtaczone.z + math.random(25000,30000)}
+               end
+        
+        					if mist.isTerrainValid(jtacpos, {'LAND'}) == true and mist.terrainHeightDiff(jtacpos, 19) < 2 then				
+                  
+					break
+					end
+		end
+        
+   
+    
+		
+		local mvars2 = {}
+	  mvars2.groupName = "Jtac"
+	  mvars2.action = "respawn"
+	  mvars2.point = jtacpos
+	  --mvars.disperse = true
+	  --mvars.maxDisp = 100
+	  --mvars.radius = 20
+		MudREDCASNamec = mist.teleportToPoint(mvars2)
+    
+  
+
+    		local mvars2 = {}
+	  mvars2.groupName = "Jtac"
+	  mvars2.action = "teleport"
+	  mvars2.point = jtacpos
+	  mvars2.disperse = randomizer_disperse
+	  mvars2.maxDisp = randomizer_max_disperse
+	  mvars2.radius = randomizer_radius
+		mvars2.innerRadius = randomizer_inner_radius
+		MudREDCASNamec = mist.teleportToPoint(mvars2)
+
+
+
+
+
+	trigger.action.activateGroup(Group.getByName("Jtac2"))
+	jtacgrp = Group.getByName("Jtac2")
+  
+
+	
+	local InitwpSpeed = mist.random(100,200)
+	local wpSpeed = mist.utils.kmphToMps(InitwpSpeed)
+	local wpAlt = 2000
+  local wpAlt2 = mist.random(600,1000)
+	local wpPsn = mist.getRandPointInCircle(jtacpos, 1000)
+	local wpPsn2 = mist.getRandPointInCircle(jtacpos, 10000)
+  local wpPsn3 = mist.getRandPointInCircle(jtaczone, 7500)
+  local path = {}
+					path[1] = mist.fixedWing.buildWP(wpPsn, wpSpeed, wpalt, "BARO")
+					path[2] = mist.fixedWing.buildWP(wpPsn2, wpSpeed, wpAlt2, "BARO")
+					path[3] = mist.fixedWing.buildWP(wpPsn3, wpSpeed, wpAlt,"BARO")
+					path[1].task = {
+
+                                                ["id"] = "ComboTask",
+                                                ["params"] = 
+                                                {
+                                                    ["tasks"] = 
+                                                    {
+                                                        [1] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "FAC",
+                                                            ["number"] = 1,
+                                                            ["params"] = 
+                                                            {
+                                                                ["number"] = 1,
+                                                                ["designation"] = "Auto",
+                                                                ["modulation"] = 0,
+                                                                ["callname"] = 8,
+                                                                ["datalink"] = true,
+                                                                ["frequency"] = 133000000,
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [1]
+                                                        [2] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "WrappedAction",
+                                                            ["number"] = 2,
+                                                            ["params"] = 
+                                                            {
+                                                                ["action"] = 
+                                                                {
+                                                                    ["id"] = "EPLRS",
+                                                                    ["params"] = 
+                                                                    {
+                                                                        ["value"] = true,
+                                                                        ["groupId"] = 1,
+                                                                    }, -- end of ["params"]
+                                                                }, -- end of ["action"]
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [2]
+                                                    }, -- end of ["tasks"]
+                                                }, -- end of ["params"]
+                                            } -- end of ["task"]
+                                            
+                                            					path[2].task = {
+
+                                                ["id"] = "ComboTask",
+                                                ["params"] = 
+                                                {
+                                                    ["tasks"] = 
+                                                    {
+                                                        [1] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "FAC",
+                                                            ["number"] = 1,
+                                                            ["params"] = 
+                                                            {
+                                                                ["number"] = 1,
+                                                                ["designation"] = "Auto",
+                                                                ["modulation"] = 0,
+                                                                ["callname"] = 8,
+                                                                ["datalink"] = true,
+                                                                ["frequency"] = 133000000,
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [1]
+                                                        [2] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "WrappedAction",
+                                                            ["number"] = 2,
+                                                            ["params"] = 
+                                                            {
+                                                                ["action"] = 
+                                                                {
+                                                                    ["id"] = "EPLRS",
+                                                                    ["params"] = 
+                                                                    {
+                                                                        ["value"] = true,
+                                                                        ["groupId"] = 1,
+                                                                    }, -- end of ["params"]
+                                                                }, -- end of ["action"]
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [2]
+                                                    }, -- end of ["tasks"]
+                                                }, -- end of ["params"]
+                                            } -- end of ["task"]
+                                            
+                                            					path[3].task = {
+
+                                                ["id"] = "ComboTask",
+                                                ["params"] = 
+                                                {
+                                                    ["tasks"] = 
+                                                    {
+                                                        [1] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "FAC",
+                                                            ["number"] = 1,
+                                                            ["params"] = 
+                                                            {
+                                                                ["number"] = 1,
+                                                                ["designation"] = "Auto",
+                                                                ["modulation"] = 0,
+                                                                ["callname"] = 8,
+                                                                ["datalink"] = true,
+                                                                ["frequency"] = 133000000,
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [1]
+                                                        [2] = 
+                                                        {
+                                                            ["enabled"] = true,
+                                                            ["auto"] = true,
+                                                            ["id"] = "WrappedAction",
+                                                            ["number"] = 2,
+                                                            ["params"] = 
+                                                            {
+                                                                ["action"] = 
+                                                                {
+                                                                    ["id"] = "EPLRS",
+                                                                    ["params"] = 
+                                                                    {
+                                                                        ["value"] = true,
+                                                                        ["groupId"] = 1,
+                                                                    }, -- end of ["params"]
+                                                                }, -- end of ["action"]
+                                                            }, -- end of ["params"]
+                                                        }, -- end of [2]
+                                                    }, -- end of ["tasks"]
+                                                }, -- end of ["params"]
+                                            } -- end of ["task"]
+                                            
+      
+  
+		
+	local vars = {} 
+	vars.groupName = "Jtac2"
+	vars.action = "respawn"
+	vars.point = jtacpos
+	vars.route = path
+	mist.teleportToPoint(vars)			
+  
+    --        	local checkunits = {
+	--groupName = seadName,
+	--flag = 2001,
+	--stopFlag = 2002,
+  --toggle = true,
+	--}
+	--mist.flagFunc.group_dead(checkunits)    
+  
+
+	local con = jtacgrp:getController()
+	con:setOption(AI.Option.Air.id.RTB_ON_BINGO, false)
+	con:setOption(AI.Option.Air.id.RADAR_USING, AI.Option.Air.val.RADAR_USING.FOR_CONTINUOUS_SEARCH)
+	--con:setOption(AI.Option.Air.id.ROE, AI.Option.Air.val.ROE.OPEN_FIRE_WEAPON_FREE)
+	--con:setOption(AI.Option.Air.id.FLARE_USING, AI.Option.Air.val.FLARE_USING.AGAINST_FIRED_MISSILE)
+	con:setOption(AI.Option.Air.id.REACTION_ON_THREAT, AI.Option.Air.val.REACTION_ON_THREAT.EVADE_FIRE)
+
+		
+		
+
+
+    
+
+
+
+
+    
+			 	
+	--random_move(MudREDCASNamed, {MudName}, 4, 9, 50, 1, "Random", 30, mzone)
+  --random_markers(MudREDCASName, 50, 500, "Blue", 480, 1800)
+  
+
+   
+   --random_move("Blue_Inf_1",{"Red_Inf_1", "Red_Inf_2"}, 6, 12, 50, 1, "Random",  60, "Redretreat")
+   
+		local msg = {}
+	  msg.text = ' Spawned Object: JTAC with Predator'
+	  msg.displayTime = 20
+	  msg.msgFor = {coa = {'all'}}
+	  mist.message.add(msg)
+	
+  
+  
+  
+  
+end
+end
+
+ 
+  
+  
+  
+  
  
  --- 
   
@@ -5879,6 +6172,7 @@ mist.removeFunction(ConvoyFunc)
 --#14 - 905 @ 136Mhz AM
 --Tbilisi-Lochini:
 --#19 - 906 @ 138Mhz AM
+-- Eyeball @ 134Mhz AM JTAC
 
       					local msg = {}
 	  msg.text = ' American forces can use Overlord @ 131Mhz AM if AWACs active'
@@ -5924,6 +6218,13 @@ mist.removeFunction(ConvoyFunc)
 	  msg.msgFor = {coa = {'all'}}
 	  mist.message.add(msg)
     
+                if JTAC == 1 then
+                	msg.text = ' Pinpoint @ 133Mhz standing by to provide targeting information.'
+                  msg.displayTime = 20
+                  msg.msgFor = { coa = {'all'}}
+                  mist.message.add(msg)
+                end
+    
 
 	end
 	---
@@ -5953,6 +6254,34 @@ mist.removeFunction(ConvoyFunc)
 	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
 	  local msg = {} 
 	    msg.text = ' Combined arms player will'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+       ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_JTAC_Level_2()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " disabled"
+	JTAC = 2
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = ' JTAC has been'..tostring(New_Set)
+	    msg.displayTime = 20
+	    msg.msgFor = {coa = {'all'}}
+	      mist.message.add(msg)
+	end
+	------	
+       ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	function Set_JTAC_Level_1()
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	local New_Set = " enabled"
+	JTAC = 1
+
+	trigger.action.outSoundForCoalition(coalition.side.RED, 'setting.ogg')
+	  local msg = {} 
+	    msg.text = 'JTAC has been'..tostring(New_Set)
 	    msg.displayTime = 20
 	    msg.msgFor = {coa = {'all'}}
 	      mist.message.add(msg)
